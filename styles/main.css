@@ -624,6 +624,12 @@ body::before {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+    
+    /* 頁腳響應式設計 - 768px以下 */
+    .footer-content p {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 480px) {
@@ -645,6 +651,20 @@ body::before {
 
     .feature-card {
         padding: 1.5rem;
+    }
+    
+    /* 頁腳響應式設計 - 480px以下 */
+    .footer-content p {
+        font-size: 0.8rem;
+        white-space: nowrap;
+        padding: 0 10px; /* 增加一點左右內邊距避免文字貼邊 */
+    }
+}
+
+/* 當螢幕太小無法完整顯示版權文字時，完全隱藏 */
+@media (max-width: 360px) {
+    .footer-content p {
+        display: none;
     }
 }
 
