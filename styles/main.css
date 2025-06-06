@@ -557,35 +557,12 @@ body::before {
     margin: 0;
 }
 
-/* 超大螢幕優化 */
-@media (min-width: 1200px) {
-    .nav-menu {
-        gap: 2.5rem; /* 增加導航項目間距 */
-    }
-    
-    .nav-link {
-        padding: 0.6rem 1.2rem; /* 增加按鈕內邊距 */
-        font-size: 1.05rem; /* 稍微增大字體 */
-    }
-    
-    .booking-btn {
-        padding: 0.7rem 1.5rem; /* 增大訂房按鈕 */
-        font-size: 1.1rem;
-    }
-    
-    /* 增大logo */
-    .nav-brand .logo {
-        height: 55px;
-    }
-    
-    .navbar {
-        padding: 1.2rem 0; /* 增加導航欄高度 */
-    }
-}
-
 /* Responsive Design */
-/* 中型到小型螢幕使用漢堡選單 (避免導航欄分行) */
-@media (max-width: 1100px) {
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 60px; /* 調整行動裝置版本的頂部內邊距 */
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -597,7 +574,6 @@ body::before {
         transition: var(--transition);
         box-shadow: var(--shadow-medium);
         padding: 2rem 0;
-        z-index: 999;
     }
 
     .nav-menu.active {
@@ -606,30 +582,6 @@ body::before {
 
     .hamburger {
         display: flex;
-    }
-    
-    .nav-link {
-        padding: 0.8rem 1rem;
-        margin: 0.2rem 0;
-        font-size: 1.1rem;
-        display: block;
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: var(--border-radius);
-    }
-    
-    .booking-btn {
-        margin-top: 1rem;
-        padding: 0.8rem 2rem;
-        font-size: 1.1rem;
-        border-radius: var(--border-radius);
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        padding-top: 60px; /* 調整行動裝置版本的頂部內邊距 */
     }
 
     .hamburger.active .bar:nth-child(2) {
@@ -693,36 +645,6 @@ body::before {
 
     .feature-card {
         padding: 1.5rem;
-    }
-    
-    /* 超小螢幕導航欄優化 */
-    .navbar {
-        padding: 0.8rem 0;
-    }
-    
-    .nav-brand .logo {
-        height: 40px;
-    }
-    
-    .hamburger .bar {
-        width: 22px;
-        height: 2.5px;
-    }
-    
-    .nav-menu {
-        top: 70px; /* 調整選單位置 */
-        padding: 1.5rem 0;
-    }
-    
-    .nav-link {
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-        margin: 0.2rem 0;
-    }
-    
-    .booking-btn {
-        margin-top: 0.5rem;
-        padding: 0.8rem 1.5rem;
     }
 }
 
