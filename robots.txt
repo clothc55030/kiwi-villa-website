@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+Disallow: /scripts/
+Disallow: /styles/
+Disallow: /*.ps1$
+
+# 指定網站地圖位置
+Sitemap: https://www.kiwi-villa.com/sitemap.xml
+
+# 特別允許重要資源
+Allow: /images/
+Allow: /styles/main.css
+Allow: /scripts/main.js
+Allow: /scripts/components.js
+
+# 針對Google Bot的特殊設定
+User-agent: Googlebot
+Allow: /
+
+# 針對Bing Bot的特殊設定  
+User-agent: bingbot
+Allow: /
+
+# 爬蟲延遲設定
+Crawl-delay: 1 

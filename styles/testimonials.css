@@ -1,0 +1,814 @@
+/* 客戶評價頁面樣式 */
+
+/* 評分概覽區域 */
+.rating-overview {
+    margin: 2rem 0;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+}
+
+.rating-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.rating-summary {
+    text-align: center;
+}
+
+.overall-rating {
+    margin-bottom: 1rem;
+}
+
+.rating-number {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #4A90E2;
+    line-height: 1;
+}
+
+.rating-stars {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+    color: #ffc107;
+}
+
+.rating-count {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.btn-google {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #4285f4;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-google:hover {
+    background: #3367d6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+    color: white;
+}
+
+/* 評論區域 */
+.reviews-section {
+    margin: 3rem 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* 評論卡片 */
+.review-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.google-review {
+    border-left: 4px solid #4285f4;
+}
+
+/* 評論標題 */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #666;
+}
+
+.reviewer-name {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.review-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.review-rating {
+    color: #ffc107;
+    font-size: 1.1rem;
+}
+
+/* 評論內容 */
+.review-content {
+    margin: 1rem 0;
+}
+
+.review-content p {
+    margin: 0;
+    line-height: 1.6;
+    color: #444;
+    font-style: italic;
+}
+
+.review-content p::before {
+    content: '"';
+    font-size: 1.5rem;
+    color: #4A90E2;
+    vertical-align: top;
+}
+
+.review-content p::after {
+    content: '"';
+    font-size: 1.5rem;
+    color: #4A90E2;
+    vertical-align: bottom;
+}
+
+/* 評論來源 */
+.review-source {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.review-source i {
+    color: #4285f4;
+}
+
+/* Google CTA */
+.google-cta {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+/* 撰寫評論CTA */
+.write-review-cta {
+    margin: 3rem 0;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #4A90E2 0%, #357abd 100%);
+    border-radius: 12px;
+}
+
+.cta-card {
+    text-align: center;
+    color: white;
+}
+
+.cta-card h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.cta-card p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn-primary,
+.cta-buttons .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cta-buttons .btn-primary {
+    background: white;
+    color: #4A90E2;
+}
+
+.cta-buttons .btn-primary:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    color: #4A90E2;
+}
+
+.cta-buttons .btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+}
+
+.cta-buttons .btn-secondary:hover {
+    background: white;
+    color: #4A90E2;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .rating-card {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .rating-number {
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn-primary,
+    .cta-buttons .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .review-card {
+        padding: 1rem;
+    }
+    
+    .reviewer-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* 動畫效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.review-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.review-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.review-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.review-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* 星級評分樣式 */
+.fas.fa-star,
+.far.fa-star {
+    margin-right: 2px;
+}
+
+.fas.fa-star {
+    color: #ffc107;
+}
+
+.far.fa-star {
+    color: #dee2e6;
+}
+
+/* 載入更多按鈕 */
+.load-more {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.load-more .btn-secondary {
+    padding: 0.75rem 2rem;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.load-more .btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* 首頁評論預覽樣式 */
+.reviews-preview {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.8) 50%, rgba(236, 254, 255, 0.7) 100%);
+    position: relative;
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(226, 232, 240, 0.2);
+}
+
+.reviews-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.04) 0%, transparent 60%),
+        radial-gradient(circle at 70% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 60%),
+        repeating-linear-gradient(
+            30deg,
+            transparent,
+            transparent 40px,
+            rgba(148, 163, 184, 0.02) 40px,
+            rgba(148, 163, 184, 0.02) 80px
+        );
+    background-size: 600px 600px, 500px 500px, 120px 120px;
+    background-position: 0 0, 100% 100%, 0 0;
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.reviews-preview > * {
+    position: relative;
+    z-index: 1;
+}
+
+.reviews-preview h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.rating-summary {
+    margin-bottom: 2rem;
+}
+
+.rating-summary .stars {
+    font-size: 1.5rem;
+    color: #ffc107;
+    margin-bottom: 0.5rem;
+}
+
+.featured-reviews {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.featured-reviews .review-card {
+    margin: 0;
+}
+
+.reviews-preview a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: #4A90E2;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.reviews-preview a:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* Elfsight Google Reviews Widget 樣式 */
+.google-reviews-section {
+    margin: 3rem 0;
+    padding: 2rem 0;
+    background: #fafbfc;
+    border-radius: 12px;
+}
+
+.reviews-widget-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.google-reviews-widget {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.google-reviews-widget h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Elfsight Widget 容器調整 */
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf {
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+/* 修復Elfsight Widget內部文字溢出問題 */
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf * {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* 名字文字控制 */
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="name"],
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="author"],
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="reviewer"] {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+/* 評價內容文字控制 */
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="text"],
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="content"],
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="review"] {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 整體容器防溢出 */
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf div {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 卡片容器調整 */
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="card"],
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="item"] {
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+/* 通用文字溢出修復 - 備用方案 */
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf {
+    overflow: hidden !important;
+}
+
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf span,
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf p,
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf div {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+/* 強制所有文字元素使用合適的字體大小 */
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+}
+
+/* 針對特定問題的快速修復 */
+.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 評價介紹區域 */
+.reviews-intro {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.intro-card {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.intro-card h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.intro-card p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+}
+
+/* 評價重要性區域 */
+.why-reviews {
+    margin: 3rem 0;
+    padding: 2rem 0;
+}
+
+.reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.reason-card {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.reason-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.reason-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #4A90E2 0%, #357abd 100%);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.reason-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.reason-card p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 首頁評價區段樣式 */
+.reviews-preview .intro-text {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.reviews-preview .intro-text p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.reviews-preview .google-reviews-widget {
+    margin: 2rem 0;
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    /* 增強背景效果 */
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(249, 250, 251, 0.95) 100%);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(226, 232, 240, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 為Google評價小工具添加裝飾性光效 */
+.reviews-preview .google-reviews-widget::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.02) 0%, transparent 70%);
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 確保Google評價小工具內容在裝飾效果上方 */
+.reviews-preview .google-reviews-widget > * {
+    position: relative;
+    z-index: 1;
+}
+
+.reviews-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.reviews-cta .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    background: #4A90E2;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.reviews-cta .btn-primary:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+    color: white;
+}
+
+.reviews-cta .btn-google {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #4285f4;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.reviews-cta .btn-google:hover {
+    background: #3367d6;
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* 響應式設計調整 */
+@media (max-width: 768px) {
+    .google-reviews-widget {
+        padding: 1rem;
+    }
+    
+    .intro-card {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .intro-card h2 {
+        font-size: 1.6rem;
+    }
+    
+    .reasons-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .reason-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .reviews-cta {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .reviews-cta .btn-primary,
+    .reviews-cta .btn-google {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .reviews-widget-container {
+        padding: 0 0.5rem;
+    }
+    
+    .google-reviews-widget {
+        padding: 0.75rem;
+    }
+    
+    .google-reviews-widget h3 {
+        font-size: 1.1rem;
+    }
+    
+    /* 手機版Widget文字修復 */
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf {
+        font-size: 14px !important;
+    }
+    
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="name"],
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="author"],
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="reviewer"] {
+        font-size: 13px !important;
+        max-width: 120px !important;
+    }
+    
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="text"],
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="content"] {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+    }
+}
+
+/* 平板版修復 */
+@media (max-width: 768px) and (min-width: 481px) {
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="name"],
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="author"],
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="reviewer"] {
+        max-width: 150px !important;
+    }
+} 

@@ -1,0 +1,649 @@
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: #2C5282;
+    --accent-color: #ED8936;
+    --text-primary: #2D3748;
+    --text-secondary: #4A5568;
+    --text-light: #718096;
+    --background-light: #F7FAFC;
+    --background-white: #FFFFFF;
+    --border-color: #E2E8F0;
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    /* 添加清爽的漸變背景和微妙紋理 */
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    background-attachment: fixed;
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    position: relative;
+}
+
+/* 為body添加微妙的幾何紋理覆蓋層 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(148, 163, 184, 0.08) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.03) 50%, transparent 50%);
+    background-size: 60px 60px, 40px 40px, 100px 100px;
+    background-position: 0 0, 30px 30px, 0 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 背景漸變動畫 */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+    background: var(--background-white);
+    box-shadow: var(--shadow-light);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand .logo {
+    height: 50px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: var(--transition);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+.booking-btn {
+    background: var(--primary-color);
+    color: white !important;
+}
+
+.booking-btn:hover {
+    background: var(--secondary-color) !important;
+    color: white !important;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-primary);
+    margin: 3px 0;
+    transition: var(--transition);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+    padding-top: 80px; /* 增加頂部內邊距，讓標題與導航欄保持距離 */
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+.hero-content {
+    z-index: 1;
+    padding: 4rem 0 2rem; /* 增加頂部內邊距 */
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-top: 1.5rem; /* 增加頂部外邊距 */
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-secondary {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-description p {
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-primary:hover {
+    background: #d97726;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+}
+
+/* Features Section */
+.features {
+    padding: 5rem 0;
+    /* 替換原本的單調背景為優雅的紋理背景 */
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.95) 100%);
+    position: relative;
+    backdrop-filter: blur(1px);
+}
+
+/* 為features區塊添加裝飾性的背景圖案 */
+.features::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 35px,
+            rgba(148, 163, 184, 0.03) 35px,
+            rgba(148, 163, 184, 0.03) 70px
+        ),
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 70%),
+        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 70%);
+    background-size: 100px 100px, 800px 800px, 600px 600px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 確保features內容在背景圖案上方 */
+.features .container {
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: var(--background-white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    /* 為卡片添加淡雅的漸變背景 */
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 為feature卡片添加裝飾性光暈效果 */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(74, 144, 226, 0.03) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+/* 確保卡片內容在裝飾效果上方 */
+.feature-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+    /* 增強hover效果的背景 */
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Contact Info Section */
+.contact-info {
+    background-color: #f9f9f9;
+    padding: 60px 0;
+    margin-top: 60px;
+    /* 替換為更優雅的背景 */
+    background: linear-gradient(135deg, rgba(241, 245, 249, 0.8) 0%, rgba(248, 250, 252, 0.9) 50%, rgba(226, 232, 240, 0.7) 100%);
+    position: relative;
+}
+
+/* 為聯絡資訊區塊添加波浪紋理 */
+.contact-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.04) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+        repeating-linear-gradient(
+            60deg,
+            transparent,
+            transparent 50px,
+            rgba(148, 163, 184, 0.02) 50px,
+            rgba(148, 163, 184, 0.02) 100px
+        );
+    background-size: 80px 80px, 60px 60px, 200px 200px;
+    background-position: 0 0, 40px 40px, 0 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 確保聯絡資訊內容在背景圖案上方 */
+.contact-info .container {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.contact-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+    position: relative;
+}
+
+.contact-item h3:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 40px;
+    height: 3px;
+    background-color: #4A90E2;
+}
+
+.contact-item p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.contact-item p i {
+    margin-right: 10px;
+    color: #4A90E2;
+    width: 20px;
+    text-align: center;
+}
+
+/* 聯絡資訊鏈接樣式 */
+.contact-item p a {
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin: -2px -4px;
+}
+
+.contact-item p a:hover {
+    color: #4A90E2 !important;
+    background-color: rgba(74, 144, 226, 0.1);
+    transform: translateX(3px);
+}
+
+.contact-item p a:hover i {
+    color: #357ABD;
+}
+
+/* 特定聯絡方式的樣式 */
+.contact-link {
+    position: relative;
+}
+
+.contact-link:hover {
+    cursor: pointer;
+}
+
+/* LINE 鏈接特殊樣式 */
+.contact-item p a[href*="line.me"]:hover {
+    background-color: rgba(0, 195, 0, 0.1);
+    color: #00c300 !important;
+}
+
+.contact-item p a[href*="line.me"]:hover i {
+    color: #00c300;
+}
+
+/* 電話鏈接特殊樣式 */
+.contact-item p a[href^="tel:"]:hover {
+    background-color: rgba(34, 139, 34, 0.1);
+    color: #228B22 !important;
+}
+
+.contact-item p a[href^="tel:"]:hover i {
+    color: #228B22;
+}
+
+/* 郵件鏈接特殊樣式 */
+.contact-item p a[href^="mailto:"]:hover {
+    background-color: rgba(220, 20, 60, 0.1);
+    color: #DC143C !important;
+}
+
+.contact-item p a[href^="mailto:"]:hover i {
+    color: #DC143C;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #4A90E2;
+    color: white;
+    border-radius: 50%;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.social-link:hover {
+    background-color: #357ABD;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.social-link i {
+    font-size: 20px;
+}
+
+/* Footer */
+.footer {
+    background: var(--text-primary);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer-content p {
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 60px; /* 調整行動裝置版本的頂部內邊距 */
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background-color: var(--background-white);
+        width: 100%;
+        text-align: center;
+        transition: var(--transition);
+        box-shadow: var(--shadow-medium);
+        padding: 2rem 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-secondary {
+        font-size: 1.8rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        padding-top: 2.5rem; /* 調整小螢幕裝置的內邊距 */
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-secondary {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-card:nth-child(4) { animation-delay: 0.4s; } 

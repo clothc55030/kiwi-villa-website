@@ -1,0 +1,425 @@
+/* Location Page Specific Styles */
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 8rem 0 4rem;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+    padding: 4rem 0;
+}
+
+/* Location Guide */
+.location-guide {
+    margin-bottom: 5rem;
+}
+
+.guide-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+
+.guide-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.map-container {
+    text-align: center;
+}
+
+.map-container img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Location Advantages */
+.location-advantages {
+    margin-bottom: 5rem;
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.advantage-card {
+    background: var(--background-white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    border-left: 4px solid var(--primary-color);
+}
+
+.advantage-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.advantage-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.advantage-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.advantage-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Distance Info */
+.distance-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.distance-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    background: var(--background-light);
+    border-radius: 6px;
+}
+
+.distance-item i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+/* Delivery Platforms */
+.delivery-platforms {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.platform-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    background: var(--background-light);
+    border-radius: 6px;
+}
+
+.platform-item i {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+/* Transportation Guide */
+.transportation-guide {
+    margin-bottom: 5rem;
+}
+
+.transport-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.transport-card {
+    background: var(--background-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+}
+
+.transport-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+.transport-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.transport-header i {
+    font-size: 2rem;
+}
+
+.transport-header h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.transport-content {
+    padding: 2rem;
+}
+
+.route-info {
+    margin-bottom: 2rem;
+}
+
+.route-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.route-step {
+    background: var(--accent-color);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.route-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-top: 0.2rem;
+}
+
+.transport-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    background: var(--background-light);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item strong {
+    display: block;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.stat-item span {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Address Section */
+.address-section {
+    margin-bottom: 4rem;
+}
+
+.address-card {
+    background: var(--background-light);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    margin-top: 3rem;
+}
+
+.address-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.address-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--background-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+}
+
+.address-item i {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-top: 0.2rem;
+}
+
+.address-item h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.address-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.map-embed {
+    width: 100%;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 300px;
+    background: var(--background-white);
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    text-align: center;
+}
+
+.map-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 6rem 0 3rem;
+    }
+    
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .guide-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .advantages-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .advantage-card {
+        padding: 1.5rem;
+    }
+    
+    .transport-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .address-card {
+        padding: 1.5rem;
+    }
+    
+    .transport-stats {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .advantage-card {
+        padding: 1rem;
+    }
+    
+    .transport-content {
+        padding: 1.5rem;
+    }
+    
+    .transport-header {
+        padding: 1rem;
+    }
+    
+    .address-card {
+        padding: 1.5rem;
+    }
+    
+    .address-item {
+        padding: 0.8rem;
+    }
+    
+    .map-placeholder {
+        height: 200px;
+    }
+}
+
+/* Animation */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.advantage-card {
+    opacity: 0;
+    animation: slideInUp 0.6s ease forwards;
+}
+
+.advantage-card:nth-child(1) { animation-delay: 0.1s; }
+.advantage-card:nth-child(2) { animation-delay: 0.2s; }
+.advantage-card:nth-child(3) { animation-delay: 0.3s; }
+
+.transport-card {
+    opacity: 0;
+    animation: slideInUp 0.6s ease forwards;
+}
+
+.transport-card:nth-child(1) { animation-delay: 0.4s; }
+.transport-card:nth-child(2) { animation-delay: 0.5s; } 
