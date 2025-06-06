@@ -477,6 +477,7 @@
     background: white;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    min-height: 450px;
 }
 
 .google-reviews-widget h3 {
@@ -491,6 +492,7 @@
 .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf {
     margin: 0 auto;
     max-width: 100%;
+    min-height: 400px;
 }
 
 /* 修復Elfsight Widget內部文字溢出問題 */
@@ -530,20 +532,18 @@
 /* 卡片容器調整 */
 .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="card"],
 .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf [class*="item"] {
-    overflow: hidden !important;
     box-sizing: border-box !important;
 }
 
-/* 通用文字溢出修復 - 備用方案 */
+/* 通用文字溢出修復 - 備用方案 - 移除overflow: hidden以顯示所有評論 */
 .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf {
-    overflow: hidden !important;
+    position: relative;
 }
 
 .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf span,
 .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf p,
 .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf div {
     max-width: 100% !important;
-    overflow: hidden !important;
     box-sizing: border-box !important;
 }
 

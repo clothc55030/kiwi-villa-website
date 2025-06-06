@@ -135,4 +135,92 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 暴露組件給全域使用
 window.ContactInfoComponent = ContactInfoComponent;
-window.FooterComponent = FooterComponent; 
+window.FooterComponent = FooterComponent;
+
+// Google Reviews Widget 載入確保
+document.addEventListener('DOMContentLoaded', function() {
+    let widgetCheckAttempts = 0;
+    const maxAttempts = 5;
+    
+    // 確保 Elfsight widget 正確載入
+    const checkElfsightWidget = () => {
+        const widgets = document.querySelectorAll('.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf');
+        const backupSection = document.getElementById('manual-reviews-backup');
+        
+        widgets.forEach(widget => {
+            // 移除可能阻止顯示的內聯樣式
+            widget.style.overflow = 'visible';
+            widget.style.height = 'auto';
+            widget.style.minHeight = '400px';
+            
+            // 檢查widget是否有內容
+            const hasContent = widget.children.length > 0 || widget.innerHTML.trim().length > 0;
+            
+            // 如果widget沒有內容且已嘗試多次，顯示備用評論
+            if (!hasContent && widgetCheckAttempts >= maxAttempts && backupSection) {
+                console.log('Elfsight widget載入失敗，顯示備用評論');
+                backupSection.style.display = 'block';
+            }
+            
+            // 觸發重新載入
+            if (typeof eapps !== 'undefined' && eapps.reinit) {
+                eapps.reinit();
+            }
+        });
+        
+        widgetCheckAttempts++;
+    };
+    
+    // 立即檢查
+    checkElfsightWidget();
+    
+    // 延遲檢查以確保Elfsight腳本已載入
+    setTimeout(checkElfsightWidget, 1000);
+    setTimeout(checkElfsightWidget, 3000);
+    setTimeout(checkElfsightWidget, 5000);
+    setTimeout(checkElfsightWidget, 8000);
+    
+    // 監聽 Elfsight 載入事件
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'elfsight-iframe-height') {
+            const backupSection = document.getElementById('manual-reviews-backup');
+            if (backupSection) {
+                backupSection.style.display = 'none'; // 隱藏備用評論，widget已載入
+            }
+            checkElfsightWidget();
+        }
+    });
+});
+
+// 滾動到評論區域時確保widget顯示
+const observeReviewsWidget = () => {
+    const widgets = document.querySelectorAll('.elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf');
+    
+    if (widgets.length > 0 && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const widget = entry.target;
+                    widget.style.overflow = 'visible';
+                    widget.style.height = 'auto';
+                    widget.style.minHeight = '400px';
+                    
+                    // 觸發Elfsight重新初始化
+                    setTimeout(() => {
+                        if (typeof eapps !== 'undefined' && eapps.reinit) {
+                            eapps.reinit();
+                        }
+                    }, 500);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px'
+        });
+        
+        widgets.forEach(widget => observer.observe(widget));
+    }
+};
+
+// 頁面載入完成後觀察widget
+window.addEventListener('load', observeReviewsWidget); 
