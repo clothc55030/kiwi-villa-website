@@ -1,24 +1,6 @@
 /* Notice Page Specific Styles */
 
-/* Page Header */
-.page-header {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    padding: 8rem 0 4rem;
-    text-align: center;
-    margin-top: 80px;
-}
-
-.page-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.page-header p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
+/* Page Header - 使用統一樣式 (定義在 main.css 中) */
 
 /* Main Content */
 .main-content {
@@ -722,13 +704,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .page-header {
-        padding: 6rem 0 3rem;
-    }
-    
-    .page-header h1 {
-        font-size: 2.5rem;
-    }
     
     .notice-card {
         flex-direction: column;
@@ -776,9 +751,6 @@
 }
 
 @media (max-width: 480px) {
-    .page-header h1 {
-        font-size: 2rem;
-    }
     
     .section-header {
         padding: 1rem 1.5rem;
