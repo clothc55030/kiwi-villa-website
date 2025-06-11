@@ -219,21 +219,24 @@
 }
 
 .offer-card {
-    background: linear-gradient(135deg, var(--accent-color), #d97726);
+    background: linear-gradient(135deg, #f5f7f8, #e8eaec);
     padding: 3rem;
     border-radius: var(--border-radius);
-    color: white;
+    color: #2c3e50;
     text-align: center;
     display: flex;
     align-items: center;
     gap: 2rem;
     max-width: 900px;
     margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+    border: 1px solid rgba(184, 206, 212, 0.4);
 }
 
 .offer-icon {
     font-size: 4rem;
     flex-shrink: 0;
+    color: #5a6c7d;
 }
 
 .offer-content {
@@ -242,27 +245,32 @@
 
 .offer-content h3 {
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 1rem;
+    color: #2c3e50;
 }
 
 .offer-content p {
     font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 2rem;
-    opacity: 0.95;
+    color: #34495e;
+    font-weight: 500;
 }
 
 .offer-card .btn-primary {
-    background: white;
-    color: var(--accent-color);
-    border: 2px solid white;
+    background: #5a6c7d;
+    color: white;
+    border: 2px solid #5a6c7d;
+    font-weight: 700;
 }
 
 .offer-card .btn-primary:hover {
-    background: transparent;
+    background: #4a5a68;
     color: white;
-    border-color: white;
+    border-color: #4a5a68;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(90, 108, 125, 0.4);
 }
 
 /* Responsive Design */

@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Close menu when clicking on nav links
         document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
+                // For anchor links, we let smooth scrolling handle it
+                if (link.getAttribute('href').charAt(0) === '#') {
+                    e.preventDefault();
+                }
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             });
@@ -19,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            if (navMenu.classList.contains('active') && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             }
@@ -28,56 +32,79 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
 });
 
 // Header scroll effect
 window.addEventListener('scroll', function() {
     const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.background = 'var(--background-white)';
-        header.style.backdropFilter = 'none';
+    if (header) { // Check if header exists
+        if (window.scrollY > 50) { // Change effect at 50px scroll
+            header.style.background = 'rgba(255, 255, 255, 0.6)';
+            header.style.backdropFilter = 'blur(10px)';
+            header.style.webkitBackdropFilter = 'blur(10px)';
+            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.background = 'transparent';
+            header.style.backdropFilter = 'none';
+            header.style.webkitBackdropFilter = 'none';
+            header.style.boxShadow = 'none';
+        }
     }
 });
 
 // Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.feature-card, .contact-item, .review-card, .room-card');
+    
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
 
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', function() {
-    const animatedElements = document.querySelectorAll('.feature-card, .contact-item');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+        animatedElements.forEach(el => {
+            el.classList.add('animate-on-scroll');
+            observer.observe(el);
+        });
+    } else {
+        // Fallback for older browsers
+        animatedElements.forEach(el => {
+            el.classList.add('is-visible');
+        });
+    }
 });
+
+// Add CSS for the animation states
+const style = document.createElement('style');
+style.textContent = `
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+`;
+document.head.appendChild(style);
 
 // Form validation (for future booking form)
 function validateForm(form) {
@@ -106,6 +133,73 @@ function formatPhoneNumber(input) {
 // Loading animation
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
+});
+
+// Auto-update copyright year
+function updateCopyrightYear() {
+    const yearSpan = document.getElementById('copyright-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+}
+document.addEventListener('DOMContentLoaded', updateCopyrightYear);
+
+// Scroll to top button
+document.addEventListener('DOMContentLoaded', () => {
+    const button = document.createElement('button');
+    button.innerHTML = '<i class="fas fa-chevron-up"></i>';
+    button.className = 'scroll-to-top';
+    button.setAttribute('aria-label', '回到頂部');
+    document.body.appendChild(button);
+    
+    // Add styles for the button
+    const buttonStyle = document.createElement('style');
+    buttonStyle.textContent = `
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-color, #4A90E2);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .scroll-to-top:hover {
+            background: var(--secondary-color, #2C5282);
+            transform: scale(1.1);
+        }
+    `;
+    document.head.appendChild(buttonStyle);
+    
+    button.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            button.classList.add('visible');
+        } else {
+            button.classList.remove('visible');
+        }
+    });
 });
 
 // Contact form handling (placeholder for future implementation)
@@ -191,51 +285,4 @@ document.addEventListener('DOMContentLoaded', function() {
             imageObserver.observe(img);
         });
     }
-});
-
-// Scroll to top button
-function createScrollToTopButton() {
-    const button = document.createElement('button');
-    button.innerHTML = '<i class="fas fa-chevron-up"></i>';
-    button.className = 'scroll-to-top';
-    button.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        border: none;
-        border-radius: 50%;
-        background: var(--primary-color);
-        color: white;
-        font-size: 1.2rem;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
-    `;
-    
-    button.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    document.body.appendChild(button);
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            button.style.opacity = '1';
-            button.style.visibility = 'visible';
-        } else {
-            button.style.opacity = '0';
-            button.style.visibility = 'hidden';
-        }
-    });
-}
-
-// Initialize scroll to top button
-document.addEventListener('DOMContentLoaded', createScrollToTopButton); 
+}); 

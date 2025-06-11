@@ -1,8 +1,10 @@
 User-agent: *
 Allow: /
-Disallow: /scripts/
-Disallow: /styles/
+
+# Disallow development/unnecessary files
 Disallow: /*.ps1$
+Disallow: /*.md$
+Disallow: /backup_*/
 
 # 指定網站地圖位置
 Sitemap: https://www.kiwi-villa.com/sitemap.xml
