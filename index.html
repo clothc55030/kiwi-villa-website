@@ -67,14 +67,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://static.elfsight.com">
     
-    <!-- 字體預載入優化 - 添加具體字體文件預載入 -->
+    <!-- 預載入關鍵字體文件 - 加速字體載入 -->
     <link rel="preload" href="https://fonts.gstatic.com/s/notosanstc/v35/nKKF-GM_FDBOg1I_qR7lhLu8gB70jmKyAEaFWODgYwWVhwejNPl5.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.gstatic.com/s/notosanstc/v35/nKKF-GM_FDBOg1I_qR7lhLu8gB70jmKyAEaFWODgYwWVhwejN_d5.woff2" as="font" type="font/woff2" crossorigin>
     
-    <!-- 預載入關鍵資源 - 調整優先級 -->
+    <!-- 預載入關鍵資源 - 只載入絕對必要的 -->
     <link rel="preload" href="images/hero/main-hall-environment.jpg" as="image" fetchpriority="high">
-    <link rel="preload" href="styles/home.css" as="style" fetchpriority="high">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" as="style" fetchpriority="high">
     
     <!-- 內聯關鍵 CSS - 添加完整的 LCP 相關樣式 -->
     <style>
@@ -102,12 +99,17 @@
             --transition: all 0.3s ease;
         }
         
+        /* 使用本地中文字體，確保立即渲染且美觀 */
         body {
-            font-family: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', 'Arial Unicode MS', sans-serif;
-            font-display: swap;
+            font-family: 'Microsoft JhengHei', '微軟正黑體', 'PingFang TC', 'Hiragino Sans GB', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background: #f8fafc;
+        }
+        
+        /* Noto Sans TC 載入完成後切換 */
+        body.fonts-loaded {
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', 'PingFang TC', sans-serif;
         }
         
         /* 立即啟用基本背景，避免閃爍 */
@@ -180,8 +182,6 @@
         .hero-content {
             z-index: 1;
             padding: 4rem 0 2rem;
-            content-visibility: auto;
-            contain-intrinsic-size: 0 800px;
         }
         
         .hero-title {
@@ -205,25 +205,16 @@
             color: var(--accent-color);
         }
         
-        /* 完整的 LCP 元素樣式 - 關鍵優化 */
+        /* LCP 元素極簡樣式 - 關鍵優化 */
         .hero-description {
             font-size: 1.2rem;
             line-height: 1.8;
-            margin-bottom: 3rem;
+            margin: 0 auto 3rem;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            min-height: 200px;
-            text-rendering: optimizeSpeed;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            /* 避免重排 */
-            contain: layout style paint;
         }
         
         .hero-description p {
             margin-bottom: 1rem;
-            contain: layout;
         }
         
         .btn-primary {
@@ -295,7 +286,6 @@
         /* 基本的視覺效果樣式 - 確保載入後正常顯示 */
         .features {
             backdrop-filter: none;
-            transition: backdrop-filter 0.3s ease;
         }
         
         body.loaded .features {
@@ -304,7 +294,6 @@
         
         .feature-card {
             background: var(--background-white);
-            transition: all 0.3s ease;
         }
         
         body.loaded .feature-card {
@@ -317,23 +306,22 @@
             .hero-title { font-size: 2.5rem; }
             .hero-subtitle { font-size: 1.2rem; }
             .hero-secondary { font-size: 1.8rem; }
-            .hero-description { 
-                font-size: 1rem;
-                min-height: 150px;
-            }
+            .hero-description { font-size: 1rem; }
             .container { padding: 0 15px; }
         }
     </style>
     
-    <!-- 字體載入優化 - 保持原有設定但提升載入優先級 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 延後載入所有非關鍵 CSS -->
+    <link rel="preload" href="styles/home.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     
-    <!-- 載入自定義輕量級圖標CSS - 降低優先級 -->
-    <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" fetchpriority="low">
-    <noscript><link rel="stylesheet" href="styles/custom-icons.css"></noscript>
-    
-    <!-- 載入主要樣式表 -->
-    <link rel="stylesheet" href="styles/home.css">
+    <!-- 備用無 JS 環境 -->
+    <noscript>
+        <link rel="stylesheet" href="styles/home.css">
+        <link rel="stylesheet" href="styles/custom-icons.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap">
+    </noscript>
     
     <!-- Elfsight Google Reviews Widget - 延後載入 -->
     <script>
@@ -580,6 +568,36 @@
             document.body.classList.add('content-ready');
         }
 
+        // 載入非關鍵樣式和字體
+        function loadNonCriticalAssets() {
+            // 啟用所有預載入的樣式表
+            const stylesheets = document.querySelectorAll('link[rel="preload"][as="style"]');
+            stylesheets.forEach(function(sheet) {
+                sheet.onload = null;
+                sheet.rel = 'stylesheet';
+                sheet.media = 'all';
+            });
+            
+            // 更積極的字體載入策略
+            if ('FontFace' in window) {
+                // 檢查 Noto Sans TC 是否載入
+                const checkFont = new FontFace('Noto Sans TC', 'url(https://fonts.gstatic.com/s/notosanstc/v35/nKKF-GM_FDBOg1I_qR7lhLu8gB70jmKyAEaFWODgYwWVhwejNPl5.woff2)');
+                checkFont.load().then(function() {
+                    document.body.classList.add('fonts-loaded');
+                }).catch(function() {
+                    // 即使載入失敗，也在短時間後嘗試切換
+                    setTimeout(function() {
+                        document.body.classList.add('fonts-loaded');
+                    }, 1000);
+                });
+            } else {
+                // 備用方案 - 更短的等待時間
+                setTimeout(function() {
+                    document.body.classList.add('fonts-loaded');
+                }, 1500);
+            }
+        }
+
         // 非關鍵視覺效果延後執行
         function initEnhancements() {
             document.body.classList.add('loaded');
@@ -590,15 +608,16 @@
             initCriticalFeatures();
         });
 
-        // 監聽最大內容繪製完成，優化LCP後啟用動畫
+        // 監聽最大內容繪製完成，LCP後載入非關鍵資源
         if ('PerformanceObserver' in window) {
             const observer = new PerformanceObserver(function(list) {
                 const entries = list.getEntries();
                 for (let entry of entries) {
                     if (entry.entryType === 'largest-contentful-paint') {
-                        // LCP 完成後啟用複雜視覺效果
+                        // LCP 完成後載入非關鍵資源
                         requestAnimationFrame(() => {
-                            initEnhancements();
+                            loadNonCriticalAssets();
+                            setTimeout(initEnhancements, 300);
                         });
                         observer.disconnect();
                         break;
@@ -608,9 +627,10 @@
             observer.observe({ entryTypes: ['largest-contentful-paint'] });
         }
         
-        // 備用機制：確保視覺效果最終會啟用
+        // 備用機制：確保資源最終會載入
         window.addEventListener('load', function() {
             setTimeout(function() {
+                loadNonCriticalAssets();
                 initEnhancements();
             }, 100);
         });
