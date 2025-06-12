@@ -62,17 +62,21 @@
     
     <title>期遇度假會館 Kiwi Villa | 澎湖民宿推薦 | Taiwan, Penghu County</title>
     
-    <!-- 預載入關鍵資源 -->
-    <link rel="preload" href="styles/home.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="images/hero/main-hall-environment.jpg" as="image">
-    
-    <!-- 預連接外部域名 -->
+    <!-- 預連接外部域名 - 提高優先級 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://static.elfsight.com">
     
-    <!-- 內聯關鍵 CSS -->
+    <!-- 字體預載入優化 - 添加具體字體文件預載入 -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/notosanstc/v35/nKKF-GM_FDBOg1I_qR7lhLu8gB70jmKyAEaFWODgYwWVhwejNPl5.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/notosanstc/v35/nKKF-GM_FDBOg1I_qR7lhLu8gB70jmKyAEaFWODgYwWVhwejN_d5.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- 預載入關鍵資源 - 調整優先級 -->
+    <link rel="preload" href="images/hero/main-hall-environment.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="styles/home.css" as="style" fetchpriority="high">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" as="style" fetchpriority="high">
+    
+    <!-- 內聯關鍵 CSS - 添加完整的 LCP 相關樣式 -->
     <style>
         /* CSS Reset and Critical Variables */
         * {
@@ -98,28 +102,31 @@
             --transition: all 0.3s ease;
         }
         
-                         body {
-             font-family: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', 'Arial Unicode MS', sans-serif;
-             font-display: swap;
-             line-height: 1.6;
-             color: var(--text-primary);
-             /* 簡化首屏背景，避免複雜動畫影響 LCP */
-             background: #f8fafc;
-         }
-         
-         /* 延後啟用的漸變動畫 */
-         body.loaded {
-             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
-             background-attachment: fixed;
-             background-size: 400% 400%;
-             animation: gradientMove 15s ease infinite;
-         }
-         
-         @keyframes gradientMove {
-             0% { background-position: 0% 50%; }
-             50% { background-position: 100% 50%; }
-             100% { background-position: 0% 50%; }
-         }
+        body {
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', 'Arial Unicode MS', sans-serif;
+            font-display: swap;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: #f8fafc;
+        }
+        
+        /* 立即啟用基本背景，避免閃爍 */
+        body.content-ready {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+            background-attachment: fixed;
+            background-size: 400% 400%;
+        }
+        
+        /* 延後啟用的漸變動畫 */
+        body.loaded {
+            animation: gradientMove 15s ease infinite;
+        }
+        
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         
         .container {
             max-width: 1200px;
@@ -149,17 +156,14 @@
             z-index: -2;
         }
         
-                         .hero-image img {
+        .hero-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* 圖片載入優化 - 進一步優化LCP */
             background-color: #2D3748;
             image-rendering: -webkit-optimize-contrast;
             image-rendering: crisp-edges;
-            /* 確保圖片載入期間的優雅降級 */
             min-height: 400px;
-            content-visibility: auto;
         }
         
         .hero::before {
@@ -176,6 +180,8 @@
         .hero-content {
             z-index: 1;
             padding: 4rem 0 2rem;
+            content-visibility: auto;
+            contain-intrinsic-size: 0 800px;
         }
         
         .hero-title {
@@ -199,25 +205,26 @@
             color: var(--accent-color);
         }
         
-                 .hero-description {
-             font-size: 1.2rem;
-             line-height: 1.8;
-             margin-bottom: 3rem;
-             max-width: 800px;
-             margin-left: auto;
-             margin-right: auto;
-             /* LCP 元素優化 */
-             will-change: auto;
-             text-rendering: optimizeSpeed;
-             -webkit-font-smoothing: antialiased;
-             -moz-osx-font-smoothing: grayscale;
-         }
-         
-         .hero-description p {
-             margin-bottom: 1rem;
-             /* 確保 LCP 文字快速渲染 */
-             contain: layout;
-         }
+        /* 完整的 LCP 元素樣式 - 關鍵優化 */
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 200px;
+            text-rendering: optimizeSpeed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            /* 避免重排 */
+            contain: layout style paint;
+        }
+        
+        .hero-description p {
+            margin-bottom: 1rem;
+            contain: layout;
+        }
         
         .btn-primary {
             display: inline-block;
@@ -285,67 +292,59 @@
             background-color: rgba(74, 144, 226, 0.1);
         }
         
-                 /* 禁用首屏渲染期間的複雜背景效果 */
-         body:not(.loaded)::before {
-             display: none !important;
-         }
-         
-         body:not(.loaded) .features::before,
-         body:not(.loaded) .contact-info::before {
-             display: none !important;
-         }
-         
-
-         
-         body:not(.loaded) .features {
-             backdrop-filter: none !important;
-         }
-         
-         body:not(.loaded) .feature-card {
-             backdrop-filter: none !important;
-             background: var(--background-white) !important;
-         }
-         
-         /* LCP 完成後確保所有視覺效果重新啟用 */
-         body.loaded .features {
-             backdrop-filter: blur(1px) !important;
-         }
-         
-         body.loaded .feature-card {
-             backdrop-filter: blur(10px) !important;
-             background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%) !important;
-         }
-         
-
-         
-         /* 行動裝置優化 */
-         @media (max-width: 768px) {
-             .hero-title { font-size: 2.5rem; }
-             .hero-subtitle { font-size: 1.2rem; }
-             .hero-secondary { font-size: 1.8rem; }
-             .hero-description { font-size: 1rem; }
-             .container { padding: 0 15px; }
-         }
+        /* 基本的視覺效果樣式 - 確保載入後正常顯示 */
+        .features {
+            backdrop-filter: none;
+            transition: backdrop-filter 0.3s ease;
+        }
+        
+        body.loaded .features {
+            backdrop-filter: blur(1px);
+        }
+        
+        .feature-card {
+            background: var(--background-white);
+            transition: all 0.3s ease;
+        }
+        
+        body.loaded .feature-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* 行動裝置優化 */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .hero-secondary { font-size: 1.8rem; }
+            .hero-description { 
+                font-size: 1rem;
+                min-height: 150px;
+            }
+            .container { padding: 0 15px; }
+        }
     </style>
+    
+    <!-- 字體載入優化 - 保持原有設定但提升載入優先級 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 載入自定義輕量級圖標CSS - 降低優先級 -->
+    <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" fetchpriority="low">
+    <noscript><link rel="stylesheet" href="styles/custom-icons.css"></noscript>
     
     <!-- 載入主要樣式表 -->
     <link rel="stylesheet" href="styles/home.css">
-    
-    <!-- 字體載入優化 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- 載入自定義輕量級圖標CSS - 大幅減少檔案大小 -->
-    <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="styles/custom-icons.css"></noscript>
     
     <!-- Elfsight Google Reviews Widget - 延後載入 -->
     <script>
         // 延後載入 Elfsight 腳本，提升首屏載入速度
         window.addEventListener('load', function() {
-            const script = document.createElement('script');
-            script.src = 'https://static.elfsight.com/platform/platform.js';
-            script.async = true;
-            document.head.appendChild(script);
+            setTimeout(function() {
+                const script = document.createElement('script');
+                script.src = 'https://static.elfsight.com/platform/platform.js';
+                script.async = true;
+                document.head.appendChild(script);
+            }, 1000);
         });
     </script>
     
@@ -560,7 +559,7 @@
         </div>
     </footer>
 
-    <!-- 效能優化：延後啟用複雜視覺效果 + 錯誤處理 -->
+    <!-- 效能優化：分階段載入視覺效果 + 錯誤處理 -->
     <script>
         // 錯誤處理：抑制Cloudflare優化功能的控制台錯誤
         window.addEventListener('error', function(e) {
@@ -575,16 +574,32 @@
             }
         }, true);
 
-        // 監聽最大內容繪製完成，啟用視覺效果
+        // 關鍵功能立即執行
+        function initCriticalFeatures() {
+            // 立即啟用基本背景，避免閃爍
+            document.body.classList.add('content-ready');
+        }
+
+        // 非關鍵視覺效果延後執行
+        function initEnhancements() {
+            document.body.classList.add('loaded');
+        }
+
+        // DOM內容載入完成後立即執行關鍵功能
+        document.addEventListener('DOMContentLoaded', function() {
+            initCriticalFeatures();
+        });
+
+        // 監聽最大內容繪製完成，優化LCP後啟用動畫
         if ('PerformanceObserver' in window) {
             const observer = new PerformanceObserver(function(list) {
                 const entries = list.getEntries();
                 for (let entry of entries) {
                     if (entry.entryType === 'largest-contentful-paint') {
-                        // LCP 完成後啟用視覺效果
-                        setTimeout(function() {
-                            document.body.classList.add('loaded');
-                        }, 100);
+                        // LCP 完成後啟用複雜視覺效果
+                        requestAnimationFrame(() => {
+                            initEnhancements();
+                        });
                         observer.disconnect();
                         break;
                     }
@@ -596,12 +611,12 @@
         // 備用機制：確保視覺效果最終會啟用
         window.addEventListener('load', function() {
             setTimeout(function() {
-                document.body.classList.add('loaded');
-            }, 300);
+                initEnhancements();
+            }, 100);
         });
     </script>
 
-    <!-- 正常載入主要 JavaScript，確保動畫正常 -->
-    <script src="scripts/main.js"></script>
+    <!-- 延後載入主要 JavaScript，避免阻塞LCP -->
+    <script src="scripts/main.js" defer></script>
 </body>
 </html> 
