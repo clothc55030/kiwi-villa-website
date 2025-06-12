@@ -96,22 +96,28 @@
             --transition: all 0.3s ease;
         }
         
-                 body {
+                         body {
              font-family: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', 'Arial Unicode MS', sans-serif;
              font-display: swap;
              line-height: 1.6;
              color: var(--text-primary);
+             /* 簡化首屏背景，避免複雜動畫影響 LCP */
+             background: #f8fafc;
+         }
+         
+         /* 延後啟用的漸變動畫 */
+         body.loaded {
              background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
              background-attachment: fixed;
              background-size: 400% 400%;
              animation: gradientMove 15s ease infinite;
          }
-        
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+         
+         @keyframes gradientMove {
+             0% { background-position: 0% 50%; }
+             50% { background-position: 100% 50%; }
+             100% { background-position: 0% 50%; }
+         }
         
         .container {
             max-width: 1200px;
@@ -141,11 +147,15 @@
             z-index: -2;
         }
         
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+                 .hero-image img {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+             /* 圖片載入優化 */
+             background-color: #2D3748;
+             image-rendering: -webkit-optimize-contrast;
+             image-rendering: crisp-edges;
+         }
         
         .hero::before {
             content: '';
@@ -184,18 +194,25 @@
             color: var(--accent-color);
         }
         
-        .hero-description {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-description p {
-            margin-bottom: 1rem;
-        }
+                 .hero-description {
+             font-size: 1.2rem;
+             line-height: 1.8;
+             margin-bottom: 3rem;
+             max-width: 800px;
+             margin-left: auto;
+             margin-right: auto;
+             /* LCP 元素優化 */
+             will-change: auto;
+             text-rendering: optimizeSpeed;
+             -webkit-font-smoothing: antialiased;
+             -moz-osx-font-smoothing: grayscale;
+         }
+         
+         .hero-description p {
+             margin-bottom: 1rem;
+             /* 確保 LCP 文字快速渲染 */
+             contain: layout;
+         }
         
         .btn-primary {
             display: inline-block;
@@ -263,14 +280,47 @@
             background-color: rgba(74, 144, 226, 0.1);
         }
         
-        /* 行動裝置優化 */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1.2rem; }
-            .hero-secondary { font-size: 1.8rem; }
-            .hero-description { font-size: 1rem; }
-            .container { padding: 0 15px; }
-        }
+                 /* 禁用首屏渲染期間的複雜背景效果 */
+         body:not(.loaded)::before {
+             display: none !important;
+         }
+         
+         body:not(.loaded) .features::before,
+         body:not(.loaded) .contact-info::before {
+             display: none !important;
+         }
+         
+
+         
+         body:not(.loaded) .features {
+             backdrop-filter: none !important;
+         }
+         
+         body:not(.loaded) .feature-card {
+             backdrop-filter: none !important;
+             background: var(--background-white) !important;
+         }
+         
+         /* LCP 完成後確保所有視覺效果重新啟用 */
+         body.loaded .features {
+             backdrop-filter: blur(1px) !important;
+         }
+         
+         body.loaded .feature-card {
+             backdrop-filter: blur(10px) !important;
+             background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%) !important;
+         }
+         
+
+         
+         /* 行動裝置優化 */
+         @media (max-width: 768px) {
+             .hero-title { font-size: 2.5rem; }
+             .hero-subtitle { font-size: 1.2rem; }
+             .hero-secondary { font-size: 1.8rem; }
+             .hero-description { font-size: 1rem; }
+             .container { padding: 0 15px; }
+         }
     </style>
     
     <!-- 載入主要樣式表 -->
@@ -505,15 +555,35 @@
         </div>
     </footer>
 
-    <!-- 延後載入主要 JavaScript -->
+    <!-- LCP 優化：延後啟用複雜視覺效果 -->
     <script>
-        // 確保關鍵渲染完成後再載入 JavaScript
-        window.addEventListener('DOMContentLoaded', function() {
-            const script = document.createElement('script');
-            script.src = 'scripts/main.js';
-            script.async = true;
-            document.body.appendChild(script);
+        // 監聽最大內容繪製完成，啟用視覺效果
+        if ('PerformanceObserver' in window) {
+            const observer = new PerformanceObserver(function(list) {
+                const entries = list.getEntries();
+                for (let entry of entries) {
+                    if (entry.entryType === 'largest-contentful-paint') {
+                        // LCP 完成後啟用視覺效果
+                        setTimeout(function() {
+                            document.body.classList.add('loaded');
+                        }, 100);
+                        observer.disconnect();
+                        break;
+                    }
+                }
+            });
+            observer.observe({ entryTypes: ['largest-contentful-paint'] });
+        }
+        
+        // 備用機制：確保視覺效果最終會啟用
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.body.classList.add('loaded');
+            }, 300);
         });
     </script>
+
+    <!-- 正常載入主要 JavaScript，確保動畫正常 -->
+    <script src="scripts/main.js"></script>
 </body>
 </html> 
