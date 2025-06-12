@@ -95,6 +95,10 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Cloudflare 錯誤處理：靜默處理Cloudflare優化功能請求
+    RewriteCond %{REQUEST_URI} ^/cdn-cgi/ [NC]
+    RewriteRule .* - [R=404,L]
+    
     # 規則 1: 強制使用 HTTPS
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
