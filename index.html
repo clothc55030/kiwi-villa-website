@@ -317,14 +317,19 @@
     <link rel="preload" href="styles/home.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <link rel="preload" href="styles/image-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <link rel="preload" href="styles/font-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <link rel="preload" href="styles/svg-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <!-- 精簡字體權重：移除500，保留400,600,700 -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     
     <!-- 備用無 JS 環境 -->
     <noscript>
         <link rel="stylesheet" href="styles/home.css">
         <link rel="stylesheet" href="styles/custom-icons.css">
         <link rel="stylesheet" href="styles/image-optimization.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap">
+        <link rel="stylesheet" href="styles/font-optimization.css">
+        <link rel="stylesheet" href="styles/svg-icons.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional">
     </noscript>
     
     <!-- Elfsight Google Reviews Widget - 延後載入 -->

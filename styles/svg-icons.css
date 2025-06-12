@@ -1,0 +1,369 @@
+/* SVG 圖標系統 - 修正藍色框問題 */
+
+/* === 基礎重置和修正 === */
+/* 完全重置Font Awesome樣式，移除藍色框 */
+.fas, .fab, .far, .fal, .fad, .fa {
+    font-family: inherit !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    text-rendering: auto !important;
+    display: inline-block !important;
+    text-decoration: none !important;
+    color: transparent !important;
+    text-shadow: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+}
+
+.fas::before, 
+.fab::before,
+.far::before,
+.fal::before,
+.fad::before {
+    content: '' !important;
+    display: none !important;
+}
+
+/* === Font Awesome 替換為 SVG === */
+
+/* 星星圖標 */
+.fas.fa-star {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffd700'%3E%3Cpath d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 箭頭圖標 */
+.fas.fa-chevron-left {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+.fas.fa-chevron-right {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+.fas.fa-chevron-down {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 使用者圖標 */
+.fas.fa-users {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Ccircle cx='9' cy='8' r='3' fill='%23333'/%3E%3Ccircle cx='15' cy='8' r='3' fill='%23333'/%3E%3Cpath d='M6 18v2h6v-2c0-2.21-1.79-4-4-4s-4 1.79-4 4z' fill='%23333'/%3E%3Cpath d='M12 18v2h6v-2c0-2.21-1.79-4-4-4s-4 1.79-4 4z' fill='%23333'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 浴室圖標 */
+.fas.fa-bath {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M20 8v11c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V8s0-2 2-2h1V4c0-1.1.9-2 2-2s2 .9 2 2v2h6c2 0 2 2 2 2zM7 10v9h10v-9H7z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 房門圖標 */
+.fas.fa-door-open {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M19 19V5c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v14H3v2h18v-2h-2zM7 5h10v14h-4V9h-2v10H7V5zm4 6h2v2h-2v-2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 床鋪圖標 */
+.fas.fa-bed {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M21 10.78V8c0-1.65-1.35-3-3-3h-4c-.77 0-1.47.3-2 .78C11.47 5.3 10.77 5 10 5H6C4.35 5 3 6.35 3 8v2.78c-.61.55-1 1.34-1 2.22v6h2v-2h16v2h2v-6c0-.88-.39-1.67-1-2.22zM14 7h4c.55 0 1 .45 1 1v2h-6V8c0-.55.45-1 1-1zM5 8c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v2H5V8zm-1 5h16v2H4v-2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 眼睛圖標 (海景) */
+.fas.fa-eye {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 建築圖標 */
+.fas.fa-building {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 位置圖標 */
+.fas.fa-map-marker-alt {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 電話圖標 */
+.fas.fa-phone {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 信封圖標 */
+.fas.fa-envelope {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 愛心圖標 */
+.fas.fa-heart {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e74c3c'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* WiFi圖標 */
+.fas.fa-wifi {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Ccircle cx='12' cy='19' r='2' fill='%23333'/%3E%3Cpath d='M12 15c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2h2c0-2.21-1.79-4-4-4z' fill='%23333'/%3E%3Cpath d='M12 11c-4.42 0-8 3.58-8 8h2c0-3.31 2.69-6 6-6s6 2.69 6 6h2c0-4.42-3.58-8-8-8z' fill='%23333'/%3E%3Cpath d='M12 7C5.93 7 1 11.93 1 18h2c0-4.97 4.03-9 9-9s9 4.03 9 9h2c0-6.07-4.93-11-11-11z' fill='%23333'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 嬰兒圖標 */
+.fas.fa-baby {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 .88.17 1.71.46 2.5H6.5c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-1c-1.1 0-2-.9-2-2v-8c0-1.1.9-2 2-2h.04C5.17 10.71 5 9.88 5 9c0-3.87 3.13-7 7-7s7 3.13 7 7c0 .88-.17 1.71-.46 2.5H18.5c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-1c-1.1 0-2-.9-2-2v-8c0-1.1.9-2 2-2h.04c-.29-.79-.46-1.62-.46-2.5 0-3.87-3.13-7-7-7z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 寶石圖標 */
+.fas.fa-gem {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M6 2l-2 4h4L6 2zM12 2L10 6h4L12 2zM18 2l-2 4h4L18 2zM2 8v2l10 10L22 10V8H2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 朋友圖標 */
+.fas.fa-user-friends {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.99 2.99 0 0 0 17.08 7H16c-1.66 0-3 1.34-3 3v7h2v5h5zm-8.5-10c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm1.5 1h-3c-1.66 0-3 1.34-3 3v7h9v-7c0-1.66-1.34-3-3-3z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 家圖標 */
+.fas.fa-home {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 月亮圖標 */
+.fas.fa-moon {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M9 2c-1.05 0-2.05.16-3 .46 4.06 1.27 7 5.06 7 9.54 0 4.48-2.94 8.27-7 9.54.95.3 1.95.46 3 .46 5.52 0 10-4.48 10-10S14.52 2 9 2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 雪花圖標 */
+.fas.fa-snowflake {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M22 11h-4.17l2.24-2.24-1.41-1.42L15 11h-2V9l3.66-3.66-1.42-1.41L13 6.17V2h-2v4.17L8.76 3.93 7.34 5.34 11 9v2H9l-3.66-3.66-1.41 1.42L6.17 11H2v2h4.17l-2.24 2.24 1.41 1.42L9 13h2v2l-3.66 3.66 1.42 1.41L11 17.83V22h2v-4.17l2.24 2.24 1.42-1.41L13 15v-2h2l3.66 3.66 1.41-1.42L17.83 13H22v-2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 水滴圖標 */
+.fas.fa-tint {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M12 2l-8 8c0 4.42 3.58 8 8 8s8-3.58 8-8L12 2z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 檢查圓圈圖標 */
+.fas.fa-check-circle {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2328a745'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 行事曆檢查圖標 */
+.fas.fa-calendar-check {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 飛機圖標 */
+.fas.fa-plane {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 路線圖標 */
+.fas.fa-route {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M19 15l-6 6-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 機車圖標 */
+.fas.fa-motorcycle {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M19.44 9.03L15.41 5H11v2h3.59l2 2H9l-2-2H2v2h4l2 2 1.8 2.4C8.16 12.69 6.64 14.68 6 17h2c.73-2.58 3.07-4.47 5.91-4.95L16.5 15l-1.8-2.4-.31-.41L16.5 10H18l1.44 1.97L21.38 11l-1.94-1.97zm-8.91 4.04L10 12h3l.53.91-2.96.16zM5 16c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm14 0c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 汽車圖標 */
+.fas.fa-car {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 禮物圖標 */
+.fas.fa-gift {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2h1c1.11 0 2-.89 2-2v-4c0-1.11-.89-2-2-2zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm6 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* Google圖標 */
+.fab.fa-google {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='white' stroke='%23ddd' stroke-width='1'/%3E%3Ctext x='12' y='16' text-anchor='middle' fill='%234285F4' font-family='Arial' font-size='10' font-weight='bold'%3EG%3C/text%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* WeChat圖標 */
+.fab.fa-weixin {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2307C160'%3E%3Ccircle cx='8' cy='10' r='6' fill='%2307C160'/%3E%3Ccircle cx='6.5' cy='8.5' r='1' fill='white'/%3E%3Ccircle cx='9.5' cy='8.5' r='1' fill='white'/%3E%3Ccircle cx='16' cy='14' r='5' fill='%2307C160'/%3E%3Ccircle cx='14.5' cy='13' r='0.8' fill='white'/%3E%3Ccircle cx='17.5' cy='13' r='0.8' fill='white'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 社群媒體圖標 */
+.fab.fa-instagram {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='ig' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23f58529'/%3E%3Cstop offset='.5' stop-color='%23dd2a7b'/%3E%3Cstop offset='1' stop-color='%238134af'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='2' y='2' width='20' height='20' rx='6' fill='url(%23ig)'/%3E%3Ccircle cx='12' cy='12' r='4' fill='none' stroke='white' stroke-width='2.5'/%3E%3Ccircle cx='18' cy='6' r='1.5' fill='white'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+.fab.fa-facebook-f {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231877F2'%3E%3Ccircle cx='12' cy='12' r='10' fill='%231877F2'/%3E%3Cpath d='M15.5 8h-2c-.8 0-1.5.7-1.5 1.5v1.5h3l-.5 3h-2.5v7h-3v-7H7v-3h2V9c0-2.2 1.8-4 4-4h2.5v3z' fill='white'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* LINE 圖標 - 使用本地圖片 */
+.fab.fa-line {
+    background: url("../images/line-icon.png") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
+/* 備用路徑，如果上面的路徑不行 */
+.fab.fa-line.fallback-1 {
+    background: url("images/line-icon.png") no-repeat center/contain !important;
+}
+
+.fab.fa-line.fallback-2 {
+    background: url("./images/line-icon.png") no-repeat center/contain !important;
+}
+
+.fab.fa-line.fallback-3 {
+    background: url("/images/line-icon.png") no-repeat center/contain !important;
+}
+
+/* === 特殊樣式和動畫 === */
+/* 評分星星特殊樣式 */
+.rating-stars .fas.fa-star {
+    margin-right: 2px;
+}
+
+/* 社群媒體圖標特殊樣式 */
+.social-icons .fab {
+    width: 1.5em !important;
+    height: 1.5em !important;
+    margin: 0 0.5rem;
+    transition: transform 0.3s ease !important;
+}
+
+.social-icons .fab:hover {
+    transform: scale(1.2) !important;
+}
+
+/* 圖標動畫效果 */
+.fas:hover, .fab:hover {
+    transform: scale(1.05) !important;
+    transition: transform 0.2s ease !important;
+}
+
+/* === 圖標清晰度優化 === */
+/* 確保所有SVG圖標在各種情況下都清晰顯示 */
+.fas, .fab {
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+    image-rendering: pixelated !important;
+    -ms-interpolation-mode: nearest-neighbor !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* 針對高解析度螢幕的優化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .fas, .fab {
+        image-rendering: -webkit-optimize-contrast !important;
+        image-rendering: auto !important;
+    }
+}
+
+/* 針對小尺寸圖標的特殊處理 */
+.fas[style*="font-size: 0.8"], 
+.fab[style*="font-size: 0.8"],
+.fas[style*="font-size: 0.9"], 
+.fab[style*="font-size: 0.9"] {
+    background-size: 90% !important;
+}
+
+/* 確保圖標在不同背景下都清晰可見 */
+.fas, .fab {
+    filter: contrast(1.1) !important;
+} 
