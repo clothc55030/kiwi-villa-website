@@ -59,14 +59,240 @@
     
     <title>期遇度假會館 Kiwi Villa | 澎湖民宿推薦 | Taiwan, Penghu County</title>
     
-    <link rel="stylesheet" href="styles/home.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 預載入關鍵資源 -->
+    <link rel="preload" href="styles/home.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="images/hero/main-hall-environment.jpg" as="image">
     
-    <!-- Elfsight Google Reviews Widget -->
-    <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <!-- 預連接外部域名 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://static.elfsight.com">
+    
+    <!-- 內聯關鍵 CSS -->
+    <style>
+        /* CSS Reset and Critical Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #2C5282;
+            --accent-color: #ED8936;
+            --text-primary: #2D3748;
+            --text-secondary: #4A5568;
+            --text-light: #718096;
+            --background-light: #F7FAFC;
+            --background-white: #FFFFFF;
+            --border-color: #E2E8F0;
+            --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+                 body {
+             font-family: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', 'Arial Unicode MS', sans-serif;
+             font-display: swap;
+             line-height: 1.6;
+             color: var(--text-primary);
+             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+             background-attachment: fixed;
+             background-size: 400% 400%;
+             animation: gradientMove 15s ease infinite;
+         }
+        
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 關鍵的 Hero Section 樣式 */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -2;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            z-index: 1;
+            padding: 4rem 0 2rem;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-secondary {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-description p {
+            margin-bottom: 1rem;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .btn-primary:hover {
+            background: #d97726;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        /* Header 基本樣式 */
+        .header {
+            background: var(--background-white);
+            box-shadow: var(--shadow-light);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            padding: 1rem 0;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand .logo {
+            height: 50px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+            background-color: rgba(74, 144, 226, 0.1);
+        }
+        
+        /* 行動裝置優化 */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .hero-secondary { font-size: 1.8rem; }
+            .hero-description { font-size: 1rem; }
+            .container { padding: 0 15px; }
+        }
+    </style>
+    
+    <!-- 載入主要樣式表 -->
+    <link rel="stylesheet" href="styles/home.css">
+    
+    <!-- 字體載入優化 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 延後載入非關鍵 CSS -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- Elfsight Google Reviews Widget - 延後載入 -->
+    <script>
+        // 延後載入 Elfsight 腳本，提升首屏載入速度
+        window.addEventListener('load', function() {
+            const script = document.createElement('script');
+            script.src = 'https://static.elfsight.com/platform/platform.js';
+            script.async = true;
+            document.head.appendChild(script);
+        });
+    </script>
     
     <!-- 結構化資料 -->
     <script type="application/ld+json">
@@ -182,6 +408,7 @@
             <img src="images/hero/main-hall-environment.jpg" 
                  alt="期遇度假會館環境圖-大廳環境，展現歐洲巴洛克古典建築風格的奢華大廳空間" 
                  loading="eager" 
+                 fetchpriority="high"
                  width="1200" 
                  height="800">
         </div>
@@ -278,6 +505,15 @@
         </div>
     </footer>
 
-    <script src="scripts/main.js"></script>
+    <!-- 延後載入主要 JavaScript -->
+    <script>
+        // 確保關鍵渲染完成後再載入 JavaScript
+        window.addEventListener('DOMContentLoaded', function() {
+            const script = document.createElement('script');
+            script.src = 'scripts/main.js';
+            script.async = true;
+            document.body.appendChild(script);
+        });
+    </script>
 </body>
 </html> 
