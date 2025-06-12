@@ -70,8 +70,10 @@
     <!-- 預載入關鍵字體文件 - 加速字體載入 -->
     <link rel="preload" href="https://fonts.gstatic.com/s/notosanstc/v35/nKKF-GM_FDBOg1I_qR7lhLu8gB70jmKyAEaFWODgYwWVhwejNPl5.woff2" as="font" type="font/woff2" crossorigin>
     
-    <!-- 預載入關鍵資源 - 只載入絕對必要的 -->
-    <link rel="preload" href="images/hero/main-hall-environment.jpg" as="image" fetchpriority="high">
+    <!-- 預載入關鍵資源 - 多格式響應式預載入 -->
+    <link rel="preload" href="images/hero/main-hall-environment.avif" as="image" type="image/avif" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment.jpg" as="image" type="image/jpeg" fetchpriority="high">
     
     <!-- 內聯關鍵 CSS - 添加完整的 LCP 相關樣式 -->
     <style>
@@ -314,12 +316,14 @@
     <!-- 延後載入所有非關鍵 CSS -->
     <link rel="preload" href="styles/home.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <link rel="preload" href="styles/image-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     
     <!-- 備用無 JS 環境 -->
     <noscript>
         <link rel="stylesheet" href="styles/home.css">
         <link rel="stylesheet" href="styles/custom-icons.css">
+        <link rel="stylesheet" href="styles/image-optimization.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap">
     </noscript>
     
@@ -360,9 +364,9 @@
             "longitude": 119.581823
         },
         "image": [
-            "https://www.kiwi-villa.com/images/hero/main-hall-environment.jpg",
-            "https://www.kiwi-villa.com/images/facilities/main-hall.jpg",
-            "https://www.kiwi-villa.com/images/rooms/luxury-family-room.jpg"
+            "https://www.kiwi-villa.com/images/hero/main-hall-environment.webp",
+            "https://www.kiwi-villa.com/images/facilities/main-hall.webp",
+            "https://www.kiwi-villa.com/images/rooms/luxury-family-room.webp"
         ],
         "priceRange": "$$",
         "amenityFeature": [
@@ -422,7 +426,11 @@
             <div class="container">
                 <div class="nav-brand">
                     <a href="index.html" aria-label="回首頁">
-                        <img src="images/logo/kiwi-villa-logo.png" alt="期遇度假會館logo" class="logo">
+                        <picture>
+                            <source srcset="images/logo/kiwi-villa-logo.avif" type="image/avif">
+                            <source srcset="images/logo/kiwi-villa-logo.webp" type="image/webp">
+                            <img src="images/logo/kiwi-villa-logo.png" alt="期遇度假會館logo" class="logo" width="180" height="50" loading="eager">
+                        </picture>
                     </a>
                 </div>
                 <ul class="nav-menu">
@@ -447,12 +455,34 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-image">
-            <img src="images/hero/main-hall-environment.jpg" 
-                 alt="期遇度假會館環境圖-大廳環境，展現歐洲巴洛克古典建築風格的奢華大廳空間" 
-                 loading="eager" 
-                 fetchpriority="high"
-                 width="1200" 
-                 height="800">
+            <picture>
+                <!-- AVIF格式 (最新標準，最小檔案) -->
+                <source 
+                    media="(max-width: 768px)" 
+                    srcset="images/hero/main-hall-environment-mobile.avif" 
+                    type="image/avif">
+                <source 
+                    srcset="images/hero/main-hall-environment.avif" 
+                    type="image/avif">
+                
+                <!-- WebP格式 (廣泛支援，中等檔案) -->
+                <source 
+                    media="(max-width: 768px)" 
+                    srcset="images/hero/main-hall-environment-mobile.webp" 
+                    type="image/webp">
+                <source 
+                    srcset="images/hero/main-hall-environment.webp" 
+                    type="image/webp">
+                
+                <!-- 備用JPEG格式 (舊瀏覽器相容) -->
+                <img src="images/hero/main-hall-environment.jpg" 
+                     alt="期遇度假會館環境圖-大廳環境，展現歐洲巴洛克古典建築風格的奢華大廳空間" 
+                     loading="eager" 
+                     fetchpriority="high"
+                     width="1200" 
+                     height="800"
+                     decoding="async">
+            </picture>
         </div>
         <div class="hero-content">
             <div class="container">
