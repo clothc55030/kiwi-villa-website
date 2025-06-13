@@ -59,6 +59,13 @@
     vertical-align: -0.125em !important;
 }
 
+.fas.fa-chevron-up {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z'/%3E%3C/svg%3E") no-repeat center/contain !important;
+    width: 1em !important;
+    height: 1em !important;
+    vertical-align: -0.125em !important;
+}
+
 /* 使用者圖標 */
 .fas.fa-users {
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Ccircle cx='9' cy='8' r='3' fill='%23333'/%3E%3Ccircle cx='15' cy='8' r='3' fill='%23333'/%3E%3Cpath d='M6 18v2h6v-2c0-2.21-1.79-4-4-4s-4 1.79-4 4z' fill='%23333'/%3E%3Cpath d='M12 18v2h6v-2c0-2.21-1.79-4-4-4s-4 1.79-4 4z' fill='%23333'/%3E%3C/svg%3E") no-repeat center/contain !important;

@@ -2659,7 +2659,7 @@ body.morandi-ocean::before {
 }
 
 .lightbox-nav {
-    display: none; /* 如果使用固定位置的箭頭，隱藏這個 */
+    display: block; /* 顯示導航按鈕 */
 }
 
 .lightbox-prev:hover, .lightbox-next:hover {
