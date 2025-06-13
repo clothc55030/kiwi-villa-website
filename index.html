@@ -44,7 +44,7 @@
     <!-- Open Graph 標籤 -->
     <meta property="og:title" content="期遇度假會館 Kiwi Villa | 澎湖優質民宿推薦">
     <meta property="og:description" content="旅行，就是和驚喜不期而遇，在過程中遇見另一個自己。歐洲巴洛克古典建築風格，三面環海的絕佳位置。">
-    <meta property="og:image" content="https://www.kiwi-villa.com/images/hero/main-hall-environment.jpg">
+    <meta property="og:image" content="https://www.kiwi-villa.com/images/hero/main-hall-environment.webp">
     <meta property="og:image:alt" content="期遇度假會館環境圖-大廳環境">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -57,7 +57,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="期遇度假會館 Kiwi Villa | 澎湖優質民宿推薦">
     <meta name="twitter:description" content="歐洲巴洛克古典建築風格，三面環海的絕佳位置。提供奢華住宿體驗的澎湖優質民宿。">
-    <meta name="twitter:image" content="https://www.kiwi-villa.com/images/hero/main-hall-environment.jpg">
+    <meta name="twitter:image" content="https://www.kiwi-villa.com/images/hero/main-hall-environment.webp">
     <meta name="twitter:image:alt" content="期遇度假會館環境圖-大廳環境">
     
     <title>期遇度假會館 Kiwi Villa | 澎湖民宿推薦 | Taiwan, Penghu County</title>
@@ -67,13 +67,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://static.elfsight.com">
     
-    <!-- 預載入關鍵字體文件 - 加速字體載入 -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/notosanstc/v35/nKKF-GM_FDBOg1I_qR7lhLu8gB70jmKyAEaFWODgYwWVhwejNPl5.woff2" as="font" type="font/woff2" crossorigin>
-    
     <!-- 預載入關鍵資源 - 多格式響應式預載入 -->
     <link rel="preload" href="images/hero/main-hall-environment.avif" as="image" type="image/avif" fetchpriority="high">
     <link rel="preload" href="images/hero/main-hall-environment.webp" as="image" type="image/webp" fetchpriority="high">
-    <link rel="preload" href="images/hero/main-hall-environment.jpg" as="image" type="image/jpeg" fetchpriority="high">
     
     <!-- 內聯關鍵 CSS - 添加完整的 LCP 相關樣式 -->
     <style>
@@ -482,8 +478,8 @@
                     srcset="images/hero/main-hall-environment.webp" 
                     type="image/webp">
                 
-                <!-- 備用JPEG格式 (舊瀏覽器相容) -->
-                <img src="images/hero/main-hall-environment.jpg" 
+                <!-- 備用WebP格式 (舊瀏覽器相容) -->
+                <img src="images/hero/main-hall-environment.webp" 
                      alt="期遇度假會館環境圖-大廳環境，展現歐洲巴洛克古典建築風格的奢華大廳空間" 
                      loading="eager" 
                      fetchpriority="high"
@@ -616,11 +612,10 @@
                 sheet.media = 'all';
             });
             
-            // 更積極的字體載入策略
-            if ('FontFace' in window) {
-                // 檢查 Noto Sans TC 是否載入
-                const checkFont = new FontFace('Noto Sans TC', 'url(https://fonts.gstatic.com/s/notosanstc/v35/nKKF-GM_FDBOg1I_qR7lhLu8gB70jmKyAEaFWODgYwWVhwejNPl5.woff2)');
-                checkFont.load().then(function() {
+            // 更積極的字體載入策略 - 移除具體字型檔案引用
+            if ('FontFace' in window && 'fonts' in document) {
+                // 使用 CSS Font Loading API 檢查字型載入
+                document.fonts.ready.then(function() {
                     document.body.classList.add('fonts-loaded');
                 }).catch(function() {
                     // 即使載入失敗，也在短時間後嘗試切換
