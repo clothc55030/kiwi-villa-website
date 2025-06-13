@@ -372,10 +372,31 @@ body::before {
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
 }
 
+.feature-card:hover .feature-icon {
+    transform: scale(1.08);
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.10) 0%, rgba(74, 144, 226, 0.16) 100%);
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.20);
+    border-color: rgba(74, 144, 226, 0.15);
+}
+
 .feature-icon {
     font-size: 3rem;
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    /* 電腦版淡雅莫蘭迪藍色圓形背景 */
+    padding: 1.2rem;
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.06) 0%, rgba(74, 144, 226, 0.10) 100%);
+    border-radius: 50%;
+    width: 5.5rem;
+    height: 5.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.12);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(74, 144, 226, 0.08);
 }
 
 .feature-card h3 {
@@ -631,6 +652,33 @@ body::before {
 
     .features-grid {
         grid-template-columns: 1fr;
+        gap: 1.8rem; /* 稍微縮小卡片間距 */
+    }
+
+    /* 中等螢幕下的圖標優化 */
+    .feature-icon {
+        font-size: 2.5rem; /* 在中等螢幕下適度縮小 */
+        margin-bottom: 1.1rem;
+        width: 5rem; /* 平板電腦適中尺寸 */
+        height: 5rem;
+        padding: 1rem;
+        box-shadow: 0 5px 18px rgba(74, 144, 226, 0.12);
+    }
+
+    .feature-card {
+        padding: 1.8rem; /* 調整卡片內邊距 */
+        max-width: 400px; /* 限制最大寬度以保持比例 */
+        margin: 0 auto; /* 居中對齊 */
+    }
+
+    .feature-card h3 {
+        font-size: 1.35rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .feature-card p {
+        font-size: 0.95rem;
+        line-height: 1.65;
     }
 
     .contact-grid {
@@ -664,6 +712,42 @@ body::before {
 
     .feature-card {
         padding: 1.5rem;
+    }
+
+    /* 優化行動裝置下的圖標排版 */
+    .feature-icon {
+        font-size: 2.2rem; /* 稍微縮小圖標尺寸，更適合小螢幕 */
+        margin-bottom: 1.2rem; /* 增加與標題的間距 */
+        padding: 0.8rem; /* 增加圖標周圍的內邊距 */
+        background: linear-gradient(135deg, rgba(74, 144, 226, 0.08) 0%, rgba(74, 144, 226, 0.12) 100%);
+        border-radius: 50%; /* 圓形背景 */
+        width: 4rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, rgba(74, 144, 226, 0.12) 0%, rgba(74, 144, 226, 0.18) 100%);
+        box-shadow: 0 6px 16px rgba(74, 144, 226, 0.25);
+    }
+
+    .feature-card h3 {
+        font-size: 1.25rem; /* 稍微縮小標題 */
+        margin-bottom: 0.8rem;
+        font-weight: 700; /* 增強標題字重 */
+    }
+
+    .feature-card p {
+        font-size: 0.9rem;
+        line-height: 1.7; /* 增加行距提升可讀性 */
+        color: var(--text-secondary);
     }
     
     /* 頁腳響應式設計 - 480px以下 */
@@ -1163,10 +1247,31 @@ body.morandi-ocean::before {
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
 }
 
+.feature-card.morandi-ocean:hover .feature-icon.morandi-ocean {
+    transform: scale(1.08);
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.10) 0%, rgba(74, 144, 226, 0.16) 100%);
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.20);
+    border-color: rgba(74, 144, 226, 0.15);
+}
+
 .feature-icon.morandi-ocean {
     font-size: 3rem;
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    /* 莫蘭迪海洋主題：電腦版淡雅藍色圓形背景 */
+    padding: 1.2rem;
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.06) 0%, rgba(74, 144, 226, 0.10) 100%);
+    border-radius: 50%;
+    width: 5.5rem;
+    height: 5.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.12);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(74, 144, 226, 0.08);
 }
 
 .feature-card.morandi-ocean h3 {
@@ -1410,6 +1515,33 @@ body.morandi-ocean::before {
 
     .features-grid.morandi-ocean {
         grid-template-columns: 1fr;
+        gap: 1.8rem; /* 稍微縮小卡片間距 */
+    }
+
+    /* 莫蘭迪海洋主題：中等螢幕下的圖標優化 */
+    .feature-icon.morandi-ocean {
+        font-size: 2.5rem; /* 在中等螢幕下適度縮小 */
+        margin-bottom: 1.1rem;
+        width: 5rem; /* 平板電腦適中尺寸 */
+        height: 5rem;
+        padding: 1rem;
+        box-shadow: 0 5px 18px rgba(74, 144, 226, 0.12);
+    }
+
+    .feature-card.morandi-ocean {
+        padding: 1.8rem; /* 調整卡片內邊距 */
+        max-width: 400px; /* 限制最大寬度以保持比例 */
+        margin: 0 auto; /* 居中對齊 */
+    }
+
+    .feature-card.morandi-ocean h3 {
+        font-size: 1.35rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .feature-card.morandi-ocean p {
+        font-size: 0.95rem;
+        line-height: 1.65;
     }
 
     .contact-grid.morandi-ocean {
@@ -1442,6 +1574,41 @@ body.morandi-ocean::before {
 
     .feature-card.morandi-ocean {
         padding: 1.5rem;
+    }
+
+    /* 莫蘭迪海洋主題：優化行動裝置下的圖標排版 */
+    .feature-icon.morandi-ocean {
+        font-size: 2.2rem; /* 稍微縮小圖標尺寸，更適合小螢幕 */
+        margin-bottom: 1.2rem; /* 增加與標題的間距 */
+        padding: 0.8rem; /* 增加圖標周圍的內邊距 */
+        background: linear-gradient(135deg, rgba(74, 144, 226, 0.08) 0%, rgba(74, 144, 226, 0.12) 100%);
+        border-radius: 50%; /* 圓形背景 */
+        width: 4rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+        transition: all 0.3s ease;
+    }
+
+    .feature-card.morandi-ocean:hover .feature-icon.morandi-ocean {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, rgba(74, 144, 226, 0.12) 0%, rgba(74, 144, 226, 0.18) 100%);
+        box-shadow: 0 6px 16px rgba(74, 144, 226, 0.25);
+    }
+
+    .feature-card.morandi-ocean h3 {
+        font-size: 1.25rem; /* 稍微縮小標題 */
+        margin-bottom: 0.8rem;
+        font-weight: 700; /* 增強標題字重 */
+    }
+
+    .feature-card.morandi-ocean p {
+        font-size: 0.9rem;
+        line-height: 1.7; /* 增加行距提升可讀性 */
     }
     
     .footer-content.morandi-ocean p {
