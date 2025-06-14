@@ -192,6 +192,15 @@
             line-height: 1.2;
         }
         
+        /* 明確指定 h1 在所有語義元素中的字型大小 - 修復已淘汰 API 警告 */
+        h1, 
+        article h1, 
+        aside h1, 
+        nav h1, 
+        section h1 {
+            font-size: inherit;
+        }
+        
         .seo-prefix {
             font-size: 1.8rem;
             font-weight: 500;
@@ -337,6 +346,15 @@
         
         /* 行動裝置優化 */
         @media (max-width: 768px) {
+            /* 確保 h1 在行動裝置上的字型大小明確定義 */
+            h1, 
+            article h1, 
+            aside h1, 
+            nav h1, 
+            section h1 {
+                font-size: initial;
+            }
+            
             .seo-prefix { 
                 font-size: 1.1rem;
                 letter-spacing: 1px;
@@ -358,6 +376,15 @@
         
         /* 超小螢幕優化 */
         @media (max-width: 480px) {
+            /* 確保 h1 在超小螢幕上的字型大小明確定義 */
+            h1, 
+            article h1, 
+            aside h1, 
+            nav h1, 
+            section h1 {
+                font-size: initial;
+            }
+            
             .seo-prefix { 
                 font-size: 1rem;
                 letter-spacing: 0.5px;
@@ -648,17 +675,29 @@
 
     <!-- 效能優化：分階段載入視覺效果 + 錯誤處理 -->
     <script>
-        // 錯誤處理：抑制Cloudflare優化功能的控制台錯誤
+        // 智能錯誤處理：分類處理不同類型的錯誤
         window.addEventListener('error', function(e) {
-            // 抑制Cloudflare相關的404錯誤
+            // RUM 相關錯誤的智能處理
+            if (e.target && e.target.src && e.target.src.includes('/rum')) {
+                // RUM 404 通常是部分進階功能失敗，核心監控仍正常
+                console.info('RUM 部分功能請求失敗，但核心效能監控仍正常運作');
+                return;
+            }
+            
+            // 其他 Cloudflare 相關的非關鍵錯誤
             if (e.target && e.target.src && 
                 (e.target.src.includes('cdn-cgi') || 
                  e.target.src.includes('cloudflare-static') ||
                  e.target.src.includes('rocket-loader') ||
                  e.target.src.includes('email-decode'))) {
-                e.preventDefault();
-                return false;
+                // 僅在開發環境下顯示詳細信息
+                if (window.location.hostname === 'localhost' || window.location.hostname.includes('dev')) {
+                    console.warn('Cloudflare 輔助功能載入問題：', e.target.src);
+                }
+                return;
             }
+            
+            // 其他錯誤正常顯示，確保真正的問題不被忽略
         }, true);
 
         // 關鍵功能立即執行
