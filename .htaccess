@@ -98,19 +98,11 @@ ErrorDocument 404 /404.html
   # --- 2) /index.html → / ---
   RewriteRule ^index\.html$ / [R=301,L]
 
-  # --- 3) 房號重定向規則 （優先處理）---
-  RewriteRule ^201/?$ /rooms?room=201 [R=301,L]
-  RewriteRule ^203/?$ /rooms?room=203 [R=301,L]
-  RewriteRule ^205/?$ /rooms?room=205 [R=301,L]
-  RewriteRule ^303/?$ /rooms?room=303 [R=301,L]
-  RewriteRule ^302/?$ /rooms?room=302 [R=301,L]
-  RewriteRule ^305/?$ /rooms?room=305 [R=301,L]
-
-  # --- 4) 去掉 .html 副檔名（外部 301）---
+  # --- 3) 去掉 .html 副檔名（外部 301）---
   RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
   RewriteRule ^ %1 [R=301,L,NE]
 
-  # --- 5) 無副檔名時，內部補 .html ---
+  # --- 4) 無副檔名時，內部補 .html ---
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME}.html -f
