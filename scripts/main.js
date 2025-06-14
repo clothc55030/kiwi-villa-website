@@ -320,4 +320,136 @@ document.addEventListener('DOMContentLoaded', function() {
             imageObserver.observe(img);
         });
     }
+});
+
+// Room URL hash navigation and highlighting
+document.addEventListener('DOMContentLoaded', function() {
+    // 房間號碼對應表
+    const roomMap = {
+        'room-201': '豪華家庭房',
+        'room-203': '高級四人房', 
+        'room-205': '奢華四人房',
+        'room-303': '高級三人房',
+        'room-302': '高級雙床房',
+        'room-305': '高級雙人房'
+    };
+
+    // 處理頁面加載時的hash定位
+    function handleRoomNavigation() {
+        const hash = window.location.hash.substring(1); // 移除 # 號
+        
+        if (hash && roomMap[hash]) {
+            setTimeout(() => {
+                const roomElement = document.getElementById(hash);
+                if (roomElement) {
+                    // 移除其他房間的高亮效果
+                    document.querySelectorAll('.room-card').forEach(card => {
+                        card.classList.remove('room-highlighted');
+                    });
+                    
+                    // 添加高亮效果
+                    roomElement.classList.add('room-highlighted');
+                    
+                    // 平滑滾動到房間卡片
+                    roomElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                    
+                    // 顯示成功提示
+                    const roomName = roomMap[hash];
+                    showNotification(`已為您定位到：${roomName}`, 'success');
+                }
+            }, 300); // 稍微延遲以確保頁面完全加載
+        }
+    }
+
+    // 監聽hash變化
+    window.addEventListener('hashchange', handleRoomNavigation);
+    
+    // 頁面加載時檢查hash
+    handleRoomNavigation();
+    
+    // 添加房間高亮效果的樣式
+    const roomHighlightStyle = document.createElement('style');
+    roomHighlightStyle.textContent = `
+        .room-highlighted {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(74, 144, 226, 0.3);
+            border: 2px solid rgba(74, 144, 226, 0.5);
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .room-highlighted::before {
+            content: '🎯 已為您定位';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, #4A90E2, #63B3ED);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+            animation: highlight-pulse 2s ease-out;
+            z-index: 3;
+        }
+        
+        @keyframes highlight-pulse {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .room-highlighted .room-content h2 {
+            color: #4A90E2;
+            text-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+        }
+        
+        .room-highlighted .room-badge {
+            background: linear-gradient(135deg, #4A90E2, #63B3ED);
+            animation: badge-glow 2s ease-out;
+        }
+        
+        @keyframes badge-glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(74, 144, 226, 0.8);
+            }
+        }
+        
+        /* 自動移除高亮效果 */
+        .room-highlighted {
+            animation: remove-highlight 8s ease-out forwards;
+        }
+        
+        @keyframes remove-highlight {
+            0%, 70% {
+                transform: scale(1.02);
+                box-shadow: 0 8px 32px rgba(74, 144, 226, 0.3);
+                border: 2px solid rgba(74, 144, 226, 0.5);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                border: 2px solid transparent;
+            }
+        }
+    `;
+    document.head.appendChild(roomHighlightStyle);
 }); 
