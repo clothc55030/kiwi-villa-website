@@ -183,11 +183,44 @@
         }
         
         .hero-title {
-            font-size: 4rem;
-            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin-top: 1.5rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+        
+        .seo-prefix {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            font-family: 'Microsoft JhengHei', sans-serif;
+        }
+        
+        body.fonts-loaded .seo-prefix {
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+        }
+        
+        .brand-name {
+            font-size: 4.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0.2rem 0;
+            letter-spacing: 1px;
+        }
+        
+        .poetic-subtitle {
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 0.4rem;
+            font-style: italic;
+            letter-spacing: 1px;
         }
         
         .hero-subtitle {
@@ -304,11 +337,39 @@
         
         /* 行動裝置優化 */
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
+            .seo-prefix { 
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+                margin-bottom: 0.2rem;
+            }
+            .brand-name { 
+                font-size: 2.8rem;
+                margin: 0.1rem 0;
+            }
+            .poetic-subtitle { 
+                font-size: 1.6rem;
+                margin-top: 0.3rem;
+            }
             .hero-subtitle { font-size: 1.2rem; }
             .hero-secondary { font-size: 1.8rem; }
             .hero-description { font-size: 1rem; }
             .container { padding: 0 15px; }
+        }
+        
+        /* 超小螢幕優化 */
+        @media (max-width: 480px) {
+            .seo-prefix { 
+                font-size: 1rem;
+                letter-spacing: 0.5px;
+            }
+            .brand-name { 
+                font-size: 2.2rem;
+                letter-spacing: 0.5px;
+            }
+            .poetic-subtitle { 
+                font-size: 1.4rem;
+                letter-spacing: 0.5px;
+            }
         }
     </style>
     
@@ -490,7 +551,11 @@
         </div>
         <div class="hero-content">
             <div class="container">
-                <h1 class="hero-title">期待・相遇</h1>
+                <h1 class="hero-title">
+                    <span class="seo-prefix">澎湖民宿推薦</span>
+                    <span class="brand-name">期遇度假會館</span>
+                    <span class="poetic-subtitle">・期待相遇</span>
+                </h1>
                 <p class="hero-subtitle">旅行，是與驚喜不期而遇<br>也是，在途中遇見另一個自己</p>
                 <h2 class="hero-secondary">這一次，來一段屬於你的 </h2>
                 <h2 class="hero-secondary">期遇之旅——</h2>
