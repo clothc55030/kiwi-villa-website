@@ -297,9 +297,9 @@
     vertical-align: -0.125em !important;
 }
 
-/* LINE 圖標 - 使用本地圖片 */
+/* LINE 圖標 - 使用優化的 WebP 格式 */
 .fab.fa-line {
-    background: url("../images/line-icon.png") no-repeat center/contain !important;
+    background: url("../images/line-icon.webp") no-repeat center/contain !important;
     width: 1em !important;
     height: 1em !important;
     vertical-align: -0.125em !important;
@@ -307,15 +307,31 @@
 
 /* 備用路徑，如果上面的路徑不行 */
 .fab.fa-line.fallback-1 {
-    background: url("images/line-icon.png") no-repeat center/contain !important;
+    background: url("images/line-icon.webp") no-repeat center/contain !important;
 }
 
 .fab.fa-line.fallback-2 {
-    background: url("./images/line-icon.png") no-repeat center/contain !important;
+    background: url("./images/line-icon.webp") no-repeat center/contain !important;
 }
 
 .fab.fa-line.fallback-3 {
-    background: url("/images/line-icon.png") no-repeat center/contain !important;
+    background: url("/images/line-icon.webp") no-repeat center/contain !important;
+}
+
+/* PNG 降級支持（針對不支援 WebP 的舊瀏覽器） */
+@supports not (background-image: url("data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==")) {
+    .fab.fa-line {
+        background: url("../images/line-icon-128.png") no-repeat center/contain !important;
+    }
+    .fab.fa-line.fallback-1 {
+        background: url("images/line-icon-128.png") no-repeat center/contain !important;
+    }
+    .fab.fa-line.fallback-2 {
+        background: url("./images/line-icon-128.png") no-repeat center/contain !important;
+    }
+    .fab.fa-line.fallback-3 {
+        background: url("/images/line-icon-128.png") no-repeat center/contain !important;
+    }
 }
 
 /* === 特殊樣式和動畫 === */
@@ -373,4 +389,4 @@
 /* 確保圖標在不同背景下都清晰可見 */
 .fas, .fab {
     filter: contrast(1.1) !important;
-} 
+}
