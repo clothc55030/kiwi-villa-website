@@ -71,339 +71,31 @@
     <link rel="preload" href="images/hero/main-hall-environment.avif" as="image" type="image/avif" fetchpriority="high">
     <link rel="preload" href="images/hero/main-hall-environment.webp" as="image" type="image/webp" fetchpriority="high">
     
-    <!-- 內聯關鍵 CSS - 添加完整的 LCP 相關樣式 -->
-    <style>
-        /* CSS Reset and Critical Variables */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-color: #4A90E2;
-            --secondary-color: #2C5282;
-            --accent-color: #ED8936;
-            --text-primary: #2D3748;
-            --text-secondary: #4A5568;
-            --text-light: #718096;
-            --background-light: #F7FAFC;
-            --background-white: #FFFFFF;
-            --border-color: #E2E8F0;
-            --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-heavy: 0 10px 15px rgba(0, 0, 0, 0.1);
-            --border-radius: 8px;
-            --transition: all 0.3s ease;
-        }
-        
-        /* 使用本地中文字體，確保立即渲染且美觀 */
-        body {
-            font-family: 'Microsoft JhengHei', '微軟正黑體', 'PingFang TC', 'Hiragino Sans GB', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: #f8fafc;
-        }
-        
-        /* Noto Sans TC 載入完成後切換 */
-        body.fonts-loaded {
-            font-family: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', 'PingFang TC', sans-serif;
-        }
-        
-        /* 立即啟用基本背景，避免閃爍 */
-        body.content-ready {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
-            background-attachment: fixed;
-            background-size: 400% 400%;
-        }
-        
-        /* 延後啟用的漸變動畫 */
-        body.loaded {
-            animation: gradientMove 15s ease infinite;
-        }
-        
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* 關鍵的 Hero Section 樣式 */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            overflow: hidden;
-            padding-top: 80px;
-        }
-        
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -2;
-        }
-        
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background-color: #2D3748;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            min-height: 400px;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
-        }
-        
-        .hero-content {
-            z-index: 1;
-            padding: 4rem 0 2rem;
-        }
-        
-        .hero-title {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            line-height: 1.2;
-        }
-        
-        /* 精確修復：僅針對 hero section 的 H1 標籤字型大小警告 */
-        section.hero h1.hero-title {
-            font-size: 4rem;
-        }
-        
-        .seo-prefix {
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.85);
-            letter-spacing: 2px;
-            margin-bottom: 0.3rem;
-            text-transform: uppercase;
-            font-family: 'Microsoft JhengHei', sans-serif;
-        }
-        
-        body.fonts-loaded .seo-prefix {
-            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-        }
-        
-        .brand-name {
-            font-size: 4.2rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0.2rem 0;
-            letter-spacing: 1px;
-        }
-        
-        .poetic-subtitle {
-            font-size: 2.2rem;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.9);
-            margin-top: 0.4rem;
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero-secondary {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            color: var(--accent-color);
-        }
-        
-        /* LCP 元素極簡樣式 - 關鍵優化 */
-        .hero-description {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin: 0 auto 3rem;
-            max-width: 800px;
-        }
-        
-        .hero-description p {
-            margin-bottom: 1rem;
-        }
-        
-        .btn-primary {
-            display: inline-block;
-            background: var(--accent-color);
-            color: white;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: var(--transition);
-            box-shadow: var(--shadow-medium);
-        }
-        
-        .btn-primary:hover {
-            background: #d97726;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-heavy);
-        }
-        
-        /* Header 基本樣式 */
-        .header {
-            background: var(--background-white);
-            box-shadow: var(--shadow-light);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-        
-        .navbar {
-            padding: 1rem 0;
-        }
-        
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-brand .logo {
-            height: 50px;
-            width: auto;
-            object-fit: contain;
-            image-rendering: -webkit-optimize-contrast;
-        }
-        
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-        }
-        
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-color);
-            background-color: rgba(74, 144, 226, 0.1);
-        }
-        
-        /* 基本的視覺效果樣式 - 確保載入後正常顯示 */
-        .features {
-            backdrop-filter: none;
-        }
-        
-        body.loaded .features {
-            backdrop-filter: blur(1px);
-        }
-        
-        .feature-card {
-            background: var(--background-white);
-        }
-        
-        body.loaded .feature-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
-            backdrop-filter: blur(10px);
-        }
-        
-        /* 行動裝置優化 */
-        @media (max-width: 768px) {
-            /* 精確修復：僅針對 hero section 的 H1 行動裝置字型大小 */
-            section.hero h1.hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .seo-prefix { 
-                font-size: 1.1rem;
-                letter-spacing: 1px;
-                margin-bottom: 0.2rem;
-            }
-            .brand-name { 
-                font-size: 2.8rem;
-                margin: 0.1rem 0;
-            }
-            .poetic-subtitle { 
-                font-size: 1.6rem;
-                margin-top: 0.3rem;
-            }
-            .hero-subtitle { font-size: 1.2rem; }
-            .hero-secondary { font-size: 1.8rem; }
-            .hero-description { font-size: 1rem; }
-            .container { padding: 0 15px; }
-        }
-        
-        /* 超小螢幕優化 */
-        @media (max-width: 480px) {
-            /* 精確修復：僅針對 hero section 的 H1 超小螢幕字型大小 */
-            section.hero h1.hero-title {
-                font-size: 2rem;
-            }
-            
-            .seo-prefix { 
-                font-size: 1rem;
-                letter-spacing: 0.5px;
-            }
-            .brand-name { 
-                font-size: 2.2rem;
-                letter-spacing: 0.5px;
-            }
-            .poetic-subtitle { 
-                font-size: 1.4rem;
-                letter-spacing: 0.5px;
-            }
-        }
-    </style>
+    <!-- 載入重構後的 CSS -->
+    <!-- 優先載入核心基礎樣式 -->
+    <link rel="stylesheet" href="styles/base.css" media="all" fetchpriority="high">
+    <!-- 載入首頁專屬樣式 -->
+    <link rel="stylesheet" href="styles/home.css" media="all">
+    <!-- 立即載入圖示樣式以修復顯示問題 -->
+    <link rel="stylesheet" href="styles/custom-icons.css" media="all">
+    <link rel="stylesheet" href="styles/svg-icons.css" media="all">
     
-    <!-- 延後載入所有非關鍵 CSS -->
-    <link rel="preload" href="styles/home.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <!-- 延後載入其他非關鍵 CSS -->
     <link rel="preload" href="styles/image-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <link rel="preload" href="styles/font-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <link rel="preload" href="styles/svg-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <!-- 精簡字體權重：移除500，保留400,600,700 -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     
     <!-- 備用無 JS 環境 -->
     <noscript>
+        <!-- 載入重構後的 CSS -->
+        <link rel="stylesheet" href="styles/base.css">
         <link rel="stylesheet" href="styles/home.css">
         <link rel="stylesheet" href="styles/custom-icons.css">
+        <link rel="stylesheet" href="styles/svg-icons.css">
+        
         <link rel="stylesheet" href="styles/image-optimization.css">
         <link rel="stylesheet" href="styles/font-optimization.css">
-        <link rel="stylesheet" href="styles/svg-icons.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional">
     </noscript>
     
@@ -624,7 +316,7 @@
         </div>
     </section>
 
-    <!-- Contact Info -->
+    <!-- Contact Info Section -->
     <section class="contact-info">
         <div class="container">
             <div class="contact-grid">
@@ -741,7 +433,8 @@
                     if (entry.entryType === 'largest-contentful-paint') {
                         // LCP 完成後載入非關鍵資源
                         requestAnimationFrame(() => {
-                            loadNonCriticalAssets();
+                            // 現在不再需要手動載入樣式表
+                            // loadNonCriticalAssets(); 
                             setTimeout(initEnhancements, 300);
                         });
                         observer.disconnect();
@@ -755,7 +448,8 @@
         // 備用機制：確保資源最終會載入
         window.addEventListener('load', function() {
             setTimeout(function() {
-                loadNonCriticalAssets();
+                // 現在不再需要手動載入樣式表
+                // loadNonCriticalAssets();
                 initEnhancements();
             }, 100);
         });
