@@ -192,13 +192,9 @@
             line-height: 1.2;
         }
         
-        /* 明確指定 h1 在所有語義元素中的字型大小 - 修復已淘汰 API 警告 */
-        h1, 
-        article h1, 
-        aside h1, 
-        nav h1, 
-        section h1 {
-            font-size: inherit;
+        /* 精確修復：僅針對 hero section 的 H1 標籤字型大小警告 */
+        section.hero h1.hero-title {
+            font-size: 4rem;
         }
         
         .seo-prefix {
@@ -346,13 +342,9 @@
         
         /* 行動裝置優化 */
         @media (max-width: 768px) {
-            /* 確保 h1 在行動裝置上的字型大小明確定義 */
-            h1, 
-            article h1, 
-            aside h1, 
-            nav h1, 
-            section h1 {
-                font-size: initial;
+            /* 精確修復：僅針對 hero section 的 H1 行動裝置字型大小 */
+            section.hero h1.hero-title {
+                font-size: 2.5rem;
             }
             
             .seo-prefix { 
@@ -376,13 +368,9 @@
         
         /* 超小螢幕優化 */
         @media (max-width: 480px) {
-            /* 確保 h1 在超小螢幕上的字型大小明確定義 */
-            h1, 
-            article h1, 
-            aside h1, 
-            nav h1, 
-            section h1 {
-                font-size: initial;
+            /* 精確修復：僅針對 hero section 的 H1 超小螢幕字型大小 */
+            section.hero h1.hero-title {
+                font-size: 2rem;
             }
             
             .seo-prefix { 
