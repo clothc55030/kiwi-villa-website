@@ -363,14 +363,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     // 添加高亮效果
                     roomElement.classList.add('room-highlighted');
                     
-                    // 平滑滾動到房間卡片，手機版避免被導航欄遮擋
+                    // 平滑滾動到房間卡片，智能避免被導航欄遮擋
                     const isMobile = window.innerWidth <= 768;
                     if (isMobile) {
-                        // 手機版：滾動到元素頂部，但留出導航欄空間
+                        // 手機版：動態計算導航欄高度並留出額外空間
+                        const header = document.querySelector('.header');
+                        const headerHeight = header ? header.offsetHeight : 80;
+                        const extraPadding = 30; // 額外間距
+                        
                         const elementRect = roomElement.getBoundingClientRect();
-                        const scrollTop = window.pageYOffset + elementRect.top - 100; // 導航欄高度 + 間距
+                        const scrollTop = window.pageYOffset + elementRect.top - headerHeight - extraPadding;
+                        
                         window.scrollTo({
-                            top: scrollTop,
+                            top: Math.max(0, scrollTop), // 確保不會滾動到負值
                             behavior: 'smooth'
                         });
                     } else {
