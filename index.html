@@ -304,15 +304,11 @@
         fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
         document.head.appendChild(fa);
         
-        // 延遲載入所有 CSS
+        // 延遲載入所有 CSS（只載入存在的檔案）
         const styles = [
+            'styles/main.css',  // 包含導航、聯絡、頁尾、響應式等所有樣式
             'styles/base.css',
-            'styles/navigation.css', 
             'styles/home.css',
-            'styles/rooms.css',
-            'styles/contact.css',
-            'styles/footer.css',
-            'styles/responsive.css',
             'styles/image-optimization.css',
             'styles/lcp-emergency-fix.css',
             'styles/custom-icons.css',
@@ -331,13 +327,9 @@
     
     <!-- 備用無 JS 環境 -->
     <noscript>
+        <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/base.css">
-        <link rel="stylesheet" href="styles/navigation.css">
         <link rel="stylesheet" href="styles/home.css">
-        <link rel="stylesheet" href="styles/rooms.css">
-        <link rel="stylesheet" href="styles/contact.css">
-        <link rel="stylesheet" href="styles/footer.css">
-        <link rel="stylesheet" href="styles/responsive.css">
         <link rel="stylesheet" href="styles/image-optimization.css">
     </noscript>
     
