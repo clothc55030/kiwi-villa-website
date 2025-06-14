@@ -67,7 +67,7 @@ window.addEventListener('scroll', function() {
 
 // Intersection Observer for fade-in animations
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.feature-card, .contact-item, .review-card, .room-card');
+    const animatedElements = document.querySelectorAll('.feature-card, .contact-item, .review-card, .room-card, .contact-info, .footer, .equipment-card, .advantage-card, .transport-card');
     
     if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries, observer) => {
@@ -77,7 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'  // 增加一些邊距，讓動畫觸發更早
+        });
 
         animatedElements.forEach(el => {
             el.classList.add('animate-on-scroll');
@@ -102,6 +105,38 @@ style.textContent = `
     .animate-on-scroll.is-visible {
         opacity: 1;
         transform: translateY(0);
+    }
+    
+    /* 特別為底部區域設定動畫 */
+    .contact-info.animate-on-scroll {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .contact-info.animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .footer.animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .footer.animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* 為聯絡項目添加交錯動畫延遲 */
+    .contact-item.animate-on-scroll:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+    .contact-item.animate-on-scroll:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+    .contact-item.animate-on-scroll:nth-child(3) {
+        transition-delay: 0.3s;
     }
 `;
 document.head.appendChild(style);
