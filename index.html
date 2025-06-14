@@ -140,10 +140,6 @@
             justify-content: center;
             padding-top: 80px;
             overflow: hidden;
-            /* 添加一個極小的 base64 編碼灰色佔位符圖片，確保立即渲染 */
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
-            background-size: cover;
-            background-position: center;
         }
         .hero-image { 
             position: absolute; 
@@ -151,7 +147,7 @@
             left: 0; 
             right: 0; 
             bottom: 0; 
-            z-index: -2; 
+            z-index: 0; 
         }
         .hero-image img { 
             width: 100%; 
@@ -165,12 +161,17 @@
             left: 0; 
             right: 0; 
             bottom: 0; 
-            background: rgba(0,0,0,0.4); 
-            z-index: -1; 
+            background: rgba(0,0,0,0.4) !important; 
+            z-index: 1; 
+            /* 確保沒有其他濾鏡效果 */
+            filter: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            mix-blend-mode: normal !important;
         }
         .hero-content { 
             position: relative; 
-            z-index: 1; 
+            z-index: 2; 
             padding: 4rem 0 2rem; 
             color: white; 
             text-align: center; 
@@ -213,8 +214,10 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         
-        /* 強制顯示所有內容 */
-        * { 
+        /* 只針對 Hero 區域強制顯示，允許其他區域有動畫 */
+        .hero *,
+        .hero-content *,
+        .hero-description * { 
             opacity: 1 !important; 
             visibility: visible !important; 
             animation: none !important; 
@@ -270,6 +273,20 @@
             .features-grid { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
         }
+        
+        /* 強制覆蓋任何可能的綠色效果 */
+        .hero {
+            filter: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+        
+        .hero * {
+            filter: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            mix-blend-mode: normal !important;
+        }
     </style>
     
     <!-- 預連接外部域名 - 提高優先級 -->
@@ -281,25 +298,26 @@
     <script>
     // 只在 window.load 後載入 CSS
     window.addEventListener('load', function() {
-        // Font Awesome for mobile
-        if (window.innerWidth <= 768) {
-            const fa = document.createElement('link');
-            fa.rel = 'stylesheet';
-            fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
-            document.head.appendChild(fa);
-        }
+        // Font Awesome for all devices (移除手機限制)
+        const fa = document.createElement('link');
+        fa.rel = 'stylesheet';
+        fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
+        document.head.appendChild(fa);
         
         // 延遲載入所有 CSS
         const styles = [
             'styles/base.css',
-            'styles/navigation.css',
+            'styles/navigation.css', 
             'styles/home.css',
             'styles/rooms.css',
             'styles/contact.css',
             'styles/footer.css',
             'styles/responsive.css',
             'styles/image-optimization.css',
-            'styles/lcp-emergency-fix.css'
+            'styles/lcp-emergency-fix.css',
+            'styles/custom-icons.css',
+            'styles/svg-icons.css',
+            'styles/font-optimization.css'
         ];
         
         styles.forEach(href => {
@@ -322,6 +340,85 @@
         <link rel="stylesheet" href="styles/responsive.css">
         <link rel="stylesheet" href="styles/image-optimization.css">
     </noscript>
+    
+    <!-- 結構化資料 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Hotel",
+        "name": "期遇度假會館 Kiwi Villa",
+        "description": "澎湖期遇度假會館 - 歐洲巴洛克古典建築風格的高品質民宿，提供奢華住宿體驗。位於澎湖馬公市，三面環海的絕佳位置。",
+        "url": "https://www.kiwi-villa.com/",
+        "telephone": "+886-933-636-373",
+        "email": "info@kiwi-villa.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "西衛里346-347號",
+            "addressLocality": "馬公市",
+            "addressRegion": "澎湖縣",
+            "postalCode": "880",
+            "addressCountry": "TW"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 23.586887,
+            "longitude": 119.581823
+        },
+        "image": [
+            "https://www.kiwi-villa.com/images/hero/main-hall-environment.webp",
+            "https://www.kiwi-villa.com/images/facilities/main-hall.webp",
+            "https://www.kiwi-villa.com/images/rooms/luxury-family-room.webp"
+        ],
+        "priceRange": "$$",
+        "amenityFeature": [
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "電梯",
+                "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification", 
+                "name": "免費WiFi",
+                "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "空調",
+                "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "陽台",
+                "value": true
+            }
+        ],
+        "checkinTime": "15:00",
+        "checkoutTime": "11:00",
+        "numberOfRooms": 8,
+        "starRating": {
+            "@type": "Rating",
+            "ratingValue": "4.5"
+        },
+        "sameAs": [
+            "https://www.instagram.com/kiwi_villa/",
+            "https://www.facebook.com/kiwivilla.home/",
+            "https://page.line.me/ucz4004x"
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "reviewCount": "50"
+        },
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -379,13 +476,14 @@
                     srcset="images/hero/main-hall-environment.webp" 
                     type="image/webp">
                 
-                <!-- 備用WebP格式 - 手機優先 -->
-                <img src="images/hero/main-hall-environment-mobile.webp" 
+                <!-- 備用WebP格式 -->
+                <img src="images/hero/main-hall-environment.webp" 
                      alt="期遇度假會館環境圖-大廳環境，展現歐洲巴洛克古典建築風格的奢華大廳空間" 
-                     loading="lazy" 
-                     width="768" 
-                     height="512"
-                     decoding="async">
+                     loading="eager" 
+                     width="1920" 
+                     height="1280"
+                     decoding="async"
+                     fetchpriority="high">
             </picture>
         </div>
         <div class="hero-content">
