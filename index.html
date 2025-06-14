@@ -64,20 +64,179 @@
     
     <!-- 內聯關鍵 CSS - 確保 LCP 立即顯示 -->
     <style>
-        /* Critical Inline CSS for LCP - 解決17秒延遲 */
-        * { margin: 0; padding: 0; box-sizing: border-box; opacity: 1 !important; visibility: visible !important; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #f8fafc; }
-        .hero { min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
-        .hero-image { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; }
-        .hero-image img { width: 100%; height: 100%; object-fit: cover; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: -1; }
-        .hero-content { position: relative; z-index: 1; padding: 2rem; color: white; text-align: center; }
-        .hero-description { opacity: 1 !important; visibility: visible !important; }
-        .hero-description p { opacity: 1 !important; visibility: visible !important; margin: 1rem 0; color: white; }
-        /* 完全禁用初始動畫 */
-        *, *::before, *::after { animation: none !important; transition: none !important; transform: none !important; }
-        /* 確保文字可讀 */
-        .hero-title, .hero-subtitle, .hero-secondary, .hero-description { color: white !important; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        /* Critical Inline CSS for LCP - 解決11秒延遲 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; }
+        
+        /* 使用系統字體，完全避免字體載入延遲 */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2D3748;
+            background: #f8fafc;
+        }
+        
+        /* Header 基本樣式 */
+        .header { 
+            background: white; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 1000; 
+        }
+        .navbar { padding: 1rem 0; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        .nav-link { text-decoration: none; color: #2D3748; font-weight: 500; padding: 0.5rem 1rem; }
+        .hamburger { display: none; }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hamburger { display: flex; flex-direction: column; cursor: pointer; }
+            .hamburger .bar { width: 25px; height: 3px; background: #2D3748; margin: 3px 0; }
+        }
+        
+        /* 按鈕基本樣式 */
+        .btn-primary {
+            display: inline-block;
+            background: #ED8936;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        /* Hero 標題組件樣式 */
+        .seo-prefix { 
+            font-size: 1.8rem; 
+            font-weight: 500; 
+            color: rgba(255,255,255,0.85); 
+            letter-spacing: 2px; 
+            margin-bottom: 0.3rem;
+        }
+        .brand-name { 
+            font-size: 4.2rem; 
+            font-weight: 700; 
+            color: white; 
+            margin: 0.2rem 0;
+        }
+        .poetic-subtitle { 
+            font-size: 2.2rem; 
+            font-weight: 300; 
+            color: rgba(255,255,255,0.9); 
+            margin-top: 0.4rem;
+        }
+        
+        /* Hero 區域完整樣式 */
+        .hero { 
+            min-height: 100vh; 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+        .hero-image { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            z-index: -2; 
+        }
+        .hero-image img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+        .hero::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: rgba(0,0,0,0.4); 
+            z-index: -1; 
+        }
+        .hero-content { 
+            position: relative; 
+            z-index: 1; 
+            padding: 4rem 0 2rem; 
+            color: white; 
+            text-align: center; 
+        }
+        
+        /* Hero 文字樣式 - 確保立即顯示 */
+        .hero-title { 
+            font-size: 4rem; 
+            font-weight: 700; 
+            margin: 1.5rem 0 1rem; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-subtitle { 
+            font-size: 1.5rem; 
+            margin-bottom: 2rem; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+            color: white;
+        }
+        .hero-secondary { 
+            font-size: 2.5rem; 
+            font-weight: 600; 
+            margin-bottom: 2rem; 
+            color: #ED8936;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .hero-description { 
+            font-size: 1.2rem; 
+            line-height: 1.8; 
+            margin: 0 auto 3rem; 
+            max-width: 800px;
+            color: white;
+        }
+        .hero-description p { 
+            margin-bottom: 1rem; 
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* 強制顯示所有內容 */
+        * { 
+            opacity: 1 !important; 
+            visibility: visible !important; 
+            animation: none !important; 
+            transition: none !important; 
+            transform: none !important; 
+        }
+        
+        /* 特別針對 LCP 元素 - 第3個段落 */
+        .hero-description p:nth-child(3) {
+            font-size: 1.2rem !important;
+            line-height: 1.8 !important;
+            color: white !important;
+            margin-bottom: 1rem !important;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* 行動裝置優化 */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .hero-secondary { font-size: 1.8rem; }
+            .hero-description { font-size: 1rem; }
+            .hero-content { padding: 2.5rem 0 2rem; }
+        }
     </style>
     
     <!-- 預連接外部域名 - 提高優先級 -->
@@ -87,27 +246,30 @@
     <link rel="preload" href="images/hero/main-hall-environment.avif" as="image" type="image/avif" fetchpriority="high">
     <link rel="preload" href="images/hero/main-hall-environment.webp" as="image" type="image/webp" fetchpriority="high">
     
-    <!-- 載入重構後的 CSS - 簡化載入順序 -->
-    <!-- 緊急 LCP 修復必須最先載入 -->
-    <link rel="stylesheet" href="styles/lcp-emergency-fix.css" media="all" fetchpriority="high">
-    <!-- 優先載入核心基礎樣式 -->
-    <link rel="stylesheet" href="styles/base.css" media="all">
-    <!-- 載入首頁專屬樣式 -->
-    <link rel="stylesheet" href="styles/home.css" media="all">
-    <!-- 延後載入圖示樣式 -->
+    <!-- 載入重構後的 CSS - 全部延後載入以解決 LCP -->
+    <link rel="preload" href="styles/lcp-emergency-fix.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <link rel="preload" href="styles/base.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <link rel="preload" href="styles/home.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <link rel="preload" href="styles/svg-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     
     <!-- 延後載入其他非關鍵 CSS -->
     <link rel="preload" href="styles/image-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <link rel="preload" href="styles/font-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <!-- 精簡字體權重：移除500，保留400,600,700 -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     
-    <!-- 字體載入策略 - 使用 font-display: optional -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400&display=optional&subset=chinese-traditional" rel="stylesheet">
+    <!-- 完全移除 Google Fonts 以解決 LCP 問題 -->
+    
+    <!-- 立即載入關鍵樣式 -->
+    <script>
+        // 行動裝置立即載入樣式
+        if (window.innerWidth <= 768) {
+            var links = document.querySelectorAll('link[rel="preload"][as="style"]');
+            links.forEach(function(link) {
+                link.rel = 'stylesheet';
+                link.media = 'all';
+            });
+        }
+    </script>
     
     <!-- 備用無 JS 環境 -->
     <noscript>
@@ -119,7 +281,6 @@
         
         <link rel="stylesheet" href="styles/image-optimization.css">
         <link rel="stylesheet" href="styles/font-optimization.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional">
     </noscript>
     
     <!-- Elfsight Google Reviews Widget - 延後載入 -->
@@ -447,27 +608,7 @@
             initCriticalFeatures();
         });
 
-        // 監聽最大內容繪製完成，LCP後載入非關鍵資源
-        if ('PerformanceObserver' in window) {
-            const observer = new PerformanceObserver(function(list) {
-                const entries = list.getEntries();
-                for (let entry of entries) {
-                    if (entry.entryType === 'largest-contentful-paint') {
-                        // LCP 完成後載入非關鍵資源
-                        requestAnimationFrame(() => {
-                            // 桌面版延後載入
-                            if (window.innerWidth > 768) {
-                                loadNonCriticalAssets();
-                            }
-                            setTimeout(initEnhancements, 200); // 縮短延遲
-                        });
-                        observer.disconnect();
-                        break;
-                    }
-                }
-            });
-            observer.observe({ entryTypes: ['largest-contentful-paint'] });
-        }
+        // 簡化：直接在 window.load 後載入資源
         
         // 備用機制：確保資源最終會載入
         window.addEventListener('load', function() {
