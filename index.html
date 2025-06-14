@@ -83,8 +83,8 @@
     <!-- 延後載入其他非關鍵 CSS -->
     <link rel="preload" href="styles/image-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     <link rel="preload" href="styles/font-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <!-- 關鍵字型：同步載入以加速 LCP -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional" media="all" fetchpriority="high">
+    <!-- 精簡字體權重：移除500，保留400,600,700 -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     
     <!-- 備用無 JS 環境 -->
     <noscript>
@@ -425,7 +425,7 @@
             initCriticalFeatures();
         });
 
-        // 監聽最大內容繪製完成，LCP後載入非關鍵資源和動畫
+        // 監聽最大內容繪製完成，LCP後載入非關鍵資源
         if ('PerformanceObserver' in window) {
             const observer = new PerformanceObserver(function(list) {
                 const entries = list.getEntries();
@@ -433,6 +433,8 @@
                     if (entry.entryType === 'largest-contentful-paint') {
                         // LCP 完成後載入非關鍵資源
                         requestAnimationFrame(() => {
+                            // 現在不再需要手動載入樣式表
+                            // loadNonCriticalAssets(); 
                             setTimeout(initEnhancements, 300);
                         });
                         observer.disconnect();
@@ -446,6 +448,8 @@
         // 備用機制：確保資源最終會載入
         window.addEventListener('load', function() {
             setTimeout(function() {
+                // 現在不再需要手動載入樣式表
+                // loadNonCriticalAssets();
                 initEnhancements();
             }, 100);
         });
