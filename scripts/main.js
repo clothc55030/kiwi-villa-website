@@ -363,11 +363,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     // 添加高亮效果
                     roomElement.classList.add('room-highlighted');
                     
-                    // 平滑滾動到房間卡片
-                    roomElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
+                    // 平滑滾動到房間卡片，手機版避免被導航欄遮擋
+                    const isMobile = window.innerWidth <= 768;
+                    if (isMobile) {
+                        // 手機版：滾動到元素頂部，但留出導航欄空間
+                        const elementRect = roomElement.getBoundingClientRect();
+                        const scrollTop = window.pageYOffset + elementRect.top - 100; // 導航欄高度 + 間距
+                        window.scrollTo({
+                            top: scrollTop,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // 桌面版：置中顯示
+                        roomElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
                     
                     // 顯示成功提示
                     const roomName = roomMap[targetRoom];
@@ -392,80 +404,104 @@ document.addEventListener('DOMContentLoaded', function() {
     const roomHighlightStyle = document.createElement('style');
     roomHighlightStyle.textContent = `
         .room-highlighted {
-            transform: scale(1.02);
-            box-shadow: 0 8px 32px rgba(74, 144, 226, 0.3);
-            border: 2px solid rgba(74, 144, 226, 0.5);
-            background: linear-gradient(135deg, rgba(74, 144, 226, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: scale(1.015);
+            box-shadow: 0 12px 40px rgba(158, 158, 158, 0.25), 0 4px 12px rgba(158, 158, 158, 0.15);
+            border: 1px solid rgba(183, 183, 183, 0.4);
+            background: linear-gradient(135deg, rgba(248, 247, 244, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             z-index: 2;
         }
         
-        .room-highlighted::before {
-            content: '🎯 已為您定位';
+        .room-highlighted::after {
+            content: '✓ 已為您定位';
             position: absolute;
-            top: -10px;
-            right: 20px;
-            background: linear-gradient(135deg, #4A90E2, #63B3ED);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
-            animation: highlight-pulse 2s ease-out;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #C4A69D 0%, #B39389 100%);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 16px rgba(196, 166, 157, 0.4), 0 2px 8px rgba(179, 147, 137, 0.3);
+            animation: morandi-appear 2.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 3;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
         
-        @keyframes highlight-pulse {
+        @keyframes morandi-appear {
             0% {
                 opacity: 0;
-                transform: translateY(-10px) scale(0.8);
+                transform: translateY(-15px) scale(0.85);
+                filter: blur(4px);
             }
-            50% {
+            40% {
+                opacity: 0.8;
+                transform: translateY(-5px) scale(0.95);
+                filter: blur(2px);
+            }
+            70% {
                 opacity: 1;
-                transform: translateY(0) scale(1.1);
+                transform: translateY(0) scale(1.05);
+                filter: blur(0);
             }
             100% {
                 opacity: 1;
                 transform: translateY(0) scale(1);
+                filter: blur(0);
             }
         }
         
         .room-highlighted .room-content h2 {
-            color: #4A90E2;
-            text-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+            color: #8B7B73;
+            text-shadow: 0 2px 6px rgba(139, 123, 115, 0.2);
+            transition: color 0.6s ease;
         }
         
         .room-highlighted .room-badge {
-            background: linear-gradient(135deg, #4A90E2, #63B3ED);
-            animation: badge-glow 2s ease-out;
+            background: linear-gradient(135deg, #D4C2B8, #B39389);
+            color: #FFFFFF;
+            animation: badge-gentle-glow 3s ease-out;
+            box-shadow: 0 3px 12px rgba(196, 166, 157, 0.5);
         }
         
-        @keyframes badge-glow {
+        @keyframes badge-gentle-glow {
             0%, 100% {
-                box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+                box-shadow: 0 3px 12px rgba(196, 166, 157, 0.3);
             }
             50% {
-                box-shadow: 0 0 20px rgba(74, 144, 226, 0.8);
+                box-shadow: 0 6px 20px rgba(196, 166, 157, 0.6);
+            }
+        }
+        
+        /* 手機版樣式優化 */
+        @media (max-width: 768px) {
+            .room-highlighted::after {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 0.75rem;
             }
         }
         
         /* 自動移除高亮效果 */
         .room-highlighted {
-            animation: remove-highlight 8s ease-out forwards;
+            animation: remove-highlight 10s ease-out forwards;
         }
         
         @keyframes remove-highlight {
-            0%, 70% {
-                transform: scale(1.02);
-                box-shadow: 0 8px 32px rgba(74, 144, 226, 0.3);
-                border: 2px solid rgba(74, 144, 226, 0.5);
+            0%, 75% {
+                transform: scale(1.015);
+                box-shadow: 0 12px 40px rgba(158, 158, 158, 0.25), 0 4px 12px rgba(158, 158, 158, 0.15);
+                border: 1px solid rgba(183, 183, 183, 0.4);
             }
             100% {
                 transform: scale(1);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                border: 2px solid transparent;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                border: 1px solid transparent;
             }
         }
     `;
