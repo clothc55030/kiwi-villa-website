@@ -273,7 +273,6 @@
     </style>
     
     <!-- 預連接外部域名 - 提高優先級 -->
-    <link rel="dns-prefetch" href="https://static.elfsight.com">
     
     <!-- Font Awesome - 延遲載入 -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet';" media="print">
@@ -492,6 +491,27 @@
             var script = document.createElement('script');
             script.src = 'scripts/main.js';
             document.body.appendChild(script);
+        });
+    </script>
+    
+    <!-- 效能優化：錯誤處理 -->
+    <script>
+        // 智能錯誤處理：只處理關鍵錯誤
+        window.addEventListener('error', function(e) {
+            // 忽略 Cloudflare 相關的非關鍵錯誤
+            if (e.target && e.target.src && 
+                (e.target.src.includes('cdn-cgi') || 
+                 e.target.src.includes('cloudflare-static') ||
+                 e.target.src.includes('rocket-loader') ||
+                 e.target.src.includes('/rum'))) {
+                return; // 靜默忽略
+            }
+            // 其他錯誤正常處理
+        }, true);
+        
+        // 頁面載入完成後添加 loaded 類別
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
         });
     </script>
 </body>
