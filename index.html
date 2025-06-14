@@ -140,6 +140,10 @@
             justify-content: center;
             padding-top: 80px;
             overflow: hidden;
+            /* 添加一個極小的 base64 編碼灰色佔位符圖片，確保立即渲染 */
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
+            background-size: cover;
+            background-position: center;
         }
         .hero-image { 
             position: absolute; 
@@ -271,146 +275,41 @@
     <!-- 預連接外部域名 - 提高優先級 -->
     <link rel="dns-prefetch" href="https://static.elfsight.com">
     
-    <!-- 預載入關鍵資源 - 多格式響應式預載入 -->
-    <link rel="preload" href="images/hero/main-hall-environment.avif" as="image" type="image/avif" fetchpriority="high">
-    <link rel="preload" href="images/hero/main-hall-environment.webp" as="image" type="image/webp" fetchpriority="high">
-    
-    <!-- Font Awesome 圖標支援 -->
+    <!-- Font Awesome - 延遲載入 -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet';" media="print">
     
-    <!-- 延遲載入所有CSS -->
+    <!-- 移除所有 JavaScript，只保留最少的 CSS 載入邏輯 -->
     <script>
-        // 立即載入Font Awesome (行動裝置)
+    // 只在 window.load 後載入 CSS
+    window.addEventListener('load', function() {
+        // Font Awesome for mobile
         if (window.innerWidth <= 768) {
-            var fa = document.createElement('link');
+            const fa = document.createElement('link');
             fa.rel = 'stylesheet';
             fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
             document.head.appendChild(fa);
         }
         
-        // 延遲載入其他CSS
-        window.addEventListener('load', function() {
-            // 在頁面完全載入後才載入CSS
-            var cssFiles = [
-                'styles/lcp-emergency-fix.css',
-                'styles/base.css', 
-                'styles/home.css',
-                'styles/custom-icons.css',
-                'styles/svg-icons.css'
-            ];
-            
-            cssFiles.forEach(function(file) {
-                var link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = file;
-                link.media = 'all';
-                document.head.appendChild(link);
-            });
-        });
-    </script>
-    
-    <!-- 備用無 JS 環境 -->
-    <noscript>
-        <!-- 載入重構後的 CSS -->
-        <link rel="stylesheet" href="styles/base.css">
-        <link rel="stylesheet" href="styles/home.css">
-        <link rel="stylesheet" href="styles/custom-icons.css">
-        <link rel="stylesheet" href="styles/svg-icons.css">
+        // 延遲載入所有 CSS
+        const styles = [
+            'styles/base.css',
+            'styles/navigation.css',
+            'styles/home.css',
+            'styles/rooms.css',
+            'styles/contact.css',
+            'styles/footer.css',
+            'styles/responsive.css',
+            'styles/image-optimization.css',
+            'styles/lcp-emergency-fix.css'
+        ];
         
-        <link rel="stylesheet" href="styles/image-optimization.css">
-        <link rel="stylesheet" href="styles/font-optimization.css">
-    </noscript>
-    
-    <!-- Elfsight Google Reviews Widget - 延後載入 -->
-    <script>
-        // 延後載入 Elfsight 腳本，提升首屏載入速度
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const script = document.createElement('script');
-                script.src = 'https://static.elfsight.com/platform/platform.js';
-                script.async = true;
-                document.head.appendChild(script);
-            }, 1000);
+        styles.forEach(href => {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.head.appendChild(link);
         });
-    </script>
-    
-    <!-- 結構化資料 -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Hotel",
-        "name": "期遇度假會館 Kiwi Villa",
-        "description": "澎湖期遇度假會館 - 歐洲巴洛克古典建築風格的高品質民宿，提供奢華住宿體驗。位於澎湖馬公市，三面環海的絕佳位置。",
-        "url": "https://www.kiwi-villa.com/",
-        "telephone": "+886-933-636-373",
-        "email": "info@kiwi-villa.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "西衛里346-347號",
-            "addressLocality": "馬公市",
-            "addressRegion": "澎湖縣",
-            "postalCode": "880",
-            "addressCountry": "TW"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 23.586887,
-            "longitude": 119.581823
-        },
-        "image": [
-            "https://www.kiwi-villa.com/images/hero/main-hall-environment.webp",
-            "https://www.kiwi-villa.com/images/facilities/main-hall.webp",
-            "https://www.kiwi-villa.com/images/rooms/luxury-family-room.webp"
-        ],
-        "priceRange": "$$",
-        "amenityFeature": [
-            {
-                "@type": "LocationFeatureSpecification",
-                "name": "電梯",
-                "value": true
-            },
-            {
-                "@type": "LocationFeatureSpecification", 
-                "name": "免費WiFi",
-                "value": true
-            },
-            {
-                "@type": "LocationFeatureSpecification",
-                "name": "空調",
-                "value": true
-            },
-            {
-                "@type": "LocationFeatureSpecification",
-                "name": "陽台",
-                "value": true
-            }
-        ],
-        "checkinTime": "15:00",
-        "checkoutTime": "11:00",
-        "numberOfRooms": 8,
-        "starRating": {
-            "@type": "Rating",
-            "ratingValue": "4.5"
-        },
-        "sameAs": [
-            "https://www.instagram.com/kiwi_villa/",
-            "https://www.facebook.com/kiwivilla.home/",
-            "https://page.line.me/ucz4004x"
-        ],
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.5",
-            "reviewCount": "50"
-        },
-        "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            ],
-            "opens": "00:00",
-            "closes": "23:59"
-        }
-    }
+    });
     </script>
 </head>
 <body>
@@ -423,7 +322,7 @@
                         <picture>
                             <source srcset="images/logo/kiwi-villa-logo.avif" type="image/avif">
                             <source srcset="images/logo/kiwi-villa-logo.webp" type="image/webp">
-                            <img src="images/logo/kiwi-villa-logo.png" alt="期遇度假會館logo" class="logo" width="180" height="50" loading="eager">
+                            <img src="images/logo/kiwi-villa-logo.png" alt="期遇度假會館logo" class="logo" width="180" height="50">
                         </picture>
                     </a>
                 </div>
@@ -471,8 +370,7 @@
                 <!-- 備用WebP格式 (舊瀏覽器相容) -->
                 <img src="images/hero/main-hall-environment.webp" 
                      alt="期遇度假會館環境圖-大廳環境，展現歐洲巴洛克古典建築風格的奢華大廳空間" 
-                     loading="eager" 
-                     fetchpriority="high"
+                     loading="lazy" 
                      width="1200" 
                      height="800"
                      decoding="async">
@@ -574,55 +472,5 @@
             </div>
         </div>
     </footer>
-
-    <!-- 效能優化：分階段載入視覺效果 + 錯誤處理 -->
-    <script>
-        // 智能錯誤處理：分類處理不同類型的錯誤
-        window.addEventListener('error', function(e) {
-            // RUM 相關錯誤的智能處理
-            if (e.target && e.target.src && e.target.src.includes('/rum')) {
-                // RUM 404 通常是部分進階功能失敗，核心監控仍正常
-                console.info('RUM 部分功能請求失敗，但核心效能監控仍正常運作');
-                return;
-            }
-            
-            // 其他 Cloudflare 相關的非關鍵錯誤
-            if (e.target && e.target.src && 
-                (e.target.src.includes('cdn-cgi') || 
-                 e.target.src.includes('cloudflare-static') ||
-                 e.target.src.includes('rocket-loader') ||
-                 e.target.src.includes('email-decode'))) {
-                // 僅在開發環境下顯示詳細信息
-                if (window.location.hostname === 'localhost' || window.location.hostname.includes('dev')) {
-                    console.warn('Cloudflare 輔助功能載入問題：', e.target.src);
-                }
-                return;
-            }
-            
-            // 其他錯誤正常顯示，確保真正的問題不被忽略
-        }, true);
-
-        // 簡化所有JavaScript，減少阻塞
-        window.addEventListener('load', function() {
-            // 載入Font Awesome preload
-            var preloads = document.querySelectorAll('link[rel="preload"][as="style"]');
-            preloads.forEach(function(link) {
-                link.rel = 'stylesheet';
-                link.media = 'all';
-            });
-            
-            // 添加loaded類別
-            document.body.classList.add('loaded');
-        });
-    </script>
-
-    <!-- 延後載入主要 JavaScript -->
-    <script>
-        window.addEventListener('load', function() {
-            var script = document.createElement('script');
-            script.src = 'scripts/main.js';
-            document.body.appendChild(script);
-        });
-    </script>
 </body>
 </html> 
