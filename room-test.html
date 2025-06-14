@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>房號重定向測試頁面</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .test-link {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background: #4A90E2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        .test-link:hover {
+            background: #357ABD;
+        }
+        .info {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #4A90E2;
+            margin: 20px 0;
+        }
+        .error-check {
+            background: #fee;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #f44;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔧 房號重定向測試頁面</h1>
+        
+        <div class="info">
+            <h3>📋 測試步驟：</h3>
+            <p>點擊下方連結測試房號重定向功能。每個連結應該會跳轉到對應的房間並顯示高亮效果。</p>
+        </div>
+
+        <h3>🏠 房型測試連結：</h3>
+        <div>
+            <a href="/201" class="test-link">201 - 豪華家庭房</a>
+            <a href="/203" class="test-link">203 - 高級四人房</a>
+            <a href="/205" class="test-link">205 - 奢華四人房</a>
+        </div>
+        <div>
+            <a href="/303" class="test-link">303 - 高級三人房</a>
+            <a href="/302" class="test-link">302 - 高級雙床房</a>
+            <a href="/305" class="test-link">305 - 高級雙人房</a>
+        </div>
+
+        <div class="info">
+            <h3>🎯 備用測試（直接URL參數）：</h3>
+            <div>
+                <a href="/rooms?room=201" class="test-link">rooms?room=201</a>
+                <a href="/rooms?room=203" class="test-link">rooms?room=203</a>
+                <a href="/rooms?room=205" class="test-link">rooms?room=205</a>
+            </div>
+        </div>
+
+        <div class="error-check">
+            <h3>❗ 如果出現404錯誤，可能原因：</h3>
+            <ol>
+                <li><strong>服務器不支援 .htaccess</strong> - 請聯繫主機商確認</li>
+                <li><strong>mod_rewrite 未啟用</strong> - 需要服務器管理員啟用</li>
+                <li><strong>瀏覽器快取</strong> - 請按 Ctrl+F5 強制刷新</li>
+                <li><strong>DNS未更新</strong> - 等待DNS傳播完成</li>
+            </ol>
+        </div>
+
+        <div class="info">
+            <h3>🔄 當前URL資訊：</h3>
+            <p id="current-url"></p>
+            <p id="url-params"></p>
+            <p id="url-hash"></p>
+        </div>
+
+        <p><a href="/rooms" class="test-link">返回房型頁面 →</a></p>
+    </div>
+
+    <script>
+        // 顯示當前URL資訊
+        document.getElementById('current-url').textContent = '當前URL: ' + window.location.href;
+        document.getElementById('url-params').textContent = '參數: ' + window.location.search;
+        document.getElementById('url-hash').textContent = 'Hash: ' + window.location.hash;
+    </script>
+</body>
+</html> 

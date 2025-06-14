@@ -322,25 +322,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Room URL hash navigation and highlighting
+// Room URL navigation and highlighting
 document.addEventListener('DOMContentLoaded', function() {
     // 房間號碼對應表
     const roomMap = {
-        'room-201': '豪華家庭房',
-        'room-203': '高級四人房', 
-        'room-205': '奢華四人房',
-        'room-303': '高級三人房',
-        'room-302': '高級雙床房',
-        'room-305': '高級雙人房'
+        '201': '豪華家庭房',
+        '203': '高級四人房', 
+        '205': '奢華四人房',
+        '303': '高級三人房',
+        '302': '高級雙床房',
+        '305': '高級雙人房'
     };
 
-    // 處理頁面加載時的hash定位
+    // 獲取URL參數
+    function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // 處理頁面加載時的房間定位
     function handleRoomNavigation() {
-        const hash = window.location.hash.substring(1); // 移除 # 號
+        // 檢查URL參數中的room值
+        const roomNumber = getUrlParameter('room');
         
-        if (hash && roomMap[hash]) {
+        // 也檢查hash（向後兼容）
+        const hash = window.location.hash.substring(1);
+        const hashRoomNumber = hash.replace('room-', '');
+        
+        const targetRoom = roomNumber || hashRoomNumber;
+        
+        if (targetRoom && roomMap[targetRoom]) {
             setTimeout(() => {
-                const roomElement = document.getElementById(hash);
+                const roomElement = document.getElementById(`room-${targetRoom}`);
                 if (roomElement) {
                     // 移除其他房間的高亮效果
                     document.querySelectorAll('.room-card').forEach(card => {
@@ -357,8 +370,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                     
                     // 顯示成功提示
-                    const roomName = roomMap[hash];
+                    const roomName = roomMap[targetRoom];
                     showNotification(`已為您定位到：${roomName}`, 'success');
+                    
+                    // 更新URL為乾淨的hash格式（可選）
+                    if (roomNumber) {
+                        window.history.replaceState({}, '', `${window.location.pathname}#room-${targetRoom}`);
+                    }
                 }
             }, 300); // 稍微延遲以確保頁面完全加載
         }
@@ -367,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 監聽hash變化
     window.addEventListener('hashchange', handleRoomNavigation);
     
-    // 頁面加載時檢查hash
+    // 頁面加載時檢查URL參數和hash
     handleRoomNavigation();
     
     // 添加房間高亮效果的樣式
