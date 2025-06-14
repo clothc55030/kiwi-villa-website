@@ -1,0 +1,142 @@
+/* 行動裝置 LCP 優化樣式 */
+
+/* === 關鍵內容立即顯示 === */
+/* 確保 hero 內容立即可見 */
+.hero-content,
+.hero-title,
+.hero-subtitle,
+.hero-secondary,
+.hero-description,
+.hero-description p {
+    /* 移除任何可能的初始隱藏 */
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* === 行動裝置動畫優化 === */
+@media (max-width: 768px) {
+    /* 簡化或移除動畫以加快渲染 */
+    .feature-card {
+        /* 移除動畫，改用簡單過渡 */
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    /* 移除動畫延遲 */
+    .feature-card:nth-child(1),
+    .feature-card:nth-child(2),
+    .feature-card:nth-child(3),
+    .feature-card:nth-child(4) {
+        animation-delay: 0s !important;
+    }
+    
+    /* 簡化懸停效果 */
+    .feature-card:hover {
+        transform: translateY(-3px);
+    }
+}
+
+/* === 字體載入優化 === */
+/* 使用系統字體作為後備，減少 FOIT */
+@media (max-width: 768px) {
+    body {
+        /* 優先使用系統字體，快速顯示內容 */
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'Noto Sans TC', sans-serif;
+    }
+    
+    /* 關鍵文字使用系統字體 */
+    .hero-title,
+    .hero-subtitle,
+    .hero-secondary,
+    .hero-description {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'Noto Sans TC', sans-serif;
+    }
+}
+
+/* === 減少渲染阻塞 === */
+@media (max-width: 768px) {
+    /* 簡化背景效果 */
+    body::before,
+    .features::before,
+    .contact-info::before {
+        display: none !important;
+    }
+    
+    /* 簡化複雜的漸變背景 */
+    body {
+        background: #f8fafc !important;
+        animation: none !important;
+    }
+    
+    .features {
+        background: #f1f5f9 !important;
+    }
+    
+    /* 移除裝飾性偽元素 */
+    .feature-card::before,
+    .contact-item h3::after {
+        display: none !important;
+    }
+}
+
+/* === 優先渲染可視區域 === */
+@media (max-width: 768px) {
+    /* 延遲非關鍵動畫 */
+    .social-link,
+    .nav-link {
+        transition-duration: 0.15s !important;
+    }
+    
+    /* 簡化圖標效果 */
+    .feature-icon {
+        background: rgba(74, 144, 226, 0.1) !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+}
+
+/* === 使用 content-visibility 優化 === */
+@supports (content-visibility: auto) {
+    @media (max-width: 768px) {
+        .features,
+        .contact-info {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 500px;
+        }
+    }
+}
+
+/* === 減少重繪和回流 === */
+@media (max-width: 768px) {
+    /* 使用 transform 替代 top/left 動畫 */
+    * {
+        will-change: auto !important;
+    }
+    
+    /* 只在需要時使用 will-change */
+    .feature-card:hover {
+        will-change: transform;
+    }
+}
+
+/* === 強制硬體加速 === */
+@media (max-width: 768px) {
+    .hero-image img {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+}
+
+/* === Critical CSS for LCP === */
+/* 確保 LCP 文字立即顯示 */
+.hero-description p:nth-child(2) {
+    /* 這是 LCP 元素 */
+    font-weight: 400 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
+    transform: none !important;
+} 
