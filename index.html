@@ -349,7 +349,7 @@
     <section class="hero">
         <div class="hero-image">
             <picture>
-                <!-- AVIF格式 (最新標準，最小檔案) -->
+                <!-- 暫時移除 AVIF 格式，因為檔案大小異常
                 <source 
                     media="(max-width: 768px)" 
                     srcset="images/hero/main-hall-environment-mobile.avif" 
@@ -357,8 +357,9 @@
                 <source 
                     srcset="images/hero/main-hall-environment.avif" 
                     type="image/avif">
+                -->
                 
-                <!-- WebP格式 (廣泛支援，中等檔案) -->
+                <!-- WebP格式 (廣泛支援，檔案較小) -->
                 <source 
                     media="(max-width: 768px)" 
                     srcset="images/hero/main-hall-environment-mobile.webp" 
@@ -367,12 +368,12 @@
                     srcset="images/hero/main-hall-environment.webp" 
                     type="image/webp">
                 
-                <!-- 備用WebP格式 (舊瀏覽器相容) -->
-                <img src="images/hero/main-hall-environment.webp" 
+                <!-- 備用WebP格式 - 手機優先 -->
+                <img src="images/hero/main-hall-environment-mobile.webp" 
                      alt="期遇度假會館環境圖-大廳環境，展現歐洲巴洛克古典建築風格的奢華大廳空間" 
                      loading="lazy" 
-                     width="1200" 
-                     height="800"
+                     width="768" 
+                     height="512"
                      decoding="async">
             </picture>
         </div>
