@@ -225,7 +225,7 @@ body {
     }
 
     .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
+        display: none;
     }
 
     .hamburger.active .bar:nth-child(1) {

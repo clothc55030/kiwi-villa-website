@@ -62,27 +62,41 @@
     
     <title>期遇度假會館 Kiwi Villa | 澎湖民宿推薦 | Taiwan, Penghu County</title>
     
+    <!-- 內聯關鍵 CSS - 確保 LCP 立即顯示 -->
+    <style>
+        /* Critical Inline CSS for LCP - 解決17秒延遲 */
+        * { margin: 0; padding: 0; box-sizing: border-box; opacity: 1 !important; visibility: visible !important; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif; background: #f8fafc; }
+        .hero { min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
+        .hero-image { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: -1; }
+        .hero-content { position: relative; z-index: 1; padding: 2rem; color: white; text-align: center; }
+        .hero-description { opacity: 1 !important; visibility: visible !important; }
+        .hero-description p { opacity: 1 !important; visibility: visible !important; margin: 1rem 0; color: white; }
+        /* 完全禁用初始動畫 */
+        *, *::before, *::after { animation: none !important; transition: none !important; transform: none !important; }
+        /* 確保文字可讀 */
+        .hero-title, .hero-subtitle, .hero-secondary, .hero-description { color: white !important; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+    </style>
+    
     <!-- 預連接外部域名 - 提高優先級 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://static.elfsight.com">
     
     <!-- 預載入關鍵資源 - 多格式響應式預載入 -->
     <link rel="preload" href="images/hero/main-hall-environment.avif" as="image" type="image/avif" fetchpriority="high">
     <link rel="preload" href="images/hero/main-hall-environment.webp" as="image" type="image/webp" fetchpriority="high">
     
-    <!-- 載入重構後的 CSS -->
-    <!-- Critical LCP Fix - 必須最先載入 -->
-    <link rel="stylesheet" href="styles/critical-lcp-fix.css" media="all" fetchpriority="high">
+    <!-- 載入重構後的 CSS - 簡化載入順序 -->
+    <!-- 緊急 LCP 修復必須最先載入 -->
+    <link rel="stylesheet" href="styles/lcp-emergency-fix.css" media="all" fetchpriority="high">
     <!-- 優先載入核心基礎樣式 -->
-    <link rel="stylesheet" href="styles/base.css" media="all" fetchpriority="high">
+    <link rel="stylesheet" href="styles/base.css" media="all">
     <!-- 載入首頁專屬樣式 -->
     <link rel="stylesheet" href="styles/home.css" media="all">
-    <!-- 立即載入圖示樣式以修復顯示問題 -->
-    <link rel="stylesheet" href="styles/custom-icons.css" media="all">
-    <link rel="stylesheet" href="styles/svg-icons.css" media="all">
-    <!-- 行動裝置 LCP 優化 -->
-    <link rel="stylesheet" href="styles/mobile-lcp-optimization.css" media="all">
+    <!-- 延後載入圖示樣式 -->
+    <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <link rel="preload" href="styles/svg-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     
     <!-- 延後載入其他非關鍵 CSS -->
     <link rel="preload" href="styles/image-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
@@ -90,16 +104,10 @@
     <!-- 精簡字體權重：移除500，保留400,600,700 -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
     
-    <!-- 行動裝置立即載入字體，避免 FOIT -->
-    <script>
-        if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
-            // 行動裝置立即載入字體
-            var fontLink = document.createElement('link');
-            fontLink.rel = 'stylesheet';
-            fontLink.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional';
-            document.head.appendChild(fontLink);
-        }
-    </script>
+    <!-- 字體載入策略 - 使用 font-display: optional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400&display=optional&subset=chinese-traditional" rel="stylesheet">
     
     <!-- 備用無 JS 環境 -->
     <noscript>
@@ -395,15 +403,9 @@
             // 其他錯誤正常顯示，確保真正的問題不被忽略
         }, true);
 
-        // 關鍵功能立即執行
+        // 關鍵功能立即執行 - 簡化以減少阻塞
         function initCriticalFeatures() {
-            // 立即啟用基本背景，避免閃爍
-            document.body.classList.add('content-ready');
-            
-            // 行動裝置立即載入字體樣式，避免 FOIT
-            if (window.innerWidth <= 768) {
-                loadNonCriticalAssets();
-            }
+            // 什麼都不做，讓內容立即顯示
         }
 
         // 載入非關鍵樣式和字體
