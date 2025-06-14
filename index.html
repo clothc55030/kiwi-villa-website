@@ -225,9 +225,8 @@
             transform: none !important; 
         }
         
-        /* 但是保留對 contact-info 和 footer 的動畫支援 */
-        .contact-info,
-        .footer {
+        /* 但是保留對 contact-info 的動畫支援 */
+        .contact-info {
             opacity: initial !important;
             visibility: initial !important; 
             animation: initial !important;
@@ -235,9 +234,15 @@
             transform: initial !important;
         }
         
-        /* 移除底部區域的動畫阻擋，讓動畫可以正常運作 */
-        .contact-info:not(.animate-on-scroll),
-        .footer:not(.animate-on-scroll) {
+        /* footer 正常顯示，無動畫 */
+        .footer {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
+        }
+        
+        /* 移除 contact-info 區域的動畫阻擋，讓動畫可以正常運作 */
+        .contact-info:not(.animate-on-scroll) {
             opacity: 1 !important;
             transform: none !important;
         }
@@ -253,27 +258,18 @@
             transform: translateY(0) !important;
         }
         
-        /* contact-info 特別動畫設定 */
+        /* contact-info 特別動畫設定 - 與 notice 頁面保持一致 */
         .contact-info.animate-on-scroll {
             opacity: 0 !important;
             transform: translateY(50px) !important;
-            transition: opacity 1s ease-out, transform 1s ease-out !important;
+            transition: opacity 1s ease-out 0.2s, transform 1s ease-out 0.2s !important;
         }
         .contact-info.animate-on-scroll.is-visible {
             opacity: 1 !important;
             transform: translateY(0) !important;
         }
         
-        /* footer 動畫設定 */
-        .footer.animate-on-scroll {
-            opacity: 0 !important;
-            transform: translateY(40px) !important;
-            transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s !important;
-        }
-        .footer.animate-on-scroll.is-visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
+
         
         /* 特別針對 LCP 元素 - 第3個段落 */
         .hero-description p:nth-child(3) {
@@ -635,7 +631,7 @@
     <script>
         // 立即初始化動畫觀察器
         document.addEventListener('DOMContentLoaded', () => {
-            const animatedElements = document.querySelectorAll('.feature-card, .contact-item, .contact-info, .footer');
+            const animatedElements = document.querySelectorAll('.feature-card, .contact-item, .contact-info');
             
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries, observer) => {
