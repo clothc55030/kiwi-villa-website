@@ -311,6 +311,18 @@
         });
     });
     </script>
+    
+    <!-- 備用無 JS 環境 -->
+    <noscript>
+        <link rel="stylesheet" href="styles/base.css">
+        <link rel="stylesheet" href="styles/navigation.css">
+        <link rel="stylesheet" href="styles/home.css">
+        <link rel="stylesheet" href="styles/rooms.css">
+        <link rel="stylesheet" href="styles/contact.css">
+        <link rel="stylesheet" href="styles/footer.css">
+        <link rel="stylesheet" href="styles/responsive.css">
+        <link rel="stylesheet" href="styles/image-optimization.css">
+    </noscript>
 </head>
 <body>
     <!-- Navigation -->
@@ -473,5 +485,14 @@
             </div>
         </div>
     </footer>
+    
+    <!-- 延後載入主要 JavaScript -->
+    <script>
+        window.addEventListener('load', function() {
+            var script = document.createElement('script');
+            script.src = 'scripts/main.js';
+            document.body.appendChild(script);
+        });
+    </script>
 </body>
 </html> 
