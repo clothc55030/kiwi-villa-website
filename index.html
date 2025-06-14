@@ -229,6 +229,33 @@
             visibility: visible !important;
         }
         
+        /* Features Section 基本樣式 */
+        .features { padding: 5rem 0; background: #f1f5f9; }
+        .section-title { text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 3rem; color: #2D3748; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .feature-card { background: white; padding: 2rem; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); opacity: 1 !important; }
+        .feature-icon { font-size: 3rem; color: #4A90E2; margin-bottom: 1rem; }
+        .feature-card h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: #2D3748; }
+        .feature-card p { color: #4A5568; line-height: 1.6; }
+        
+        /* Footer 基本樣式 */
+        .footer { background: #2D3748; color: white; padding: 2rem 0; text-align: center; }
+        .contact-info { background: #f9f9f9; padding: 60px 0; margin-top: 60px; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .contact-item h3 { font-size: 1.5rem; margin-bottom: 20px; color: #333; }
+        .contact-item p { margin-bottom: 10px; display: flex; align-items: center; }
+        .contact-item p i { margin-right: 10px; color: #4A90E2; width: 20px; text-align: center; }
+        .contact-item p a { color: inherit; text-decoration: none; }
+        .social-links { display: flex; gap: 15px; margin-top: 15px; }
+        .social-link { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #4A90E2; color: white; border-radius: 50%; font-size: 20px; text-decoration: none; }
+        
+        /* Logo 樣式 */
+        .logo { height: 50px; width: auto; object-fit: contain; }
+        
+        /* 預防FOUC - 確保圖標容器有基本樣式 */
+        .fa, .fab, .fas, .far { display: inline-block; width: 1em; height: 1em; }
+        .booking-btn { background: #4A90E2 !important; color: white !important; }
+        
         /* 行動裝置優化 */
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem; }
@@ -236,6 +263,8 @@
             .hero-secondary { font-size: 1.8rem; }
             .hero-description { font-size: 1rem; }
             .hero-content { padding: 2.5rem 0 2rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
         }
     </style>
     
@@ -246,29 +275,38 @@
     <link rel="preload" href="images/hero/main-hall-environment.avif" as="image" type="image/avif" fetchpriority="high">
     <link rel="preload" href="images/hero/main-hall-environment.webp" as="image" type="image/webp" fetchpriority="high">
     
-    <!-- 載入重構後的 CSS - 全部延後載入以解決 LCP -->
-    <link rel="preload" href="styles/lcp-emergency-fix.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <link rel="preload" href="styles/base.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <link rel="preload" href="styles/home.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <link rel="preload" href="styles/custom-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <link rel="preload" href="styles/svg-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
+    <!-- Font Awesome 圖標支援 -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet';" media="print">
     
-    <!-- 延後載入其他非關鍵 CSS -->
-    <link rel="preload" href="styles/image-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    <link rel="preload" href="styles/font-optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='all';" media="print">
-    
-    <!-- 完全移除 Google Fonts 以解決 LCP 問題 -->
-    
-    <!-- 立即載入關鍵樣式 -->
+    <!-- 延遲載入所有CSS -->
     <script>
-        // 行動裝置立即載入樣式
+        // 立即載入Font Awesome (行動裝置)
         if (window.innerWidth <= 768) {
-            var links = document.querySelectorAll('link[rel="preload"][as="style"]');
-            links.forEach(function(link) {
-                link.rel = 'stylesheet';
-                link.media = 'all';
-            });
+            var fa = document.createElement('link');
+            fa.rel = 'stylesheet';
+            fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
+            document.head.appendChild(fa);
         }
+        
+        // 延遲載入其他CSS
+        window.addEventListener('load', function() {
+            // 在頁面完全載入後才載入CSS
+            var cssFiles = [
+                'styles/lcp-emergency-fix.css',
+                'styles/base.css', 
+                'styles/home.css',
+                'styles/custom-icons.css',
+                'styles/svg-icons.css'
+            ];
+            
+            cssFiles.forEach(function(file) {
+                var link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = file;
+                link.media = 'all';
+                document.head.appendChild(link);
+            });
+        });
     </script>
     
     <!-- 備用無 JS 環境 -->
@@ -564,62 +602,27 @@
             // 其他錯誤正常顯示，確保真正的問題不被忽略
         }, true);
 
-        // 關鍵功能立即執行 - 簡化以減少阻塞
-        function initCriticalFeatures() {
-            // 什麼都不做，讓內容立即顯示
-        }
-
-        // 載入非關鍵樣式和字體
-        function loadNonCriticalAssets() {
-            // 啟用所有預載入的樣式表
-            const stylesheets = document.querySelectorAll('link[rel="preload"][as="style"]');
-            stylesheets.forEach(function(sheet) {
-                sheet.onload = null;
-                sheet.rel = 'stylesheet';
-                sheet.media = 'all';
+        // 簡化所有JavaScript，減少阻塞
+        window.addEventListener('load', function() {
+            // 載入Font Awesome preload
+            var preloads = document.querySelectorAll('link[rel="preload"][as="style"]');
+            preloads.forEach(function(link) {
+                link.rel = 'stylesheet';
+                link.media = 'all';
             });
             
-            // 更積極的字體載入策略
-            if ('FontFace' in window && 'fonts' in document) {
-                // 使用 CSS Font Loading API 檢查字型載入
-                document.fonts.ready.then(function() {
-                    document.body.classList.add('fonts-loaded');
-                }).catch(function() {
-                    // 即使載入失敗，也在短時間後嘗試切換
-                    setTimeout(function() {
-                        document.body.classList.add('fonts-loaded');
-                    }, 500); // 縮短時間
-                });
-            } else {
-                // 備用方案 - 更短的等待時間
-                setTimeout(function() {
-                    document.body.classList.add('fonts-loaded');
-                }, 800); // 縮短時間
-            }
-        }
-
-        // 非關鍵視覺效果延後執行
-        function initEnhancements() {
+            // 添加loaded類別
             document.body.classList.add('loaded');
-        }
-
-        // DOM內容載入完成後立即執行關鍵功能
-        document.addEventListener('DOMContentLoaded', function() {
-            initCriticalFeatures();
-        });
-
-        // 簡化：直接在 window.load 後載入資源
-        
-        // 備用機制：確保資源最終會載入
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                loadNonCriticalAssets();
-                initEnhancements();
-            }, 50); // 縮短延遲
         });
     </script>
 
-    <!-- 延後載入主要 JavaScript，避免阻塞LCP -->
-    <script src="scripts/main.js" defer></script>
+    <!-- 延後載入主要 JavaScript -->
+    <script>
+        window.addEventListener('load', function() {
+            var script = document.createElement('script');
+            script.src = 'scripts/main.js';
+            document.body.appendChild(script);
+        });
+    </script>
 </body>
 </html> 
