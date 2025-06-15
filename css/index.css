@@ -19,7 +19,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../images/hero/main-hall-environment.webp');
+    background-image: url('../images/hero/main-hall-environment-new.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -30,22 +30,22 @@
     background-attachment: scroll;
 }
 
-/* 多格式圖片支援 - AVIF優先，WebP備用 */
-@supports (background-image: url('../images/hero/main-hall-environment.avif')) {
+/* 多格式圖片支援 - AVIF優先，WebP備用 - 使用優化版本 */
+@supports (background-image: url('../images/hero/main-hall-environment-new.avif')) {
     .hero-background {
-        background-image: url('../images/hero/main-hall-environment.avif');
+        background-image: url('../images/hero/main-hall-environment-new.avif');
     }
     
     @media (max-width: 768px) {
         .hero-background {
-            background-image: url('../images/hero/main-hall-environment-mobile.avif');
+            background-image: url('../images/hero/main-hall-environment-mobile-new.avif');
         }
     }
 }
 
 @media (max-width: 768px) {
     .hero-background {
-        background-image: url('../images/hero/main-hall-environment-mobile.webp');
+        background-image: url('../images/hero/main-hall-environment-mobile-new.webp');
     }
 }
 

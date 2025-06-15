@@ -42,9 +42,11 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.kiwi-villa.com/">
     
-    <!-- 預載入關鍵圖片 - 最高優先級 -->
-    <link rel="preload" href="images/hero/main-hall-environment.webp" as="image" type="image/webp" fetchpriority="high">
-    <link rel="preload" href="images/hero/main-hall-environment-mobile.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+    <!-- 預載入關鍵圖片 - 最高優先級 - 使用優化版本 -->
+    <link rel="preload" href="images/hero/main-hall-environment-new.avif" as="image" type="image/avif" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-new.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-mobile-new.avif" as="image" type="image/avif" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-mobile-new.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,14 +63,17 @@
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"></noscript>
     
-    <!-- 關鍵CSS內聯 - 優化LCP -->
+    <!-- 關鍵CSS內聯 - 優化LCP - 使用優化圖片 -->
     <style>
     /* 關鍵Hero樣式 - 優化LCP */
     .hero-section{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero-background{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('images/hero/main-hall-environment.webp');background-size:cover;background-position:center;background-repeat:no-repeat;z-index:1;will-change:auto;transform:translate3d(0,0,0);background-attachment:scroll}
+    .hero-background{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('images/hero/main-hall-environment-new.webp');background-size:cover;background-position:center;background-repeat:no-repeat;z-index:1;will-change:auto;transform:translate3d(0,0,0);background-attachment:scroll}
     .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4),rgba(0,0,0,0.6));z-index:2}
     .hero-content{position:relative;z-index:3;text-align:center;max-width:900px;padding:3rem 1.5rem 6rem;background:rgba(0,0,0,0.3);border-radius:20px;border:1px solid rgba(255,255,255,0.15);margin-top:30px;box-shadow:0 8px 32px rgba(0,0,0,0.3)}
-    @media (max-width:768px){.hero-background{background-image:url('images/hero/main-hall-environment-mobile.webp')}}
+    /* 現代格式優先 */
+    @supports (background-image:url('images/hero/main-hall-environment-new.avif')){.hero-background{background-image:url('images/hero/main-hall-environment-new.avif')}}
+    @media (max-width:768px){.hero-background{background-image:url('images/hero/main-hall-environment-mobile-new.webp')}}
+    @media (max-width:768px){@supports (background-image:url('images/hero/main-hall-environment-mobile-new.avif')){.hero-background{background-image:url('images/hero/main-hall-environment-mobile-new.avif')}}}
     </style>
 
     <!-- Main CSS - 關鍵 CSS 保持正常載入 -->
