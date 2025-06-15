@@ -52,6 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
         initImageLightbox();
     }
     
+    // Room gallery swipe functionality for mobile
+    if (document.querySelector('.room-gallery')) {
+        initRoomGallerySwipe();
+    }
+    
     // 視窗大小變化監聽 - 防抖處理
     let resizeTimer;
     window.addEventListener('resize', function() {
@@ -111,6 +116,17 @@ function handleResize() {
             document.body.style.overflow = '';
             document.body.style.position = '';
             document.body.style.width = '';
+        }
+        
+        // 桌面版時移除手機版滑動指示器
+        const indicators = document.querySelectorAll('.gallery-indicators');
+        indicators.forEach(indicator => {
+            indicator.remove();
+        });
+    } else {
+        // 手機版時重新初始化滑動功能
+        if (document.querySelector('.room-gallery')) {
+            initRoomGallerySwipe();
         }
     }
 }
@@ -676,6 +692,104 @@ function initImageLightbox() {
     lightbox.querySelector('.lightbox-image').addEventListener('dragstart', function(e) {
         e.preventDefault();
     });
+    
+    // Touch swipe functionality for lightbox
+    initLightboxSwipe(lightbox);
+    
+    // Touch swipe functionality for lightbox
+    function initLightboxSwipe(lightbox) {
+        const lightboxContainer = lightbox.querySelector('.lightbox-container');
+        let startX = 0;
+        let startY = 0;
+        let distX = 0;
+        let distY = 0;
+        let startTime = 0;
+        let elapsedTime = 0;
+        const threshold = 50; // 最小滑動距離
+        const restraint = 100; // 垂直方向最大偏移
+        const allowedTime = 500; // 最大滑動時間
+        
+        lightboxContainer.addEventListener('touchstart', function(e) {
+            if (!lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
+            
+            const touchObj = e.changedTouches[0];
+            startX = touchObj.pageX;
+            startY = touchObj.pageY;
+            startTime = new Date().getTime();
+        }, { passive: true });
+        
+        lightboxContainer.addEventListener('touchmove', function(e) {
+            if (!lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
+            
+            // 防止頁面滾動
+            e.preventDefault();
+        });
+        
+        lightboxContainer.addEventListener('touchend', function(e) {
+            if (!lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
+            
+            const touchObj = e.changedTouches[0];
+            distX = touchObj.pageX - startX;
+            distY = touchObj.pageY - startY;
+            elapsedTime = new Date().getTime() - startTime;
+            
+            // 檢查是否為有效滑動
+            if (elapsedTime <= allowedTime && Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+                if (distX > 0) {
+                    // 向右滑動 - 上一張圖片
+                    showPrevImage();
+                } else {
+                    // 向左滑動 - 下一張圖片
+                    showNextImage();
+                }
+            }
+        }, { passive: false });
+        
+        // 滑鼠事件支援（桌面版測試用）
+        let isMouseDown = false;
+        let mouseStartX = 0;
+        let mouseStartY = 0;
+        
+        lightboxContainer.addEventListener('mousedown', function(e) {
+            if (!lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
+            
+            isMouseDown = true;
+            mouseStartX = e.pageX;
+            mouseStartY = e.pageY;
+            startTime = new Date().getTime();
+            e.preventDefault();
+        });
+        
+        lightboxContainer.addEventListener('mousemove', function(e) {
+            if (!isMouseDown || !lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
+            
+            e.preventDefault();
+        });
+        
+        lightboxContainer.addEventListener('mouseup', function(e) {
+            if (!isMouseDown || !lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
+            
+            isMouseDown = false;
+            distX = e.pageX - mouseStartX;
+            distY = e.pageY - mouseStartY;
+            elapsedTime = new Date().getTime() - startTime;
+            
+            // 檢查是否為有效滑動
+            if (elapsedTime <= allowedTime && Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+                if (distX > 0) {
+                    // 向右滑動 - 上一張圖片
+                    showPrevImage();
+                } else {
+                    // 向左滑動 - 下一張圖片
+                    showNextImage();
+                }
+            }
+        });
+        
+        lightboxContainer.addEventListener('mouseleave', function() {
+            isMouseDown = false;
+        });
+    }
 }
 
 // Service Worker registration (for future PWA features)
@@ -698,5 +812,147 @@ function updateCopyrightYear() {
     
     copyrightElements.forEach(element => {
         element.textContent = currentYear;
+    });
+}
+
+// Room Gallery Swipe functionality for mobile
+function initRoomGallerySwipe() {
+    // 只在手機版啟用滑動功能
+    if (DOMCache.viewportWidth > 768) return;
+    
+    const roomGalleries = document.querySelectorAll('.room-gallery');
+    
+    roomGalleries.forEach(gallery => {
+        const galleryItems = gallery.querySelectorAll('.gallery-item');
+        
+        // 如果只有一張圖片，不需要滑動功能
+        if (galleryItems.length <= 1) return;
+        
+        // 創建指示器
+        createGalleryIndicators(gallery, galleryItems.length);
+        
+        // 初始化滑動功能
+        initGallerySwipe(gallery, galleryItems);
+        
+        // 監聽滾動事件以更新指示器
+        gallery.addEventListener('scroll', debounce(() => {
+            updateActiveIndicator(gallery);
+        }, 100), { passive: true });
+    });
+}
+
+function createGalleryIndicators(gallery, count) {
+    // 檢查是否已存在指示器
+    if (gallery.querySelector('.gallery-indicators')) return;
+    
+    const indicatorsContainer = document.createElement('div');
+    indicatorsContainer.className = 'gallery-indicators';
+    
+    for (let i = 0; i < count; i++) {
+        const indicator = document.createElement('div');
+        indicator.className = `gallery-indicator ${i === 0 ? 'active' : ''}`;
+        indicatorsContainer.appendChild(indicator);
+    }
+    
+    gallery.appendChild(indicatorsContainer);
+}
+
+function initGallerySwipe(gallery, galleryItems) {
+    let startX = 0;
+    let scrollLeft = 0;
+    let isScrolling = false;
+    
+    // 觸摸開始
+    gallery.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX;
+        scrollLeft = gallery.scrollLeft;
+        isScrolling = true;
+        gallery.style.scrollBehavior = 'auto';
+    }, { passive: true });
+    
+    // 觸摸移動
+    gallery.addEventListener('touchmove', (e) => {
+        if (!isScrolling) return;
+        
+        const x = e.touches[0].pageX;
+        const walk = (x - startX) * 1.5; // 滑動敏感度
+        gallery.scrollLeft = scrollLeft - walk;
+    }, { passive: true });
+    
+    // 觸摸結束
+    gallery.addEventListener('touchend', () => {
+        isScrolling = false;
+        gallery.style.scrollBehavior = 'smooth';
+        
+        // 滑動到最接近的圖片
+        snapToNearestImage(gallery, galleryItems);
+    }, { passive: true });
+    
+    // 滑鼠事件（桌面版測試用）
+    gallery.addEventListener('mousedown', (e) => {
+        startX = e.pageX;
+        scrollLeft = gallery.scrollLeft;
+        isScrolling = true;
+        gallery.style.scrollBehavior = 'auto';
+        e.preventDefault();
+    });
+    
+    gallery.addEventListener('mousemove', (e) => {
+        if (!isScrolling) return;
+        
+        const x = e.pageX;
+        const walk = (x - startX) * 1.5;
+        gallery.scrollLeft = scrollLeft - walk;
+        e.preventDefault();
+    });
+    
+    gallery.addEventListener('mouseup', () => {
+        isScrolling = false;
+        gallery.style.scrollBehavior = 'smooth';
+        snapToNearestImage(gallery, galleryItems);
+    });
+    
+    gallery.addEventListener('mouseleave', () => {
+        isScrolling = false;
+        gallery.style.scrollBehavior = 'smooth';
+    });
+}
+
+function snapToNearestImage(gallery, galleryItems) {
+    const galleryWidth = gallery.offsetWidth;
+    const scrollLeft = gallery.scrollLeft;
+    const imageIndex = Math.round(scrollLeft / galleryWidth);
+    
+    // 確保索引在有效範圍內
+    const targetIndex = Math.max(0, Math.min(imageIndex, galleryItems.length - 1));
+    const targetScrollLeft = targetIndex * galleryWidth;
+    
+    // 滑動到目標位置
+    gallery.scrollTo({
+        left: targetScrollLeft,
+        behavior: 'smooth'
+    });
+    
+    // 更新指示器
+    setTimeout(() => {
+        updateActiveIndicator(gallery);
+    }, 100);
+}
+
+function updateActiveIndicator(gallery) {
+    const indicators = gallery.querySelectorAll('.gallery-indicator');
+    if (indicators.length === 0) return;
+    
+    const galleryWidth = gallery.offsetWidth;
+    const scrollLeft = gallery.scrollLeft;
+    const activeIndex = Math.round(scrollLeft / galleryWidth);
+    
+    // 更新指示器樣式
+    indicators.forEach((indicator, index) => {
+        if (index === activeIndex) {
+            indicator.classList.add('active');
+        } else {
+            indicator.classList.remove('active');
+        }
     });
 } 

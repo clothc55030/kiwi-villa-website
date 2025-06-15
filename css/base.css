@@ -906,6 +906,8 @@ img {
     backdrop-filter: blur(10px);
 }
 
+
+
 /* Loading animation for lightbox */
 .lightbox-image {
     opacity: 0;
