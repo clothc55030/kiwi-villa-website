@@ -818,7 +818,7 @@
                 document.head.appendChild(aosScript);
             }, 2000);
         } else {
-            // 手機版移除AOS屬性
+            // 手機版完全移除AOS屬性
             const aosElements = document.querySelectorAll('[data-aos]');
             aosElements.forEach(el => {
                 el.removeAttribute('data-aos');

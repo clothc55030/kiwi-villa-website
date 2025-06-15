@@ -636,8 +636,8 @@
     }
 }
 
-/* Scroll Animations */
-@media (prefers-reduced-motion: no-preference) {
+/* Scroll Animations - 僅桌面版 */
+@media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
     .intro-card {
         opacity: 0;
         transform: translateY(30px);
