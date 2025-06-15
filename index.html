@@ -78,10 +78,17 @@
     @keyframes heroScrollFade{0%{opacity:0}100%{opacity:1}}
     </style>
 
-    <!-- Main CSS - 關鍵 CSS 保持正常載入 -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/index.css">
+    <!-- Main CSS - 非阻塞預載入模式 -->
+    <link rel="preload" href="css/base.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/layout.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- 無JavaScript降級方案 -->
+    <noscript>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/layout.css">
+        <link rel="stylesheet" href="css/index.css">
+    </noscript>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
