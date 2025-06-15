@@ -705,6 +705,58 @@
         height: auto;
         display: block;
     }
+    
+    /* 簡化的社群媒體樣式 */
+    .social-media-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        padding: var(--space-lg);
+        border-radius: 16px;
+        transition: transform var(--transition-normal) ease;
+        background: var(--white);
+        text-align: center;
+    }
+    
+    .social-media-card:hover {
+        transform: translateY(-4px);
+    }
+    
+    .social-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-md);
+        font-size: 1.5rem;
+        color: var(--white);
+    }
+    
+    .social-media-card.instagram .social-icon {
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+    
+    .social-media-card.facebook .social-icon {
+        background: #1877f2;
+    }
+    
+    .social-media-card.line .social-icon {
+        background: #00c300;
+    }
+    
+    .hashtag {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: var(--white);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-top: var(--space-xs);
+    }
     </style>
 
     <!-- 字體優化載入 - 完全非阻塞 -->
@@ -778,7 +830,11 @@
         "description": "澎湖期遇度假會館，座落於三面環海半島，融合歐洲巴洛克古典建築美學，提供獨特的海島度假體驗。",
         "url": "https://www.kiwi-villa.com/",
         "telephone": "+886-933-636373",
-        "email": "info@kiwi-villa[dot]com",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+886-933-636373",
+            "contactType": "customer service"
+        },
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "NO.347, Xiwei Village, Magong City, Penghu County, Taiwan",
@@ -983,26 +1039,20 @@
                 <h2 class="section-title">追蹤我們的期遇時光</h2>
                 <p class="section-subtitle">在社群媒體上分享您的 #期遇澎湖 美好回憶</p>
                 <div class="social-media-grid">
-                    <a href="https://www.instagram.com/kiwi_villa/" class="social-media-card" target="_blank" data-aos="fade-up" data-aos-delay="100" aria-label="追蹤期遇度假會館 Instagram">
-                        <div class="social-icon instagram">
-                            <i class="fab fa-instagram"></i>
-                        </div>
+                    <a href="https://www.instagram.com/kiwi_villa/" class="social-card instagram" target="_blank" data-aos="fade-up" data-aos-delay="100" aria-label="追蹤期遇度假會館 Instagram">
+                        <i class="fab fa-instagram"></i>
                         <h3>Instagram</h3>
                         <p>@kiwi_villa</p>
                         <span class="hashtag">#期遇澎湖</span>
                     </a>
-                    <a href="https://www.facebook.com/kiwivilla.home/" class="social-media-card" target="_blank" data-aos="fade-up" data-aos-delay="200" aria-label="追蹤期遇度假會館 Facebook 粉絲專頁">
-                        <div class="social-icon facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </div>
+                    <a href="https://www.facebook.com/kiwivilla.home/" class="social-card facebook" target="_blank" data-aos="fade-up" data-aos-delay="200" aria-label="追蹤期遇度假會館 Facebook 粉絲專頁">
+                        <i class="fab fa-facebook-f"></i>
                         <h3>Facebook</h3>
                         <p>期遇度假會館</p>
                         <span class="hashtag">最新消息</span>
                     </a>
-                    <a href="https://page.line.me/ucz4004x" class="social-media-card" target="_blank" data-aos="fade-up" data-aos-delay="300" aria-label="加入期遇度假會館 LINE 官方帳號">
-                        <div class="social-icon line">
-                            <i class="fab fa-line"></i>
-                        </div>
+                    <a href="https://page.line.me/ucz4004x" class="social-card line" target="_blank" data-aos="fade-up" data-aos-delay="300" aria-label="加入期遇度假會館 LINE 官方帳號">
+                        <i class="fab fa-line"></i>
                         <h3>LINE</h3>
                         <p>2,362 位好友</p>
                         <span class="hashtag">即時服務</span>
@@ -1096,7 +1146,7 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <a href="#" onclick="location.href='mai'+'lto:info'+'@kiwi-villa.com'" class="contact-link">info@kiwi-villa.com</a>
+                            <a href="#" onclick="location.href='mai'+'lto:info'+'@kiwi-villa.com'" class="contact-link">info [at] kiwi-villa.com</a>
                         </div>
                         <div class="contact-item">
                             <i class="fab fa-line"></i>
@@ -1125,6 +1175,16 @@
     <!-- 非阻塞載入外部資源 -->
     <script>
     function loadExternalResources() {
+        const isMobile = window.innerWidth < 768;
+        const isSlowConnection = navigator.connection && 
+                               (navigator.connection.effectiveType === 'slow-2g' || 
+                                navigator.connection.effectiveType === '2g');
+        
+        // 為慢速連線添加特殊class以應用優化樣式
+        if (isSlowConnection) {
+            document.documentElement.classList.add('slow-connection');
+        }
+        
         // Font Awesome - 非阻塞載入
         const faLink = document.createElement('link');
         faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
@@ -1137,35 +1197,45 @@
         };
         document.head.appendChild(faLink);
         
-        // AOS 動畫庫 - 非阻塞載入
-        const aosLink = document.createElement('link');
-        aosLink.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
-        aosLink.rel = 'stylesheet';
-        aosLink.media = 'print';
-        aosLink.onload = function() { this.media = 'all'; };
-        document.head.appendChild(aosLink);
-        
-        // AOS JavaScript - 延遲載入
-        setTimeout(function() {
-            const aosScript = document.createElement('script');
-            aosScript.src = 'https://unpkg.com/aos@2.3.1/dist/aos.js';
-            aosScript.defer = true;
-            aosScript.onload = function() {
-                // 初始化 AOS，但排除 Hero 區域
-                if (typeof AOS !== 'undefined') {
-                    AOS.init({
-                        duration: 600,
-                        once: true,
-                        offset: 100,
-                        disable: function() {
-                            // 在小螢幕或低性能設備上禁用
-                            return window.innerWidth < 768;
-                        }
-                    });
-                }
-            };
-            document.head.appendChild(aosScript);
-        }, 1000); // 延遲1秒載入
+        // AOS 動畫庫 - 手機版和慢速連線條件載入
+        if (!isMobile && !isSlowConnection) {
+            const aosLink = document.createElement('link');
+            aosLink.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+            aosLink.rel = 'stylesheet';
+            aosLink.media = 'print';
+            aosLink.onload = function() { this.media = 'all'; };
+            document.head.appendChild(aosLink);
+            
+            // AOS JavaScript - 延遲載入
+            setTimeout(function() {
+                const aosScript = document.createElement('script');
+                aosScript.src = 'https://unpkg.com/aos@2.3.1/dist/aos.js';
+                aosScript.defer = true;
+                aosScript.onload = function() {
+                    // 初始化 AOS
+                    if (typeof AOS !== 'undefined') {
+                        AOS.init({
+                            duration: 600,
+                            once: true,
+                            offset: 100,
+                            disable: function() {
+                                // 在小螢幕或低性能設備上禁用
+                                return window.innerWidth < 768 || isSlowConnection;
+                            }
+                        });
+                    }
+                };
+                document.head.appendChild(aosScript);
+            }, 2000); // 延遲2秒載入，優先處理關鍵資源
+        } else {
+            // 手機版移除所有AOS屬性以避免佈局偏移
+            const aosElements = document.querySelectorAll('[data-aos]');
+            aosElements.forEach(el => {
+                el.removeAttribute('data-aos');
+                el.removeAttribute('data-aos-delay');
+                el.removeAttribute('data-aos-duration');
+            });
+        }
     }
     
     // 頁面載入完成後載入外部資源

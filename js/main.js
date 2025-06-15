@@ -1,10 +1,29 @@
 // ==========================================================================
-// Main JavaScript - 主要 JavaScript 功能
+// Main JavaScript - 主要 JavaScript 功能 (優化版)
 // ==========================================================================
 
+// 緩存關鍵DOM元素和尺寸，避免重複查詢
+const DOMCache = {
+    navbar: null,
+    navToggle: null,
+    navMenu: null,
+    navLinks: null,
+    navbarHeight: 80,
+    viewportWidth: window.innerWidth,
+    init() {
+        this.navbar = document.getElementById('navbar');
+        this.navToggle = document.getElementById('nav-toggle');
+        this.navMenu = document.getElementById('nav-menu');
+        this.navLinks = document.querySelectorAll('.nav-link');
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS Animation - 延遲載入後初始化
-    initAOSWhenReady();
+    // 初始化DOM緩存
+    DOMCache.init();
+    
+    // Initialize AOS Animation - 手機版性能優化
+    initAOSOptimized();
 
     // Navigation functionality
     initNavigation();
@@ -32,134 +51,176 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.room-gallery')) {
         initImageLightbox();
     }
+    
+    // 視窗大小變化監聽 - 防抖處理
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            DOMCache.viewportWidth = window.innerWidth;
+            handleResize();
+        }, 250);
+    }, { passive: true });
 });
 
-// Initialize AOS when it's loaded
-function initAOSWhenReady() {
+// 優化的AOS初始化 - 手機版性能考量
+function initAOSOptimized() {
     if (typeof AOS !== 'undefined') {
         AOS.init({
-            duration: 800,
+            duration: DOMCache.viewportWidth < 768 ? 400 : 800, // 手機版使用更短動畫
             easing: 'ease-in-out',
             once: true,
-            offset: 100
+            offset: DOMCache.viewportWidth < 768 ? 50 : 100, // 手機版提早觸發
+            disable: function() {
+                // 在非常小螢幕或低性能設備上禁用
+                return window.innerWidth < 480 || 
+                       (navigator.connection && navigator.connection.effectiveType === 'slow');
+            }
         });
     } else {
-        // Wait for AOS to load
+        // Wait for AOS to load - 優化輪詢
+        let checkCount = 0;
         const checkAOS = setInterval(function() {
-            if (typeof AOS !== 'undefined') {
+            checkCount++;
+            if (typeof AOS !== 'undefined' || checkCount > 100) { // 最多檢查5秒
                 clearInterval(checkAOS);
-                AOS.init({
-                    duration: 800,
-                    easing: 'ease-in-out',
-                    once: true,
-                    offset: 100
-                });
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({
+                        duration: DOMCache.viewportWidth < 768 ? 400 : 800,
+                        easing: 'ease-in-out',
+                        once: true,
+                        offset: DOMCache.viewportWidth < 768 ? 50 : 100,
+                        disable: function() {
+                            return window.innerWidth < 480 || 
+                                   (navigator.connection && navigator.connection.effectiveType === 'slow');
+                        }
+                    });
+                }
             }
         }, 50);
-        
-        // Fallback timeout after 5 seconds
-        setTimeout(function() {
-            clearInterval(checkAOS);
-        }, 5000);
     }
 }
 
-// Navigation functionality
-function initNavigation() {
-    const navbar = document.getElementById('navbar');
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
+// 視窗大小變化處理函數
+function handleResize() {
+    if (DOMCache.viewportWidth > 768) {
+        // 桌面版時確保移除行動版選單的樣式限制
+        if (DOMCache.navToggle && DOMCache.navMenu) {
+            DOMCache.navToggle.classList.remove('active');
+            DOMCache.navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+        }
+    }
+}
 
-    // Mobile menu toggle
+// Navigation functionality - 優化版
+function initNavigation() {
+    const { navbar, navToggle, navMenu, navLinks } = DOMCache;
+
+    // Mobile menu toggle - 優化事件處理
     if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
+        navToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             const isActive = navMenu.classList.contains('active');
             
-            navToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            
-            // 修正滾動問題：更明確地設定 body overflow
-            if (!isActive) {
-                // 開啟選單時禁止滾動
-                document.body.style.overflow = 'hidden';
-                document.body.style.position = 'fixed';
-                document.body.style.width = '100%';
-            } else {
-                // 關閉選單時恢復滾動
-                document.body.style.overflow = '';
-                document.body.style.position = '';
-                document.body.style.width = '';
-            }
-        });
-
-        // Close mobile menu when clicking on nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                // 確保恢復滾動功能
-                document.body.style.overflow = '';
-                document.body.style.position = '';
-                document.body.style.width = '';
+            // 使用requestAnimationFrame批處理DOM操作
+            requestAnimationFrame(() => {
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                
+                // 批處理body樣式更改
+                if (!isActive) {
+                    Object.assign(document.body.style, {
+                        overflow: 'hidden',
+                        position: 'fixed',
+                        width: '100%'
+                    });
+                } else {
+                    Object.assign(document.body.style, {
+                        overflow: '',
+                        position: '',
+                        width: ''
+                    });
+                }
             });
         });
 
-        // Close mobile menu when clicking outside
+        // Close mobile menu when clicking on nav links - 優化
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                requestAnimationFrame(() => {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    Object.assign(document.body.style, {
+                        overflow: '',
+                        position: '',
+                        width: ''
+                    });
+                });
+            });
+        });
+
+        // Close mobile menu when clicking outside - 優化
         document.addEventListener('click', function(e) {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                navToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                // 確保恢復滾動功能
-                document.body.style.overflow = '';
-                document.body.style.position = '';
-                document.body.style.width = '';
-            }
-        });
-
-        // 處理視窗大小變化時的選單狀態
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                // 桌面版時確保移除行動版選單的樣式限制
-                navToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = '';
-                document.body.style.position = '';
-                document.body.style.width = '';
+                requestAnimationFrame(() => {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    Object.assign(document.body.style, {
+                        overflow: '',
+                        position: '',
+                        width: ''
+                    });
+                });
             }
         });
     }
 
-    // Navbar scroll effect
+    // Navbar scroll effect - 優化重排，使用IntersectionObserver
     if (navbar) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+        let isScrolling = false;
+        let ticking = false;
+        
+        const scrollHandler = () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    if (window.pageYOffset > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
-        });
+        };
+        
+        window.addEventListener('scroll', scrollHandler, { passive: true });
     }
 
-    // Active nav link highlighting
+    // Active nav link highlighting - 優化
     function updateActiveNavLink() {
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         
-        navLinks.forEach(link => {
-            const linkHref = link.getAttribute('href');
-            if (linkHref === currentPage || 
-                (currentPage === '' && linkHref === 'index.html')) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
+        requestAnimationFrame(() => {
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPage || 
+                    (currentPage === '' && linkHref === 'index.html')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
         });
     }
     
     updateActiveNavLink();
 }
 
-// Smooth scrolling for anchor links
+// Smooth scrolling for anchor links - 優化重排
 function initSmoothScrolling() {
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
     
@@ -171,18 +232,22 @@ function initSmoothScrolling() {
             if (targetElement) {
                 e.preventDefault();
                 
-                const offsetTop = targetElement.offsetTop - 80; // Account for fixed navbar
-                
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
+                // 批處理計算，避免強制重排
+                requestAnimationFrame(() => {
+                    const rect = targetElement.getBoundingClientRect();
+                    const offsetTop = rect.top + window.pageYOffset - DOMCache.navbarHeight;
+                    
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
                 });
             }
         });
     });
 }
 
-// Hero scroll indicator
+// Hero scroll indicator - 優化重排
 function initHeroScrollIndicator() {
     const scrollIndicator = document.querySelector('.hero-scroll-indicator');
     
@@ -192,11 +257,15 @@ function initHeroScrollIndicator() {
                               document.querySelector('section:nth-of-type(2)');
             
             if (nextSection) {
-                const offsetTop = nextSection.offsetTop - 80;
-                
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
+                // 批處理計算，避免強制重排
+                requestAnimationFrame(() => {
+                    const rect = nextSection.getBoundingClientRect();
+                    const offsetTop = rect.top + window.pageYOffset - DOMCache.navbarHeight;
+                    
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
                 });
             }
         });
@@ -261,7 +330,7 @@ function initFAQ() {
     });
 }
 
-// Room slider functionality
+// Room slider functionality - 優化版
 function initRoomSlider() {
     const sliders = document.querySelectorAll('.room-slider');
     
@@ -272,42 +341,78 @@ function initRoomSlider() {
         const nextBtn = slider.querySelector('.slider-btn.next');
         
         let currentIndex = 0;
+        let isAnimating = false; // 防止快速點擊
         
         function updateSlider() {
-            const translateX = -currentIndex * 100;
-            container.style.transform = `translateX(${translateX}%)`;
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            // 使用requestAnimationFrame批處理transform操作
+            requestAnimationFrame(() => {
+                const translateX = -currentIndex * 100;
+                container.style.transform = `translateX(${translateX}%)`;
+                
+                // 重置動畫標記
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 300);
+            });
         }
         
         if (nextBtn) {
             nextBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex + 1) % items.length;
-                updateSlider();
+                if (!isAnimating) {
+                    currentIndex = (currentIndex + 1) % items.length;
+                    updateSlider();
+                }
             });
         }
         
         if (prevBtn) {
             prevBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex - 1 + items.length) % items.length;
-                updateSlider();
+                if (!isAnimating) {
+                    currentIndex = (currentIndex - 1 + items.length) % items.length;
+                    updateSlider();
+                }
             });
         }
         
-        // Auto-play slider
-        let autoPlay = setInterval(function() {
-            currentIndex = (currentIndex + 1) % items.length;
-            updateSlider();
-        }, 5000);
+        // Auto-play slider - 優化記憶體管理
+        let autoPlayInterval;
         
-        // Pause auto-play on hover
-        slider.addEventListener('mouseenter', function() {
-            clearInterval(autoPlay);
-        });
-        
-        slider.addEventListener('mouseleave', function() {
-            autoPlay = setInterval(function() {
-                currentIndex = (currentIndex + 1) % items.length;
-                updateSlider();
+        function startAutoPlay() {
+            if (autoPlayInterval) clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(() => {
+                if (!isAnimating && DOMCache.viewportWidth >= 768) { // 只在桌面版自動播放
+                    currentIndex = (currentIndex + 1) % items.length;
+                    updateSlider();
+                }
             }, 5000);
+        }
+        
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+        }
+        
+        // 只在桌面版啟用自動播放
+        if (DOMCache.viewportWidth >= 768) {
+            startAutoPlay();
+            
+            // Pause auto-play on hover - 只在桌面版
+            slider.addEventListener('mouseenter', stopAutoPlay);
+            slider.addEventListener('mouseleave', startAutoPlay);
+        }
+        
+        // 頁面不可見時停止自動播放
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoPlay();
+            } else if (DOMCache.viewportWidth >= 768) {
+                startAutoPlay();
+            }
         });
     });
 }

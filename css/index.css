@@ -318,7 +318,7 @@
     transform: translateX(4px);
 }
 
-/* Social Media Section */
+/* Social Media Section - 優化版DOM結構 */
 .social-media-section {
     background: var(--bg-secondary);
     position: relative;
@@ -335,7 +335,8 @@
     margin-top: var(--space-xl);
 }
 
-.social-media-card {
+/* 簡化的社交媒體卡片 - 減少DOM深度 */
+.social-card {
     background: var(--white);
     padding: var(--space-xl);
     border-radius: 20px;
@@ -345,9 +346,12 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.social-media-card::before {
+.social-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -358,16 +362,17 @@
     transition: left var(--transition-slow) ease;
 }
 
-.social-media-card:hover::before {
+.social-card:hover::before {
     left: 100%;
 }
 
-.social-media-card:hover {
+.social-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-heavy);
 }
 
-.social-icon {
+/* 簡化的圖標樣式 - 直接應用於i元素 */
+.social-card i {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -375,33 +380,29 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto var(--space-lg);
-    position: relative;
-}
-
-.social-icon i {
     font-size: 2rem;
     color: var(--white);
 }
 
-.social-icon.instagram {
+.social-card.instagram i {
     background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
 }
 
-.social-icon.facebook {
+.social-card.facebook i {
     background: #1877f2;
 }
 
-.social-icon.line {
+.social-card.line i {
     background: #00c300;
 }
 
-.social-media-card h3 {
+.social-card h3 {
     color: var(--text-primary);
     margin-bottom: var(--space-sm);
     font-size: 1.25rem;
 }
 
-.social-media-card p {
+.social-card p {
     color: var(--text-secondary);
     margin-bottom: var(--space-md);
     font-size: 1rem;
@@ -416,8 +417,6 @@
     font-size: 0.875rem;
     font-weight: 500;
 }
-
-
 
 /* CTA Section */
 .cta-section {
@@ -590,17 +589,15 @@
         gap: var(--space-lg);
     }
     
-    .social-media-card {
+    .social-card {
         padding: var(--space-lg);
     }
     
-    .social-icon {
+    .social-card i {
         width: 60px;
         height: 60px;
-    }
-    
-    .social-icon i {
         font-size: 1.5rem;
+        margin-bottom: var(--space-md);
     }
 }
 
@@ -686,5 +683,135 @@
     
     .cta-title {
         color: var(--text-primary);
+    }
+}
+
+/* 手機版性能優化 - 禁用複雜動畫和效果 */
+@media (max-width: 768px) {
+    /* 禁用複雜的偽元素動畫以提升性能 */
+    .intro-card::before,
+    .social-card::before {
+        display: none;
+    }
+    
+    /* 簡化hover效果，只保留基本的transform */
+    .intro-card:hover,
+    .social-card:hover {
+        transform: translateY(-4px);
+        transition: transform 0.2s ease;
+    }
+    
+    /* 減少box-shadow複雜度 */
+    .intro-card,
+    .social-card {
+        box-shadow: 0 2px 8px rgba(74, 69, 63, 0.08);
+    }
+    
+    .intro-card:hover,
+    .social-card:hover {
+        box-shadow: 0 4px 12px rgba(74, 69, 63, 0.12);
+    }
+    
+    /* Hero區塊優化 - 減少層疊和複雜背景 */
+    .hero-content {
+        background: rgba(0, 0, 0, 0.4); /* 簡化背景 */
+        border: none; /* 移除邊框 */
+    }
+    
+    /* 禁用不必要的will-change */
+    .hero-image {
+        will-change: auto;
+        transform: none;
+    }
+    
+    /* 簡化按鈕樣式 */
+    .hero-buttons .btn,
+    .cta-buttons .btn {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: transform 0.15s ease;
+    }
+    
+    .hero-buttons .btn:hover,
+    .cta-buttons .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* 關鍵渲染路徑優化 - 立即顯示重要內容 */
+    .hero-content-immediate,
+    .hero-scroll-immediate {
+        animation: none; /* 手機版禁用動畫 */
+        opacity: 1;
+    }
+}
+
+/* 極小螢幕優化 - 進一步減少DOM複雜度 */
+@media (max-width: 480px) {
+    /* 移除所有陰影效果以提升渲染性能 */
+    .intro-card,
+    .social-card,
+    .hero-buttons .btn,
+    .cta-buttons .btn {
+        box-shadow: none;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    /* 簡化圖標樣式 */
+    .social-card i {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+    
+    /* 減少內間距 */
+    .social-card {
+        padding: var(--space-md);
+    }
+    
+    /* Hero區塊極簡化 */
+    .hero-content {
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 12px;
+    }
+}
+
+/* 低性能設備優化 */
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+    /* 完全禁用所有動畫和過渡 */
+    *,
+    *::before,
+    *::after {
+        animation: none;
+        transition: none;
+    }
+    
+    /* 移除hover效果 */
+    .intro-card:hover,
+    .social-card:hover,
+    .hero-buttons .btn:hover,
+    .cta-buttons .btn:hover {
+        transform: none;
+        box-shadow: inherit;
+    }
+}
+
+/* 慢速連線優化 - 通過JavaScript動態添加此類 */
+.slow-connection {
+    /* 禁用所有非關鍵動畫 */
+    .hero-content-immediate,
+    .hero-scroll-immediate {
+        animation: none;
+    }
+    
+    /* 簡化背景 */
+    .cta-background {
+        background: var(--primary-color);
+        animation: none;
+    }
+    
+    /* 移除複雜渐变 */
+    .card-icon,
+    .social-card i {
+        background: var(--primary-color);
     }
 } 
