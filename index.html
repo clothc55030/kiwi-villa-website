@@ -42,11 +42,21 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.kiwi-villa.com/">
     
-    <!-- Hero圖片 Preload - 只載入現代格式，JPG僅作備用 -->
-    <link rel="preload" href="images/hero/main-hall-environment-new.avif" as="image" type="image/avif" fetchpriority="high">
-    <link rel="preload" href="images/hero/main-hall-environment-ultra.webp" as="image" type="image/webp" fetchpriority="high">
-    <link rel="preload" href="images/hero/main-hall-environment-mobile-new.avif" as="image" type="image/avif" media="(max-width: 768px)" fetchpriority="high">
-    <link rel="preload" href="images/hero/main-hall-environment-mobile-ultra.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+    <!-- Hero圖片 Preload - 精細的響應式控制 -->
+    <link rel="preload" href="images/hero/main-hall-environment-new.avif" as="image" type="image/avif" 
+          imagesrcset="images/hero/main-hall-environment-new.avif 1920w, images/hero/main-hall-environment.avif 2560w"
+          imagesizes="100vw" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-ultra.webp" as="image" type="image/webp" 
+          imagesrcset="images/hero/main-hall-environment-ultra.webp 1920w, images/hero/main-hall-environment.webp 2560w"
+          imagesizes="100vw" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-mobile-new.avif" as="image" type="image/avif" 
+          media="(max-width: 768px)" 
+          imagesrcset="images/hero/main-hall-environment-mobile-new.avif 768w"
+          imagesizes="100vw" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-mobile-ultra.webp" as="image" type="image/webp" 
+          media="(max-width: 768px)" 
+          imagesrcset="images/hero/main-hall-environment-mobile-ultra.webp 768w"
+          imagesizes="100vw" fetchpriority="high">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,7 +78,7 @@
     /* 關鍵Hero樣式 - 優化LCP */
     .hero-section{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
     .hero-picture{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
-    .hero-image{width:100%;height:100%;object-fit:cover;object-position:center;display:block;will-change:auto;transform:translate3d(0,0,0)}
+    .hero-image{width:100%;height:100%;object-fit:cover;object-position:center;display:block;will-change:auto;transform:translate3d(0,0,0);aspect-ratio:16/9}
     .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:2}
     .hero-content{position:relative;z-index:3;text-align:center;max-width:900px;padding:3rem 1.5rem 6rem;background:rgba(0,0,0,0.3);border-radius:20px;border:1px solid rgba(255,255,255,0.15);margin-top:30px;box-shadow:0 8px 32px rgba(0,0,0,0.3)}
     /* 立即顯示 - 簡潔0.3s淡入 */
@@ -76,19 +86,16 @@
     .hero-scroll-immediate{animation:heroScrollFade 0.3s ease-out 0.2s both}
     @keyframes heroFadeIn{0%{opacity:0}100%{opacity:1}}
     @keyframes heroScrollFade{0%{opacity:0}100%{opacity:1}}
+    /* 響應式圖片優化 */
+    @media (max-width: 768px) {
+        .hero-image{aspect-ratio:4/3}
+    }
     </style>
 
-    <!-- Main CSS - 非阻塞預載入模式 -->
-    <link rel="preload" href="css/base.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="css/layout.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
-    <!-- 無JavaScript降級方案 -->
-    <noscript>
-        <link rel="stylesheet" href="css/base.css">
-        <link rel="stylesheet" href="css/layout.css">
-        <link rel="stylesheet" href="css/index.css">
-    </noscript>
+    <!-- Main CSS - 穩定的同步載入避免版面跳動 -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/index.css">
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -193,18 +200,37 @@
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
         <picture class="hero-picture">
-            <source srcset="images/hero/main-hall-environment-mobile-new.avif" 
+            <!-- 手機版 - 更精細的srcset控制 -->
+            <source srcset="images/hero/main-hall-environment-mobile-new.avif 768w,
+                           images/hero/main-hall-environment-mobile-ultra.webp 768w" 
                     media="(max-width: 768px)" type="image/avif">
-            <source srcset="images/hero/main-hall-environment-mobile-ultra.webp" 
+            <source srcset="images/hero/main-hall-environment-mobile-ultra.webp 768w,
+                           images/hero/main-hall-environment-mobile-new.webp 1024w" 
                     media="(max-width: 768px)" type="image/webp">
-            <source srcset="images/hero/main-hall-environment-new.avif" type="image/avif">
-            <source srcset="images/hero/main-hall-environment-ultra.webp" type="image/webp">
+            <source srcset="images/hero/main-hall-environment-mobile-new.jpg 768w" 
+                    media="(max-width: 768px)" type="image/jpeg">
+            
+            <!-- 桌面版 - 高密度螢幕支援 -->
+            <source srcset="images/hero/main-hall-environment-new.avif 1920w,
+                           images/hero/main-hall-environment.avif 2560w" 
+                    type="image/avif">
+            <source srcset="images/hero/main-hall-environment-ultra.webp 1920w,
+                           images/hero/main-hall-environment-new.webp 1920w,
+                           images/hero/main-hall-environment.webp 2560w" 
+                    type="image/webp">
+            <source srcset="images/hero/main-hall-environment-optimized.jpg 1920w,
+                           images/hero/main-hall-environment.jpg 2560w" 
+                    type="image/jpeg">
+            
             <img src="images/hero/main-hall-environment-optimized.jpg" 
                  alt="澎湖期遇度假會館主廳環境 - 三面環海的歐洲巴洛克建築風格" 
                  class="hero-image"
+                 width="1920"
+                 height="1080"
                  loading="eager"
                  fetchpriority="high"
-                 decoding="async">
+                 decoding="async"
+                 sizes="(max-width: 768px) 100vw, 100vw">
         </picture>
         <div class="hero-overlay"></div>
         <div class="hero-content hero-content-immediate">

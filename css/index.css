@@ -32,6 +32,7 @@
     /* 性能優化 */
     will-change: auto;
     transform: translate3d(0, 0, 0);
+    aspect-ratio: 16/9;
 }
 
 /* 多格式圖片支援現在由HTML picture元素處理 */
@@ -512,8 +513,7 @@
 /* Hero 圖片響應式優化 */
 @media (max-width: 768px) {
     .hero-image {
-        /* 手機版優化 */
-        object-position: center center;
+        aspect-ratio: 4/3;
     }
 }
 
