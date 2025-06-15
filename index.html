@@ -54,7 +54,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Font Awesome Preload - 減少按鈕圖標閃爍 -->
+    <!-- Font Awesome優化載入 - 針對性preload減少載入時間 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.add('fa-loaded')">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     
@@ -105,6 +108,19 @@
         /* 字體系統 - 系統字體優先，Google Fonts作為增強 */
         --font-serif: "Playfair Display", "Times New Roman", "Microsoft YaHei", "PingFang TC", "Hiragino Sans GB", serif;
         --font-sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", "PingFang TC", "Hiragino Sans GB", sans-serif;
+    }
+    
+    /* 字體顯示優化 - 確保文字始終可見 */
+    /* Google Fonts 已通過 URL 參數 display=swap 設置 */
+    /* Font Awesome 通過 CDN 載入，使用 fallback 策略確保圖標可見 */
+    
+    /* 字體載入狀態優化 - 使用font-display:swap效果 */
+    /* 所有字體都通過CSS變數配置，包含系統字體fallback */
+    /* Google Fonts通過display=swap參數確保文字始終可見 */
+    
+    /* 字體完全準備就緒後的微調 */
+    .fonts-ready * {
+        text-rendering: optimizeLegibility;
     }
     
     /* 關鍵基礎重置 */
@@ -527,7 +543,7 @@
 
     <!-- 字體優化載入 - 改善體驗的同時保持性能 -->
     <script>
-    // 智能載入Google Fonts
+    // 智能載入Google Fonts - 添加font-display=swap
     function loadGoogleFonts() {
         const isMobile = window.innerWidth < 768;
         const isSlowConnection = navigator.connection && 
@@ -540,12 +556,33 @@
         if (!isSlowConnection) {
             setTimeout(function() {
                 const link = document.createElement('link');
+                // 添加font-display=swap確保文字始終可見
                 link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Noto+Sans+TC:wght@300;500&display=swap';
                 link.rel = 'stylesheet';
                 link.media = 'print';
                 link.onload = function() { 
                     this.media = 'all';
                     document.documentElement.classList.add('fonts-loaded');
+                    
+                    // 使用Font Loading API監測字體載入
+                    if ('fonts' in document) {
+                        Promise.all([
+                            document.fonts.load('400 16px "Playfair Display"'),
+                            document.fonts.load('600 16px "Playfair Display"'),
+                            document.fonts.load('300 16px "Noto Sans TC"'),
+                            document.fonts.load('500 16px "Noto Sans TC"')
+                        ]).then(function() {
+                            document.documentElement.classList.add('fonts-ready');
+                        }).catch(function() {
+                            // 如果載入失敗，確保頁面仍然可用
+                            document.documentElement.classList.add('fonts-ready');
+                        });
+                    } else {
+                        // 舊瀏覽器fallback
+                        setTimeout(function() {
+                            document.documentElement.classList.add('fonts-ready');
+                        }, 1000);
+                    }
                 };
                 document.head.appendChild(link);
             }, delay);
@@ -895,10 +932,7 @@
                             <i class="fas fa-phone"></i>
                             <a href="tel:+886933636373" class="contact-link">0933-636373</a>
                         </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <a href="/cdn-cgi/l/email-protection#c6a5a9a8b2a7a5b286a5a9a8b2a7a5b2e8a5a9ab" class="contact-link">info@kiwi-villa.com</a>
-                        </div>
+
                         <div class="contact-item">
                             <i class="fab fa-line"></i>
                             <a href="https://page.line.me/ucz4004x" class="contact-link" target="_blank">期遇度假會館</a>
@@ -979,8 +1013,5 @@
     </script>
     
     <script src="js/main.js" defer></script>
-    
-    <!-- Cloudflare Email Protection -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 </body>
 </html> 

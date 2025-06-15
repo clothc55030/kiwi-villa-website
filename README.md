@@ -160,7 +160,6 @@ kiwi-villa/
 
 - **網站**：澎湖期遇度假會館
 - **訂房熱線**：0933-636373
-- **信箱**：info@kiwi-villa.com
 - **地址**：澎湖縣馬公市西衛里347號
 - **線上訂房**：https://booking.owlting.com/kiwi-villa
 - **LINE 官方帳號**：https://page.line.me/ucz4004x
