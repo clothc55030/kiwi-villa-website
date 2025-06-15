@@ -1,0 +1,25 @@
+{
+    "name": "澎湖期遇度假會館 Kiwi Villa",
+    "short_name": "Kiwi Villa",
+    "description": "澎湖期遇度假會館 Kiwi Villa，坐落於澎湖美麗海灣，提供精緻住宿體驗。",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#7c9bb5",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "assets/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "categories": ["travel", "hospitality", "accommodation"],
+    "lang": "zh-TW",
+    "dir": "ltr"
+} 

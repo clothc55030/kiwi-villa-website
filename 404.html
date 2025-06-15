@@ -1,234 +1,311 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="找不到頁面 - 期遇度假會館 | 澎湖優質民宿">
-    <meta name="keywords" content="404錯誤, 期遇度假會館, 澎湖民宿">
+    <title>找不到頁面 - 澎湖期遇度假會館</title>
+    <meta name="description" content="很抱歉，您要找的頁面不存在。請返回澎湖期遇度假會館首頁繼續您的期遇之旅。">
     <meta name="robots" content="noindex, nofollow">
-    <title>找不到頁面 | 期遇度假會館 | 澎湖民宿</title>
     
-    <link rel="canonical" href="https://www.kiwi-villa.com/404.html">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon-180x180.png">
     
-    <!-- Favicon 和 Apple Touch Icon -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/logo/favicon-16x16.png?v=2">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/logo/favicon-32x32.png?v=2">
-    <link rel="icon" type="image/png" sizes="96x96" href="images/logo/favicon-96x96.png?v=2">
-    <link rel="icon" type="image/png" sizes="192x192" href="images/logo/favicon-192x192.png?v=2">
-    <link rel="icon" type="image/png" sizes="512x512" href="images/logo/favicon-512x512.png?v=2">
-    
-    <!-- Apple Touch Icons -->
-    <link rel="apple-touch-icon" sizes="57x57" href="images/logo/apple-touch-icon-57x57.png?v=2">
-    <link rel="apple-touch-icon" sizes="60x60" href="images/logo/apple-touch-icon-60x60.png?v=2">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/logo/apple-touch-icon-72x72.png?v=2">
-    <link rel="apple-touch-icon" sizes="76x76" href="images/logo/apple-touch-icon-76x76.png?v=2">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/logo/apple-touch-icon-114x114.png?v=2">
-    <link rel="apple-touch-icon" sizes="120x120" href="images/logo/apple-touch-icon-120x120.png?v=2">
-    <link rel="apple-touch-icon" sizes="144x144" href="images/logo/apple-touch-icon-144x144.png?v=2">
-    <link rel="apple-touch-icon" sizes="152x152" href="images/logo/apple-touch-icon-152x152.png?v=2">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon-180x180.png?v=2">
-    
-    <!-- Microsoft Tiles -->
-    <meta name="msapplication-TileColor" content="#2b5797">
-    <meta name="msapplication-TileImage" content="images/logo/ms-icon-144x144.png?v=2">
-    <meta name="theme-color" content="#ffffff">
-    
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/glassmorphism-ocean.css">
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap&subset=chinese-traditional" rel="stylesheet">
-    <link rel="stylesheet" href="styles/custom-icons.css">
-    <link rel="stylesheet" href="styles/font-optimization.css">
-    <link rel="stylesheet" href="styles/svg-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    
+    <!-- 404 Specific Styles -->
     <style>
-        .main-content {
-            padding-top: 6rem;
-        }
-        .error-container {
-            min-height: 60vh;
+        /* 404 Page Specific Styles */
+        .error-page {
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7c9bb5 0%, #9bb0c4 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/hero/hero-bg.webp') center/cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .error-container {
             text-align: center;
             padding: 2rem;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
         }
+        
         .error-number {
             font-size: 8rem;
-            font-weight: bold;
-            color: #4A90E2;
-            margin: 0;
+            font-weight: 700;
+            color: #7c9bb5;
             line-height: 1;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
+        
         .error-title {
-            font-size: 2rem;
-            margin: 1rem 0;
-            color: #333;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #4a453f;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
         }
+        
+        .error-subtitle {
+            font-size: 1.5rem;
+            color: #7c9bb5;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
         .error-description {
             font-size: 1.1rem;
             color: #666;
+            line-height: 1.6;
             margin-bottom: 2rem;
-            max-width: 500px;
         }
+        
         .error-actions {
             display: flex;
             gap: 1rem;
-            flex-wrap: wrap;
             justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
         }
-        .error-links {
-            margin-top: 2rem;
-        }
-        .error-links h3 {
-            margin-bottom: 1rem;
-            color: #333;
-        }
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            max-width: 600px;
-        }
-        .quick-link {
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        
+        .error-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
             text-decoration: none;
-            color: #333;
+            font-weight: 500;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
-        .quick-link:hover {
-            border-color: #4A90E2;
-            background-color: #f8f9fa;
+        
+        .error-btn-primary {
+            background: #7c9bb5;
+            color: white;
+        }
+        
+        .error-btn-primary:hover {
+            background: #6a8ba3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 155, 181, 0.3);
+        }
+        
+        .error-btn-secondary {
+            background: transparent;
+            color: #7c9bb5;
+            border-color: #7c9bb5;
+        }
+        
+        .error-btn-secondary:hover {
+            background: #7c9bb5;
+            color: white;
             transform: translateY(-2px);
         }
-        .quick-link i {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #4A90E2;
+        
+        .error-navigation {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .error-nav-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4a453f;
+            margin-bottom: 1rem;
+        }
+        
+        .error-nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .error-nav-link {
+            color: #7c9bb5;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .error-nav-link:hover {
+            background: #f8f9fa;
+            color: #6a8ba3;
+        }
+        
+        .error-decoration {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .decoration-1 {
+            top: 10%;
+            left: 10%;
+            font-size: 3rem;
+            color: #7c9bb5;
+            transform: rotate(-15deg);
+        }
+        
+        .decoration-2 {
+            top: 20%;
+            right: 15%;
+            font-size: 2rem;
+            color: #9bb0c4;
+            transform: rotate(25deg);
+        }
+        
+        .decoration-3 {
+            bottom: 15%;
+            left: 15%;
+            font-size: 2.5rem;
+            color: #b8c7d6;
+            transform: rotate(-25deg);
+        }
+        
+        .decoration-4 {
+            bottom: 10%;
+            right: 10%;
+            font-size: 2rem;
+            color: #a8b8c8;
+            transform: rotate(15deg);
+        }
+        
+        @media (max-width: 768px) {
+            .error-number {
+                font-size: 5rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .error-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .error-nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
-<body class="ocean-body">
-    <!-- Navigation -->
-    <header class="header">
-        <nav class="navbar glass-navbar">
-            <div class="container">
-                <div class="nav-brand">
-                    <a href="index.html" aria-label="回首頁">
-                        <img src="images/logo/kiwi-villa-logo.png" alt="期遇度假會館logo" class="logo">
-                    </a>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link glass-nav-link">首頁</a></li>
-                    <li><a href="about.html" class="nav-link glass-nav-link">細說期遇</a></li>
-                    <li><a href="location.html" class="nav-link glass-nav-link">地理資訊</a></li>
-                    <li><a href="rooms.html" class="nav-link glass-nav-link">房型設施</a></li>
-                    <li><a href="testimonials.html" class="nav-link glass-nav-link">客戶評價</a></li>
-                    <li><a href="qa.html" class="nav-link glass-nav-link">常見問題</a></li>
-                    <li><a href="notice.html" class="nav-link glass-nav-link">訂房須知</a></li>
-                    <li><a href="https://booking.owlting.com/kiwi-villa" class="nav-link glass-btn-primary" target="_blank" rel="noopener">線上訂房</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
+<body>
+    <!-- 404 Error Page -->
+    <div class="error-page">
+        <!-- Decorative Elements -->
+        <div class="error-decoration decoration-1">
+            <i class="fas fa-compass"></i>
+        </div>
+        <div class="error-decoration decoration-2">
+            <i class="fas fa-anchor"></i>
+        </div>
+        <div class="error-decoration decoration-3">
+            <i class="fas fa-ship"></i>
+        </div>
+        <div class="error-decoration decoration-4">
+            <i class="fas fa-lighthouse"></i>
+        </div>
+        
+        <div class="error-container">
+            <div class="error-number">404</div>
+            <h1 class="error-title">迷航了？</h1>
+            <p class="error-subtitle">頁面不在這裡</p>
+            <p class="error-description">
+                很抱歉，您要找的頁面似乎已經飄向了遠方的海洋。<br>
+                但別擔心，讓我們幫您找到回家的路，繼續您的期遇之旅。
+            </p>
+            
+            <div class="error-actions">
+                <a href="/" class="error-btn error-btn-primary">
+                    <i class="fas fa-home"></i>
+                    回到首頁
+                </a>
+                <a href="/rooms" class="error-btn error-btn-secondary">
+                    <i class="fas fa-bed"></i>
+                    查看房型
+                </a>
             </div>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <div class="error-container">
-                <div class="error-number">404</div>
-                <h1 class="error-title">找不到頁面</h1>
-                <p class="error-description">
-                    抱歉，您要找的頁面不存在或已被移動。<br>
-                    請檢查網址是否正確，或者使用下方連結繼續瀏覽我們的網站。
-                </p>
-                
-                <div class="error-actions">
-                    <a href="index.html" class="btn-primary glass-btn-primary">
-                        <i class="fas fa-home"></i> 回到首頁
-                    </a>
-                    <a href="rooms.html" class="btn-secondary">
-                        <i class="fas fa-bed"></i> 查看房型
-                    </a>
-                </div>
-
-                <div class="error-links">
-                    <h3>您可能在尋找：</h3>
-                    <div class="quick-links">
-                        <a href="rooms.html" class="quick-link">
-                            <i class="fas fa-bed"></i>
-                            <strong>房型設施</strong>
-                            <small>查看我們的豪華房型</small>
-                        </a>
-                        <a href="location.html" class="quick-link">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <strong>地理資訊</strong>
-                            <small>交通指南與位置資訊</small>
-                        </a>
-                        <a href="about.html" class="quick-link">
-                            <i class="fas fa-info-circle"></i>
-                            <strong>細說期遇</strong>
-                            <small>了解我們的設施特色</small>
-                        </a>
-                        <a href="https://booking.owlting.com/kiwi-villa" class="quick-link" target="_blank" rel="noopener">
-                            <i class="fas fa-calendar-check"></i>
-                            <strong>線上訂房</strong>
-                            <small>立即預訂您的住宿</small>
-                        </a>
-                    </div>
+            
+            <div class="error-navigation">
+                <h3 class="error-nav-title">您可能想要：</h3>
+                <div class="error-nav-links">
+                    <a href="/intro" class="error-nav-link">細說期遇</a>
+                    <a href="/location" class="error-nav-link">地理資訊</a>
+                    <a href="/reviews" class="error-nav-link">客戶評價</a>
+                    <a href="/faq" class="error-nav-link">常見問題</a>
+                    <a href="https://booking.owlting.com/kiwi-villa" class="error-nav-link" target="_blank">線上訂房</a>
                 </div>
             </div>
         </div>
-    </main>
-
-    <!-- Contact Info -->
-    <section class="contact-info">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <h3>聯絡我們</h3>
-                    <p><a href="https://page.line.me/ucz4004x" target="_blank" rel="noopener"><i class="fab fa-line"></i> Line: @kiwivilla</a></p>
-                    <p><i class="fab fa-weixin"></i> WeChat ID: rickywang4159</p>
-                    <p><a href="tel:0933636373"><i class="fas fa-phone"></i> 訂房熱線：0933636373</a></p>
-                    <p><a href="mailto:info@kiwi-villa.com"><i class="fas fa-envelope"></i> info@kiwi-villa.com</a></p>
-                </div>
-                <div class="contact-item">
-                    <h3>地址</h3>
-                    <p><a href="https://www.google.com.tw/maps/place/%E6%9C%9F%E9%81%87%E5%BA%A6%E5%81%87%E6%9C%83%E9%A4%A8(2025%E7%81%AB%E7%86%B1%E8%A8%82%E6%88%BF%E4%B8%AD%EF%BC%81%E7%84%A1%E6%B5%B7%E6%99%AF%E9%9D%9E%E5%8C%85%E6%A3%9F%E4%B8%8D%E7%B6%B2%E7%BE%8E%E7%A6%81%E5%AF%B5%E7%89%A9%E6%B2%92%E5%94%B1%E6%AD%8C%E8%B5%B0%E8%B7%AF%E9%81%A0%EF%BC%8C%E8%AB%8B%E9%96%B1%E8%AE%80%E8%A8%82%E6%88%BF%E9%A0%88%E7%9F%A5)/@23.5835134,119.5842094,15z/data=!4m9!3m8!1s0x346c5b21b8abcda7:0x2157a9c94466e69b!5m2!4m1!1i2!8m2!3d23.5868758!4d119.5818157!16s%2Fg%2F11f4l9cgq1?entry=ttu&g_ep=EgoyMDI1MDYwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> 台灣澎湖縣馬公市西衛里 346-347號</a></p>
-                    <p><a href="https://www.google.com.tw/maps/place/%E6%9C%9F%E9%81%87%E5%BA%A6%E5%81%87%E6%9C%83%E9%A4%A8(2025%E7%81%AB%E7%86%B1%E8%A8%82%E6%88%BF%E4%B8%AD%EF%BC%81%E7%84%A1%E6%B5%B7%E6%99%AF%E9%9D%9E%E5%8C%85%E6%A3%9F%E4%B8%8D%E7%B6%B2%E7%BE%8E%E7%A6%81%E5%AF%B5%E7%89%A9%E6%B2%92%E5%94%B1%E6%AD%8C%E8%B5%B0%E8%B7%AF%E9%81%A0%EF%BC%8C%E8%AB%8B%E9%96%B1%E8%AE%80%E8%A8%82%E6%88%BF%E9%A0%88%E7%9F%A5)/@23.5835134,119.5842094,15z/data=!4m9!3m8!1s0x346c5b21b8abcda7:0x2157a9c94466e69b!5m2!4m1!1i2!8m2!3d23.5868758!4d119.5818157!16s%2Fg%2F11f4l9cgq1?entry=ttu&g_ep=EgoyMDI1MDYwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">NO.346-347, Xiwei Village, Magong City, Penghu County, Taiwan</a></p>
-                </div>
-                <div class="contact-item">
-                    <h3>追蹤我們</h3>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/kiwi_villa/" class="social-link glass-social-link" target="_blank" rel="noopener" aria-label="Instagram 期遇度假會館"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/kiwivilla.home/" class="social-link glass-social-link" target="_blank" rel="noopener" aria-label="Facebook 期遇度假會館"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://page.line.me/ucz4004x" class="social-link glass-social-link" target="_blank" rel="noopener" aria-label="Line 期遇度假會館"><i class="fab fa-line"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; <span id="copyright-year">2025</span> 澎湖期遇度假會館 Kiwi Villa | By Ricky Wang</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="scripts/main.js"></script>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        // 記錄404錯誤以便分析
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_not_found', {
+                'page_location': window.location.href,
+                'page_referrer': document.referrer
+            });
+        }
+        
+        // 如果用戶是從搜尋引擎來的，5秒後自動重定向到首頁
+        if (document.referrer && (document.referrer.includes('google') || document.referrer.includes('bing') || document.referrer.includes('yahoo'))) {
+            setTimeout(() => {
+                if (confirm('頁面不存在，是否要返回首頁？')) {
+                    window.location.href = '/';
+                }
+            }, 5000);
+        }
+    </script>
 </body>
 </html> 

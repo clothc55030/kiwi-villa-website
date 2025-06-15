@@ -1,126 +1,194 @@
-############################################
-#  基本設定
-############################################
-DirectoryIndex index.html index.php
+# Apache .htaccess Configuration for Kiwi Villa
+# 澎湖期遇度假會館網站優化配置
 
-############################################
-#  GZIP / Brotli 壓縮（mod_deflate）
-############################################
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/css
-  AddOutputFilterByType DEFLATE application/javascript application/json
-  AddOutputFilterByType DEFLATE image/svg+xml
-  AddOutputFilterByType DEFLATE font/woff font/woff2
-  AddOutputFilterByType DEFLATE text/xml application/xml
-</IfModule>
+# ==========================================
+# 安全性設置
+# ==========================================
 
-############################################
-#  Browser Cache（mod_expires）
-############################################
-<IfModule mod_expires.c>
-  ExpiresActive On
-  # 圖片 & 影片
-  ExpiresByType image/png  "access plus 1 year"
-  ExpiresByType image/jpg  "access plus 1 year"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/gif  "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
-  ExpiresByType image/x-icon "access plus 1 year"
-  ExpiresByType video/mp4  "access plus 1 year"
+# 防止訪問敏感文件
+<Files ~ "^\.ht">
+    Order allow,deny
+    Deny from all
+</Files>
 
-  # CSS / JS（我們的自定義CSS檔案也受益）
-  ExpiresByType text/css               "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
-  
-  # 字體檔案
-  ExpiresByType font/woff  "access plus 1 year"
-  ExpiresByType font/woff2 "access plus 1 year"
-  ExpiresByType font/ttf   "access plus 1 year"
-  ExpiresByType font/otf   "access plus 1 year"
-</IfModule>
-
-############################################
-#  安全與 CORS 標頭（mod_headers）
-############################################
-<IfModule mod_headers.c>
-  # 基礎安全
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "DENY"
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set X-XSS-Protection "1; mode=block"
-
-  # HSTS（兩年，含子網域，可選 preload）
-  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
-
-  # Keep-Alive 連線優化
-  Header always set Connection keep-alive
-
-  # 字體 CORS（支援我們的自定義圖標字體）
-  <FilesMatch "\.(ttf|otf|woff|woff2)$">
-    Header set Access-Control-Allow-Origin "*"
-  </FilesMatch>
-  
-  # CSS檔案快取優化
-  <FilesMatch "\.(css)$">
-    Header set Cache-Control "public, max-age=2592000"
-  </FilesMatch>
-</IfModule>
-
-############################################
-#  自訂 404 頁面
-############################################
-ErrorDocument 404 /404.html
-
-############################################
-#  敏感檔案拒絕存取
-############################################
-<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak|git|gitignore|ps1)$">
-  Require all denied
+# 防止訪問備份文件
+<FilesMatch "\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist)$">
+    Order allow,deny
+    Deny from all
 </FilesMatch>
 
-############################################
-#  URL Rewrite 與轉向規則（mod_rewrite）
-############################################
-<IfModule mod_rewrite.c>
-  RewriteEngine On
+# 隱藏服務器簽名
+ServerTokens Prod
+ServerSignature Off
 
-  # --- 0) Cloudflare 優化功能處理 ---
-  #    針對性處理可能造成404的Cloudflare功能
-  RewriteCond %{REQUEST_URI} ^/cdn-cgi/(speed|rum|speculation)/ [NC]
-  RewriteRule ^ - [R=404,L]
+# 防止目錄瀏覽
+Options -Indexes
 
-  # --- 1) 一次完成 HTTPS + 去除 www ---
-  RewriteCond %{HTTPS} !=on [OR]
-  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+# ==========================================
+# SSL 和 HTTPS 重定向
+# ==========================================
 
-  # --- 2) /index.html → / ---
-  RewriteRule ^index\.html$ / [R=301,L]
+# 強制使用 HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # --- 3) 去掉 .html 副檔名（外部 301）---
-  RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
-  RewriteRule ^ %1 [R=301,L,NE]
+# ==========================================
+# WWW 重定向（統一域名）
+# ==========================================
 
-  # --- 4) 無副檔名時，內部補 .html ---
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME}.html -f
-  RewriteRule ^(.+?)/?$ $1.html [L]
+# 統一使用 www 版本的域名
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.kiwi-villa.com/$1 [L,R=301]
+
+# ==========================================
+# URL 重寫和清理
+# ==========================================
+
+# 將 .html 重定向到無後綴版本
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteCond %1 !^404$ [NC]
+RewriteRule ^ /%1 [NC,L,R=301]
+
+# 移除 .html 後綴（可選）
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# ==========================================
+# 緩存控制
+# ==========================================
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # HTML 文件
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # CSS 和 JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # 圖片
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # 字體
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    
+    # 其他文件
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType application/json "access plus 1 day"
+    ExpiresByType application/xml "access plus 1 day"
+    ExpiresByType text/xml "access plus 1 day"
+    
+    # 視頻和音頻
+    ExpiresByType video/mp4 "access plus 1 month"
+    ExpiresByType video/webm "access plus 1 month"
+    ExpiresByType audio/mp3 "access plus 1 month"
+    
+    # 文檔
+    ExpiresByType text/cache-manifest "access plus 0 seconds"
 </IfModule>
 
-############################################
-#  CSS 優化專用設定
-############################################
+# ==========================================
+# Gzip 壓縮
+# ==========================================
+
+<IfModule mod_deflate.c>
+    # 壓縮 HTML, CSS, JavaScript, Text, XML 和字體
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+    AddOutputFilterByType DEFLATE application/x-font
+    AddOutputFilterByType DEFLATE application/x-font-opentype
+    AddOutputFilterByType DEFLATE application/x-font-otf
+    AddOutputFilterByType DEFLATE application/x-font-truetype
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+</IfModule>
+
+# ==========================================
+# 自定義錯誤頁面
+# ==========================================
+
+# 自定義錯誤頁面
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+ErrorDocument 500 /404.html
+
+# ==========================================
+# MIME 類型設置
+# ==========================================
+
+<IfModule mod_mime.c>
+    # WebP 圖片格式
+    AddType image/webp .webp
+    
+    # 字體格式
+    AddType application/font-woff .woff
+    AddType application/font-woff2 .woff2
+    
+    # SVG 格式
+    AddType image/svg+xml .svg .svgz
+    
+    # JSON 格式
+    AddType application/json .json
+</IfModule>
+
+# ==========================================
+# 安全標頭
+# ==========================================
+
 <IfModule mod_headers.c>
-  # 為我們的自定義CSS檔案設定最佳化標頭
-  <FilesMatch "custom-icons\.css">
-    Header set Cache-Control "public, max-age=2592000"
-    Header set X-Content-Type-Options "nosniff"
-  </FilesMatch>
-  
-  # 主要CSS檔案預載入提示
-  <FilesMatch "(home|main)\.css">
-    Header set Link "</styles/custom-icons.css>; rel=preload; as=style"
-  </FilesMatch>
+    # X-Content-Type-Options
+    Header always set X-Content-Type-Options nosniff
+    
+    # X-Frame-Options
+    Header always set X-Frame-Options DENY
+    
+    # X-XSS-Protection  
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (根據需要調整)
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com *.unpkg.com *.cdnjs.cloudflare.com *.elfsight.com static.elfsight.com; style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com *.unpkg.com *.cdnjs.cloudflare.com; img-src 'self' data: *.googleapis.com *.gstatic.com *.google.com maps.googleapis.com; font-src 'self' *.googleapis.com *.gstatic.com; frame-src 'self' *.google.com *.elfsight.com *.youtube.com www.google.com; connect-src 'self' *.googleapis.com *.elfsight.com"
 </IfModule>
+
+# ==========================================
+# 性能優化
+# ==========================================
+
+# 移除 ETag（因為已經使用 Expires）
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
+
+# 啟用 Keep-Alive
+<IfModule mod_headers.c>
+    Header set Connection keep-alive
+</IfModule> 

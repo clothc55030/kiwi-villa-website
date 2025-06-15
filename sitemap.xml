@@ -1,81 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-    
-    <!-- 首頁 -->
-    <url>
-        <loc>https://www.kiwi-villa.com/</loc>
-        <lastmod>2024-07-26</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-        <image:image>
-            <image:loc>https://www.kiwi-villa.com/images/hero/main-hall-environment.jpg</image:loc>
-            <image:title>期遇度假會館環境圖-大廳環境</image:title>
-        </image:image>
-    </url>
-    
-    <!-- 關於我們 -->
-    <url>
-        <loc>https://www.kiwi-villa.com/about.html</loc>
-        <lastmod>2024-07-26</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://www.kiwi-villa.com/images/facilities/main-hall.jpg</image:loc>
-            <image:title>期遇環境圖-大廳</image:title>
-        </image:image>
-    </url>
-    
-    <!-- 房型設施 -->
-    <url>
-        <loc>https://www.kiwi-villa.com/rooms.html</loc>
-        <lastmod>2024-07-26</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://www.kiwi-villa.com/images/rooms/luxury-family-room.jpg</image:loc>
-            <image:title>期遇環境圖-豪華家庭房</image:title>
-        </image:image>
-    </url>
-    
-    <!-- 地理資訊 -->
-    <url>
-        <loc>https://www.kiwi-villa.com/location.html</loc>
-        <lastmod>2024-07-26</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://www.kiwi-villa.com/images/location/penghu-map.jpg</image:loc>
-            <image:title>澎湖地圖</image:title>
-        </image:image>
-    </url>
-    
-    <!-- 常見問題 -->
-    <url>
-        <loc>https://www.kiwi-villa.com/qa.html</loc>
-        <lastmod>2024-07-26</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    
-    <!-- 訂房須知 -->
-    <url>
-        <loc>https://www.kiwi-villa.com/notice.html</loc>
-        <lastmod>2024-07-26</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    
-    <!-- 客戶評價 -->
-    <url>
-        <loc>https://www.kiwi-villa.com/testimonials.html</loc>
-        <lastmod>2024-07-26</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-        <image:image>
-            <image:loc>https://www.kiwi-villa.com/images/hero/main-hall-environment.jpg</image:loc>
-            <image:title>期遇度假會館客戶評價</image:title>
-        </image:image>
-    </url>
-    
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.kiwi-villa.com/</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kiwi-villa.com/intro</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kiwi-villa.com/location</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kiwi-villa.com/rooms</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kiwi-villa.com/reviews</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kiwi-villa.com/faq</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.kiwi-villa.com/policy</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset> 
