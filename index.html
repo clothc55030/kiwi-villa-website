@@ -42,82 +42,47 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.kiwi-villa.com/">
     
-    <!-- Hero圖片 Preload - 極度優化版本 -->
-    <link rel="preload" href="images/hero/main-hall-environment-new.avif" as="image" type="image/avif" 
-          imagesrcset="images/hero/main-hall-environment-new.avif 1920w, images/hero/main-hall-environment.avif 2560w"
-          imagesizes="100vw" fetchpriority="high">
-    <link rel="preload" href="images/hero/main-hall-environment-ultra.webp" as="image" type="image/webp" 
-          imagesrcset="images/hero/main-hall-environment-ultra.webp 1920w, images/hero/main-hall-environment.webp 2560w"
-          imagesizes="100vw" fetchpriority="high">
+    <!-- Hero圖片 Preload - 手機版優先 -->
     <link rel="preload" href="images/hero/main-hall-environment-mobile-extreme.avif" as="image" type="image/avif" 
-          media="(max-width: 768px)" 
-          imagesrcset="images/hero/main-hall-environment-mobile-extreme.avif 768w"
-          imagesizes="100vw" fetchpriority="high">
+          media="(max-width: 768px)" fetchpriority="high">
     <link rel="preload" href="images/hero/main-hall-environment-mobile-ultra.webp" as="image" type="image/webp" 
-          media="(max-width: 768px)" 
-          imagesrcset="images/hero/main-hall-environment-mobile-ultra.webp 768w"
-          imagesizes="100vw" fetchpriority="high">
+          media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-new.avif" as="image" type="image/avif" 
+          media="(min-width: 769px)" fetchpriority="high">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- 完整Hero CSS內聯 - 避免渲染阻塞 -->
+    <!-- 精簡關鍵Hero CSS - 極度優化轉譯速度 -->
     <style>
-    /* CSS 變數定義 */
+    /* 最小化CSS變數 - 僅關鍵值 */
     :root {
-        /* 色彩系統 - 莫蘭迪藍灰色系 */
-        --primary-color: #7c9bb5;
-        --primary-light: #9bb0c4;
-        --primary-dark: #6b8aa0;
-        --secondary-color: #a8b8c8;
-        --secondary-light: #b8c7d6;
-        --secondary-dark: #8fa3b3;
-        --accent-color: #9bb0c4;
-        --accent-light: #b8c7d6;
-        
-        /* 基礎色彩 */
         --white: #ffffff;
         --text-primary: #4a453f;
-        --text-secondary: #8a8580;
-        --text-light: #ffffff;
-        --text-muted: #b5b0aa;
-        
-        /* 背景色彩 */
-        --bg-primary: #ffffff;
-        --bg-secondary: #f7f6f4;
-        --bg-accent: #faf9f7;
-        
-        /* 陰影系統 */
-        --shadow-light: 0 2px 8px rgba(74, 69, 63, 0.08);
-        --shadow-medium: 0 4px 16px rgba(74, 69, 63, 0.12);
-        --shadow-heavy: 0 8px 24px rgba(74, 69, 63, 0.16);
-        
-        /* 間距系統 */
-        --space-xs: 0.5rem;
+        --primary-color: #7c9bb5;
         --space-sm: 1rem;
         --space-md: 1.5rem;
         --space-lg: 2rem;
         --space-xl: 3rem;
         --space-xxl: 4rem;
-        
-        /* 動畫系統 */
-        --transition-fast: 0.2s;
-        --transition-normal: 0.3s;
-        --transition-slow: 0.5s;
-        
-        /* 字體系統 - 系統字體優先，Google Fonts作為增強 */
-        --font-serif: "Playfair Display", "Times New Roman", "Microsoft YaHei", "PingFang TC", "Hiragino Sans GB", serif;
-        --font-sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", "PingFang TC", "Hiragino Sans GB", sans-serif;
     }
     
-    /* 基礎字體設定 - 立即可用的系統字體 */
+    /* 關鍵基礎重置 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { font-size: 16px; }
+    
     body {
-        font-family: var(--font-sans);
-        font-display: swap;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background: #ffffff;
+        overflow-x: hidden;
+        padding-top: 80px;
     }
     
-    /* Hero Section - 完整樣式 */
+    /* Hero Section - 極簡版 */
     .hero-section {
         position: relative;
         height: 100vh;
@@ -143,9 +108,6 @@
         object-fit: cover;
         object-position: center;
         display: block;
-        will-change: auto;
-        transform: translate3d(0, 0, 0);
-        aspect-ratio: 16/9;
     }
     
     .hero-overlay {
@@ -163,63 +125,46 @@
         z-index: 3;
         text-align: center;
         max-width: 900px;
-        padding: var(--space-xl) var(--space-md) calc(var(--space-xl) * 2);
+        padding: var(--space-xl) var(--space-md);
         background: rgba(0, 0, 0, 0.3);
         border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
         margin-top: 30px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        color: var(--white);
     }
     
-    /* 立即顯示動畫 */
+    /* 立即顯示 - 無動畫 */
     .hero-content-immediate {
-        animation: heroFadeIn 0.3s ease-out;
+        opacity: 1;
     }
     
     .hero-scroll-immediate {
-        animation: heroScrollFade 0.3s ease-out 0.2s both;
+        opacity: 1;
     }
     
-    @keyframes heroFadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-    }
-    
-    @keyframes heroScrollFade {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-    }
-    
-    /* Hero 文字樣式 - 使用系統字體確保立即渲染 */
+    /* 基礎文字樣式 - 使用系統字體 */
     .hero-subtitle-small {
-        font-family: var(--font-sans);
-        font-size: clamp(0.875rem, 2vw, 1rem);
+        font-size: 0.875rem;
         color: rgba(255, 255, 255, 0.9);
         font-weight: 300;
         margin-bottom: var(--space-sm);
         letter-spacing: 2px;
         text-transform: uppercase;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
     
     .hero-title {
-        font-family: var(--font-serif);
-        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-size: 2.5rem;
         font-weight: 600;
         color: var(--white);
         margin-bottom: var(--space-sm);
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     }
     
     .hero-subtitle {
-        font-family: var(--font-serif);
-        font-size: clamp(1.25rem, 3vw, 1.75rem);
+        font-size: 1.25rem;
         font-weight: 400;
         color: var(--white);
         margin-bottom: var(--space-lg);
         font-style: italic;
         letter-spacing: 1px;
-        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
     }
     
     .hero-poem {
@@ -227,14 +172,12 @@
     }
     
     .hero-poem p {
-        font-family: var(--font-sans);
-        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        font-size: 1rem;
         color: rgba(255, 255, 255, 0.95);
         line-height: 1.8;
         font-weight: 300;
-        margin-bottom: var(--space-xs);
+        margin-bottom: 0.5rem;
         font-style: italic;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
     
     .hero-call-to-action {
@@ -242,27 +185,22 @@
     }
     
     .hero-call-to-action p {
-        font-family: var(--font-sans);
-        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+        font-size: 1.125rem;
         color: var(--white);
         line-height: 1.7;
-        margin-bottom: var(--space-xs);
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        margin-bottom: 0.5rem;
     }
     
     .hero-call-to-action strong {
         color: rgba(255, 255, 255, 1);
         font-weight: 600;
-        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
     }
     
     .hero-final-line {
-        font-family: var(--font-sans);
-        font-size: clamp(0.95rem, 2vw, 1.125rem);
+        font-size: 0.95rem;
         color: rgba(255, 255, 255, 0.9);
         font-style: italic;
         margin-top: var(--space-sm);
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
     
     .hero-buttons {
@@ -274,44 +212,27 @@
     }
     
     .hero-buttons .btn {
-        font-family: var(--font-sans);
         padding: 16px 32px;
         font-size: 1.125rem;
         font-weight: 500;
         border-radius: 10px;
-        box-shadow: var(--shadow-medium);
         border: 1px solid rgba(255, 255, 255, 0.3);
         background: rgba(255, 255, 255, 0.1);
         color: var(--white);
         text-decoration: none;
         display: inline-flex;
         align-items: center;
-        gap: var(--space-xs);
-        transition: all var(--transition-normal) ease;
-    }
-    
-    .hero-buttons .btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-heavy);
+        gap: 0.5rem;
     }
     
     .hero-buttons .btn-primary {
-        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        background: var(--primary-color);
         border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .hero-buttons .btn-primary:hover {
-        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
     }
     
     .hero-buttons .btn-secondary {
         background: rgba(255, 255, 255, 0.1);
         border: 2px solid rgba(255, 255, 255, 0.3);
-    }
-    
-    .hero-buttons .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.2);
     }
     
     .hero-scroll-indicator {
@@ -321,170 +242,18 @@
         transform: translateX(-50%);
         z-index: 3;
         color: var(--white);
-        animation: bounce 1s ease-in-out infinite;
         cursor: pointer;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-    }
-    
-    .hero-scroll-indicator i {
         font-size: 1.5rem;
     }
     
-    @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {
-            transform: translateX(-50%) translateY(0);
-        }
-        40% {
-            transform: translateX(-50%) translateY(-10px);
-        }
-        60% {
-            transform: translateX(-50%) translateY(-5px);
-        }
-    }
-    
-    /* 響應式設計 - 768px 以下 */
-    @media (max-width: 768px) {
-        .hero-image {
-            aspect-ratio: 4/3;
-        }
-        
-        .hero-section {
-            min-height: 100vh;
-            height: auto;
-            padding-bottom: var(--space-xl);
-        }
-        
-        .hero-content {
-            padding: var(--space-lg) var(--space-sm) calc(var(--space-lg) * 2);
-            margin: 0 var(--space-sm) 0;
-        }
-        
-        .hero-buttons {
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: calc(var(--space-xxl) + var(--space-lg));
-        }
-        
-        .hero-buttons .btn {
-            width: 100%;
-            max-width: 250px;
-        }
-        
-        .hero-scroll-indicator {
-            bottom: 15px;
-        }
-    }
-    
-    /* 響應式設計 - 480px 以下 */
-    @media (max-width: 480px) {
-        .hero-section {
-            min-height: 100vh;
-            height: auto;
-            padding-bottom: calc(var(--space-xl) * 1.5);
-        }
-        
-        .hero-content {
-            padding: var(--space-md) var(--space-sm) calc(var(--space-md) * 2.5);
-            margin-top: 0;
-        }
-        
-        .hero-buttons {
-            margin-bottom: calc(var(--space-xxl) * 1.5);
-        }
-        
-        .hero-scroll-indicator {
-            bottom: 10px;
-        }
-    }
-    
-    /* 高密度螢幕優化 */
-    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-        .hero-image {
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-        }
-    }
-    
-    /* 減少動畫偏好設定 */
-    @media (prefers-reduced-motion: reduce) {
-        .hero-content-immediate,
-        .hero-scroll-immediate {
-            animation: none;
-        }
-        
-        .hero-scroll-indicator {
-            animation: none;
-        }
-        
-        .hero-buttons .btn {
-            transition: none;
-        }
-    }
-    
-    /* Font Awesome Fallback - 圖標載入前的佔位符 */
-    .fas, .far, .fab {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        text-align: center;
-    }
-    
-    /* 具體圖標 fallback */
-    .fas.fa-calendar-alt::before,
-    .fas.fa-calendar-check::before {
-        content: "📅";
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    .fas.fa-chevron-down::before {
-        content: "⌄";
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    .fas.fa-phone::before {
-        content: "📞";
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    /* 當 Font Awesome 載入後，替換 fallback */
-    .fa-loaded .fas::before,
-    .fa-loaded .far::before,
-    .fa-loaded .fab::before {
-        font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
-    }
-    
-    /* 關鍵基礎樣式 - 避免CSS阻塞 */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    html {
-        scroll-behavior: smooth;
-        font-size: 16px;
-    }
-    
-    body {
-        font-family: var(--font-sans);
-        line-height: 1.6;
-        color: var(--text-primary);
-        background-color: var(--bg-primary);
-        overflow-x: hidden;
-        padding-top: 80px; /* navbar height */
-    }
-    
-    /* 關鍵導航樣式 - 立即渲染 */
+    /* 基礎導航樣式 */
     .navbar {
         position: fixed;
         top: 0;
         width: 100%;
         background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: var(--shadow-light);
         z-index: 1000;
-        transition: all var(--transition-normal) ease;
+        height: 80px;
     }
     
     .nav-container {
@@ -500,14 +269,13 @@
     .nav-logo {
         display: flex;
         align-items: center;
-        gap: var(--space-xs);
+        gap: 0.5rem;
         text-decoration: none;
     }
     
     .logo-img {
         width: 60px;
         height: auto;
-        object-fit: contain;
     }
     
     .nav-menu {
@@ -518,19 +286,13 @@
         padding: 0;
     }
     
-    .nav-item {
-        position: relative;
-    }
-    
     .nav-link {
         display: block;
-        padding: var(--space-xs) var(--space-sm);
+        padding: 0.5rem var(--space-sm);
         color: var(--text-primary);
         text-decoration: none;
         font-weight: 500;
         font-size: 0.95rem;
-        transition: all var(--transition-fast) ease;
-        position: relative;
     }
     
     .nav-link:hover {
@@ -542,28 +304,20 @@
     }
     
     .nav-link.nav-booking {
-        background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-        color: var(--text-light);
+        background: var(--primary-color);
+        color: var(--white);
         border-radius: 20px;
         padding: 8px 16px;
         font-weight: 600;
         font-size: 0.9rem;
         margin-left: var(--space-sm);
-        transition: all var(--transition-normal) ease;
-    }
-    
-    .nav-link.nav-booking:hover {
-        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-        color: var(--text-light);
-        transform: translateY(-1px);
-        box-shadow: var(--shadow-medium);
     }
     
     .nav-toggle {
         display: none;
         flex-direction: column;
         cursor: pointer;
-        padding: var(--space-xs);
+        padding: 0.5rem;
     }
     
     .nav-toggle .bar {
@@ -571,254 +325,116 @@
         height: 3px;
         background: var(--primary-color);
         margin: 2px 0;
-        transition: all var(--transition-normal) ease;
         border-radius: 2px;
     }
     
-    /* 手機版導航 */
-    @media (max-width: 992px) {
-        .nav-toggle {
-            display: flex;
-        }
+    /* 手機版基礎樣式 */
+    @media (max-width: 768px) {
+        body { padding-top: 70px; }
+        .navbar { height: 70px; }
+        .nav-container { height: 70px; padding: 0 var(--space-sm); }
+        .logo-img { width: 45px; }
+        .nav-toggle { display: flex; }
+        .nav-menu { display: none; }
         
-        .nav-menu {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 80px);
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+        .hero-title { font-size: 2rem; }
+        .hero-subtitle { font-size: 1.125rem; }
+        .hero-content { 
+            padding: var(--space-lg) var(--space-sm);
+            margin: 0 var(--space-sm);
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+        }
+        .hero-buttons { 
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding: var(--space-lg) var(--space-md);
-            gap: var(--space-lg);
-            transform: translateX(-100%);
-            transition: transform var(--transition-normal) ease;
         }
-        
-        .nav-menu.active {
-            transform: translateX(0);
-        }
-        
-        .nav-link {
-            font-size: 1.125rem;
-            padding: var(--space-sm) var(--space-lg);
+        .hero-buttons .btn { 
             width: 100%;
-            max-width: 300px;
-            text-align: center;
-            border-radius: 8px;
+            max-width: 250px;
         }
-        
-        .nav-link.nav-booking {
-            margin-left: 0;
-            margin-top: var(--space-sm);
-            padding: 12px 24px;
-            border-radius: 25px;
+        .hero-scroll-indicator { bottom: 15px; }
+    }
+    
+    @media (max-width: 480px) {
+        .hero-title { font-size: 1.75rem; }
+        .hero-subtitle { font-size: 1rem; }
+        .hero-content { 
+            padding: var(--space-md) var(--space-sm);
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
         }
+        .hero-scroll-indicator { bottom: 10px; }
     }
     
-    @media (max-width: 768px) {
-        body {
-            padding-top: 70px;
-        }
-        
-        .navbar {
-            height: 70px;
-        }
-        
-        .nav-container {
-            height: 70px;
-            padding: 0 var(--space-sm);
-        }
-        
-        .nav-menu {
-            top: 70px;
-            height: calc(100vh - 70px);
-        }
-        
-        .logo-img {
-            width: 45px;
-            height: 24px;
-        }
-    }
-    
-    /* 基礎typography */
-    h1, h2, h3, h4, h5, h6 {
-        font-family: var(--font-serif);
-        font-weight: 500;
-        line-height: 1.3;
-        color: var(--text-primary);
-        margin-bottom: var(--space-sm);
-    }
-    
-    h1 {
-        font-size: clamp(2rem, 5vw, 3.5rem);
-        font-weight: 600;
-    }
-    
-    h2 {
-        font-size: clamp(1.75rem, 4vw, 2.5rem);
-    }
-    
-    p {
-        margin-bottom: var(--space-sm);
-        color: var(--text-secondary);
-        font-weight: 400;
-    }
-    
-    a {
-        color: var(--primary-color);
-        text-decoration: none;
-        transition: color var(--transition-fast) ease;
-    }
-    
-    a:hover {
-        color: var(--primary-dark);
-    }
-    
-    /* 基礎佈局 */
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 var(--space-md);
-    }
-    
-    section {
-        padding: var(--space-xxl) 0;
-    }
-    
-    @media (max-width: 768px) {
-        .container {
-            padding: 0 var(--space-sm);
-        }
-        
-        section {
-            padding: var(--space-xl) 0;
-        }
-    }
-    
-    /* 圖片優化 */
-    img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-    }
-    
-    /* 簡化的社群媒體樣式 */
-    .social-media-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-decoration: none;
-        padding: var(--space-lg);
-        border-radius: 16px;
-        transition: transform var(--transition-normal) ease;
-        background: var(--white);
+    /* Font Awesome基礎fallback */
+    .fas, .far, .fab {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
         text-align: center;
     }
     
-    .social-media-card:hover {
-        transform: translateY(-4px);
-    }
-    
-    .social-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: var(--space-md);
-        font-size: 1.5rem;
-        color: var(--white);
-    }
-    
-    .social-media-card.instagram .social-icon {
-        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    }
-    
-    .social-media-card.facebook .social-icon {
-        background: #1877f2;
-    }
-    
-    .social-media-card.line .social-icon {
-        background: #00c300;
-    }
-    
-    .hashtag {
-        display: inline-block;
-        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-        color: var(--white);
-        padding: var(--space-xs) var(--space-sm);
-        border-radius: 12px;
-        font-size: 0.8rem;
-        font-weight: 500;
-        margin-top: var(--space-xs);
-    }
+    .fas.fa-calendar-alt::before,
+    .fas.fa-calendar-check::before { content: "📅"; }
+    .fas.fa-chevron-down::before { content: "⌄"; }
+    .fas.fa-phone::before { content: "📞"; }
     </style>
 
-    <!-- 字體優化載入 - 完全非阻塞 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- 字體載入策略 - 延遲載入僅必要字重 -->
+    <!-- 字體優化載入 - 完全非阻塞，系統字體優先 -->
     <script>
-    // 非阻塞字體載入
-    function loadOptimalFonts() {
-        const link = document.createElement('link');
-        link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Noto+Sans+TC:wght@300;500&display=swap';
-        link.rel = 'stylesheet';
-        link.media = 'print';
-        link.onload = function() { this.media = 'all'; };
-        document.head.appendChild(link);
+    // 延遲載入Google Fonts，完全不阻塞渲染
+    function loadGoogleFonts() {
+        // 只在桌面版且非慢速連線時載入
+        const isMobile = window.innerWidth < 768;
+        const isSlowConnection = navigator.connection && 
+                               (navigator.connection.effectiveType === 'slow-2g' || 
+                                navigator.connection.effectiveType === '2g');
         
-        // Fallback for browsers that don't support onload
-        setTimeout(function() {
-            link.media = 'all';
-        }, 0);
+        if (!isMobile && !isSlowConnection) {
+            setTimeout(function() {
+                const link = document.createElement('link');
+                link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Noto+Sans+TC:wght@300;500&display=swap';
+                link.rel = 'stylesheet';
+                link.media = 'print';
+                link.onload = function() { 
+                    this.media = 'all';
+                    document.documentElement.classList.add('fonts-loaded');
+                };
+                document.head.appendChild(link);
+            }, 3000); // 延遲3秒載入，確保關鍵渲染完成
+        }
     }
     
-    // 延遲載入字體 - 頁面載入後
+    // 頁面載入完成後才載入字體
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadOptimalFonts);
+        document.addEventListener('DOMContentLoaded', loadGoogleFonts);
     } else {
-        loadOptimalFonts();
+        loadGoogleFonts();
     }
     </script>
 
-    <!-- Main CSS - 非阻塞載入避免渲染阻塞 -->
-    <script>
-    // 非阻塞載入關鍵CSS
-    function loadNonCriticalCSS() {
-        const cssFiles = [
-            'css/base.css',
-            'css/layout.css', 
-            'css/index.css'
-        ];
-        
-        cssFiles.forEach(function(file) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = file;
-            link.media = 'print';
-            link.onload = function() { this.media = 'all'; };
-            document.head.appendChild(link);
-            
-            // Fallback for browsers that don't support onload
-            setTimeout(function() {
-                link.media = 'all';
-            }, 0);
-        });
-    }
+    <!-- CSS Preload策略 - 並行載入不阻塞渲染 -->
+    <link rel="preload" href="css/base.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/base.css"></noscript>
     
-    // 頁面載入後載入非關鍵CSS
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadNonCriticalCSS);
-    } else {
-        loadNonCriticalCSS();
-    }
+    <link rel="preload" href="css/layout.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/layout.css"></noscript>
+    
+    <link rel="preload" href="css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.css"></noscript>
+    
+    <!-- Fallback載入確保CSS一定會生效 -->
+    <script>
+    // 確保CSS載入的fallback
+    setTimeout(function() {
+        const preloadLinks = document.querySelectorAll('link[rel="preload"][as="style"]');
+        preloadLinks.forEach(function(link) {
+            if (link.rel === 'preload') {
+                link.rel = 'stylesheet';
+            }
+        });
+    }, 100);
     </script>
 
     <!-- Structured Data -->
@@ -927,35 +543,24 @@
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
         <picture class="hero-picture">
-            <!-- 手機版 - 超壓縮版本 -->
-            <source srcset="images/hero/main-hall-environment-mobile-extreme.avif 768w" 
+            <!-- 手機版 - 僅最優化版本 -->
+            <source srcset="images/hero/main-hall-environment-mobile-extreme.avif" 
                     media="(max-width: 768px)" type="image/avif">
-            <source srcset="images/hero/main-hall-environment-mobile-ultra.webp 768w" 
+            <source srcset="images/hero/main-hall-environment-mobile-ultra.webp" 
                     media="(max-width: 768px)" type="image/webp">
-            <source srcset="images/hero/main-hall-environment-mobile-new.jpg 768w" 
-                    media="(max-width: 768px)" type="image/jpeg">
             
-            <!-- 桌面版 - 高密度螢幕支援 -->
-            <source srcset="images/hero/main-hall-environment-new.avif 1920w,
-                           images/hero/main-hall-environment.avif 2560w" 
-                    type="image/avif">
-            <source srcset="images/hero/main-hall-environment-ultra.webp 1920w,
-                           images/hero/main-hall-environment-new.webp 1920w,
-                           images/hero/main-hall-environment.webp 2560w" 
-                    type="image/webp">
-            <source srcset="images/hero/main-hall-environment-optimized.jpg 1920w,
-                           images/hero/main-hall-environment.jpg 2560w" 
-                    type="image/jpeg">
+            <!-- 桌面版 - 簡化版本 -->
+            <source srcset="images/hero/main-hall-environment-new.avif" type="image/avif">
+            <source srcset="images/hero/main-hall-environment-ultra.webp" type="image/webp">
             
             <img src="images/hero/main-hall-environment-optimized.jpg" 
-                 alt="澎湖期遇度假會館主廳環境 - 三面環海的歐洲巴洛克建築風格" 
+                 alt="澎湖期遇度假會館主廳環境" 
                  class="hero-image"
                  width="1920"
                  height="1080"
                  loading="eager"
                  fetchpriority="high"
-                 decoding="async"
-                 sizes="(max-width: 768px) 100vw, 100vw">
+                 decoding="async">
         </picture>
         <div class="hero-overlay"></div>
         <div class="hero-content hero-content-immediate">
@@ -1166,12 +771,7 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <!-- 延遲載入 polyfill -->
-    <script>
-    !function(e){"use strict";var t=function(t,n,r){function o(e){return i.body?e():void setTimeout(function(){o(e)})}function a(){d.addEventListener&&d.removeEventListener("load",a),d.media=r||"all"}var l,i=e.document,d=i.createElement("link");if(n)l=n;else{var s=(i.body||i.getElementsByTagName("head")[0]).childNodes;l=s[s.length-1]}var u=i.styleSheets;d.rel="stylesheet",d.href=t,d.media="only x",o(function(){l.parentNode.insertBefore(d,n?l:l.nextSibling)});var f=function(e){for(var t=d.href,n=u.length;n--;)if(u[n].href===t)return e();setTimeout(function(){f(e)})};return d.addEventListener&&d.addEventListener("load",a),d.onloadcssdefined=f,f(a),d};"undefined"!=typeof exports?exports.loadCSS=t:e.loadCSS=t}("undefined"!=typeof global?global:this);
-    </script>
-    
+    <!-- Scripts - 極簡載入 -->
     <!-- 非阻塞載入外部資源 -->
     <script>
     function loadExternalResources() {
@@ -1180,65 +780,54 @@
                                (navigator.connection.effectiveType === 'slow-2g' || 
                                 navigator.connection.effectiveType === '2g');
         
-        // 為慢速連線添加特殊class以應用優化樣式
+        // 為慢速連線添加特殊class
         if (isSlowConnection) {
             document.documentElement.classList.add('slow-connection');
         }
         
-        // Font Awesome - 非阻塞載入
-        const faLink = document.createElement('link');
-        faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-        faLink.rel = 'stylesheet';
-        faLink.media = 'print';
-        faLink.onload = function() { 
-            this.media = 'all';
-            // 標記 Font Awesome 已載入
-            document.documentElement.classList.add('fa-loaded');
-        };
-        document.head.appendChild(faLink);
+        // Font Awesome - 延遲載入
+        setTimeout(function() {
+            const faLink = document.createElement('link');
+            faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+            faLink.rel = 'stylesheet';
+            faLink.onload = function() { 
+                document.documentElement.classList.add('fa-loaded');
+            };
+            document.head.appendChild(faLink);
+        }, 1000);
         
-        // AOS 動畫庫 - 手機版和慢速連線條件載入
+        // AOS - 只在桌面版載入
         if (!isMobile && !isSlowConnection) {
-            const aosLink = document.createElement('link');
-            aosLink.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
-            aosLink.rel = 'stylesheet';
-            aosLink.media = 'print';
-            aosLink.onload = function() { this.media = 'all'; };
-            document.head.appendChild(aosLink);
-            
-            // AOS JavaScript - 延遲載入
             setTimeout(function() {
+                const aosLink = document.createElement('link');
+                aosLink.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+                aosLink.rel = 'stylesheet';
+                document.head.appendChild(aosLink);
+                
                 const aosScript = document.createElement('script');
                 aosScript.src = 'https://unpkg.com/aos@2.3.1/dist/aos.js';
-                aosScript.defer = true;
                 aosScript.onload = function() {
-                    // 初始化 AOS
                     if (typeof AOS !== 'undefined') {
                         AOS.init({
                             duration: 600,
                             once: true,
-                            offset: 100,
-                            disable: function() {
-                                // 在小螢幕或低性能設備上禁用
-                                return window.innerWidth < 768 || isSlowConnection;
-                            }
+                            offset: 100
                         });
                     }
                 };
                 document.head.appendChild(aosScript);
-            }, 2000); // 延遲2秒載入，優先處理關鍵資源
+            }, 2000);
         } else {
-            // 手機版移除所有AOS屬性以避免佈局偏移
+            // 手機版移除AOS屬性
             const aosElements = document.querySelectorAll('[data-aos]');
             aosElements.forEach(el => {
                 el.removeAttribute('data-aos');
                 el.removeAttribute('data-aos-delay');
-                el.removeAttribute('data-aos-duration');
             });
         }
     }
     
-    // 頁面載入完成後載入外部資源
+    // 頁面載入完成後執行
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadExternalResources);
     } else {
