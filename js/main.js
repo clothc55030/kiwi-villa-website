@@ -3,13 +3,8 @@
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS Animation
-    AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: true,
-        offset: 100
-    });
+    // Initialize AOS Animation - 延遲載入後初始化
+    initAOSWhenReady();
 
     // Navigation functionality
     initNavigation();
@@ -38,6 +33,36 @@ document.addEventListener('DOMContentLoaded', function() {
         initImageLightbox();
     }
 });
+
+// Initialize AOS when it's loaded
+function initAOSWhenReady() {
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+    } else {
+        // Wait for AOS to load
+        const checkAOS = setInterval(function() {
+            if (typeof AOS !== 'undefined') {
+                clearInterval(checkAOS);
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-in-out',
+                    once: true,
+                    offset: 100
+                });
+            }
+        }, 50);
+        
+        // Fallback timeout after 5 seconds
+        setTimeout(function() {
+            clearInterval(checkAOS);
+        }, 5000);
+    }
+}
 
 // Navigation functionality
 function initNavigation() {
