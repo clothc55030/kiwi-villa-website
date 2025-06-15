@@ -42,7 +42,12 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.kiwi-villa.com/">
     
-    <!-- picture/img 結構會自動優先載入，不需要額外預載入 -->
+    <!-- Hero圖片 Preload - 使用超壓縮版本獲得極致性能 -->
+    <link rel="preload" href="images/hero/main-hall-environment-new.avif" as="image" type="image/avif" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-ultra.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-mobile-new.avif" as="image" type="image/avif" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-mobile-ultra.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="images/hero/main-hall-environment-optimized.jpg" as="image" type="image/jpeg" fetchpriority="high">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -184,10 +189,10 @@
         <picture class="hero-picture">
             <source srcset="images/hero/main-hall-environment-mobile-new.avif" 
                     media="(max-width: 768px)" type="image/avif">
-            <source srcset="images/hero/main-hall-environment-mobile-new.webp" 
+            <source srcset="images/hero/main-hall-environment-mobile-ultra.webp" 
                     media="(max-width: 768px)" type="image/webp">
             <source srcset="images/hero/main-hall-environment-new.avif" type="image/avif">
-            <source srcset="images/hero/main-hall-environment-new.webp" type="image/webp">
+            <source srcset="images/hero/main-hall-environment-ultra.webp" type="image/webp">
             <img src="images/hero/main-hall-environment-optimized.jpg" 
                  alt="澎湖期遇度假會館主廳環境 - 三面環海的歐洲巴洛克建築風格" 
                  class="hero-image"
