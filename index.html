@@ -50,22 +50,57 @@
     <link rel="preload" href="images/hero/main-hall-environment-new.avif" as="image" type="image/avif" 
           media="(min-width: 769px)" fetchpriority="high">
     
-    <!-- Fonts -->
+    <!-- Fonts預連接 - 改善字體載入體驗 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- 精簡關鍵Hero CSS - 極度優化轉譯速度 -->
+    <!-- 精簡關鍵Hero CSS - 恢復重要變數和效果 -->
     <style>
-    /* 最小化CSS變數 - 僅關鍵值 */
+    /* 完整CSS變數系統 - 提升維護性 */
     :root {
+        /* 色彩系統 - 莫蘭迪藍灰色系 */
+        --primary-color: #7c9bb5;
+        --primary-light: #9bb0c4;
+        --primary-dark: #6b8aa0;
+        --secondary-color: #a8b8c8;
+        --secondary-light: #b8c7d6;
+        --secondary-dark: #8fa3b3;
+        --accent-color: #9bb0c4;
+        --accent-light: #b8c7d6;
+        
+        /* 基礎色彩 */
         --white: #ffffff;
         --text-primary: #4a453f;
-        --primary-color: #7c9bb5;
+        --text-secondary: #8a8580;
+        --text-light: #ffffff;
+        --text-muted: #b5b0aa;
+        
+        /* 背景色彩 */
+        --bg-primary: #ffffff;
+        --bg-secondary: #f7f6f4;
+        --bg-accent: #faf9f7;
+        
+        /* 陰影系統 - 統一視覺層次 */
+        --shadow-light: 0 2px 8px rgba(74, 69, 63, 0.08);
+        --shadow-medium: 0 4px 16px rgba(74, 69, 63, 0.12);
+        --shadow-heavy: 0 8px 24px rgba(74, 69, 63, 0.16);
+        
+        /* 間距系統 */
+        --space-xs: 0.5rem;
         --space-sm: 1rem;
         --space-md: 1.5rem;
         --space-lg: 2rem;
         --space-xl: 3rem;
         --space-xxl: 4rem;
+        
+        /* 動畫系統 */
+        --transition-fast: 0.2s;
+        --transition-normal: 0.3s;
+        --transition-slow: 0.5s;
+        
+        /* 字體系統 - 系統字體優先，Google Fonts作為增強 */
+        --font-serif: "Playfair Display", "Times New Roman", "Microsoft YaHei", "PingFang TC", "Hiragino Sans GB", serif;
+        --font-sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", "PingFang TC", "Hiragino Sans GB", sans-serif;
     }
     
     /* 關鍵基礎重置 */
@@ -74,15 +109,15 @@
     html { font-size: 16px; }
     
     body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: var(--font-sans);
         line-height: 1.6;
         color: var(--text-primary);
-        background: #ffffff;
+        background: var(--bg-primary);
         overflow-x: hidden;
         padding-top: 80px;
     }
     
-    /* Hero Section - 極簡版 */
+    /* Hero Section - 恢復重要效果 */
     .hero-section {
         position: relative;
         height: 100vh;
@@ -128,11 +163,13 @@
         padding: var(--space-xl) var(--space-md);
         background: rgba(0, 0, 0, 0.3);
         border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
         margin-top: 30px;
         color: var(--white);
+        box-shadow: var(--shadow-heavy);
     }
     
-    /* 立即顯示 - 無動畫 */
+    /* 立即顯示 - 手機版無動畫 */
     .hero-content-immediate {
         opacity: 1;
     }
@@ -141,30 +178,36 @@
         opacity: 1;
     }
     
-    /* 基礎文字樣式 - 使用系統字體 */
+    /* Hero文字樣式 - 恢復響應式字體和文字陰影 */
     .hero-subtitle-small {
-        font-size: 0.875rem;
+        font-family: var(--font-sans);
+        font-size: clamp(0.875rem, 2vw, 1rem);
         color: rgba(255, 255, 255, 0.9);
         font-weight: 300;
         margin-bottom: var(--space-sm);
         letter-spacing: 2px;
         text-transform: uppercase;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-family: var(--font-serif);
+        font-size: clamp(2.5rem, 6vw, 4rem);
         font-weight: 600;
         color: var(--white);
         margin-bottom: var(--space-sm);
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     }
     
     .hero-subtitle {
-        font-size: 1.25rem;
+        font-family: var(--font-serif);
+        font-size: clamp(1.25rem, 3vw, 1.75rem);
         font-weight: 400;
         color: var(--white);
         margin-bottom: var(--space-lg);
         font-style: italic;
         letter-spacing: 1px;
+        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
     }
     
     .hero-poem {
@@ -172,12 +215,14 @@
     }
     
     .hero-poem p {
-        font-size: 1rem;
+        font-family: var(--font-sans);
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
         color: rgba(255, 255, 255, 0.95);
         line-height: 1.8;
         font-weight: 300;
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--space-xs);
         font-style: italic;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
     
     .hero-call-to-action {
@@ -185,22 +230,27 @@
     }
     
     .hero-call-to-action p {
-        font-size: 1.125rem;
+        font-family: var(--font-sans);
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
         color: var(--white);
         line-height: 1.7;
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--space-xs);
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
     
     .hero-call-to-action strong {
         color: rgba(255, 255, 255, 1);
         font-weight: 600;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
     }
     
     .hero-final-line {
-        font-size: 0.95rem;
+        font-family: var(--font-sans);
+        font-size: clamp(0.95rem, 2vw, 1.125rem);
         color: rgba(255, 255, 255, 0.9);
         font-style: italic;
         margin-top: var(--space-sm);
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
     
     .hero-buttons {
@@ -212,27 +262,44 @@
     }
     
     .hero-buttons .btn {
+        font-family: var(--font-sans);
         padding: 16px 32px;
         font-size: 1.125rem;
         font-weight: 500;
         border-radius: 10px;
+        box-shadow: var(--shadow-medium);
         border: 1px solid rgba(255, 255, 255, 0.3);
         background: rgba(255, 255, 255, 0.1);
         color: var(--white);
         text-decoration: none;
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--space-xs);
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .hero-buttons .btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-heavy);
     }
     
     .hero-buttons .btn-primary {
-        background: var(--primary-color);
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
         border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .hero-buttons .btn-primary:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
     }
     
     .hero-buttons .btn-secondary {
         background: rgba(255, 255, 255, 0.1);
         border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .hero-buttons .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
     }
     
     .hero-scroll-indicator {
@@ -244,16 +311,19 @@
         color: var(--white);
         cursor: pointer;
         font-size: 1.5rem;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
     
-    /* 基礎導航樣式 */
+    /* 基礎導航樣式 - 恢復視覺效果 */
     .navbar {
         position: fixed;
         top: 0;
         width: 100%;
         background: rgba(255, 255, 255, 0.95);
+        box-shadow: var(--shadow-light);
         z-index: 1000;
         height: 80px;
+        transition: all var(--transition-normal) ease;
     }
     
     .nav-container {
@@ -269,13 +339,14 @@
     .nav-logo {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--space-xs);
         text-decoration: none;
     }
     
     .logo-img {
         width: 60px;
         height: auto;
+        object-fit: contain;
     }
     
     .nav-menu {
@@ -286,13 +357,19 @@
         padding: 0;
     }
     
+    .nav-item {
+        position: relative;
+    }
+    
     .nav-link {
         display: block;
-        padding: 0.5rem var(--space-sm);
+        padding: var(--space-xs) var(--space-sm);
         color: var(--text-primary);
         text-decoration: none;
         font-weight: 500;
         font-size: 0.95rem;
+        transition: all var(--transition-fast) ease;
+        position: relative;
     }
     
     .nav-link:hover {
@@ -304,20 +381,28 @@
     }
     
     .nav-link.nav-booking {
-        background: var(--primary-color);
-        color: var(--white);
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+        color: var(--text-light);
         border-radius: 20px;
         padding: 8px 16px;
         font-weight: 600;
         font-size: 0.9rem;
         margin-left: var(--space-sm);
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .nav-link.nav-booking:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+        color: var(--text-light);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-medium);
     }
     
     .nav-toggle {
         display: none;
         flex-direction: column;
         cursor: pointer;
-        padding: 0.5rem;
+        padding: var(--space-xs);
     }
     
     .nav-toggle .bar {
@@ -325,6 +410,7 @@
         height: 3px;
         background: var(--primary-color);
         margin: 2px 0;
+        transition: all var(--transition-normal) ease;
         border-radius: 2px;
     }
     
@@ -337,13 +423,10 @@
         .nav-toggle { display: flex; }
         .nav-menu { display: none; }
         
-        .hero-title { font-size: 2rem; }
-        .hero-subtitle { font-size: 1.125rem; }
         .hero-content { 
             padding: var(--space-lg) var(--space-sm);
             margin: 0 var(--space-sm);
             background: rgba(0, 0, 0, 0.4);
-            border: none;
         }
         .hero-buttons { 
             flex-direction: column;
@@ -357,8 +440,6 @@
     }
     
     @media (max-width: 480px) {
-        .hero-title { font-size: 1.75rem; }
-        .hero-subtitle { font-size: 1rem; }
         .hero-content { 
             padding: var(--space-md) var(--space-sm);
             background: rgba(0, 0, 0, 0.5);
@@ -381,17 +462,19 @@
     .fas.fa-phone::before { content: "📞"; }
     </style>
 
-    <!-- 字體優化載入 - 完全非阻塞，系統字體優先 -->
+    <!-- 字體優化載入 - 改善體驗的同時保持性能 -->
     <script>
-    // 延遲載入Google Fonts，完全不阻塞渲染
+    // 智能載入Google Fonts
     function loadGoogleFonts() {
-        // 只在桌面版且非慢速連線時載入
         const isMobile = window.innerWidth < 768;
         const isSlowConnection = navigator.connection && 
                                (navigator.connection.effectiveType === 'slow-2g' || 
                                 navigator.connection.effectiveType === '2g');
         
-        if (!isMobile && !isSlowConnection) {
+        // 桌面版立即載入，手機版延遲載入以保持LCP性能
+        const delay = isMobile ? 2000 : 0;
+        
+        if (!isSlowConnection) {
             setTimeout(function() {
                 const link = document.createElement('link');
                 link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Noto+Sans+TC:wght@300;500&display=swap';
@@ -402,11 +485,11 @@
                     document.documentElement.classList.add('fonts-loaded');
                 };
                 document.head.appendChild(link);
-            }, 3000); // 延遲3秒載入，確保關鍵渲染完成
+            }, delay);
         }
     }
     
-    // 頁面載入完成後才載入字體
+    // 頁面載入完成後載入字體
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadGoogleFonts);
     } else {
@@ -751,7 +834,7 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <a href="#" onclick="location.href='mai'+'lto:info'+'@kiwi-villa.com'" class="contact-link">info [at] kiwi-villa.com</a>
+                            <a href="/cdn-cgi/l/email-protection#c6a5a9a8b2a7a5b286a5a9a8b2a7a5b2e8a5a9ab" class="contact-link">info@kiwi-villa.com</a>
                         </div>
                         <div class="contact-item">
                             <i class="fab fa-line"></i>
@@ -836,5 +919,8 @@
     </script>
     
     <script src="js/main.js" defer></script>
+    
+    <!-- Cloudflare Email Protection -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 </body>
 </html> 
