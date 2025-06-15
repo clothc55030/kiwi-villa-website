@@ -73,22 +73,346 @@
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"></noscript>
     
-    <!-- 關鍵CSS內聯 - 優化LCP - 立即顯示Hero內容 -->
+    <!-- 完整Hero CSS內聯 - 避免渲染阻塞 -->
     <style>
-    /* 關鍵Hero樣式 - 優化LCP */
-    .hero-section{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero-picture{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
-    .hero-image{width:100%;height:100%;object-fit:cover;object-position:center;display:block;will-change:auto;transform:translate3d(0,0,0);aspect-ratio:16/9}
-    .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:2}
-    .hero-content{position:relative;z-index:3;text-align:center;max-width:900px;padding:3rem 1.5rem 6rem;background:rgba(0,0,0,0.3);border-radius:20px;border:1px solid rgba(255,255,255,0.15);margin-top:30px;box-shadow:0 8px 32px rgba(0,0,0,0.3)}
-    /* 立即顯示 - 簡潔0.3s淡入 */
-    .hero-content-immediate{animation:heroFadeIn 0.3s ease-out}
-    .hero-scroll-immediate{animation:heroScrollFade 0.3s ease-out 0.2s both}
-    @keyframes heroFadeIn{0%{opacity:0}100%{opacity:1}}
-    @keyframes heroScrollFade{0%{opacity:0}100%{opacity:1}}
-    /* 響應式圖片優化 */
+    /* CSS 變數定義 */
+    :root {
+        /* 色彩系統 - 莫蘭迪藍灰色系 */
+        --primary-color: #7c9bb5;
+        --primary-light: #9bb0c4;
+        --primary-dark: #6b8aa0;
+        --secondary-color: #a8b8c8;
+        --secondary-light: #b8c7d6;
+        --secondary-dark: #8fa3b3;
+        --accent-color: #9bb0c4;
+        --accent-light: #b8c7d6;
+        
+        /* 基礎色彩 */
+        --white: #ffffff;
+        --text-primary: #4a453f;
+        --text-secondary: #8a8580;
+        --text-light: #ffffff;
+        --text-muted: #b5b0aa;
+        
+        /* 背景色彩 */
+        --bg-primary: #ffffff;
+        --bg-secondary: #f7f6f4;
+        --bg-accent: #faf9f7;
+        
+        /* 陰影系統 */
+        --shadow-light: 0 2px 8px rgba(74, 69, 63, 0.08);
+        --shadow-medium: 0 4px 16px rgba(74, 69, 63, 0.12);
+        --shadow-heavy: 0 8px 24px rgba(74, 69, 63, 0.16);
+        
+        /* 間距系統 */
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 1.5rem;
+        --space-lg: 2rem;
+        --space-xl: 3rem;
+        --space-xxl: 4rem;
+        
+        /* 動畫系統 */
+        --transition-fast: 0.2s;
+        --transition-normal: 0.3s;
+        --transition-slow: 0.5s;
+    }
+    
+    /* Hero Section - 完整樣式 */
+    .hero-section {
+        position: relative;
+        height: 100vh;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    .hero-picture {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    
+    .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        will-change: auto;
+        transform: translate3d(0, 0, 0);
+        aspect-ratio: 16/9;
+    }
+    
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        max-width: 900px;
+        padding: var(--space-xl) var(--space-md) calc(var(--space-xl) * 2);
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        margin-top: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* 立即顯示動畫 */
+    .hero-content-immediate {
+        animation: heroFadeIn 0.3s ease-out;
+    }
+    
+    .hero-scroll-immediate {
+        animation: heroScrollFade 0.3s ease-out 0.2s both;
+    }
+    
+    @keyframes heroFadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    
+    @keyframes heroScrollFade {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    
+    /* Hero 文字樣式 */
+    .hero-subtitle-small {
+        font-size: clamp(0.875rem, 2vw, 1rem);
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+        margin-bottom: var(--space-sm);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hero-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 600;
+        color: var(--white);
+        margin-bottom: var(--space-sm);
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1.25rem, 3vw, 1.75rem);
+        font-weight: 400;
+        color: var(--white);
+        margin-bottom: var(--space-lg);
+        font-style: italic;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hero-poem {
+        margin-bottom: var(--space-lg);
+    }
+    
+    .hero-poem p {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        color: rgba(255, 255, 255, 0.95);
+        line-height: 1.8;
+        font-weight: 300;
+        margin-bottom: var(--space-xs);
+        font-style: italic;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hero-call-to-action {
+        margin-bottom: var(--space-xl);
+    }
+    
+    .hero-call-to-action p {
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+        color: var(--white);
+        line-height: 1.7;
+        margin-bottom: var(--space-xs);
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hero-call-to-action strong {
+        color: rgba(255, 255, 255, 1);
+        font-weight: 600;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+    }
+    
+    .hero-final-line {
+        font-size: clamp(0.95rem, 2vw, 1.125rem);
+        color: rgba(255, 255, 255, 0.9);
+        font-style: italic;
+        margin-top: var(--space-sm);
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hero-buttons {
+        display: flex;
+        gap: var(--space-md);
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: var(--space-xxl);
+    }
+    
+    .hero-buttons .btn {
+        padding: 16px 32px;
+        font-size: 1.125rem;
+        font-weight: 500;
+        border-radius: 10px;
+        box-shadow: var(--shadow-medium);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .hero-buttons .btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-heavy);
+    }
+    
+    .hero-buttons .btn-primary {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .hero-buttons .btn-primary:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    }
+    
+    .hero-buttons .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .hero-buttons .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .hero-scroll-indicator {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+        color: var(--white);
+        animation: bounce 1s ease-in-out infinite;
+        cursor: pointer;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    }
+    
+    .hero-scroll-indicator i {
+        font-size: 1.5rem;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateX(-50%) translateY(0);
+        }
+        40% {
+            transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+            transform: translateX(-50%) translateY(-5px);
+        }
+    }
+    
+    /* 響應式設計 - 768px 以下 */
     @media (max-width: 768px) {
-        .hero-image{aspect-ratio:4/3}
+        .hero-image {
+            aspect-ratio: 4/3;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            height: auto;
+            padding-bottom: var(--space-xl);
+        }
+        
+        .hero-content {
+            padding: var(--space-lg) var(--space-sm) calc(var(--space-lg) * 2);
+            margin: 0 var(--space-sm) 0;
+        }
+        
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: calc(var(--space-xxl) + var(--space-lg));
+        }
+        
+        .hero-buttons .btn {
+            width: 100%;
+            max-width: 250px;
+        }
+        
+        .hero-scroll-indicator {
+            bottom: 15px;
+        }
+    }
+    
+    /* 響應式設計 - 480px 以下 */
+    @media (max-width: 480px) {
+        .hero-section {
+            min-height: 100vh;
+            height: auto;
+            padding-bottom: calc(var(--space-xl) * 1.5);
+        }
+        
+        .hero-content {
+            padding: var(--space-md) var(--space-sm) calc(var(--space-md) * 2.5);
+            margin-top: 0;
+        }
+        
+        .hero-buttons {
+            margin-bottom: calc(var(--space-xxl) * 1.5);
+        }
+        
+        .hero-scroll-indicator {
+            bottom: 10px;
+        }
+    }
+    
+    /* 高密度螢幕優化 */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .hero-image {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+    }
+    
+    /* 減少動畫偏好設定 */
+    @media (prefers-reduced-motion: reduce) {
+        .hero-content-immediate,
+        .hero-scroll-immediate {
+            animation: none;
+        }
+        
+        .hero-scroll-indicator {
+            animation: none;
+        }
+        
+        .hero-buttons .btn {
+            transition: none;
+        }
     }
     </style>
 
