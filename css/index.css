@@ -13,41 +13,28 @@
     overflow: hidden;
 }
 
-.hero-background {
+/* Hero圖片結構 - 使用picture/img取代CSS背景 */
+.hero-picture {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../images/hero/main-hall-environment-new.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     z-index: 1;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
     /* 性能優化 */
     will-change: auto;
     transform: translate3d(0, 0, 0);
-    background-attachment: scroll;
 }
 
-/* 多格式圖片支援 - AVIF優先，WebP備用 - 使用優化版本 */
-@supports (background-image: url('../images/hero/main-hall-environment-new.avif')) {
-    .hero-background {
-        background-image: url('../images/hero/main-hall-environment-new.avif');
-    }
-    
-    @media (max-width: 768px) {
-        .hero-background {
-            background-image: url('../images/hero/main-hall-environment-mobile-new.avif');
-        }
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-background {
-        background-image: url('../images/hero/main-hall-environment-mobile-new.webp');
-    }
-}
+/* 多格式圖片支援現在由HTML picture元素處理 */
 
 @keyframes gradientShift {
     0%, 100% {
@@ -504,6 +491,23 @@
 .cta-buttons .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
     color: var(--white);
+}
+
+/* Hero 圖片響應式優化 */
+@media (max-width: 768px) {
+    .hero-image {
+        /* 手機版優化 */
+        object-position: center center;
+    }
+}
+
+/* 針對高密度螢幕優化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-image {
+        /* 高DPI螢幕優化 */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
 }
 
 /* Responsive Design */
