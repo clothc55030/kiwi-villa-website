@@ -73,39 +73,24 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* 立即顯示優化 - 移除AOS依賴 */
+/* 立即顯示優化 - 簡潔0.3s淡入 */
 .hero-content-immediate {
-    opacity: 1;
-    transform: translateY(0);
-    animation: heroFadeInUp 0.8s ease-out;
+    animation: heroFadeIn 0.3s ease-out;
 }
 
 .hero-scroll-immediate {
-    opacity: 1;
-    animation: heroScrollFadeIn 1.2s ease-out 0.5s both;
+    animation: heroScrollFade 0.3s ease-out 0.2s both;
 }
 
-/* 性能優化的CSS動畫 - 取代AOS */
-@keyframes heroFadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* 簡潔動畫 - 只有淡入效果 */
+@keyframes heroFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
-@keyframes heroScrollFadeIn {
-    0% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
+@keyframes heroScrollFade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .hero-subtitle-small {
@@ -123,8 +108,7 @@
     font-weight: 600;
     color: var(--white);
     margin-bottom: var(--space-sm);
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 
-                 0 0 16px rgba(0, 0, 0, 0.6);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .hero-subtitle {
@@ -204,7 +188,7 @@
     transform: translateX(-50%);
     z-index: 3;
     color: var(--white);
-    animation: bounce 2s infinite;
+    animation: bounce 1s ease-in-out infinite;
     cursor: pointer;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
