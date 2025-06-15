@@ -54,6 +54,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
+    <!-- Font Awesome Preload - 減少按鈕圖標閃爍 -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.add('fa-loaded')">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
     <!-- 精簡關鍵Hero CSS - 恢復重要變數和效果 -->
     <style>
     /* 完整CSS變數系統 - 提升維護性 */
@@ -380,6 +384,7 @@
         color: var(--primary-color);
     }
     
+    /* 關鍵修復：立即載入訂房按鈕樣式，防止FOUC */
     .nav-link.nav-booking {
         background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
         color: var(--text-light);
@@ -389,6 +394,13 @@
         font-size: 0.9rem;
         margin-left: var(--space-sm);
         transition: all var(--transition-normal) ease;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        white-space: nowrap;
+        /* 防止閃爍的關鍵樣式 */
+        min-height: 36px;
+        box-sizing: border-box;
     }
     
     .nav-link.nav-booking:hover {
@@ -396,6 +408,15 @@
         color: var(--text-light);
         transform: translateY(-1px);
         box-shadow: var(--shadow-medium);
+    }
+    
+    /* 確保圖標區域不會塌陷 */
+    .nav-link.nav-booking i {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        text-align: center;
+        vertical-align: middle;
     }
     
     .nav-toggle {
@@ -414,14 +435,69 @@
         border-radius: 2px;
     }
     
-    /* 手機版基礎樣式 */
+    /* 手機版導航樣式 - 防止FOUC */
+    @media (max-width: 992px) {
+        .nav-toggle {
+            display: flex;
+        }
+        
+        .nav-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 80px);
+            background: rgba(255, 255, 255, 0.98);
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: var(--space-lg) var(--space-md);
+            gap: var(--space-lg);
+            transform: translateX(-100%);
+            transition: transform var(--transition-normal) ease;
+        }
+        
+        .nav-menu.active {
+            transform: translateX(0);
+        }
+        
+        .nav-link {
+            font-size: 1.125rem;
+            padding: var(--space-sm) var(--space-lg);
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        
+        .nav-link.nav-booking {
+            margin-left: 0;
+            margin-top: var(--space-sm);
+            padding: 12px 24px;
+            border-radius: 25px;
+            justify-content: center;
+        }
+    }
+    
+    /* Font Awesome基礎fallback */
+    .fas, .far, .fab {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        text-align: center;
+    }
+    
+    .fas.fa-calendar-alt::before,
+    .fas.fa-calendar-check::before { content: "📅"; }
+    .fas.fa-chevron-down::before { content: "⌄"; }
+    .fas.fa-phone::before { content: "📞"; }
+    
+    /* 手機版基礎樣式 - 重要的響應式設計 */
     @media (max-width: 768px) {
         body { padding-top: 70px; }
         .navbar { height: 70px; }
         .nav-container { height: 70px; padding: 0 var(--space-sm); }
         .logo-img { width: 45px; }
-        .nav-toggle { display: flex; }
-        .nav-menu { display: none; }
         
         .hero-content { 
             padding: var(--space-lg) var(--space-sm);
@@ -447,19 +523,6 @@
         }
         .hero-scroll-indicator { bottom: 10px; }
     }
-    
-    /* Font Awesome基礎fallback */
-    .fas, .far, .fab {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        text-align: center;
-    }
-    
-    .fas.fa-calendar-alt::before,
-    .fas.fa-calendar-check::before { content: "📅"; }
-    .fas.fa-chevron-down::before { content: "⌄"; }
-    .fas.fa-phone::before { content: "📞"; }
     </style>
 
     <!-- 字體優化載入 - 改善體驗的同時保持性能 -->
@@ -868,16 +931,13 @@
             document.documentElement.classList.add('slow-connection');
         }
         
-        // Font Awesome - 延遲載入
-        setTimeout(function() {
-            const faLink = document.createElement('link');
-            faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-            faLink.rel = 'stylesheet';
-            faLink.onload = function() { 
+        // Font Awesome現在通過preload載入，確保已標記載入完成
+        if (!document.documentElement.classList.contains('fa-loaded')) {
+            // Fallback: 如果preload失敗，立即標記為已載入以顯示fallback圖標
+            setTimeout(function() {
                 document.documentElement.classList.add('fa-loaded');
-            };
-            document.head.appendChild(faLink);
-        }, 1000);
+            }, 500);
+        }
         
         // AOS - 只在桌面版載入
         if (!isMobile && !isSlowConnection) {
