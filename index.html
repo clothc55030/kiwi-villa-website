@@ -49,9 +49,9 @@
     <link rel="preload" href="images/hero/main-hall-environment-ultra.webp" as="image" type="image/webp" 
           imagesrcset="images/hero/main-hall-environment-ultra.webp 1920w, images/hero/main-hall-environment.webp 2560w"
           imagesizes="100vw" fetchpriority="high">
-    <link rel="preload" href="images/hero/main-hall-environment-mobile-new.avif" as="image" type="image/avif" 
+    <link rel="preload" href="images/hero/main-hall-environment-mobile-ultra-compressed.avif" as="image" type="image/avif" 
           media="(max-width: 768px)" 
-          imagesrcset="images/hero/main-hall-environment-mobile-new.avif 768w"
+          imagesrcset="images/hero/main-hall-environment-mobile-ultra-compressed.avif 768w"
           imagesizes="100vw" fetchpriority="high">
     <link rel="preload" href="images/hero/main-hall-environment-mobile-ultra.webp" as="image" type="image/webp" 
           media="(max-width: 768px)" 
@@ -452,6 +452,259 @@
     .fa-loaded .fab::before {
         font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
     }
+    
+    /* 關鍵基礎樣式 - 避免CSS阻塞 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+    }
+    
+    body {
+        font-family: var(--font-sans);
+        line-height: 1.6;
+        color: var(--text-primary);
+        background-color: var(--bg-primary);
+        overflow-x: hidden;
+        padding-top: 80px; /* navbar height */
+    }
+    
+    /* 關鍵導航樣式 - 立即渲染 */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-light);
+        z-index: 1000;
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+    }
+    
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        text-decoration: none;
+    }
+    
+    .logo-img {
+        width: 60px;
+        height: auto;
+        object-fit: contain;
+    }
+    
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: var(--space-lg);
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-item {
+        position: relative;
+    }
+    
+    .nav-link {
+        display: block;
+        padding: var(--space-xs) var(--space-sm);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: all var(--transition-fast) ease;
+        position: relative;
+    }
+    
+    .nav-link:hover {
+        color: var(--primary-color);
+    }
+    
+    .nav-link.active {
+        color: var(--primary-color);
+    }
+    
+    .nav-link.nav-booking {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+        color: var(--text-light);
+        border-radius: 20px;
+        padding: 8px 16px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-left: var(--space-sm);
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .nav-link.nav-booking:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+        color: var(--text-light);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-medium);
+    }
+    
+    .nav-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: var(--space-xs);
+    }
+    
+    .nav-toggle .bar {
+        width: 25px;
+        height: 3px;
+        background: var(--primary-color);
+        margin: 2px 0;
+        transition: all var(--transition-normal) ease;
+        border-radius: 2px;
+    }
+    
+    /* 手機版導航 */
+    @media (max-width: 992px) {
+        .nav-toggle {
+            display: flex;
+        }
+        
+        .nav-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 80px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: var(--space-lg) var(--space-md);
+            gap: var(--space-lg);
+            transform: translateX(-100%);
+            transition: transform var(--transition-normal) ease;
+        }
+        
+        .nav-menu.active {
+            transform: translateX(0);
+        }
+        
+        .nav-link {
+            font-size: 1.125rem;
+            padding: var(--space-sm) var(--space-lg);
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        
+        .nav-link.nav-booking {
+            margin-left: 0;
+            margin-top: var(--space-sm);
+            padding: 12px 24px;
+            border-radius: 25px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        body {
+            padding-top: 70px;
+        }
+        
+        .navbar {
+            height: 70px;
+        }
+        
+        .nav-container {
+            height: 70px;
+            padding: 0 var(--space-sm);
+        }
+        
+        .nav-menu {
+            top: 70px;
+            height: calc(100vh - 70px);
+        }
+        
+        .logo-img {
+            width: 45px;
+            height: 24px;
+        }
+    }
+    
+    /* 基礎typography */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-serif);
+        font-weight: 500;
+        line-height: 1.3;
+        color: var(--text-primary);
+        margin-bottom: var(--space-sm);
+    }
+    
+    h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 600;
+    }
+    
+    h2 {
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+    }
+    
+    p {
+        margin-bottom: var(--space-sm);
+        color: var(--text-secondary);
+        font-weight: 400;
+    }
+    
+    a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color var(--transition-fast) ease;
+    }
+    
+    a:hover {
+        color: var(--primary-dark);
+    }
+    
+    /* 基礎佈局 */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+    }
+    
+    section {
+        padding: var(--space-xxl) 0;
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 var(--space-sm);
+        }
+        
+        section {
+            padding: var(--space-xl) 0;
+        }
+    }
+    
+    /* 圖片優化 */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
     </style>
 
     <!-- 字體優化載入 - 完全非阻塞 -->
@@ -483,11 +736,39 @@
     }
     </script>
 
-    <!-- Main CSS - 穩定的同步載入避免版面跳動 -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/index.css">
+    <!-- Main CSS - 非阻塞載入避免渲染阻塞 -->
+    <script>
+    // 非阻塞載入關鍵CSS
+    function loadNonCriticalCSS() {
+        const cssFiles = [
+            'css/base.css',
+            'css/layout.css', 
+            'css/index.css'
+        ];
+        
+        cssFiles.forEach(function(file) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = file;
+            link.media = 'print';
+            link.onload = function() { this.media = 'all'; };
+            document.head.appendChild(link);
+            
+            // Fallback for browsers that don't support onload
+            setTimeout(function() {
+                link.media = 'all';
+            }, 0);
+        });
+    }
     
+    // 頁面載入後載入非關鍵CSS
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadNonCriticalCSS);
+    } else {
+        loadNonCriticalCSS();
+    }
+    </script>
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -545,9 +826,18 @@
                     <div class="nav-logo">
             <a href="index.html" class="logo">
                 <picture>
-                    <source srcset="images/logo/kiwi-villa-logo.avif" type="image/avif">
-                    <source srcset="images/logo/kiwi-villa-logo.webp" type="image/webp">
-                    <img src="images/logo/kiwi-villa-logo.webp" alt="澎湖期遇度假會館 Logo" class="logo-img">
+                    <source srcset="images/logo/kiwi-villa-logo-small.avif 45w,
+                                   images/logo/kiwi-villa-logo-medium.webp 90w" 
+                            type="image/avif">
+                    <source srcset="images/logo/kiwi-villa-logo-small.webp 45w,
+                                   images/logo/kiwi-villa-logo-medium.webp 90w" 
+                            type="image/webp">
+                    <img src="images/logo/kiwi-villa-logo-small.webp" 
+                         alt="澎湖期遇度假會館 Logo" 
+                         class="logo-img"
+                         width="45" 
+                         height="24"
+                         sizes="(max-width: 768px) 45px, 60px">
                 </picture>
             </a>
             
@@ -591,12 +881,10 @@
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
         <picture class="hero-picture">
-            <!-- 手機版 - 更精細的srcset控制 -->
-            <source srcset="images/hero/main-hall-environment-mobile-new.avif 768w,
-                           images/hero/main-hall-environment-mobile-ultra.webp 768w" 
+            <!-- 手機版 - 超壓縮版本 -->
+            <source srcset="images/hero/main-hall-environment-mobile-ultra-compressed.avif 768w" 
                     media="(max-width: 768px)" type="image/avif">
-            <source srcset="images/hero/main-hall-environment-mobile-ultra.webp 768w,
-                           images/hero/main-hall-environment-mobile-new.webp 1024w" 
+            <source srcset="images/hero/main-hall-environment-mobile-ultra.webp 768w" 
                     media="(max-width: 768px)" type="image/webp">
             <source srcset="images/hero/main-hall-environment-mobile-new.jpg 768w" 
                     media="(max-width: 768px)" type="image/jpeg">
@@ -766,9 +1054,18 @@
                     <div class="footer-logo">
                         <a href="index.html">
                             <picture>
-                                <source srcset="images/logo/kiwi-villa-logo.avif" type="image/avif">
-                                <source srcset="images/logo/kiwi-villa-logo.webp" type="image/webp">
-                                <img src="images/logo/kiwi-villa-logo.webp" alt="澎湖期遇度假會館 Logo" class="footer-logo-img">
+                                <source srcset="images/logo/kiwi-villa-logo-small.avif 45w,
+                                               images/logo/kiwi-villa-logo-medium.webp 90w" 
+                                        type="image/avif">
+                                <source srcset="images/logo/kiwi-villa-logo-small.webp 45w,
+                                               images/logo/kiwi-villa-logo-medium.webp 90w" 
+                                        type="image/webp">
+                                <img src="images/logo/kiwi-villa-logo-small.webp" 
+                                     alt="澎湖期遇度假會館 Logo" 
+                                     class="footer-logo-img"
+                                     width="45" 
+                                     height="24"
+                                     sizes="(max-width: 768px) 45px, 60px">
                             </picture>
                         </a>
                         <span class="footer-logo-text">期遇度假會館</span>
