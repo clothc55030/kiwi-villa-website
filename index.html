@@ -61,17 +61,6 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- 預載入關鍵字體 -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"></noscript>
-    
-    <!-- Font Awesome - 延遲載入 -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    
-    <!-- AOS Animation - 延遲載入 -->
-    <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"></noscript>
     
     <!-- 完整Hero CSS內聯 - 避免渲染阻塞 -->
     <style>
@@ -116,6 +105,16 @@
         --transition-fast: 0.2s;
         --transition-normal: 0.3s;
         --transition-slow: 0.5s;
+        
+        /* 字體系統 - 系統字體優先，Google Fonts作為增強 */
+        --font-serif: "Playfair Display", "Times New Roman", "Microsoft YaHei", "PingFang TC", "Hiragino Sans GB", serif;
+        --font-sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", "PingFang TC", "Hiragino Sans GB", sans-serif;
+    }
+    
+    /* 基礎字體設定 - 立即可用的系統字體 */
+    body {
+        font-family: var(--font-sans);
+        font-display: swap;
     }
     
     /* Hero Section - 完整樣式 */
@@ -191,8 +190,9 @@
         100% { opacity: 1; }
     }
     
-    /* Hero 文字樣式 */
+    /* Hero 文字樣式 - 使用系統字體確保立即渲染 */
     .hero-subtitle-small {
+        font-family: var(--font-sans);
         font-size: clamp(0.875rem, 2vw, 1rem);
         color: rgba(255, 255, 255, 0.9);
         font-weight: 300;
@@ -203,6 +203,7 @@
     }
     
     .hero-title {
+        font-family: var(--font-serif);
         font-size: clamp(2.5rem, 6vw, 4rem);
         font-weight: 600;
         color: var(--white);
@@ -211,6 +212,7 @@
     }
     
     .hero-subtitle {
+        font-family: var(--font-serif);
         font-size: clamp(1.25rem, 3vw, 1.75rem);
         font-weight: 400;
         color: var(--white);
@@ -225,6 +227,7 @@
     }
     
     .hero-poem p {
+        font-family: var(--font-sans);
         font-size: clamp(1rem, 2.5vw, 1.25rem);
         color: rgba(255, 255, 255, 0.95);
         line-height: 1.8;
@@ -239,6 +242,7 @@
     }
     
     .hero-call-to-action p {
+        font-family: var(--font-sans);
         font-size: clamp(1.125rem, 2.5vw, 1.5rem);
         color: var(--white);
         line-height: 1.7;
@@ -253,6 +257,7 @@
     }
     
     .hero-final-line {
+        font-family: var(--font-sans);
         font-size: clamp(0.95rem, 2vw, 1.125rem);
         color: rgba(255, 255, 255, 0.9);
         font-style: italic;
@@ -269,6 +274,7 @@
     }
     
     .hero-buttons .btn {
+        font-family: var(--font-sans);
         padding: 16px 32px;
         font-size: 1.125rem;
         font-weight: 500;
@@ -414,7 +420,68 @@
             transition: none;
         }
     }
+    
+    /* Font Awesome Fallback - 圖標載入前的佔位符 */
+    .fas, .far, .fab {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        text-align: center;
+    }
+    
+    /* 具體圖標 fallback */
+    .fas.fa-calendar-alt::before,
+    .fas.fa-calendar-check::before {
+        content: "📅";
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    .fas.fa-chevron-down::before {
+        content: "⌄";
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    .fas.fa-phone::before {
+        content: "📞";
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    /* 當 Font Awesome 載入後，替換 fallback */
+    .fa-loaded .fas::before,
+    .fa-loaded .far::before,
+    .fa-loaded .fab::before {
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
+    }
     </style>
+
+    <!-- 字體優化載入 - 完全非阻塞 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- 字體載入策略 - 延遲載入僅必要字重 -->
+    <script>
+    // 非阻塞字體載入
+    function loadOptimalFonts() {
+        const link = document.createElement('link');
+        link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Noto+Sans+TC:wght@300;500&display=swap';
+        link.rel = 'stylesheet';
+        link.media = 'print';
+        link.onload = function() { this.media = 'all'; };
+        document.head.appendChild(link);
+        
+        // Fallback for browsers that don't support onload
+        setTimeout(function() {
+            link.media = 'all';
+        }, 0);
+    }
+    
+    // 延遲載入字體 - 頁面載入後
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadOptimalFonts);
+    } else {
+        loadOptimalFonts();
+    }
+    </script>
 
     <!-- Main CSS - 穩定的同步載入避免版面跳動 -->
     <link rel="stylesheet" href="css/base.css">
@@ -778,7 +845,61 @@
     <script>
     !function(e){"use strict";var t=function(t,n,r){function o(e){return i.body?e():void setTimeout(function(){o(e)})}function a(){d.addEventListener&&d.removeEventListener("load",a),d.media=r||"all"}var l,i=e.document,d=i.createElement("link");if(n)l=n;else{var s=(i.body||i.getElementsByTagName("head")[0]).childNodes;l=s[s.length-1]}var u=i.styleSheets;d.rel="stylesheet",d.href=t,d.media="only x",o(function(){l.parentNode.insertBefore(d,n?l:l.nextSibling)});var f=function(e){for(var t=d.href,n=u.length;n--;)if(u[n].href===t)return e();setTimeout(function(){f(e)})};return d.addEventListener&&d.addEventListener("load",a),d.onloadcssdefined=f,f(a),d};"undefined"!=typeof exports?exports.loadCSS=t:e.loadCSS=t}("undefined"!=typeof global?global:this);
     </script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    
+    <!-- 非阻塞載入外部資源 -->
+    <script>
+    function loadExternalResources() {
+        // Font Awesome - 非阻塞載入
+        const faLink = document.createElement('link');
+        faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+        faLink.rel = 'stylesheet';
+        faLink.media = 'print';
+        faLink.onload = function() { 
+            this.media = 'all';
+            // 標記 Font Awesome 已載入
+            document.documentElement.classList.add('fa-loaded');
+        };
+        document.head.appendChild(faLink);
+        
+        // AOS 動畫庫 - 非阻塞載入
+        const aosLink = document.createElement('link');
+        aosLink.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+        aosLink.rel = 'stylesheet';
+        aosLink.media = 'print';
+        aosLink.onload = function() { this.media = 'all'; };
+        document.head.appendChild(aosLink);
+        
+        // AOS JavaScript - 延遲載入
+        setTimeout(function() {
+            const aosScript = document.createElement('script');
+            aosScript.src = 'https://unpkg.com/aos@2.3.1/dist/aos.js';
+            aosScript.defer = true;
+            aosScript.onload = function() {
+                // 初始化 AOS，但排除 Hero 區域
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({
+                        duration: 600,
+                        once: true,
+                        offset: 100,
+                        disable: function() {
+                            // 在小螢幕或低性能設備上禁用
+                            return window.innerWidth < 768;
+                        }
+                    });
+                }
+            };
+            document.head.appendChild(aosScript);
+        }, 1000); // 延遲1秒載入
+    }
+    
+    // 頁面載入完成後載入外部資源
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadExternalResources);
+    } else {
+        loadExternalResources();
+    }
+    </script>
+    
     <script src="js/main.js" defer></script>
 </body>
 </html> 
