@@ -59,7 +59,7 @@
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"></noscript>
     
-    <!-- 關鍵CSS內聯 - 優化LCP - 使用picture/img結構 -->
+    <!-- 關鍵CSS內聯 - 優化LCP - 立即顯示Hero內容 -->
     <style>
     /* 關鍵Hero樣式 - 優化LCP */
     .hero-section{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -67,6 +67,11 @@
     .hero-image{width:100%;height:100%;object-fit:cover;object-position:center;display:block;will-change:auto;transform:translate3d(0,0,0)}
     .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4),rgba(0,0,0,0.6));z-index:2}
     .hero-content{position:relative;z-index:3;text-align:center;max-width:900px;padding:3rem 1.5rem 6rem;background:rgba(0,0,0,0.3);border-radius:20px;border:1px solid rgba(255,255,255,0.15);margin-top:30px;box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+    /* 立即顯示 - 移除AOS延遲 */
+    .hero-content-immediate{opacity:1;transform:translateY(0);animation:heroFadeIn 0.8s ease-out}
+    .hero-scroll-immediate{opacity:1;animation:heroScrollFade 1.2s ease-out 0.5s both}
+    @keyframes heroFadeIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+    @keyframes heroScrollFade{0%{opacity:0}100%{opacity:1}}
     </style>
 
     <!-- Main CSS - 關鍵 CSS 保持正常載入 -->
@@ -191,7 +196,7 @@
                  decoding="async">
         </picture>
         <div class="hero-overlay"></div>
-        <div class="hero-content" data-aos="fade-up" data-aos-delay="300">
+        <div class="hero-content hero-content-immediate">
             <div class="hero-subtitle-small">澎湖民宿推薦</div>
             <h1 class="hero-title">期遇度假會館</h1>
             <h2 class="hero-subtitle">・期待相遇</h2>
@@ -215,7 +220,7 @@
                     </a>
             </div>
         </div>
-        <div class="hero-scroll-indicator" data-aos="fade-in" data-aos-delay="800">
+        <div class="hero-scroll-indicator hero-scroll-immediate">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>

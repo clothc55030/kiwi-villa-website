@@ -76,6 +76,41 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
+/* 立即顯示優化 - 移除AOS依賴 */
+.hero-content-immediate {
+    opacity: 1;
+    transform: translateY(0);
+    animation: heroFadeInUp 0.8s ease-out;
+}
+
+.hero-scroll-immediate {
+    opacity: 1;
+    animation: heroScrollFadeIn 1.2s ease-out 0.5s both;
+}
+
+/* 性能優化的CSS動畫 - 取代AOS */
+@keyframes heroFadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroScrollFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
 .hero-subtitle-small {
     font-size: clamp(0.875rem, 2vw, 1rem);
     color: rgba(255, 255, 255, 0.9);
