@@ -979,8 +979,10 @@ function initRoomNavigation() {
         
         // 檢查是否有房間錨點
         if (hash && hash.includes('room-')) {
-            const roomId = hash.substring(1); // 移除 # 符號
-            const targetRoom = document.getElementById(roomId);
+            const targetRoomId = hash.substring(1); // 移除 # 符號
+            console.log('檢測到房間錨點:', targetRoomId);
+            
+            const targetRoom = document.getElementById(targetRoomId);
             
             if (targetRoom) {
                 // 延遲執行確保頁面已完全載入
@@ -989,7 +991,7 @@ function initRoomNavigation() {
                 }, 500);
             } else {
                 // 如果是隱藏錨點，找到對應的房間卡片
-                const roomNumber = roomId.replace(/\D/g, '');
+                const roomNumber = targetRoomId.replace(/\D/g, '');
                 let actualTargetRoom = null;
                 
                 if (roomNumber === '302') {

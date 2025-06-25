@@ -45,17 +45,8 @@ RewriteRule ^(.*)$ https://www.kiwi-villa.com/$1 [L,R=301]
 # URL 重寫和清理
 # ==========================================
 
-# 房間號直接跳轉規則（優先處理）
-# 支援房間號：201, 203, 205, 303, 301, 302, 305, 306, 307
-RewriteRule ^(201)/?$ /rooms.html#room-201 [L,R=301]
-RewriteRule ^(203)/?$ /rooms.html#room-203 [L,R=301]
-RewriteRule ^(205)/?$ /rooms.html#room-205 [L,R=301]
-RewriteRule ^(303)/?$ /rooms.html#room-303 [L,R=301]
-RewriteRule ^(301)/?$ /rooms.html#room-301 [L,R=301]
-RewriteRule ^(302)/?$ /rooms.html#room-302 [L,R=301]
-RewriteRule ^(305)/?$ /rooms.html#room-305 [L,R=301]
-RewriteRule ^(306)/?$ /rooms.html#room-306 [L,R=301]
-RewriteRule ^(307)/?$ /rooms.html#room-307 [L,R=301]
+# 房間號跳轉由 404 頁面的 JavaScript 處理
+# 靜態網站無法使用伺服器端重寫規則
 
 # 將 .html 重定向到無後綴版本
 RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
