@@ -371,6 +371,22 @@
 }
 
 @media (max-width: 768px) {
+    /* 手機版禁用房間卡片入場動畫 */
+    .room-card {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .room-card:nth-child(1),
+    .room-card:nth-child(2),
+    .room-card:nth-child(3),
+    .room-card:nth-child(4),
+    .room-card:nth-child(5),
+    .room-card:nth-child(6) {
+        animation-delay: 0s;
+    }
+    
     .hero-section {
         padding: 4rem 0 3rem;
     }
@@ -709,28 +725,14 @@
     }
 }
 
-/* 響應式優化 */
+/* 手機版響應式優化 - 禁用高亮動畫 */
 @media (max-width: 768px) {
     .room-card.highlighted {
+        /* 禁用高亮動畫，僅保留視覺效果 */
+        animation: none;
         border: 2px solid var(--primary-color);
         box-shadow: 0 6px 24px rgba(124, 155, 181, 0.3), 
                     0 0 0 3px rgba(124, 155, 181, 0.1);
-    }
-    
-    @keyframes roomHighlight {
-        0% {
-            transform: scale(1);
-            box-shadow: 0 4px 16px rgba(124, 155, 181, 0.1);
-        }
-        50% {
-            transform: scale(1.01);
-            box-shadow: 0 8px 28px rgba(124, 155, 181, 0.35), 
-                        0 0 0 6px rgba(124, 155, 181, 0.12);
-        }
-        100% {
-            transform: scale(1);
-            box-shadow: 0 6px 24px rgba(124, 155, 181, 0.3), 
-                        0 0 0 3px rgba(124, 155, 181, 0.1);
-        }
+        transform: none;
     }
 } 

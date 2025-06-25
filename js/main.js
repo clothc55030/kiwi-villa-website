@@ -1113,11 +1113,12 @@ function initRoomNavigation() {
                         return;
                     }
                     
-                    // 檢查是否為減少動畫模式
+                    // 檢查是否需要等待動畫
+                    const isMobile = window.innerWidth < 768;
                     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                     
-                    // 如果不是減少動畫模式，檢查動畫是否完成（手機版特別重要）
-                    if (!prefersReducedMotion) {
+                    // 只有桌面版且非減少動畫模式才需要檢查動畫
+                    if (!isMobile && !prefersReducedMotion) {
                         const isAnimationComplete = () => {
                             const style = window.getComputedStyle(targetRoom);
                             const opacity = parseFloat(style.opacity);
@@ -1145,12 +1146,10 @@ function initRoomNavigation() {
                 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 
                 let initialDelay;
-                if (prefersReducedMotion) {
-                    initialDelay = 300; // 減少動畫模式：短延遲
-                } else if (isMobile) {
-                    initialDelay = 1500; // 手機版：等待所有動畫完成
+                if (prefersReducedMotion || isMobile) {
+                    initialDelay = 300; // 手機版或減少動畫模式：快速執行
                 } else {
-                    initialDelay = 800; // 桌面版：標準延遲
+                    initialDelay = 800; // 桌面版：等待動畫完成
                 }
                 
                 console.log('設定延遲執行時間:', initialDelay, 'ms (手機版:', isMobile, ', 減少動畫:', prefersReducedMotion, ')');
@@ -1163,7 +1162,7 @@ function initRoomNavigation() {
                         console.log('終極備用滾動執行');
                         scrollToRoom(targetRoom);
                     }
-                }, isMobile ? 3000 : 2500);
+                }, isMobile ? 1500 : 2500);
                 
             } else {
                 console.log('找不到對應的房間元素，房號:', roomNumber);
