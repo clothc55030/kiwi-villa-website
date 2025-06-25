@@ -1053,8 +1053,11 @@ function initRoomNavigation() {
         if (targetRoomId && roomNumber) {
             console.log('開始處理房間導航 - 房號:', roomNumber, '目標ID:', targetRoomId);
             
-            // 檢查所有可用的房間元素
+            // 清除所有房間的處理標記，允許重新跳轉
             const allRoomCards = document.querySelectorAll('.room-card[id]');
+            allRoomCards.forEach(room => {
+                delete room.dataset.navigationProcessed;
+            });
             console.log('頁面中找到的房間卡片:', Array.from(allRoomCards).map(el => el.id));
             
             // 先嘗試直接找到目標房間
@@ -1103,6 +1106,13 @@ function initRoomNavigation() {
             
             if (targetRoom) {
                 console.log('找到目標房間元素:', targetRoom.id, targetRoom);
+                
+                // 添加執行標記，避免重複處理
+                if (targetRoom.dataset.navigationProcessed === 'true') {
+                    console.log('房間跳轉已處理過，跳過重複執行');
+                    return;
+                }
+                targetRoom.dataset.navigationProcessed = 'true';
                 
                 // 等待所有動畫完成後執行滾動
                 const executeScroll = () => {
@@ -1155,14 +1165,6 @@ function initRoomNavigation() {
                 console.log('設定延遲執行時間:', initialDelay, 'ms (手機版:', isMobile, ', 減少動畫:', prefersReducedMotion, ')');
                 
                 setTimeout(executeScroll, initialDelay);
-                
-                // 終極備用執行，確保功能一定會運行
-                setTimeout(() => {
-                    if (!targetRoom.classList.contains('highlighted')) {
-                        console.log('終極備用滾動執行');
-                        scrollToRoom(targetRoom);
-                    }
-                }, isMobile ? 1500 : 2500);
                 
             } else {
                 console.log('找不到對應的房間元素，房號:', roomNumber);
@@ -1220,38 +1222,14 @@ function initRoomNavigation() {
                 behavior: 'smooth'
             });
             
-            // 手機版等待更長時間讓滾動完成
-            const scrollDelay = isMobile ? 1200 : 800;
+            // 手機版較短延遲，桌面版較長延遲等待滾動完成
+            const scrollDelay = isMobile ? 600 : 800;
             
+            // 滾動完成後高亮，只執行一次
             setTimeout(() => {
+                console.log('滾動延遲完成，執行高亮');
                 highlightRoom(roomElement);
-                console.log('滾動完成，高亮房間');
             }, scrollDelay);
-            
-            // 備用檢查：手機版更頻繁檢查滾動狀態
-            const checkInterval = isMobile ? 300 : 500;
-            setTimeout(() => {
-                const newScroll = window.pageYOffset;
-                const scrollDifference = Math.abs(newScroll - offsetTop);
-                
-                if (scrollDifference > (isMobile ? 80 : 50)) {
-                    console.log('滾動位置不準確，重新計算並滾動');
-                    
-                    // 重新計算位置
-                    const newRect = roomElement.getBoundingClientRect();
-                    const newTop = newRect.top + window.pageYOffset;
-                    const correctedTop = Math.max(0, newTop - navbarHeight - extraMargin);
-                    
-                    window.scrollTo({
-                        top: correctedTop,
-                        behavior: 'smooth'
-                    });
-                    
-                    setTimeout(() => {
-                        highlightRoom(roomElement);
-                    }, scrollDelay / 2);
-                }
-            }, scrollDelay + 200);
             
         } catch (error) {
             console.error('滾動執行錯誤:', error);
@@ -1265,6 +1243,12 @@ function initRoomNavigation() {
     
     // 高亮房間卡片
     function highlightRoom(roomElement) {
+        // 如果已經在高亮狀態，不重複處理
+        if (roomElement.classList.contains('highlighted')) {
+            console.log('房間已經高亮，跳過重複處理');
+            return;
+        }
+        
         // 移除其他房間的高亮
         const allRooms = document.querySelectorAll('.room-card');
         allRooms.forEach(room => {
@@ -1273,10 +1257,12 @@ function initRoomNavigation() {
         
         // 添加高亮效果
         roomElement.classList.add('highlighted');
+        console.log('房間高亮效果已添加:', roomElement.id);
         
         // 3秒後移除高亮
         setTimeout(() => {
             roomElement.classList.remove('highlighted');
+            console.log('房間高亮效果已移除:', roomElement.id);
         }, 3000);
     }
     
