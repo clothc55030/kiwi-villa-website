@@ -1104,7 +1104,7 @@ function initRoomNavigation() {
             if (targetRoom) {
                 console.log('找到目標房間元素:', targetRoom.id, targetRoom);
                 
-                // 等待 DOM 和 CSS 完全載入，使用多重延遲策略
+                // 等待所有動畫完成後執行滾動
                 const executeScroll = () => {
                     // 確保元素在視窗內可見
                     if (targetRoom.offsetHeight === 0) {
@@ -1113,20 +1113,57 @@ function initRoomNavigation() {
                         return;
                     }
                     
+                    // 檢查是否為減少動畫模式
+                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    
+                    // 如果不是減少動畫模式，檢查動畫是否完成（手機版特別重要）
+                    if (!prefersReducedMotion) {
+                        const isAnimationComplete = () => {
+                            const style = window.getComputedStyle(targetRoom);
+                            const opacity = parseFloat(style.opacity);
+                            const transform = style.transform;
+                            
+                            // 檢查元素是否已完全顯示（opacity=1）且無位移變換
+                            return opacity === 1 && (transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)');
+                        };
+                        
+                        if (!isAnimationComplete()) {
+                            console.log('動畫尚未完成，延遲執行滾動');
+                            setTimeout(executeScroll, 200);
+                            return;
+                        }
+                    } else {
+                        console.log('減少動畫模式啟用，跳過動畫檢測');
+                    }
+                    
                     scrollToRoom(targetRoom);
-                    console.log('成功執行滾動到房間:', targetRoom.id);
+                    console.log('動畫完成，成功執行滾動到房間:', targetRoom.id);
                 };
                 
-                // 多階段延遲執行
-                setTimeout(executeScroll, 500);
+                // 智能延遲：考慮設備類型和動畫設定
+                const isMobile = window.innerWidth < 768;
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 
-                // 備用延遲執行，確保在慢速網絡下也能工作
+                let initialDelay;
+                if (prefersReducedMotion) {
+                    initialDelay = 300; // 減少動畫模式：短延遲
+                } else if (isMobile) {
+                    initialDelay = 1500; // 手機版：等待所有動畫完成
+                } else {
+                    initialDelay = 800; // 桌面版：標準延遲
+                }
+                
+                console.log('設定延遲執行時間:', initialDelay, 'ms (手機版:', isMobile, ', 減少動畫:', prefersReducedMotion, ')');
+                
+                setTimeout(executeScroll, initialDelay);
+                
+                // 終極備用執行，確保功能一定會運行
                 setTimeout(() => {
                     if (!targetRoom.classList.contains('highlighted')) {
-                        console.log('備用滾動執行');
-                        executeScroll();
+                        console.log('終極備用滾動執行');
+                        scrollToRoom(targetRoom);
                     }
-                }, 1500);
+                }, isMobile ? 3000 : 2500);
                 
             } else {
                 console.log('找不到對應的房間元素，房號:', roomNumber);
@@ -1143,25 +1180,33 @@ function initRoomNavigation() {
         
         const navbar = document.getElementById('navbar');
         const navbarHeight = navbar ? navbar.offsetHeight : 80;
+        const isMobile = window.innerWidth < 768;
         
-        // 計算滾動位置 - 使用更穩定的計算方式
+        // 強制重新計算佈局，確保動畫完成後的準確位置
+        roomElement.offsetHeight; // 觸發重排
+        
+        // 計算滾動位置 - 手機版使用更保守的間距
         const elementRect = roomElement.getBoundingClientRect();
         const elementTop = elementRect.top + window.pageYOffset;
-        const offsetTop = Math.max(0, elementTop - navbarHeight - 30); // 額外留30px間距，確保不為負數
+        const extraMargin = isMobile ? 50 : 30; // 手機版留更多間距
+        const offsetTop = Math.max(0, elementTop - navbarHeight - extraMargin);
         
-        console.log('滾動計算:', {
+        console.log('滾動計算 (手機版: ' + isMobile + '):', {
             elementRect: elementRect,
             elementTop: elementTop,
             navbarHeight: navbarHeight,
+            extraMargin: extraMargin,
             offsetTop: offsetTop,
             currentScroll: window.pageYOffset
         });
         
-        // 如果已經在正確位置附近，就不需要滾動
+        // 檢查是否已在視窗內 - 手機版使用更寬鬆的條件
         const currentScroll = window.pageYOffset;
-        const targetInView = elementRect.top >= -50 && elementRect.bottom <= window.innerHeight + 50;
+        const viewportBuffer = isMobile ? 100 : 50;
+        const targetInView = elementRect.top >= -viewportBuffer && 
+                           elementRect.bottom <= window.innerHeight + viewportBuffer;
         
-        if (targetInView && Math.abs(currentScroll - offsetTop) < 100) {
+        if (targetInView && Math.abs(currentScroll - offsetTop) < viewportBuffer) {
             console.log('房間已在視窗內，直接高亮');
             highlightRoom(roomElement);
             return;
@@ -1176,27 +1221,46 @@ function initRoomNavigation() {
                 behavior: 'smooth'
             });
             
-            // 滾動完成後添加高亮效果
+            // 手機版等待更長時間讓滾動完成
+            const scrollDelay = isMobile ? 1200 : 800;
+            
             setTimeout(() => {
                 highlightRoom(roomElement);
                 console.log('滾動完成，高亮房間');
-            }, 800);
+            }, scrollDelay);
             
-            // 備用：如果 smooth 滾動失敗，使用立即滾動
+            // 備用檢查：手機版更頻繁檢查滾動狀態
+            const checkInterval = isMobile ? 300 : 500;
             setTimeout(() => {
                 const newScroll = window.pageYOffset;
-                if (Math.abs(newScroll - offsetTop) > 50) {
-                    console.log('smooth滾動可能失敗，使用立即滾動');
-                    window.scrollTo(0, offsetTop);
-                    highlightRoom(roomElement);
+                const scrollDifference = Math.abs(newScroll - offsetTop);
+                
+                if (scrollDifference > (isMobile ? 80 : 50)) {
+                    console.log('滾動位置不準確，重新計算並滾動');
+                    
+                    // 重新計算位置
+                    const newRect = roomElement.getBoundingClientRect();
+                    const newTop = newRect.top + window.pageYOffset;
+                    const correctedTop = Math.max(0, newTop - navbarHeight - extraMargin);
+                    
+                    window.scrollTo({
+                        top: correctedTop,
+                        behavior: 'smooth'
+                    });
+                    
+                    setTimeout(() => {
+                        highlightRoom(roomElement);
+                    }, scrollDelay / 2);
                 }
-            }, 1500);
+            }, scrollDelay + 200);
             
         } catch (error) {
             console.error('滾動執行錯誤:', error);
-            // 降級處理：使用舊式滾動
+            // 降級處理：使用立即滾動
             window.scrollTo(0, offsetTop);
-            highlightRoom(roomElement);
+            setTimeout(() => {
+                highlightRoom(roomElement);
+            }, 100);
         }
     }
     
