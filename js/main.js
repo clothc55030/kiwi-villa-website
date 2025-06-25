@@ -970,18 +970,34 @@ function initRoomNavigation() {
     console.log('房間跳轉調試:', { 
         path: window.location.pathname, 
         hash: window.location.hash,
+        search: window.location.search,
         currentURL: window.location.href 
     });
     
-    // 檢查當前URL錨點
+    // 檢查當前URL錨點或查詢參數
     function checkRoomNavigation() {
         const hash = window.location.hash;
+        const urlParams = new URLSearchParams(window.location.search);
+        const gotoParam = urlParams.get('goto');
         
-        // 檢查是否有房間錨點
-        if (hash && hash.includes('room-')) {
-            const targetRoomId = hash.substring(1); // 移除 # 符號
-            console.log('檢測到房間錨點:', targetRoomId);
+        let targetRoomId = null;
+        
+        // 優先檢查查詢參數（從伺服器重定向）
+        if (gotoParam) {
+            targetRoomId = 'room-' + gotoParam;
+            console.log('檢測到房間查詢參數:', gotoParam);
             
+            // 更新URL為錨點形式，移除查詢參數
+            const newUrl = window.location.pathname + '#' + targetRoomId;
+            history.replaceState(null, '', newUrl);
+        }
+        // 檢查是否有房間錨點
+        else if (hash && hash.includes('room-')) {
+            targetRoomId = hash.substring(1); // 移除 # 符號
+            console.log('檢測到房間錨點:', targetRoomId);
+        }
+        
+        if (targetRoomId) {
             const targetRoom = document.getElementById(targetRoomId);
             
             if (targetRoom) {

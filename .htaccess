@@ -45,8 +45,11 @@ RewriteRule ^(.*)$ https://www.kiwi-villa.com/$1 [L,R=301]
 # URL 重寫和清理
 # ==========================================
 
-# 房間號跳轉由 404 頁面的 JavaScript 處理
-# 靜態網站無法使用伺服器端重寫規則
+# 房間號直接重定向規則（伺服器端處理）
+# 使用查詢參數，避免經過404頁面
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(201|203|205|303|301|302|305|306|307)/?$ /rooms?goto=$1 [L,R=301]
 
 # 將 .html 重定向到無後綴版本
 RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]

@@ -298,48 +298,13 @@
             });
         }
         
-                // 房間跳轉檢測
-        function checkRoomRedirect() {
-            const path = window.location.pathname;
-            const roomNumber = path.replace(/\D/g, ''); // 提取數字
-            
-            // 房間號碼對應關係
-            const roomMapping = {
-                '201': 'room-201',    // 萌201
-                '203': 'room-203',    // 戀203
-                '205': 'room-205',    // 趣205
-                '303': 'room-303',    // 夢303
-                '301': 'room-301',    // 期301
-                '302': 'room-302',    // 遇302
-                '305': 'room-305',    // 泊305
-                '306': 'room-306',    // 韻306
-                '307': 'room-307'     // 縵307
-            };
-            
-            // 如果URL包含有效的房間號，自動跳轉到房型頁面
-            if (roomNumber && roomMapping[roomNumber]) {
-                console.log('檢測到房間號:', roomNumber, '跳轉到:', roomMapping[roomNumber]);
-                
-                // 立即跳轉（不顯示任何提示）
-                window.location.replace(`/rooms#${roomMapping[roomNumber]}`);
-                
-                return true;
-            }
-            
-            return false;
-        }
-        
-        // 頁面載入時檢查房間跳轉
-        if (!checkRoomRedirect()) {
-            // 如果不是房間跳轉，執行原有的邏輯
-            // 如果用戶是從搜尋引擎來的，5秒後自動重定向到首頁
-            if (document.referrer && (document.referrer.includes('google') || document.referrer.includes('bing') || document.referrer.includes('yahoo'))) {
-                setTimeout(() => {
-                    if (confirm('頁面不存在，是否要返回首頁？')) {
-                        window.location.href = '/';
-                    }
-                }, 5000);
-            }
+                // 如果用戶是從搜尋引擎來的，5秒後自動重定向到首頁
+        if (document.referrer && (document.referrer.includes('google') || document.referrer.includes('bing') || document.referrer.includes('yahoo'))) {
+            setTimeout(() => {
+                if (confirm('頁面不存在，是否要返回首頁？')) {
+                    window.location.href = '/';
+                }
+            }, 5000);
         }
     </script>
 </body>
