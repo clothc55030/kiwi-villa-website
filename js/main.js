@@ -57,8 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
         initRoomGallerySwipe();
     }
     
-    // Room direct navigation functionality
-    initRoomNavigation();
+    // Room direct navigation functionality - 延遲執行確保所有元素都已載入
+    setTimeout(() => {
+        initRoomNavigation();
+    }, 100);
     
     // 視窗大小變化監聽 - 防抖處理
     let resizeTimer;
@@ -983,11 +985,18 @@ function initRoomNavigation() {
         let targetRoomId = null;
         let roomNumber = null;
         
-        // 優先檢查查詢參數（從首頁重定向）
+        console.log('房間導航調試 - URL資訊:', {
+            hash: hash,
+            gotoParam: gotoParam,
+            search: window.location.search,
+            pathname: window.location.pathname
+        });
+        
+        // 優先檢查查詢參數（從 Cloudflare Pages 重定向）
         if (gotoParam) {
             roomNumber = gotoParam;
             targetRoomId = 'room-' + roomNumber;
-            console.log('檢測到房間查詢參數:', gotoParam);
+            console.log('檢測到房間查詢參數:', gotoParam, '目標ID:', targetRoomId);
             
             // 更新URL為錨點形式，移除查詢參數
             const newUrl = window.location.pathname + '#' + targetRoomId;
@@ -1001,6 +1010,12 @@ function initRoomNavigation() {
         }
         
         if (targetRoomId && roomNumber) {
+            console.log('開始處理房間導航 - 房號:', roomNumber, '目標ID:', targetRoomId);
+            
+            // 檢查所有可用的房間元素
+            const allRoomCards = document.querySelectorAll('.room-card[id]');
+            console.log('頁面中找到的房間卡片:', Array.from(allRoomCards).map(el => el.id));
+            
             // 先嘗試直接找到目標房間
             let targetRoom = document.getElementById(targetRoomId);
             
@@ -1046,34 +1061,102 @@ function initRoomNavigation() {
             }
             
             if (targetRoom) {
-                // 延遲執行確保頁面已完全載入
-                setTimeout(() => {
+                console.log('找到目標房間元素:', targetRoom.id, targetRoom);
+                
+                // 等待 DOM 和 CSS 完全載入，使用多重延遲策略
+                const executeScroll = () => {
+                    // 確保元素在視窗內可見
+                    if (targetRoom.offsetHeight === 0) {
+                        console.log('目標元素尚未完全載入，再次延遲');
+                        setTimeout(executeScroll, 200);
+                        return;
+                    }
+                    
                     scrollToRoom(targetRoom);
-                    console.log('成功滾動到房間:', targetRoom.id);
-                }, 500);
+                    console.log('成功執行滾動到房間:', targetRoom.id);
+                };
+                
+                // 多階段延遲執行
+                setTimeout(executeScroll, 500);
+                
+                // 備用延遲執行，確保在慢速網絡下也能工作
+                setTimeout(() => {
+                    if (!targetRoom.classList.contains('highlighted')) {
+                        console.log('備用滾動執行');
+                        executeScroll();
+                    }
+                }, 1500);
+                
             } else {
                 console.log('找不到對應的房間元素，房號:', roomNumber);
+                console.log('可能的解決方案：檢查房間ID是否正確');
             }
+        } else {
+            console.log('沒有檢測到需要跳轉的房間');
         }
     }
     
     // 平滑滾動到房間卡片
     function scrollToRoom(roomElement) {
+        console.log('執行滾動到房間:', roomElement.id);
+        
         const navbar = document.getElementById('navbar');
         const navbarHeight = navbar ? navbar.offsetHeight : 80;
         
-        // 計算滾動位置
-        const elementTop = roomElement.getBoundingClientRect().top + window.pageYOffset;
-        const offsetTop = elementTop - navbarHeight - 20; // 額外留20px間距
+        // 計算滾動位置 - 使用更穩定的計算方式
+        const elementRect = roomElement.getBoundingClientRect();
+        const elementTop = elementRect.top + window.pageYOffset;
+        const offsetTop = Math.max(0, elementTop - navbarHeight - 30); // 額外留30px間距，確保不為負數
         
-        // 平滑滾動
-        window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
+        console.log('滾動計算:', {
+            elementRect: elementRect,
+            elementTop: elementTop,
+            navbarHeight: navbarHeight,
+            offsetTop: offsetTop,
+            currentScroll: window.pageYOffset
         });
         
-        // 添加高亮效果
-        highlightRoom(roomElement);
+        // 如果已經在正確位置附近，就不需要滾動
+        const currentScroll = window.pageYOffset;
+        const targetInView = elementRect.top >= -50 && elementRect.bottom <= window.innerHeight + 50;
+        
+        if (targetInView && Math.abs(currentScroll - offsetTop) < 100) {
+            console.log('房間已在視窗內，直接高亮');
+            highlightRoom(roomElement);
+            return;
+        }
+        
+        // 執行平滑滾動
+        try {
+            console.log('執行滾動 - 從', currentScroll, '到', offsetTop);
+            
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+            
+            // 滾動完成後添加高亮效果
+            setTimeout(() => {
+                highlightRoom(roomElement);
+                console.log('滾動完成，高亮房間');
+            }, 800);
+            
+            // 備用：如果 smooth 滾動失敗，使用立即滾動
+            setTimeout(() => {
+                const newScroll = window.pageYOffset;
+                if (Math.abs(newScroll - offsetTop) > 50) {
+                    console.log('smooth滾動可能失敗，使用立即滾動');
+                    window.scrollTo(0, offsetTop);
+                    highlightRoom(roomElement);
+                }
+            }, 1500);
+            
+        } catch (error) {
+            console.error('滾動執行錯誤:', error);
+            // 降級處理：使用舊式滾動
+            window.scrollTo(0, offsetTop);
+            highlightRoom(roomElement);
+        }
     }
     
     // 高亮房間卡片
