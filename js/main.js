@@ -981,10 +981,12 @@ function initRoomNavigation() {
         const gotoParam = urlParams.get('goto');
         
         let targetRoomId = null;
+        let roomNumber = null;
         
-        // 優先檢查查詢參數（從伺服器重定向）
+        // 優先檢查查詢參數（從首頁重定向）
         if (gotoParam) {
-            targetRoomId = 'room-' + gotoParam;
+            roomNumber = gotoParam;
+            targetRoomId = 'room-' + roomNumber;
             console.log('檢測到房間查詢參數:', gotoParam);
             
             // 更新URL為錨點形式，移除查詢參數
@@ -994,33 +996,63 @@ function initRoomNavigation() {
         // 檢查是否有房間錨點
         else if (hash && hash.includes('room-')) {
             targetRoomId = hash.substring(1); // 移除 # 符號
+            roomNumber = targetRoomId.replace('room-', '');
             console.log('檢測到房間錨點:', targetRoomId);
         }
         
-        if (targetRoomId) {
-            const targetRoom = document.getElementById(targetRoomId);
+        if (targetRoomId && roomNumber) {
+            // 先嘗試直接找到目標房間
+            let targetRoom = document.getElementById(targetRoomId);
+            
+            // 如果找不到直接的房間ID，檢查房號對應關係
+            if (!targetRoom) {
+                console.log('未找到直接房間ID，檢查房號對應關係:', roomNumber);
+                
+                // 房號對應關係處理
+                switch(roomNumber) {
+                    case '201':
+                        targetRoom = document.getElementById('room-201');
+                        break;
+                    case '203':
+                        targetRoom = document.getElementById('room-203');
+                        break;
+                    case '205':
+                        targetRoom = document.getElementById('room-205');
+                        break;
+                    case '301':
+                        targetRoom = document.getElementById('room-301');
+                        break;
+                    case '302':
+                        // 302 跳轉到 301 房間卡片
+                        targetRoom = document.getElementById('room-301');
+                        console.log('房號302重定向到room-301');
+                        break;
+                    case '303':
+                        targetRoom = document.getElementById('room-303');
+                        break;
+                    case '305':
+                        targetRoom = document.getElementById('room-305');
+                        break;
+                    case '306':
+                    case '307':
+                        // 306、307 跳轉到 305 房間卡片
+                        targetRoom = document.getElementById('room-305');
+                        console.log('房號' + roomNumber + '重定向到room-305');
+                        break;
+                    default:
+                        console.log('未知房號:', roomNumber);
+                        break;
+                }
+            }
             
             if (targetRoom) {
                 // 延遲執行確保頁面已完全載入
                 setTimeout(() => {
                     scrollToRoom(targetRoom);
+                    console.log('成功滾動到房間:', targetRoom.id);
                 }, 500);
             } else {
-                // 如果是隱藏錨點，找到對應的房間卡片
-                const roomNumber = targetRoomId.replace(/\D/g, '');
-                let actualTargetRoom = null;
-                
-                if (roomNumber === '302') {
-                    actualTargetRoom = document.getElementById('room-301');
-                } else if (roomNumber === '306' || roomNumber === '307') {
-                    actualTargetRoom = document.getElementById('room-305');
-                }
-                
-                if (actualTargetRoom) {
-                    setTimeout(() => {
-                        scrollToRoom(actualTargetRoom);
-                    }, 500);
-                }
+                console.log('找不到對應的房間元素，房號:', roomNumber);
             }
         }
     }

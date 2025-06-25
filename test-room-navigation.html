@@ -1,1 +1,263 @@
- 
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>房號跳轉功能測試 - 澎湖期遇度假會館</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+        
+        .test-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: #7c9bb5;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            color: #6b8aa0;
+            border-bottom: 2px solid #b8c7d6;
+            padding-bottom: 0.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+        
+        .test-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .test-link {
+            background: linear-gradient(135deg, #7c9bb5, #9bb0c4);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        
+        .test-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(124, 155, 181, 0.3);
+            color: white;
+        }
+        
+        .room-info {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        
+        .note {
+            background: #e8f4f8;
+            border: 1px solid #b8c7d6;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #8d6e1a;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #e83e8c;
+        }
+        
+        .status {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .test-container {
+                padding: 1rem;
+            }
+            
+            .test-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🏨 澎湖期遇度假會館<br>房號跳轉功能測試</h1>
+        
+        <div class="note success">
+            <strong>✅ 功能已實現！</strong><br>
+            現在您可以直接在網址輸入房號，系統會自動跳轉到相應的房間頁面並高亮顯示對應房間。
+        </div>
+
+        <h2>🔗 測試連結</h2>
+        <p>點擊下方連結測試房號跳轉功能：</p>
+        
+        <div class="test-links">
+            <a href="/201" class="test-link">
+                <strong>201 房間</strong>
+                <div class="room-info">萌201 - 豪華家庭房-附浴缸</div>
+            </a>
+            
+            <a href="/203" class="test-link">
+                <strong>203 房間</strong>
+                <div class="room-info">戀203 - 高級四人房-附陽台</div>
+            </a>
+            
+            <a href="/205" class="test-link">
+                <strong>205 房間</strong>
+                <div class="room-info">趣205 - 奢華四人房-附陽台</div>
+            </a>
+            
+            <a href="/301" class="test-link">
+                <strong>301 房間</strong>
+                <div class="room-info">期301 - 高級雙床房-附陽台</div>
+            </a>
+            
+            <a href="/302" class="test-link">
+                <strong>302 房間</strong>
+                <div class="room-info">遇302 - 高級雙床房-附陽台</div>
+            </a>
+            
+            <a href="/303" class="test-link">
+                <strong>303 房間</strong>
+                <div class="room-info">夢303 - 高級三人房-附陽台</div>
+            </a>
+            
+            <a href="/305" class="test-link">
+                <strong>305 房間</strong>
+                <div class="room-info">泊305 - 高級雙人房-附陽台</div>
+            </a>
+            
+            <a href="/306" class="test-link">
+                <strong>306 房間</strong>
+                <div class="room-info">韻306 - 高級雙人房-附陽台</div>
+            </a>
+            
+            <a href="/307" class="test-link">
+                <strong>307 房間</strong>
+                <div class="room-info">縵307 - 高級雙人房-附陽台</div>
+            </a>
+        </div>
+
+        <h2>📝 功能說明</h2>
+        <div class="note">
+            <strong>房號跳轉邏輯：</strong>
+            <ul>
+                <li><code>www.kiwi-villa.com/201</code> → 跳轉到房間頁面並定位到 201 房間</li>
+                <li><code>www.kiwi-villa.com/302</code> → 跳轉到房間頁面並定位到 301 房間（302與301共用卡片）</li>
+                <li><code>www.kiwi-villa.com/306</code> → 跳轉到房間頁面並定位到 305 房間（306、307與305共用卡片）</li>
+                <li>支援所有房號：201, 203, 205, 301, 302, 303, 305, 306, 307</li>
+            </ul>
+        </div>
+
+        <div class="note warning">
+            <strong>⚠️ 注意事項：</strong>
+            <ul>
+                <li>此功能僅在生產環境中完全有效</li>
+                <li>本地測試時，請直接修改瀏覽器網址列進行測試</li>
+                <li>房間卡片會有3秒的高亮效果以引起注意</li>
+            </ul>
+        </div>
+
+        <h2>🛠 技術實現</h2>
+        <div class="note">
+            <strong>實現方式：</strong>
+            <ol>
+                <li><strong>服務器重定向：</strong>在 <code>.htaccess</code> 中配置房號重定向規則</li>
+                <li><strong>301永久重定向：</strong><code>/205</code> → <code>/rooms?goto=205</code></li>
+                <li><strong>房間定位：</strong>在 <code>main.js</code> 中處理查詢參數並定位房間</li>
+                <li><strong>高亮效果：</strong>使用 CSS 動畫效果高亮顯示目標房間3秒</li>
+            </ol>
+        </div>
+        
+        <div class="note success">
+            <strong>🚀 性能優勢：</strong>
+            <ul>
+                <li><strong>更快響應：</strong>服務器端重定向，無需等待 JavaScript 載入</li>
+                <li><strong>SEO 友好：</strong>301重定向告訴搜索引擎這是永久重定向</li>
+                <li><strong>更可靠：</strong>不依賴瀏覽器 JavaScript 支持</li>
+                <li><strong>減少跳躍：</strong>避免頁面閃爍和二次跳轉</li>
+            </ul>
+        </div>
+
+        <h2>✨ 使用範例</h2>
+        <div class="note success">
+            <strong>您的客戶現在可以：</strong>
+            <ul>
+                <li>直接分享房間連結：<code>https://www.kiwi-villa.com/205</code></li>
+                <li>在社群媒體上推廣特定房型</li>
+                <li>通過簡潔的網址快速查看房間詳情</li>
+                <li>享受流暢的用戶體驗</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="/rooms" class="test-link" style="display: inline-block; max-width: 200px;">
+                回到房型設施頁面
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 顯示當前頁面資訊
+        console.log('測試頁面載入完成');
+        console.log('當前網址:', window.location.href);
+        console.log('路徑:', window.location.pathname);
+        
+        // 測試房號檢測邏輯（僅用於演示）
+        function testRoomDetection(testPath) {
+            const pathSegments = testPath.split('/').filter(segment => segment !== '');
+            const roomNumberPattern = /^(201|203|205|301|302|303|305|306|307)$/;
+            
+            if (pathSegments.length === 1 && roomNumberPattern.test(pathSegments[0])) {
+                console.log('✅ 房號檢測成功:', pathSegments[0]);
+                return true;
+            }
+            
+            console.log('❌ 房號檢測失敗:', testPath);
+            return false;
+        }
+        
+        // 測試案例
+        const testCases = ['/201', '/302', '/999', '/rooms', '/intro'];
+        console.log('=== 房號檢測測試 ===');
+        testCases.forEach(testCase => {
+            testRoomDetection(testCase);
+        });
+    </script>
+</body>
+</html> 
