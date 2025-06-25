@@ -906,6 +906,8 @@ img {
     backdrop-filter: blur(10px);
 }
 
+
+
 /* Loading animation for lightbox */
 .lightbox-image {
     opacity: 0;
@@ -1030,7 +1032,6 @@ img {
         display: none;
     }
 } 
-
 /* ==========================================================================
    Layout Styles - 共用區塊樣式（Header、Footer）
    ========================================================================== */
@@ -1589,7 +1590,6 @@ html {
         color: var(--white);
     }
 } 
-
 /* ==========================================================================
    Rooms Page Styles - 房型設施頁面樣式
    ========================================================================== */
@@ -1598,6 +1598,10 @@ html {
 .hero-section {
     padding: 6rem 0 4rem;
 }
+
+
+
+
 
 /* Main Content */
 .rooms-main {
@@ -2271,3 +2275,5 @@ html {
         transform: none;
     }
 } 
+
+</rewritten_file>

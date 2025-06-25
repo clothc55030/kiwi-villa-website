@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightbox 測試頁面</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/rooms.css">
+</head>
+<body>
+    <div class="container" style="padding: 50px;">
+        <h1>Lightbox 功能測試</h1>
+        
+        <div class="room-card">
+            <div class="room-gallery">
+                <div class="gallery-item">
+                    <img src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp" alt="測試圖片-1">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room2.webp" alt="測試圖片-2">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room3.webp" alt="測試圖片-3">
+                </div>
+            </div>
+        </div>
+        
+        <p>點擊上方圖片測試 lightbox 功能</p>
+        
+        <div style="margin-top: 20px;">
+            <button onclick="testLightboxInit()">測試 Lightbox 初始化</button>
+            <button onclick="checkConsole()">檢查控制台錯誤</button>
+        </div>
+        
+        <div id="debug-info" style="margin-top: 20px; padding: 10px; background: #f0f0f0;"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+    function testLightboxInit() {
+        const debugDiv = document.getElementById('debug-info');
+        let debugInfo = [];
+        
+        // 檢查 lightbox 是否存在
+        const lightbox = document.querySelector('.lightbox-modal');
+        debugInfo.push(`Lightbox 元素: ${lightbox ? '✅ 存在' : '❌ 不存在'}`);
+        
+        // 檢查圖片數量
+        const galleryImages = document.querySelectorAll('.room-gallery img');
+        debugInfo.push(`圖片數量: ${galleryImages.length}`);
+        
+        // 檢查圖片點擊事件
+        let hasClickListeners = 0;
+        galleryImages.forEach(img => {
+            if (img.style.cursor === 'pointer') {
+                hasClickListeners++;
+            }
+        });
+        debugInfo.push(`有點擊樣式的圖片: ${hasClickListeners}/${galleryImages.length}`);
+        
+        // 檢查 main.js 函數
+        debugInfo.push(`initImageLightbox 函數: ${typeof initImageLightbox !== 'undefined' ? '✅ 存在' : '❌ 不存在'}`);
+        
+        debugDiv.innerHTML = debugInfo.join('<br>');
+    }
+    
+    function checkConsole() {
+        console.log('測試 lightbox 功能...');
+        console.log('圖片元素:', document.querySelectorAll('.room-gallery img'));
+        console.log('Lightbox 元素:', document.querySelector('.lightbox-modal'));
+        
+        // 手動觸發第一張圖片點擊
+        const firstImg = document.querySelector('.room-gallery img');
+        if (firstImg) {
+            console.log('手動觸發第一張圖片點擊...');
+            firstImg.click();
+        }
+    }
+    
+    // 頁面載入完成後自動測試
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            testLightboxInit();
+        }, 1000);
+    });
+    </script>
+</body>
+</html> 
