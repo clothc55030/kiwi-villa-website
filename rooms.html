@@ -62,37 +62,157 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/rooms.css">
     
-    <!-- Structured Data -->
+    <!-- Structured Data for LodgingBusiness and individual Rooms -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "房型設施 - 澎湖期遇度假會館",
-        "description": "澎湖期遇度假會館房型設施，提供多種房型選擇，滿足不同旅客需求。",
-        "url": "https://www.kiwi-villa.com/rooms",
-        "mainEntity": {
-            "@type": "LodgingBusiness",
-            "name": "澎湖期遇度假會館",
-            "accommodationCategory": "Bed and Breakfast",
-            "amenityFeature": [
-                {
-                    "@type": "LocationFeatureSpecification",
-                    "name": "TOTO衛浴"
+        "@graph": [
+            {
+                "@type": "LodgingBusiness",
+                "name": "澎湖期遇度假會館",
+                "url": "https://www.kiwi-villa.com/",
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://www.kiwi-villa.com/rooms"
                 },
-                {
-                    "@type": "LocationFeatureSpecification",
-                    "name": "大金冷氣"
+                "accommodationCategory": "Bed and Breakfast",
+                "amenityFeature": [
+                    {"@type": "LocationFeatureSpecification", "name": "TOTO衛浴"},
+                    {"@type": "LocationFeatureSpecification", "name": "大金冷氣"},
+                    {"@type": "LocationFeatureSpecification", "name": "全屋軟水系統"},
+                    {"@type": "LocationFeatureSpecification", "name": "高速網路"},
+                    {"@type": "LocationFeatureSpecification", "name": "電梯"},
+                    {"@type": "LocationFeatureSpecification", "name": "公共空間"},
+                    {"@type": "LocationFeatureSpecification", "name": "頂樓戲水池"}
+                ]
+            },
+            {
+                "@type": "Room",
+                "name": "豪華家庭房-附浴缸",
+                "description": "擁有獨立浴缸與超大私人陽台的家庭房，配備兩張King Size大床與兒童帳篷，是親子旅遊的首選。",
+                "url": "https://www.kiwi-villa.com/rooms#room-deluxe-family",
+                "image": "https://www.kiwi-villa.com/images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp",
+                "bed": {
+                    "@type": "BedDetails",
+                    "typeOfBed": "King",
+                    "numberOfBeds": 2
                 },
-                {
-                    "@type": "LocationFeatureSpecification",
-                    "name": "軟水系統"
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "value": 4
                 },
-                {
-                    "@type": "LocationFeatureSpecification",
-                    "name": "高速網路"
-                }
-            ]
-        }
+                "amenityFeature": [
+                    {"@type": "LocationFeatureSpecification", "name": "獨立浴缸"},
+                    {"@type": "LocationFeatureSpecification", "name": "私人陽台 (60㎡)"},
+                    {"@type": "LocationFeatureSpecification", "name": "兒童帳篷"},
+                    {"@type": "LocationFeatureSpecification", "name": "TOTO涼暖風機"}
+                ]
+            },
+            {
+                "@type": "Room",
+                "name": "高級四人房-附陽台",
+                "description": "寬敞舒適的高級四人房，配備兩張King Size豪華大床與私人陽台，採光極佳。",
+                "url": "https://www.kiwi-villa.com/rooms#room-superior-quad",
+                "image": "https://www.kiwi-villa.com/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp",
+                "bed": {
+                    "@type": "BedDetails",
+                    "typeOfBed": "King",
+                    "numberOfBeds": 2
+                },
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "value": 4
+                },
+                "amenityFeature": [
+                    {"@type": "LocationFeatureSpecification", "name": "私人陽台 (38㎡)"}
+                ]
+            },
+            {
+                "@type": "Room",
+                "name": "奢華四人房-附陽台",
+                "description": "配備頂級設備與精品家具的奢華四人房，擁有兩個私人陽台，空間感十足。",
+                "url": "https://www.kiwi-villa.com/rooms#room-luxury-quad",
+                "image": "https://www.kiwi-villa.com/images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp",
+                "bed": {
+                    "@type": "BedDetails",
+                    "typeOfBed": "King",
+                    "numberOfBeds": 2
+                },
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "value": 4
+                },
+                "amenityFeature": [
+                    {"@type": "LocationFeatureSpecification", "name": "雙私人陽台 (54㎡)"},
+                    {"@type": "LocationFeatureSpecification", "name": "TOTO涼暖風機"}
+                ]
+            },
+            {
+                "@type": "Room",
+                "name": "高級三人房-附陽台",
+                "description": "適合小家庭或朋友出遊的三人房，床型配置靈活，空間舒適，並附有兒童小屋。",
+                "url": "https://www.kiwi-villa.com/rooms#room-superior-triple",
+                "image": "https://www.kiwi-villa.com/images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp",
+                "bed": [
+                    {
+                        "@type": "BedDetails",
+                        "typeOfBed": "King",
+                        "numberOfBeds": 1
+                    },
+                    {
+                        "@type": "BedDetails",
+                        "typeOfBed": "Single",
+                        "numberOfBeds": 1
+                    }
+                ],
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "value": 3
+                },
+                "amenityFeature": [
+                    {"@type": "LocationFeatureSpecification", "name": "私人陽台 (36㎡)"},
+                    {"@type": "LocationFeatureSpecification", "name": "兒童小屋"}
+                ]
+            },
+            {
+                "@type": "Room",
+                "name": "高級雙床房-附陽台",
+                "description": "專為朋友出遊設計的雙床房，提供兩張獨立單人床與寬敞的私人陽台。",
+                "url": "https://www.kiwi-villa.com/rooms#room-superior-twin",
+                "image": "https://www.kiwi-villa.com/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp",
+                "bed": {
+                    "@type": "BedDetails",
+                    "typeOfBed": "Single",
+                    "numberOfBeds": 2
+                },
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "value": 2
+                },
+                "amenityFeature": [
+                    {"@type": "LocationFeatureSpecification", "name": "私人大陽台 (33㎡)"}
+                ]
+            },
+            {
+                "@type": "Room",
+                "name": "高級雙人房-附陽台",
+                "description": "適合情侶或夫妻的浪漫雙人房，配備King Size加大雙人床與溫馨的私人陽台。",
+                "url": "https://www.kiwi-villa.com/rooms#room-superior-double",
+                "image": "https://www.kiwi-villa.com/images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp",
+                "bed": {
+                    "@type": "BedDetails",
+                    "typeOfBed": "King",
+                    "numberOfBeds": 1
+                },
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "value": 2
+                },
+                "amenityFeature": [
+                    {"@type": "LocationFeatureSpecification", "name": "私人陽台 (29㎡)"}
+                ]
+            }
+        ]
     }
     </script>
 </head>
@@ -161,7 +281,7 @@
             <div class="container">
                 <div class="rooms-grid">
                 <!-- Deluxe Family Room -->
-                <div class="room-card featured" data-aos="fade-up">
+                <div id="room-deluxe-family" class="room-card featured" data-aos="fade-up">
                     <div class="room-badge">推薦</div>
                     <div class="room-gallery">
                         <div class="gallery-item" data-aos="zoom-in">
@@ -261,7 +381,7 @@
                 </div>
 
                 <!-- Superior Quad Room -->
-                <div class="room-card" data-aos="fade-up" data-aos-delay="100">
+                <div id="room-superior-quad" class="room-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="room-gallery">
                         <div class="gallery-item" data-aos="zoom-in">
                             <picture>
@@ -344,7 +464,7 @@
                 </div>
 
                 <!-- Luxury Quad Room -->
-                <div class="room-card" data-aos="fade-up" data-aos-delay="200">
+                <div id="room-luxury-quad" class="room-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="room-gallery">
                         <div class="gallery-item" data-aos="zoom-in">
                             <picture>
@@ -440,7 +560,7 @@
                 </div>
 
                 <!-- Superior Triple Room -->
-                <div class="room-card" data-aos="fade-up" data-aos-delay="300">
+                <div id="room-superior-triple" class="room-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="room-gallery">
                         <div class="gallery-item" data-aos="zoom-in">
                             <picture>
@@ -524,7 +644,7 @@
                 </div>
 
                 <!-- Superior Twin Room -->
-                <div class="room-card" data-aos="fade-up" data-aos-delay="400">
+                <div id="room-superior-twin" class="room-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="room-gallery">
                         <div class="gallery-item" data-aos="zoom-in">
                             <picture>
@@ -613,7 +733,7 @@
                 </div>
 
                 <!-- Superior Double Room -->
-                <div class="room-card" data-aos="fade-up" data-aos-delay="500">
+                <div id="room-superior-double" class="room-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="room-gallery">
                         <div class="gallery-item" data-aos="zoom-in">
                             <picture>
