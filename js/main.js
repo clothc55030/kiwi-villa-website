@@ -797,15 +797,56 @@ function initImageLightbox() {
     }
 }
 
-// Service Worker registration (for future PWA features)
+// Service Worker registration with version management
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js')
             .then(function(registration) {
-                console.log('ServiceWorker registration successful');
+                console.log('✅ Service Worker 註冊成功');
+                
+                // 檢查是否有新版本
+                registration.addEventListener('updatefound', () => {
+                    console.log('🔄 發現 Service Worker 新版本...');
+                    const newWorker = registration.installing;
+                    
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            console.log('🎯 新版本 Service Worker 已安裝，準備更新...');
+                            
+                            // 可以在這裡顯示更新提示給用戶
+                            // showUpdateNotification();
+                            
+                            // 自動跳過等待，立即激活新版本
+                            newWorker.postMessage({ type: 'SKIP_WAITING' });
+                        }
+                    });
+                });
+                
+                // 監聽 Service Worker 控制權變化
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    console.log('🔄 Service Worker 控制權已更新，即將重新載入頁面...');
+                    // 延遲重新載入，避免打斷用戶操作
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                });
+                
+                // 獲取當前版本信息
+                if (navigator.serviceWorker.controller) {
+                    const messageChannel = new MessageChannel();
+                    messageChannel.port1.onmessage = (event) => {
+                        if (event.data.version) {
+                            console.log('📋 當前 Service Worker 版本:', event.data.version);
+                        }
+                    };
+                    navigator.serviceWorker.controller.postMessage(
+                        { type: 'GET_VERSION' }, 
+                        [messageChannel.port2]
+                    );
+                }
             })
             .catch(function(error) {
-                console.log('ServiceWorker registration failed');
+                console.error('❌ Service Worker 註冊失敗:', error);
             });
     });
 }

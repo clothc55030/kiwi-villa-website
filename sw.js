@@ -2,7 +2,7 @@
 // 澎湖期遇度假會館 - Service Worker
 
 // 📝 更新版本號：每次需要強制更新緩存時，修改這個版本號
-const CACHE_VERSION = 'kiwi-villa-v1.2.0'; // 🔄 更新此版本號可強制刷新緩存
+const CACHE_VERSION = 'kiwi-villa-v1.5.0'; // 🔄 更新此版本號可強制刷新緩存
 const CACHE_NAME = `kiwi-villa-cache-${CACHE_VERSION}`;
 
 // 需要緩存的關鍵資源
@@ -97,6 +97,44 @@ self.addEventListener('fetch', (event) => {
         return;
     }
     
+    // 檢查是否為導航請求或 .html 頁面請求
+    const isNavigationRequest = event.request.mode === 'navigate' || 
+                               event.request.destination === 'document' ||
+                               event.request.url.endsWith('.html');
+    
+    // 導航請求使用網絡優先策略：先嘗試網絡，失敗時才用緩存
+    if (isNavigationRequest) {
+        event.respondWith(
+            fetch(event.request)
+                .then((response) => {
+                    // 網絡請求成功，緩存響應
+                    if (response && response.status === 200) {
+                        const responseToCache = response.clone();
+                        caches.open(CACHE_NAME)
+                            .then((cache) => {
+                                console.log('💾 緩存頁面:', event.request.url);
+                                cache.put(event.request, responseToCache);
+                            });
+                    }
+                    return response;
+                })
+                .catch((error) => {
+                    console.error('🌐 導航請求失敗，嘗試緩存:', event.request.url, error);
+                    // 網絡失敗時，嘗試從緩存返回
+                    return caches.match(event.request)
+                        .then((cachedResponse) => {
+                            if (cachedResponse) {
+                                console.log('📱 離線模式，從快取返回:', event.request.url);
+                                return cachedResponse;
+                            }
+                            // 如果沒有緩存，返回離線頁面
+                            return caches.match('/404.html');
+                        });
+                })
+        );
+        return;
+    }
+    
     event.respondWith(
         caches.match(event.request)
             .then((cachedResponse) => {
@@ -133,12 +171,6 @@ self.addEventListener('fetch', (event) => {
                     })
                     .catch((error) => {
                         console.error('🌐 網絡請求失敗:', event.request.url, error);
-                        
-                        // 離線時返回離線頁面
-                        if (event.request.destination === 'document') {
-                            return caches.match('/404.html');
-                        }
-                        
                         throw error;
                     });
             })
