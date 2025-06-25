@@ -988,7 +988,7 @@ function initRoomNavigation() {
     // 如果URL包含房間號但不在房型頁面，跳轉到房型頁面
     if (roomNumber && roomMapping[roomNumber] && !path.includes('rooms') && !document.querySelector('.rooms-section')) {
         // 跳轉到房型頁面並附帶錨點
-        window.location.href = `rooms.html#${roomMapping[roomNumber]}`;
+        window.location.href = `./rooms.html#${roomMapping[roomNumber]}`;
         return;
     }
     
