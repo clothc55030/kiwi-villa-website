@@ -792,8 +792,8 @@ function initImageLightbox() {
     }
 }
 
-// Service Worker registration (for PWA features)
-if ('serviceWorker' in navigator) {
+// Service Worker registration (for PWA features) - TEMPORARILY DISABLED
+if (false && 'serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         // 嘗試相對路徑和絕對路徑
         const swPaths = ['./sw.js', '/sw.js', 'sw.js'];

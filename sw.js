@@ -75,13 +75,13 @@ self.addEventListener('fetch', event => {
 
   // 排除外部 API 和特定路徑
   const excludePatterns = [
-    '/booking.owlting.com/',
-    '/fonts.googleapis.com/',
-    '/fonts.gstatic.com/',
-    '/cdnjs.cloudflare.com/',
-    '/unpkg.com/',
-    '/api/',
-    '/admin/'
+    'booking.owlting.com',
+    'fonts.googleapis.com',
+    'fonts.gstatic.com', 
+    'cdnjs.cloudflare.com',
+    'unpkg.com',
+    'googleapis.com',
+    'gstatic.com'
   ];
 
   const shouldExclude = excludePatterns.some(pattern => 
