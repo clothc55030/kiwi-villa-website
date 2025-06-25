@@ -626,13 +626,15 @@
         "@context": "https://schema.org",
         "@type": "LodgingBusiness",
         "name": "澎湖期遇度假會館",
+        "alternateName": "期遇度假會館",
         "description": "澎湖期遇度假會館，座落於三面環海半島，融合歐洲巴洛克古典建築美學，提供獨特的海島度假體驗。",
         "url": "https://www.kiwi-villa.com/",
         "telephone": "+886-933-636373",
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+886-933-636373",
-            "contactType": "customer service"
+            "contactType": "customer service",
+            "availableLanguage": ["zh-TW", "zh-CN"]
         },
         "address": {
             "@type": "PostalAddress",
@@ -648,23 +650,93 @@
             "longitude": "119.5794"
         },
         "priceRange": "$2,501 - $8,000",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "200",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "starRating": {
+            "@type": "Rating",
+            "ratingValue": "4"
+        },
+        "checkinTime": "15:00",
+        "checkoutTime": "11:00",
+        "numberOfRooms": "6",
+        "accommodationCategory": "Bed and Breakfast",
         "amenityFeature": [
             {
                 "@type": "LocationFeatureSpecification",
-                "name": "免費WiFi"
+                "name": "免費WiFi",
+                "value": true
             },
             {
                 "@type": "LocationFeatureSpecification", 
-                "name": "空調"
+                "name": "空調",
+                "value": true
             },
             {
                 "@type": "LocationFeatureSpecification",
-                "name": "免費停車場"
+                "name": "免費停車場",
+                "value": true
             },
             {
                 "@type": "LocationFeatureSpecification",
-                "name": "禁菸住宿"
+                "name": "禁菸住宿",
+                "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "電梯",
+                "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "早餐",
+                "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "陽台",
+                "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "浴缸",
+                "value": true
             }
+        ],
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "房型選擇",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Hotel",
+                        "name": "豪華家庭房-附浴缸"
+                    }
+                },
+                {
+                    "@type": "Offer", 
+                    "itemOffered": {
+                        "@type": "Hotel",
+                        "name": "高級四人房-附陽台"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Hotel", 
+                        "name": "奢華四人房-附陽台"
+                    }
+                }
+            ]
+        },
+        "image": [
+            "https://www.kiwi-villa.com/images/hero/main-hall-environment-new.webp",
+            "https://www.kiwi-villa.com/assets/og-image.webp"
         ],
         "sameAs": [
             "https://www.facebook.com/kiwivilla.home/",
