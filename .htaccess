@@ -30,12 +30,22 @@ Options -Indexes
 
 # 強制使用 HTTPS
 RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # ==========================================
-# WWW 重定向（統一域名）
+# 房間號重定向（最高優先級）
 # ==========================================
+
+# 房間號直接重定向規則（優先處理，避免與其他規則衝突）
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(201|203|205|303|301|302|305|306|307)/?$ /rooms?goto=$1 [L,R=301]
+
+# ==========================================
+# HTTPS 和 WWW 重定向
+# ==========================================
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # 統一使用 www 版本的域名
 RewriteCond %{HTTP_HOST} !^www\. [NC]
@@ -44,12 +54,6 @@ RewriteRule ^(.*)$ https://www.kiwi-villa.com/$1 [L,R=301]
 # ==========================================
 # URL 重寫和清理
 # ==========================================
-
-# 房間號直接重定向規則（伺服器端處理）
-# 使用查詢參數，避免經過404頁面
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(201|203|205|303|301|302|305|306|307)/?$ /rooms?goto=$1 [L,R=301]
 
 # 將 .html 重定向到無後綴版本
 RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
