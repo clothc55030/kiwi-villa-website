@@ -2,7 +2,7 @@
 // 澎湖期遇度假會館 - Service Worker
 
 // 📝 更新版本號：每次需要強制更新緩存時，修改這個版本號
-const CACHE_VERSION = 'kiwi-villa-v1.8.0'; // 🔄 更新此版本號可強制刷新緩存
+const CACHE_VERSION = 'kiwi-villa-v2.0.0'; // 🔄 更新此版本號可強制刷新緩存
 const CACHE_NAME = `kiwi-villa-cache-${CACHE_VERSION}`;
 
 // 需要緩存的關鍵資源

@@ -1127,24 +1127,20 @@ function initRoomNavigation() {
                     const isMobile = window.innerWidth < 768;
                     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                     
-                    // 只有桌面版且非減少動畫模式才需要檢查動畫
-                    if (!isMobile && !prefersReducedMotion) {
-                        const isAnimationComplete = () => {
-                            const style = window.getComputedStyle(targetRoom);
-                            const opacity = parseFloat(style.opacity);
-                            const transform = style.transform;
-                            
-                            // 檢查元素是否已完全顯示（opacity=1）且無位移變換
-                            return opacity === 1 && (transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)');
-                        };
+                    // 手機版無動畫，直接執行；桌面版需檢查動畫狀態
+                    if (isMobile || prefersReducedMotion) {
+                        console.log('手機版或減少動畫模式，直接執行滾動');
+                    } else {
+                        // 桌面版檢查動畫完成狀態
+                        const style = window.getComputedStyle(targetRoom);
+                        const opacity = parseFloat(style.opacity);
+                        const transform = style.transform;
                         
-                        if (!isAnimationComplete()) {
-                            console.log('動畫尚未完成，延遲執行滾動');
+                        if (opacity < 1 || (transform !== 'none' && transform !== 'matrix(1, 0, 0, 1, 0, 0)')) {
+                            console.log('桌面版動畫尚未完成，延遲執行滾動');
                             setTimeout(executeScroll, 200);
                             return;
                         }
-                    } else {
-                        console.log('減少動畫模式啟用，跳過動畫檢測');
                     }
                     
                     scrollToRoom(targetRoom);
