@@ -298,13 +298,69 @@
             });
         }
         
-        // 如果用戶是從搜尋引擎來的，5秒後自動重定向到首頁
-        if (document.referrer && (document.referrer.includes('google') || document.referrer.includes('bing') || document.referrer.includes('yahoo'))) {
-            setTimeout(() => {
-                if (confirm('頁面不存在，是否要返回首頁？')) {
-                    window.location.href = '/';
+        // 房間跳轉檢測
+        function checkRoomRedirect() {
+            const path = window.location.pathname;
+            const roomNumber = path.replace(/\D/g, ''); // 提取數字
+            
+                         // 房間號碼對應關係
+             const roomMapping = {
+                 '201': 'room-201',    // 萌201
+                 '203': 'room-203',    // 戀203
+                 '205': 'room-205',    // 趣205
+                 '303': 'room-303',    // 夢303
+                 '301': 'room-301',    // 期301
+                 '302': 'room-302',    // 遇302 (隱藏錨點)
+                 '305': 'room-305',    // 泊305
+                 '306': 'room-306',    // 韻306 (隱藏錨點)
+                 '307': 'room-307'     // 縵307 (隱藏錨點)
+             };
+            
+            // 如果URL包含有效的房間號，自動跳轉到房型頁面
+            if (roomNumber && roomMapping[roomNumber]) {
+                console.log('檢測到房間號:', roomNumber, '跳轉到:', roomMapping[roomNumber]);
+                
+                // 顯示跳轉提示
+                const errorContainer = document.querySelector('.error-container');
+                if (errorContainer) {
+                    errorContainer.innerHTML = `
+                        <div class="error-number">🏨</div>
+                        <h1 class="error-title">找到您的房間了！</h1>
+                        <p class="error-subtitle">正在為您跳轉到 ${roomNumber} 房型介紹</p>
+                        <p class="error-description">
+                            偵測到您要查看房間${roomNumber}，正在為您導航至房型設施頁面...
+                        </p>
+                        <div class="error-actions">
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: #7c9bb5;">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <span>跳轉中...</span>
+                            </div>
+                        </div>
+                    `;
                 }
-            }, 5000);
+                
+                // 1.5秒後跳轉
+                setTimeout(() => {
+                    window.location.href = `rooms.html#${roomMapping[roomNumber]}`;
+                }, 1500);
+                
+                return true;
+            }
+            
+            return false;
+        }
+        
+        // 頁面載入時檢查房間跳轉
+        if (!checkRoomRedirect()) {
+            // 如果不是房間跳轉，執行原有的邏輯
+            // 如果用戶是從搜尋引擎來的，5秒後自動重定向到首頁
+            if (document.referrer && (document.referrer.includes('google') || document.referrer.includes('bing') || document.referrer.includes('yahoo'))) {
+                setTimeout(() => {
+                    if (confirm('頁面不存在，是否要返回首頁？')) {
+                        window.location.href = '/';
+                    }
+                }, 5000);
+            }
         }
     </script>
 </body>
