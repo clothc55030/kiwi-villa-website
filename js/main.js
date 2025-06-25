@@ -57,6 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
         initRoomGallerySwipe();
     }
     
+    // Room direct navigation functionality
+    initRoomNavigation();
+    
     // 視窗大小變化監聽 - 防抖處理
     let resizeTimer;
     window.addEventListener('resize', function() {
@@ -955,4 +958,102 @@ function updateActiveIndicator(gallery) {
             indicator.classList.remove('active');
         }
     });
+}
+
+// Room Navigation - 房間直接跳轉功能
+function initRoomNavigation() {
+    // 檢查當前URL路徑
+    const path = window.location.pathname;
+    const roomNumber = path.replace(/\D/g, ''); // 提取數字
+    
+    // 如果URL包含房間號但不在房型頁面，跳轉到房型頁面
+    if (roomNumber && !path.includes('rooms') && !document.querySelector('.rooms-section')) {
+        window.location.href = `/rooms#room-${roomNumber}`;
+        return;
+    }
+    
+    // 只在房型頁面執行滾動功能
+    if (!path.includes('rooms') && !document.querySelector('.rooms-section')) {
+        return;
+    }
+    
+    // 房間號碼對應關係
+    const roomMapping = {
+        '201': 'room-201',    // 萌201
+        '203': 'room-203',    // 戀203
+        '205': 'room-205',    // 趣205
+        '303': 'room-303',    // 夢303
+        '301': 'room-301',    // 期301
+        '302': 'room-301',    // 遇302 (跳轉到same card as 301)
+        '305': 'room-305',    // 泊305
+        '306': 'room-305',    // 韻306 (跳轉到same card as 305)
+        '307': 'room-305'     // 縵307 (跳轉到same card as 305)
+    };
+    
+    // 檢查當前URL路徑或錨點
+    function checkRoomNavigation() {
+        const path = window.location.pathname;
+        const hash = window.location.hash;
+        let roomNumber = path.replace(/\D/g, ''); // 從路徑提取數字
+        
+        // 如果路徑沒有房間號，檢查錨點
+        if (!roomNumber && hash.includes('room-')) {
+            roomNumber = hash.replace(/\D/g, '');
+        }
+        
+        if (roomNumber && roomMapping[roomNumber]) {
+            const targetRoom = document.getElementById(roomMapping[roomNumber]);
+            if (targetRoom) {
+                // 延遲執行確保頁面已完全載入
+                setTimeout(() => {
+                    scrollToRoom(targetRoom);
+                }, 500);
+            }
+        }
+    }
+    
+    // 平滑滾動到房間卡片
+    function scrollToRoom(roomElement) {
+        const navbar = document.getElementById('navbar');
+        const navbarHeight = navbar ? navbar.offsetHeight : 80;
+        
+        // 計算滾動位置
+        const elementTop = roomElement.getBoundingClientRect().top + window.pageYOffset;
+        const offsetTop = elementTop - navbarHeight - 20; // 額外留20px間距
+        
+        // 平滑滾動
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+        
+        // 添加高亮效果
+        highlightRoom(roomElement);
+    }
+    
+    // 高亮房間卡片
+    function highlightRoom(roomElement) {
+        // 移除其他房間的高亮
+        const allRooms = document.querySelectorAll('.room-card');
+        allRooms.forEach(room => {
+            room.classList.remove('highlighted');
+        });
+        
+        // 添加高亮效果
+        roomElement.classList.add('highlighted');
+        
+        // 3秒後移除高亮
+        setTimeout(() => {
+            roomElement.classList.remove('highlighted');
+        }, 3000);
+    }
+    
+    // 處理瀏覽器歷史記錄變化
+    window.addEventListener('popstate', checkRoomNavigation);
+    
+    // 處理錨點變化
+    window.addEventListener('hashchange', checkRoomNavigation);
+    
+    // 頁面載入時檢查
+    checkRoomNavigation();
 } 
