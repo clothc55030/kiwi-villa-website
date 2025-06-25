@@ -962,73 +962,47 @@ function updateActiveIndicator(gallery) {
 
 // Room Navigation - 房間直接跳轉功能
 function initRoomNavigation() {
-    // 檢查當前URL路徑
-    const path = window.location.pathname;
-    const roomNumber = path.replace(/\D/g, ''); // 提取數字
+    // 只在房型頁面執行
+    if (!window.location.pathname.includes('rooms') && !document.querySelector('.rooms-section')) {
+        return;
+    }
     
     console.log('房間跳轉調試:', { 
-        path: path, 
-        roomNumber: roomNumber, 
+        path: window.location.pathname, 
+        hash: window.location.hash,
         currentURL: window.location.href 
     });
     
-    // 房間號碼對應關係
-    const roomMapping = {
-        '201': 'room-201',    // 萌201
-        '203': 'room-203',    // 戀203
-        '205': 'room-205',    // 趣205
-        '303': 'room-303',    // 夢303
-        '301': 'room-301',    // 期301
-        '302': 'room-302',    // 遇302 (隱藏錨點)
-        '305': 'room-305',    // 泊305
-        '306': 'room-306',    // 韻306 (隱藏錨點)
-        '307': 'room-307'     // 縵307 (隱藏錨點)
-    };
-    
-    // 如果URL包含房間號但不在房型頁面，跳轉到房型頁面
-    if (roomNumber && roomMapping[roomNumber] && !path.includes('rooms') && !document.querySelector('.rooms-section')) {
-        // 跳轉到房型頁面並附帶錨點
-        window.location.href = `./rooms.html#${roomMapping[roomNumber]}`;
-        return;
-    }
-    
-    // 只在房型頁面執行滾動功能
-    if (!path.includes('rooms') && !document.querySelector('.rooms-section')) {
-        return;
-    }
-    
-    // 檢查當前URL路徑或錨點
+    // 檢查當前URL錨點
     function checkRoomNavigation() {
-        const path = window.location.pathname;
         const hash = window.location.hash;
-        let roomNumber = path.replace(/\D/g, ''); // 從路徑提取數字
         
-        // 如果路徑沒有房間號，檢查錨點
-        if (!roomNumber && hash.includes('room-')) {
-            roomNumber = hash.replace(/\D/g, '');
-        }
-        
-        if (roomNumber && roomMapping[roomNumber]) {
-            // 先嘗試直接找到錨點
-            let targetRoom = document.getElementById(roomMapping[roomNumber]);
-            
-            // 如果找不到，可能是隱藏錨點，找到對應的房間卡片
-            if (!targetRoom || !targetRoom.classList.contains('room-card')) {
-                // 找到對應的房間卡片
-                if (roomNumber === '302') {
-                    targetRoom = document.getElementById('room-301');
-                } else if (roomNumber === '306' || roomNumber === '307') {
-                    targetRoom = document.getElementById('room-305');
-                } else {
-                    targetRoom = document.getElementById(roomMapping[roomNumber]);
-                }
-            }
+        // 檢查是否有房間錨點
+        if (hash && hash.includes('room-')) {
+            const roomId = hash.substring(1); // 移除 # 符號
+            const targetRoom = document.getElementById(roomId);
             
             if (targetRoom) {
                 // 延遲執行確保頁面已完全載入
                 setTimeout(() => {
                     scrollToRoom(targetRoom);
                 }, 500);
+            } else {
+                // 如果是隱藏錨點，找到對應的房間卡片
+                const roomNumber = roomId.replace(/\D/g, '');
+                let actualTargetRoom = null;
+                
+                if (roomNumber === '302') {
+                    actualTargetRoom = document.getElementById('room-301');
+                } else if (roomNumber === '306' || roomNumber === '307') {
+                    actualTargetRoom = document.getElementById('room-305');
+                }
+                
+                if (actualTargetRoom) {
+                    setTimeout(() => {
+                        scrollToRoom(actualTargetRoom);
+                    }, 500);
+                }
             }
         }
     }
