@@ -723,7 +723,7 @@ function initImageLightbox() {
             
             // 防止頁面滾動
             e.preventDefault();
-        }, { passive: false });
+        });
         
         lightboxContainer.addEventListener('touchend', function(e) {
             if (!lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
@@ -792,41 +792,15 @@ function initImageLightbox() {
     }
 }
 
-// Service Worker registration (for PWA features) - TEMPORARILY DISABLED
-if (false && 'serviceWorker' in navigator) {
+// Service Worker registration (for future PWA features)
+if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-        // 嘗試相對路徑和絕對路徑
-        const swPaths = ['./sw.js', '/sw.js', 'sw.js'];
-        
-        async function registerServiceWorker() {
-            for (const path of swPaths) {
-                try {
-                    // 先檢查檔案是否存在
-                    const response = await fetch(path, { method: 'HEAD' });
-                    if (response.ok) {
-                        const registration = await navigator.serviceWorker.register(path);
-                        console.log('✅ Service Worker 註冊成功:', path);
-                        console.log('📦 Service Worker scope:', registration.scope);
-                        return registration;
-                    }
-                } catch (error) {
-                    console.log(`❌ 嘗試路徑 ${path} 失敗:`, error.message);
-                    continue;
-                }
-            }
-            throw new Error('所有 Service Worker 路徑都無法載入');
-        }
-        
-        registerServiceWorker()
-            .then(registration => {
-                // 監聽 Service Worker 更新
-                registration.addEventListener('updatefound', () => {
-                    console.log('🔄 發現 Service Worker 更新');
-                });
+        navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+                console.log('ServiceWorker registration successful');
             })
-            .catch(error => {
-                console.log('💥 Service Worker 註冊完全失敗:', error.message);
-                console.log('💡 請檢查 sw.js 檔案是否存在於網站根目錄');
+            .catch(function(error) {
+                console.log('ServiceWorker registration failed');
             });
     });
 }

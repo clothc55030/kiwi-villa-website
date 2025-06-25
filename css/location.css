@@ -28,20 +28,6 @@
     color: var(--text-secondary);
 }
 
-.map-image-container {
-    margin: var(--space-xl) auto;
-    max-width: 900px; /* 根據需要調整地圖最大寬度 */
-}
-
-.location-map-img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: var(--shadow-medium);
-    border: 1px solid rgba(0,0,0,0.05);
-    object-fit: cover;
-}
-
 /* Advantages Section */
 .advantages-section {
     padding: var(--space-xxl) 0;

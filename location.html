@@ -66,57 +66,30 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "LodgingBusiness",
-                "name": "澎湖期遇度假會館",
-                "url": "https://www.kiwi-villa.com/",
-                "logo": "https://www.kiwi-villa.com/images/logo/kiwi-villa-logo.webp",
-                "image": "https://www.kiwi-villa.com/assets/og-image.webp",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "西衛里347號",
-                    "addressLocality": "馬公市",
-                    "addressRegion": "澎湖縣",
-                    "postalCode": "880",
-                    "addressCountry": "TW"
-                },
-                "geo": {
-                    "@type": "GeoCoordinates",
-                    "latitude": "23.5868865",
-                    "longitude": "119.5818231"
-                },
-                "telephone": "+886-933-636373",
-                "mainEntityOfPage": {
-                    "@type": "WebPage",
-                    "@id": "https://www.kiwi-villa.com/location"
-                }
+        "@type": "WebPage",
+        "name": "地理資訊 - 澎湖期遇度假會館",
+        "description": "澎湖期遇度假會館絕佳地理位置，距離機場12分鐘、碼頭9分鐘車程，靠近市區商圈與澎科大，外送覆蓋範圍內，交通便捷生活機能佳。",
+        "url": "https://www.kiwi-villa.com/location",
+        "mainEntity": {
+            "@type": "LodgingBusiness",
+            "@id": "https://www.kiwi-villa.com/#kiwivilla",
+            "name": "澎湖期遇度假會館",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "澎湖縣馬公市西衛里347號",
+                "addressLocality": "馬公市",
+                "addressRegion": "澎湖縣",
+                "postalCode": "880",
+                "addressCountry": "TW"
             },
-            {
-                "@type": "TouristAttraction",
-                "name": "市區商圈",
-                "description": "距離澎湖最熱鬧的市區商圈（中正路）僅9分鐘車程，生活機能方便。",
-                "url": "https://www.kiwi-villa.com/location#core-area"
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "23.558722",
+                "longitude": "119.587917"
             },
-            {
-                "@type": "CollegeOrUniversity",
-                "name": "國立澎湖科技大學",
-                "description": "距離澎湖唯一的大學「澎湖科技大學」僅2公里路程，鄰近大學生常去的三多商圈。",
-                "url": "https://www.kiwi-villa.com/location#core-area"
-            },
-            {
-                "@type": "Airport",
-                "name": "澎湖機場 (MZG)",
-                "description": "從澎湖機場 (MZG) 出發，開車沿201縣道往馬公市區方向，約12分鐘（8.5公里）即可抵達期遇度假會館。",
-                "url": "https://www.kiwi-villa.com/location#transportation-guide"
-            },
-            {
-                "@type": "CivicStructure",
-                "name": "馬公港碼頭",
-                "description": "從馬公港碼頭出發，往市區方向沿中正路往西衛方向行駛，約9分鐘（3.5公里）即可抵達。",
-                "url": "https://www.kiwi-villa.com/location#transportation-guide"
-            }
-        ]
+            "telephone": "0933-636373",
+            "url": "https://www.kiwi-villa.com"
+        }
     }
     </script>
 </head>
@@ -186,16 +159,9 @@
             <div class="container">
                 <div class="intro-content" data-aos="fade-up">
                     <h2 class="section-title">如何挑選澎湖住宿位置？</h2>
-                    <div class="map-image-container">
-                        <picture>
-                            <source srcset="images/location/penghu-map.avif" type="image/avif">
-                            <source srcset="images/location/penghu-map.webp" type="image/webp">
-                            <img src="images/location/penghu-map-optimized.jpg" alt="澎湖本島與市區地圖標示" class="location-map-img" loading="lazy">
-                        </picture>
-                    </div>
                     <div class="intro-text">
                         <p>澎湖群島位於台灣島與中國大陸之間的臺灣海峽上，由90座大小不等之島嶼組成。澎湖人常說的本島是由馬公市、湖西、白沙、西嶼組成。</p>
-                        <p>澎湖的市區主要指在馬公市中正路（麥當勞）附近，但是馬公市除了以上地圖標識的市區部分，南邊的區域也都在馬公市範圍內！如果希望住的地方離市區不要太遠，建議Google地圖搜尋一下住宿地址到澎湖麥當勞的距離是否能接受。</p>
+                        <p>澎湖的市區主要指在馬公市中正路（麥當勞）附近，但是馬公市除了以下地圖標識的市區部分，南邊的區域也都在馬公市範圍內！如果希望住的地方離市區不要太遠，建議Google地圖搜尋一下住宿地址到澎湖麥當勞的距離是否能接受。</p>
                         <p>澎湖雖然四面環海但是澎湖的沙灘主要集中在澎湖的南邊，因此若是需要離沙灘近的住宿地點可挑選山水地區的民宿。</p>
                         <p>西嶼、白沙、湖西這三個地方離市區較遠民宿不多，但是大部分都有海景，可以根據個人需求考慮！</p>
                     </div>
@@ -212,7 +178,7 @@
                     
 
                     <!-- Core Area -->
-                    <div id="core-area" class="advantage-group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="advantage-group" data-aos="fade-up" data-aos-delay="200">
                         <h3 class="advantage-title">
                             <i class="fas fa-building"></i>
                             核心商圈
@@ -278,7 +244,7 @@
         </section>
 
         <!-- Transportation Guide Section -->
-        <section id="transportation-guide" class="guide-section">
+        <section class="guide-section">
             <div class="container">
                 <div class="guide-content" data-aos="fade-up">
                     <h2 class="section-title">交通指南</h2>
