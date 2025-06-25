@@ -709,13 +709,14 @@
     }
 }
 
-/* 手機版響應式優化 - 禁用所有動畫 */
+/* 手機版響應式優化 - 禁用所有動畫和過渡效果 */
 @media (max-width: 768px) {
     /* 禁用房間卡片入場動畫 - 必須放在最後確保優先級 */
     .room-card {
         animation: none;
         opacity: 1;
         transform: none;
+        transition: none; /* 禁用過渡效果，防止閃爍 */
     }
     
     .room-card:nth-child(1),
@@ -728,6 +729,28 @@
         animation-delay: 0s;
         opacity: 1;
         transform: none;
+        transition: none;
+    }
+    
+    /* 禁用房間卡片內部元素的過渡效果 */
+    .room-main-image img {
+        transition: none;
+    }
+    
+    .room-thumbnails img {
+        transition: none;
+    }
+    
+    .room-gallery img {
+        transition: none;
+    }
+    
+    .room-gallery::after {
+        transition: none;
+    }
+    
+    .room-gallery .gallery-indicator {
+        transition: none;
     }
     
     .room-card.highlighted {
@@ -737,5 +760,6 @@
         box-shadow: 0 6px 24px rgba(124, 155, 181, 0.3), 
                     0 0 0 3px rgba(124, 155, 181, 0.1);
         transform: none;
+        transition: none; /* 關鍵：禁用高亮狀態變化的過渡 */
     }
 } 
