@@ -187,9 +187,10 @@
         <div class="note warning">
             <strong>⚠️ 注意事項：</strong>
             <ul>
-                <li>此功能僅在生產環境中完全有效</li>
-                <li>本地測試時，請直接修改瀏覽器網址列進行測試</li>
+                <li>此功能僅在 Cloudflare Pages 生產環境中有效</li>
+                <li>本地測試時重定向不會生效，請發佈後測試</li>
                 <li>房間卡片會有3秒的高亮效果以引起注意</li>
+                <li>重定向使用 <code>_redirects</code> 文件配置</li>
             </ul>
         </div>
 
@@ -197,7 +198,7 @@
         <div class="note">
             <strong>實現方式：</strong>
             <ol>
-                <li><strong>服務器重定向：</strong>在 <code>.htaccess</code> 中配置房號重定向規則</li>
+                <li><strong>Cloudflare Pages 重定向：</strong>在 <code>_redirects</code> 文件中配置房號重定向規則</li>
                 <li><strong>301永久重定向：</strong><code>/205</code> → <code>/rooms?goto=205</code></li>
                 <li><strong>房間定位：</strong>在 <code>main.js</code> 中處理查詢參數並定位房間</li>
                 <li><strong>高亮效果：</strong>使用 CSS 動畫效果高亮顯示目標房間3秒</li>
@@ -205,12 +206,12 @@
         </div>
         
         <div class="note success">
-            <strong>🚀 性能優勢：</strong>
+            <strong>🚀 Cloudflare Pages 優勢：</strong>
             <ul>
-                <li><strong>更快響應：</strong>服務器端重定向，無需等待 JavaScript 載入</li>
+                <li><strong>邊緣重定向：</strong>在 Cloudflare 全球邊緣節點進行重定向，超快響應</li>
                 <li><strong>SEO 友好：</strong>301重定向告訴搜索引擎這是永久重定向</li>
                 <li><strong>更可靠：</strong>不依賴瀏覽器 JavaScript 支持</li>
-                <li><strong>減少跳躍：</strong>避免頁面閃爍和二次跳轉</li>
+                <li><strong>全球 CDN：</strong>利用 Cloudflare 全球網絡加速</li>
             </ul>
         </div>
 
