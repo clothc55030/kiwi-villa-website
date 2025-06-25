@@ -62,14 +62,386 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/rooms.css">
     
-    <!-- Structured Data -->
+    <!-- Structured Data for Rooms -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "房型設施 - 澎湖期遇度假會館",
-        "description": "澎湖期遇度假會館房型設施，提供多種房型選擇，滿足不同旅客需求。",
+        "@type": "ItemList",
+        "name": "澎湖期遇度假會館房型設施",
+        "description": "澎湖期遇度假會館提供多種精品房型，滿足不同旅客需求",
         "url": "https://www.kiwi-villa.com/rooms",
+        "itemListElement": [
+            {
+                "@type": "HotelRoom",
+                "name": "豪華家庭房-附浴缸",
+                "alternateName": "萌201",
+                "description": "最受歡迎的家庭房型，配備TOTO豪華浴缸和60㎡超大陽台，適合親子家庭入住",
+                "identifier": "luxury-family-room-201",
+                "bed": [
+                    {
+                        "@type": "BedDetails",
+                        "numberOfBeds": 2,
+                        "typeOfBed": "King Size床 (1.8×2.0m)"
+                    }
+                ],
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "maxValue": 4,
+                    "unitText": "persons"
+                },
+                "floorSize": {
+                    "@type": "QuantitativeValue",
+                    "value": 60,
+                    "unitText": "平方米"
+                },
+                "amenityFeature": [
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "TOTO豪華浴缸",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "私人大陽台",
+                        "value": "60㎡"
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "兒童帳篷",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "天絲棉定制床品",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "玫瑰金皮沙發",
+                        "value": "2組"
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "43吋液晶電視",
+                        "value": true
+                    }
+                ],
+                "image": [
+                    "https://www.kiwi-villa.com/images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp",
+                    "https://www.kiwi-villa.com/images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room2.webp"
+                ],
+                "offers": {
+                    "@type": "Offer",
+                    "priceCurrency": "TWD",
+                    "priceRange": "$4000-8000"
+                }
+            },
+            {
+                "@type": "HotelRoom",
+                "name": "高級四人房-附陽台",
+                "alternateName": "戀203",
+                "description": "舒適的四人房型，配備38㎡陽台和雙床配置，適合朋友或小家庭入住",
+                "identifier": "premium-quad-room-203",
+                "bed": [
+                    {
+                        "@type": "BedDetails",
+                        "numberOfBeds": 2,
+                        "typeOfBed": "King Size床 (1.8×2.0m)"
+                    }
+                ],
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "maxValue": 4,
+                    "unitText": "persons"
+                },
+                "floorSize": {
+                    "@type": "QuantitativeValue",
+                    "value": 38,
+                    "unitText": "平方米"
+                },
+                "amenityFeature": [
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "私人陽台",
+                        "value": "38㎡"
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "天絲棉定制床品",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "採光極佳",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "43吋液晶電視",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "遙控遮光簾",
+                        "value": true
+                    }
+                ],
+                "image": [
+                    "https://www.kiwi-villa.com/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp",
+                    "https://www.kiwi-villa.com/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room2.webp"
+                ],
+                "offers": {
+                    "@type": "Offer",
+                    "priceCurrency": "TWD",
+                    "priceRange": "$3500-6500"
+                }
+            },
+            {
+                "@type": "HotelRoom",
+                "name": "奢華四人房-附陽台",
+                "alternateName": "趣205",
+                "description": "頂級奢華房型，配備54㎡雙陽台和精品家具，適合追求高品質住宿體驗的旅客",
+                "identifier": "deluxe-quad-room-205",
+                "bed": [
+                    {
+                        "@type": "BedDetails",
+                        "numberOfBeds": 2,
+                        "typeOfBed": "King Size床 (1.8×2.0m)"
+                    }
+                ],
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "maxValue": 4,
+                    "unitText": "persons"
+                },
+                "floorSize": {
+                    "@type": "QuantitativeValue",
+                    "value": 54,
+                    "unitText": "平方米"
+                },
+                "amenityFeature": [
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "雙私人陽台",
+                        "value": "54㎡"
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "TOTO涼暖風機",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "天絲棉定制床品",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "精品家具",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "43吋液晶電視",
+                        "value": true
+                    }
+                ],
+                "image": [
+                    "https://www.kiwi-villa.com/images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp",
+                    "https://www.kiwi-villa.com/images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room2.webp"
+                ],
+                "offers": {
+                    "@type": "Offer",
+                    "priceCurrency": "TWD",
+                    "priceRange": "$4500-7500"
+                }
+            },
+            {
+                "@type": "HotelRoom",
+                "name": "高級三人房-附陽台",
+                "alternateName": "夢303",
+                "description": "靈活的三人房型，配備36㎡陽台和兒童小屋，適合小家庭或三人旅遊",
+                "identifier": "premium-triple-room-303",
+                "bed": [
+                    {
+                        "@type": "BedDetails",
+                        "numberOfBeds": 1,
+                        "typeOfBed": "King Size床 (1.8×2.0m)"
+                    },
+                    {
+                        "@type": "BedDetails",
+                        "numberOfBeds": 1,
+                        "typeOfBed": "單人床 (1.2×2.0m)"
+                    }
+                ],
+                "occupancy": {
+                    "@type": "QuantitativeValue",
+                    "maxValue": 3,
+                    "unitText": "persons"
+                },
+                "floorSize": {
+                    "@type": "QuantitativeValue",
+                    "value": 36,
+                    "unitText": "平方米"
+                },
+                "amenityFeature": [
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "私人陽台",
+                        "value": "36㎡"
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "兒童小屋",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "天絲棉定制床品",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "靈活床型配置",
+                        "value": true
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        "name": "43吋液晶電視",
+                        "value": true
+                    }
+                ],
+                "image": [
+                    "https://www.kiwi-villa.com/images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp",
+                    "https://www.kiwi-villa.com/images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room2.webp"
+                ],
+                                 "offers": {
+                     "@type": "Offer",
+                     "priceCurrency": "TWD",
+                     "priceRange": "$3000-5500"
+                 }
+             },
+             {
+                 "@type": "HotelRoom",
+                 "name": "高級雙床房-附陽台",
+                 "alternateName": "期301 遇302",
+                 "description": "雙床配置房型，配備33㎡陽台，適合朋友或同事旅遊入住",
+                 "identifier": "premium-twin-room-301-302",
+                 "bed": [
+                     {
+                         "@type": "BedDetails",
+                         "numberOfBeds": 2,
+                         "typeOfBed": "單人床"
+                     }
+                 ],
+                 "occupancy": {
+                     "@type": "QuantitativeValue",
+                     "maxValue": 2,
+                     "unitText": "persons"
+                 },
+                 "floorSize": {
+                     "@type": "QuantitativeValue",
+                     "value": 33,
+                     "unitText": "平方米"
+                 },
+                 "amenityFeature": [
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "私人大陽台",
+                         "value": "33㎡"
+                     },
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "天絲棉定制床品",
+                         "value": true
+                     },
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "雙床配置",
+                         "value": true
+                     },
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "精品家具",
+                         "value": true
+                     },
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "43吋液晶電視",
+                         "value": true
+                     }
+                 ],
+                 "image": [
+                     "https://www.kiwi-villa.com/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp",
+                     "https://www.kiwi-villa.com/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room2.webp"
+                 ],
+                 "offers": {
+                     "@type": "Offer",
+                     "priceCurrency": "TWD",
+                     "priceRange": "$2500-4500"
+                 }
+             },
+             {
+                 "@type": "HotelRoom",
+                 "name": "高級雙人房-附陽台",
+                 "alternateName": "泊305 韻306 縵307",
+                 "description": "浪漫雙人房型，配備29㎡陽台和KING SIZE大床，適合情侶或夫妻度假",
+                 "identifier": "premium-double-room-305-306-307",
+                 "bed": [
+                     {
+                         "@type": "BedDetails",
+                         "numberOfBeds": 1,
+                         "typeOfBed": "King Size床 (1.8×2.0m)"
+                     }
+                 ],
+                 "occupancy": {
+                     "@type": "QuantitativeValue",
+                     "maxValue": 2,
+                     "unitText": "persons"
+                 },
+                 "floorSize": {
+                     "@type": "QuantitativeValue",
+                     "value": 29,
+                     "unitText": "平方米"
+                 },
+                 "amenityFeature": [
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "私人陽台",
+                         "value": "29㎡"
+                     },
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "天絲棉定制床品",
+                         "value": true
+                     },
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "浪漫雙人配置",
+                         "value": true
+                     },
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "寧靜舒適",
+                         "value": true
+                     },
+                     {
+                         "@type": "LocationFeatureSpecification",
+                         "name": "43吋液晶電視",
+                         "value": true
+                     }
+                 ],
+                 "image": [
+                     "https://www.kiwi-villa.com/images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp",
+                     "https://www.kiwi-villa.com/images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room2.webp"
+                 ],
+                 "offers": {
+                     "@type": "Offer",
+                     "priceCurrency": "TWD",
+                     "priceRange": "$2501-4000"
+                 }
+             }
+         ],
         "mainEntity": {
             "@type": "LodgingBusiness",
             "name": "澎湖期遇度假會館",
