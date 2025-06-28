@@ -61,6 +61,9 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.add('fa-loaded')">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     
+    <!-- AOS preconnect 優化 -->
+    <link rel="preconnect" href="https://unpkg.com">
+    
     <!-- 精簡關鍵Hero CSS - 恢復重要變數和效果 -->
     <style>
     /* 關鍵 CSS - 首屏渲染必需樣式（< 200行） */
@@ -86,6 +89,29 @@
         color: var(--text-primary);
         overflow-x: hidden;
         padding-top: 80px;
+    }
+    
+    /* Logo 預設大小，避免 CLS */
+    .logo-img {
+        width: 45px;
+        height: 24px;
+        object-fit: contain;
+    }
+    
+    /* AOS 元素預設樣式，避免 CLS */
+    [data-aos] {
+        pointer-events: auto !important;
+    }
+    
+    [data-aos].aos-animate {
+        pointer-events: auto !important;
+    }
+    
+    /* 預設隱藏動畫元素，避免閃爍 */
+    @media (min-width: 769px) {
+        [data-aos]:not(.aos-animate) {
+            opacity: 0;
+        }
     }
     
     /* Hero */
@@ -243,6 +269,13 @@
     }
     </style>
 
+    <!-- AOS 條件載入 - 只在需要時載入 -->
+    <script>
+    // 預先定義 AOS 佔位避免 CLS
+    document.documentElement.setAttribute('data-aos-delay', '0');
+    document.documentElement.setAttribute('data-aos-duration', '600');
+    </script>
+    
     <!-- 字體優化載入 - 改善體驗的同時保持性能 -->
     <script>
     // 智能載入Google Fonts - 添加font-display=swap
@@ -452,9 +485,10 @@
             <div class="nav-logo">
                 <a href="/" class="logo">
                     <picture>
-                        <source srcset="images/logo/kiwi-villa-logo.avif" type="image/avif">
-                        <source srcset="images/logo/kiwi-villa-logo.webp" type="image/webp">
-                        <img src="images/logo/kiwi-villa-logo.webp" alt="澎湖期遇度假會館 Logo" class="logo-img">
+                        <source srcset="images/logo/kiwi-villa-logo-small.avif" type="image/avif" media="(max-width: 768px)">
+                        <source srcset="images/logo/kiwi-villa-logo-small.webp" type="image/webp" media="(max-width: 768px)">
+                        <source srcset="images/logo/kiwi-villa-logo-medium.webp" type="image/webp">
+                        <img src="images/logo/kiwi-villa-logo-small.webp" alt="澎湖期遇度假會館 Logo" class="logo-img" width="45" height="24" loading="eager">
                     </picture>
                 </a>
             </div>
@@ -744,9 +778,10 @@
             }, 500);
         }
         
-        // AOS - 只在桌面版載入
+        // AOS - 只在桌面版且非低速網路載入
         if (!isMobile && !isSlowConnection) {
-            setTimeout(function() {
+            // 使用 IntersectionObserver 延遲載入 AOS
+            const loadAOS = function() {
                 const aosLink = document.createElement('link');
                 aosLink.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
                 aosLink.rel = 'stylesheet';
@@ -754,17 +789,39 @@
                 
                 const aosScript = document.createElement('script');
                 aosScript.src = 'https://unpkg.com/aos@2.3.1/dist/aos.js';
+                aosScript.async = true;
                 aosScript.onload = function() {
                     if (typeof AOS !== 'undefined') {
                         AOS.init({
                             duration: 600,
                             once: true,
-                            offset: 100
+                            offset: 100,
+                            disable: false
                         });
                     }
                 };
                 document.head.appendChild(aosScript);
-            }, 2000);
+            };
+            
+            // 當用戶滾動到第一個動畫元素時載入 AOS
+            if ('IntersectionObserver' in window) {
+                const aosObserver = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        loadAOS();
+                        aosObserver.disconnect();
+                    }
+                }, { rootMargin: '100px' });
+                
+                const firstAosElement = document.querySelector('[data-aos]');
+                if (firstAosElement) {
+                    aosObserver.observe(firstAosElement);
+                } else {
+                    // 如果沒有 AOS 元素，就不載入
+                }
+            } else {
+                // Fallback: 舊瀏覽器延遲載入
+                setTimeout(loadAOS, 2000);
+            }
         } else {
             // 手機版完全移除AOS屬性
             const aosElements = document.querySelectorAll('[data-aos]');
