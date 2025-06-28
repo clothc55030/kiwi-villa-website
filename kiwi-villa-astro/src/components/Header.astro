@@ -77,24 +77,33 @@ const navItems = [
 
     <!-- Mobile Menu Toggle -->
     <button 
-      class="md:hidden flex flex-col justify-center p-2 cursor-pointer"
+      class="md:hidden flex flex-col justify-center p-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
       id="nav-toggle"
       aria-label="開啟選單"
       aria-expanded="false"
+      aria-controls="mobile-nav-menu"
     >
       <span class="bar w-[25px] h-[3px] bg-primary my-[2px] rounded-[2px] transition-all duration-300"></span>
       <span class="bar w-[25px] h-[3px] bg-primary my-[2px] rounded-[2px] transition-all duration-300"></span>
       <span class="bar w-[25px] h-[3px] bg-primary my-[2px] rounded-[2px] transition-all duration-300"></span>
     </button>
   </div>
+</nav>
 
-  <!-- Mobile Navigation Menu -->
-  <ul class="
-    fixed top-20 left-0 w-full h-[calc(100vh-80px)] 
-    bg-white/98 flex-col items-center p-8 gap-8
-    transform -translate-x-full transition-transform duration-300
-    flex m-0 list-none md:hidden
-  " id="mobile-nav-menu">
+<!-- Mobile Menu Overlay -->
+<div 
+  class="fixed inset-0 bg-black/50 z-[999] opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
+  id="nav-overlay"
+  aria-hidden="true"
+></div>
+
+<!-- Mobile Navigation Menu -->
+<ul class="
+  fixed top-20 left-0 w-full h-[calc(100vh-80px)] 
+  bg-white flex-col items-center p-8 gap-8
+  transition-transform duration-300
+  flex m-0 list-none md:hidden z-[1001] shadow-xl
+" id="mobile-nav-menu">
     {navItems.map((item) => (
       <li class="w-full">
         <a 
@@ -130,12 +139,26 @@ const navItems = [
       </a>
     </li>
   </ul>
-</nav>
 
 <style is:global>
-  /* Mobile menu active state */
-  #mobile-nav-menu.active {
+  /* Mobile menu states with higher specificity */
+  ul#mobile-nav-menu {
+    transform: translateX(-100%);
+  }
+  
+  ul#mobile-nav-menu.active {
     transform: translateX(0);
+  }
+
+  /* Overlay states with higher specificity */
+  div#nav-overlay {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  div#nav-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   /* Hamburger menu animation */
@@ -149,6 +172,15 @@ const navItems = [
 
   #nav-toggle.active .bar:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  /* Performance optimization */
+  #mobile-nav-menu {
+    will-change: transform;
+  }
+  
+  #nav-toggle .bar {
+    will-change: transform, opacity;
   }
 
   /* Adjust navbar height for mobile using specific IDs */
@@ -166,41 +198,95 @@ const navItems = [
       height: calc(100vh - 70px);
     }
   }
+
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
+  }
 </style>
 
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    // 漢堡選單互動邏輯
-    const navToggle = document.getElementById('nav-toggle');
-    const mobileNavMenu = document.getElementById('mobile-nav-menu');
-    
-    if (navToggle && mobileNavMenu) {
-      navToggle.addEventListener('click', () => {
+<script>
+  // 使用 IIFE 避免全域污染
+  (() => {
+    // 確保 DOM 完全載入後再執行
+    const initNavigation = () => {
+      const navToggle = document.getElementById('nav-toggle');
+      const mobileNavMenu = document.getElementById('mobile-nav-menu');
+      const navOverlay = document.getElementById('nav-overlay');
+      
+      if (!navToggle || !mobileNavMenu || !navOverlay) {
+        return;
+      }
+
+      // 關閉選單的通用函數
+      const closeMenu = () => {
+        navToggle.classList.remove('active');
+        mobileNavMenu.classList.remove('active');
+        navOverlay.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      };
+
+      // 開啟選單的函數
+      const openMenu = () => {
+        navToggle.classList.add('active');
+        mobileNavMenu.classList.add('active');
+        navOverlay.classList.add('active');
+        navToggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('menu-open');
+      };
+
+      // 漢堡選單點擊事件
+      navToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
         const isActive = navToggle.classList.contains('active');
         
         if (isActive) {
-          navToggle.classList.remove('active');
-          mobileNavMenu.classList.remove('active');
-          navToggle.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = '';
+          closeMenu();
         } else {
-          navToggle.classList.add('active');
-          mobileNavMenu.classList.add('active');
-          navToggle.setAttribute('aria-expanded', 'true');
-          document.body.style.overflow = 'hidden';
+          openMenu();
         }
       });
+
+      // 點擊遮罩關閉選單
+      navOverlay.addEventListener('click', closeMenu);
 
       // 點擊選單項目時關閉選單
       const mobileNavLinks = mobileNavMenu.querySelectorAll('a');
       mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          navToggle.classList.remove('active');
-          mobileNavMenu.classList.remove('active');
-          navToggle.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = '';
-        });
+        link.addEventListener('click', closeMenu);
       });
+
+      // ESC 鍵關閉選單
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileNavMenu.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+
+      // 防止選單內部點擊冒泡到 document
+      mobileNavMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+
+      // 視窗大小改變時關閉選單
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.innerWidth >= 768 && mobileNavMenu.classList.contains('active')) {
+            closeMenu();
+          }
+        }, 250);
+      });
+    };
+
+    // 確保在 DOM 載入完成後初始化
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initNavigation);
+    } else {
+      // DOM 已經載入完成
+      initNavigation();
     }
-  });
+  })();
 </script> 
