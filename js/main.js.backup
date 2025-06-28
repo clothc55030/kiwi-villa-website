@@ -802,16 +802,16 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js')
             .then(function(registration) {
-                // Service Worker 註冊成功
+                console.log('✅ Service Worker 註冊成功');
                 
                 // 檢查是否有新版本
                 registration.addEventListener('updatefound', () => {
-                    // 發現 Service Worker 新版本
+                    console.log('🔄 發現 Service Worker 新版本...');
                     const newWorker = registration.installing;
                     
                     newWorker.addEventListener('statechange', () => {
                         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            // 新版本 Service Worker 已安裝，準備更新
+                            console.log('🎯 新版本 Service Worker 已安裝，準備更新...');
                             
                             // 可以在這裡顯示更新提示給用戶
                             // showUpdateNotification();
@@ -824,7 +824,7 @@ if ('serviceWorker' in navigator) {
                 
                 // 監聽 Service Worker 控制權變化
                 navigator.serviceWorker.addEventListener('controllerchange', () => {
-                    // Service Worker 控制權已更新，即將重新載入頁面
+                    console.log('🔄 Service Worker 控制權已更新，即將重新載入頁面...');
                     // 延遲重新載入，避免打斷用戶操作
                     setTimeout(() => {
                         window.location.reload();
@@ -836,7 +836,7 @@ if ('serviceWorker' in navigator) {
                     const messageChannel = new MessageChannel();
                     messageChannel.port1.onmessage = (event) => {
                         if (event.data.version) {
-                            // 當前 Service Worker 版本: event.data.version
+                            console.log('📋 當前 Service Worker 版本:', event.data.version);
                         }
                     };
                     navigator.serviceWorker.controller.postMessage(
@@ -1010,7 +1010,12 @@ function initRoomNavigation() {
         return;
     }
     
-    // 房間跳轉功能已啟用
+    console.log('房間跳轉調試:', { 
+        path: window.location.pathname, 
+        hash: window.location.hash,
+        search: window.location.search,
+        currentURL: window.location.href 
+    });
     
     // 檢查當前URL錨點或查詢參數
     function checkRoomNavigation() {
@@ -1021,13 +1026,18 @@ function initRoomNavigation() {
         let targetRoomId = null;
         let roomNumber = null;
         
-        // 檢查 URL 資訊
+        console.log('房間導航調試 - URL資訊:', {
+            hash: hash,
+            gotoParam: gotoParam,
+            search: window.location.search,
+            pathname: window.location.pathname
+        });
         
         // 優先檢查查詢參數（從 Cloudflare Pages 重定向）
         if (gotoParam) {
             roomNumber = gotoParam;
             targetRoomId = 'room-' + roomNumber;
-            // 檢測到房間查詢參數
+            console.log('檢測到房間查詢參數:', gotoParam, '目標ID:', targetRoomId);
             
             // 更新URL為錨點形式，移除查詢參數
             const newUrl = window.location.pathname + '#' + targetRoomId;
@@ -1037,25 +1047,25 @@ function initRoomNavigation() {
         else if (hash && hash.includes('room-')) {
             targetRoomId = hash.substring(1); // 移除 # 符號
             roomNumber = targetRoomId.replace('room-', '');
-            // 檢測到房間錨點
+            console.log('檢測到房間錨點:', targetRoomId);
         }
         
         if (targetRoomId && roomNumber) {
-            // 開始處理房間導航
+            console.log('開始處理房間導航 - 房號:', roomNumber, '目標ID:', targetRoomId);
             
             // 清除所有房間的處理標記，允許重新跳轉
             const allRoomCards = document.querySelectorAll('.room-card[id]');
             allRoomCards.forEach(room => {
                 delete room.dataset.navigationProcessed;
             });
-            // 清除所有房間的處理標記
+            console.log('頁面中找到的房間卡片:', Array.from(allRoomCards).map(el => el.id));
             
             // 先嘗試直接找到目標房間
             let targetRoom = document.getElementById(targetRoomId);
             
             // 如果找不到直接的房間ID，檢查房號對應關係
             if (!targetRoom) {
-                // 未找到直接房間ID，檢查房號對應關係
+                console.log('未找到直接房間ID，檢查房號對應關係:', roomNumber);
                 
                 // 房號對應關係處理
                 switch(roomNumber) {
@@ -1074,7 +1084,7 @@ function initRoomNavigation() {
                     case '302':
                         // 302 跳轉到 301 房間卡片
                         targetRoom = document.getElementById('room-301');
-                        // 房號302重定向到room-301
+                        console.log('房號302重定向到room-301');
                         break;
                     case '303':
                         targetRoom = document.getElementById('room-303');
@@ -1086,20 +1096,20 @@ function initRoomNavigation() {
                     case '307':
                         // 306、307 跳轉到 305 房間卡片
                         targetRoom = document.getElementById('room-305');
-                        // 房號306/307重定向到room-305
+                        console.log('房號' + roomNumber + '重定向到room-305');
                         break;
                     default:
-                        // 未知房號
+                        console.log('未知房號:', roomNumber);
                         break;
                 }
             }
             
             if (targetRoom) {
-                // 找到目標房間元素
+                console.log('找到目標房間元素:', targetRoom.id, targetRoom);
                 
                 // 添加執行標記，避免重複處理
                 if (targetRoom.dataset.navigationProcessed === 'true') {
-                    // 房間跳轉已處理過，跳過重複執行
+                    console.log('房間跳轉已處理過，跳過重複執行');
                     return;
                 }
                 targetRoom.dataset.navigationProcessed = 'true';
@@ -1108,7 +1118,7 @@ function initRoomNavigation() {
                 const executeScroll = () => {
                     // 確保元素在視窗內可見
                     if (targetRoom.offsetHeight === 0) {
-                        // 目標元素尚未完全載入，再次延遲
+                        console.log('目標元素尚未完全載入，再次延遲');
                         setTimeout(executeScroll, 200);
                         return;
                     }
@@ -1119,7 +1129,7 @@ function initRoomNavigation() {
                     
                     // 手機版無動畫，直接執行；桌面版需檢查動畫狀態
                     if (isMobile || prefersReducedMotion) {
-                        // 手機版或減少動畫模式，直接執行滾動
+                        console.log('手機版或減少動畫模式，直接執行滾動');
                     } else {
                         // 桌面版檢查動畫完成狀態
                         const style = window.getComputedStyle(targetRoom);
@@ -1127,14 +1137,14 @@ function initRoomNavigation() {
                         const transform = style.transform;
                         
                         if (opacity < 1 || (transform !== 'none' && transform !== 'matrix(1, 0, 0, 1, 0, 0)')) {
-                            // 桌面版動畫尚未完成，延遲執行滾動
+                            console.log('桌面版動畫尚未完成，延遲執行滾動');
                             setTimeout(executeScroll, 200);
                             return;
                         }
                     }
                     
                     scrollToRoom(targetRoom);
-                    // 動畫完成，成功執行滾動到房間
+                    console.log('動畫完成，成功執行滾動到房間:', targetRoom.id);
                 };
                 
                 // 智能延遲：考慮設備類型和動畫設定
@@ -1148,21 +1158,22 @@ function initRoomNavigation() {
                     initialDelay = 800; // 桌面版：等待動畫完成
                 }
                 
-                // 設定延遲執行時間
+                console.log('設定延遲執行時間:', initialDelay, 'ms (手機版:', isMobile, ', 減少動畫:', prefersReducedMotion, ')');
                 
                 setTimeout(executeScroll, initialDelay);
                 
             } else {
-                // 找不到對應的房間元素
+                console.log('找不到對應的房間元素，房號:', roomNumber);
+                console.log('可能的解決方案：檢查房間ID是否正確');
             }
         } else {
-            // 沒有檢測到需要跳轉的房間
+            console.log('沒有檢測到需要跳轉的房間');
         }
     }
     
     // 平滑滾動到房間卡片
     function scrollToRoom(roomElement) {
-        // 執行滾動到房間
+        console.log('執行滾動到房間:', roomElement.id);
         
         const navbar = document.getElementById('navbar');
         const navbarHeight = navbar ? navbar.offsetHeight : 80;
@@ -1177,7 +1188,14 @@ function initRoomNavigation() {
         const extraMargin = isMobile ? 50 : 30; // 手機版留更多間距
         const offsetTop = Math.max(0, elementTop - navbarHeight - extraMargin);
         
-        // 滾動計算完成
+        console.log('滾動計算 (手機版: ' + isMobile + '):', {
+            elementRect: elementRect,
+            elementTop: elementTop,
+            navbarHeight: navbarHeight,
+            extraMargin: extraMargin,
+            offsetTop: offsetTop,
+            currentScroll: window.pageYOffset
+        });
         
         // 檢查是否已在視窗內 - 手機版使用更寬鬆的條件
         const currentScroll = window.pageYOffset;
@@ -1186,14 +1204,14 @@ function initRoomNavigation() {
                            elementRect.bottom <= window.innerHeight + viewportBuffer;
         
         if (targetInView && Math.abs(currentScroll - offsetTop) < viewportBuffer) {
-            // 房間已在視窗內，直接高亮
+            console.log('房間已在視窗內，直接高亮');
             highlightRoom(roomElement);
             return;
         }
         
         // 執行平滑滾動
         try {
-            // 執行滾動
+            console.log('執行滾動 - 從', currentScroll, '到', offsetTop);
             
             window.scrollTo({
                 top: offsetTop,
@@ -1205,12 +1223,12 @@ function initRoomNavigation() {
             
             // 滾動完成後高亮，只執行一次
             setTimeout(() => {
-                // 滾動延遲完成，執行高亮
+                console.log('滾動延遲完成，執行高亮');
                 highlightRoom(roomElement);
             }, scrollDelay);
             
         } catch (error) {
-            // 滾動執行錯誤
+            console.error('滾動執行錯誤:', error);
             // 降級處理：使用立即滾動
             window.scrollTo(0, offsetTop);
             setTimeout(() => {
@@ -1223,7 +1241,7 @@ function initRoomNavigation() {
     function highlightRoom(roomElement) {
         // 如果已經在高亮狀態，不重複處理
         if (roomElement.classList.contains('highlighted')) {
-            // 房間已經高亮，跳過重複處理
+            console.log('房間已經高亮，跳過重複處理');
             return;
         }
         
@@ -1235,12 +1253,12 @@ function initRoomNavigation() {
         
         // 添加高亮效果
         roomElement.classList.add('highlighted');
-        // 房間高亮效果已添加
+        console.log('房間高亮效果已添加:', roomElement.id);
         
         // 3秒後移除高亮
         setTimeout(() => {
             roomElement.classList.remove('highlighted');
-            // 房間高亮效果已移除
+            console.log('房間高亮效果已移除:', roomElement.id);
         }, 3000);
     }
     

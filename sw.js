@@ -15,6 +15,7 @@ const CORE_ASSETS = [
     '/reviews.html',
     '/faq.html',
     '/policy.html',
+    '/404.html',
     '/css/base.css',
     '/css/layout.css',
     '/css/index.css',

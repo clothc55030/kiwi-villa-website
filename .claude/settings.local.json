@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp:*)",
+      "Bash(rm:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(python3:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(timeout 30s npx @11ty/eleventy --input=src/intro.html --output=dist)",
+      "Bash(timeout 300s npm run build)",
+      "Bash(npm uninstall:*)",
+      "Bash(timeout 60s npx @11ty/eleventy --input=src/intro.html --output=dist)",
+      "Bash(node:*)",
+      "Bash(for file in reviews.html location.html faq.html policy.html intro.html)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(done)",
+      "Bash(for file in *.html)",
+      "Bash(do echo -n \"$file: \")",
+      "Bash(rg:*)",
+      "Bash(sed:*)",
+      "Bash(for file in location.html reviews.html faq.html)"
+    ],
+    "deny": []
+  }
+}
