@@ -1,0 +1,139 @@
+/* Tailwind CSS v4 Configuration */
+@import "tailwindcss";
+
+/* 設計系統 - 莫蘭迪色系 */
+@theme {
+  /* 顏色系統 - 直接映射到 Tailwind 顏色名稱 */
+  --color-primary: #7c9bb5;
+  --color-primary-light: #9bb0c4;
+  --color-primary-dark: #6b8aa0;
+  
+  --color-secondary: #a8b8c8;
+  --color-secondary-light: #b8c7d6;
+  --color-secondary-dark: #8fa3b3;
+  
+  --color-accent: #9bb0c4;
+  --color-accent-light: #b8c7d6;
+  
+  /* 中性色 */
+  --color-light-gray: #f7f6f4;
+  --color-medium-gray: #e6e2dc;
+  --color-dark-gray: #8a8580;
+  --color-charcoal: #4a453f;
+  
+  /* 語意色彩 */
+  --color-text-primary: #4a453f;
+  --color-text-secondary: #8a8580;
+  --color-text-light: #ffffff;
+  --color-text-muted: #b5b0aa;
+  
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f7f6f4;
+  --color-bg-accent: #faf9f7;
+  
+  /* 品牌色彩 */
+  --color-instagram-start: #f09433;
+  --color-instagram-end: #bc1888;
+  --color-facebook: #1877f2;
+  --color-line: #00c300;
+  
+  /* 陰影系統 */
+  --color-shadow-light: rgba(74, 69, 63, 0.08);
+  --color-shadow-medium: rgba(74, 69, 63, 0.12);
+  --color-shadow-heavy: rgba(74, 69, 63, 0.16);
+  
+  /* 間距系統 */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 4rem;
+  
+  /* 字體系統 */
+  --font-family-sans: -apple-system, "PingFang TC", "Microsoft YaHei", "Noto Sans TC", system-ui, sans-serif;
+  --font-family-serif: "Playfair Display", -apple-system, "PingFang TC", "Microsoft YaHei", serif;
+  
+  /* 動畫時間 */
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  
+  /* 斷點 */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* 全域樣式 - 僅保留 Tailwind Preflight 未涵蓋的特定全域樣式 */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.625rem; /* 90px */
+  }
+
+  body {
+    /* Tailwind's Preflight 已經處理了大部分基礎樣式 */
+    /* 只保留專案特定的字體和顏色 */
+    font-family: var(--font-family-sans);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    overflow-x: hidden; /* 保留以防止水平滾動 */
+  }
+}
+
+/* 動畫定義 */
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* 效能優化：減少動畫 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* 自定義工具類別 */
+@layer utilities {
+  .bg-radial-gradient {
+    background: radial-gradient(circle at center, var(--tw-gradient-stops));
+  }
+  
+  .shadow-medium {
+    box-shadow: 0 4px 16px rgba(74, 69, 63, 0.12);
+  }
+  
+  /* Motion One 動畫的初始狀態 */
+  [data-animate='fade-up'] {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  [data-animate='hero'] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* 高對比度支援 */
+@media (prefers-contrast: high) {
+  :root {
+    --color-primary: #5a7a94;
+    --color-text-primary: #2a251f;
+    --color-text-secondary: #5a5550;
+  }
+} 

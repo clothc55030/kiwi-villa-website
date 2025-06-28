@@ -21,7 +21,9 @@
       "Bash(do echo -n \"$file: \")",
       "Bash(rg:*)",
       "Bash(sed:*)",
-      "Bash(for file in location.html reviews.html faq.html)"
+      "Bash(for file in location.html reviews.html faq.html)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(pnpm dev:*)"
     ],
     "deny": []
   }

@@ -1,0 +1,172 @@
+---
+import '../styles/globals.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+	title: string;
+	description: string;
+	ogImage?: string;
+	canonicalUrl?: string;
+	structuredData?: object;
+}
+
+const { 
+	title = '澎湖期遇度假會館 - 澎湖民宿推薦 | 三面環海歐風建築度假首選',
+	description = '澎湖期遇度假會館，座落於三面環海半島，融合歐洲巴洛克古典建築美學。在陽光海洋微風星光中，開啟您的期遇之旅，體驗潮流與經典融合的海島度假時光。',
+	ogImage = 'https://www.kiwi-villa.com/assets/og-image.webp',
+	canonicalUrl = 'https://www.kiwi-villa.com/',
+	structuredData
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="keywords" content="澎湖民宿推薦,澎湖期遇度假會館,澎湖住宿,三面環海,歐洲巴洛克建築,澎湖旅遊,海島度假,澎湖民宿" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website">
+		<meta property="og:url" content={canonicalUrl}>
+		<meta property="og:title" content={title}>
+		<meta property="og:description" content={description}>
+		<meta property="og:image" content={ogImage}>
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image">
+		<meta property="twitter:url" content={canonicalUrl}>
+		<meta property="twitter:title" content={title}>
+		<meta property="twitter:description" content={description}>
+		<meta property="twitter:image" content={ogImage}>
+		
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" href="/images/logo/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/logo/favicon-16x16.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/logo/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/images/logo/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="/images/logo/favicon-192x192.png">
+		<link rel="icon" type="image/png" sizes="512x512" href="/images/logo/favicon-512x512.png">
+		<link rel="apple-touch-icon" sizes="57x57" href="/images/logo/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/images/logo/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/images/logo/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/images/logo/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/images/logo/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/images/logo/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/images/logo/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/images/logo/apple-touch-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/logo/apple-touch-icon-180x180.png">
+		<link rel="manifest" href="/manifest.json">
+		
+		<!-- Canonical URL -->
+		<link rel="canonical" href={canonicalUrl} />
+		
+		<!-- Structured Data -->
+		{structuredData && (
+			<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+		)}
+		
+		<!-- Critical CSS (關鍵 CSS 內聯) -->
+		<style>
+			/* 關鍵渲染路徑的基礎樣式 */
+			:root {
+				--color-primary: #7c9bb5;
+				--color-primary-dark: #6b8aa0;
+				--color-text-primary: #4a453f;
+				--color-text-secondary: #8a8580;
+				--color-bg-primary: #ffffff;
+				--font-family-sans: -apple-system, "PingFang TC", "Microsoft YaHei", "Noto Sans TC", system-ui, sans-serif;
+			}
+			
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			
+			html {
+				font-family: var(--font-family-sans);
+				scroll-behavior: smooth;
+			}
+			
+			body {
+				line-height: 1.6;
+				color: var(--color-text-primary);
+				background-color: var(--color-bg-primary);
+				overflow-x: hidden;
+			}
+			
+			/* 防止字體閃爍 */
+			.font-sans {
+				font-family: var(--font-family-sans);
+			}
+			
+			/* Hero 區域關鍵樣式 */
+			.hero-section {
+				position: relative;
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			
+			/* 導覽列關鍵樣式 */
+			.navbar {
+				position: fixed;
+				top: 0;
+				width: 100%;
+				background: rgba(255, 255, 255, 0.95);
+				backdrop-filter: blur(10px);
+				z-index: 1000;
+			}
+			
+			/* 行動裝置優化 */
+			@media (max-width: 768px) {
+				/* 可在此處添加行動裝置特定的關鍵樣式 */
+			}
+		</style>
+		
+		<!-- 預載入關鍵資源 - 預載入 AVIF 格式（瀏覽器優先使用的格式） -->
+		<link rel="preload" as="image" href="/images/hero/main-hall-environment-mobile-extreme.avif" type="image/avif" media="(max-width: 768px)" />
+		<link rel="preload" as="image" href="/images/hero/main-hall-environment-new.avif" type="image/avif" media="(min-width: 769px)" />
+		
+		<!-- DNS 預取 -->
+		<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+		
+		<!-- 資源提示 -->
+		<meta name="theme-color" content="#7c9bb5" />
+		<meta name="color-scheme" content="light" />
+	</head>
+	<body class="font-sans">
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+		
+		<!-- 延遲載入非關鍵腳本 -->
+		<script type="module">
+			// 性能監測
+			if ('PerformanceObserver' in window) {
+				// LCP 監測
+				const lcpObserver = new PerformanceObserver((list) => {
+					const entries = list.getEntries();
+					const lastEntry = entries[entries.length - 1];
+					console.log('LCP:', lastEntry.startTime);
+				});
+				lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+				
+				// FID 監測
+				const fidObserver = new PerformanceObserver((list) => {
+					for (const entry of list.getEntries()) {
+						console.log('FID:', entry.processingStart - entry.startTime);
+					}
+				});
+				fidObserver.observe({ type: 'first-input', buffered: true });
+			}
+		</script>
+	</body>
+</html> 
