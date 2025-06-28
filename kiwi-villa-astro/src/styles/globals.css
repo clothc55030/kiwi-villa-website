@@ -3,6 +3,11 @@
 
 /* 設計系統 - 莫蘭迪色系 */
 @theme {
+  /* 字體族設定 */
+  --font-sans: "Noto Sans TC", -apple-system, "PingFang TC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-serif: "Lora", "Noto Serif TC", "PingFang TC", "Microsoft YaHei", serif;
+  --font-display: "Noto Serif TC", "Lora", serif;
+  
   /* 顏色系統 - 直接映射到 Tailwind 顏色名稱 */
   --color-primary: #7c9bb5;
   --color-primary-light: #9bb0c4;
@@ -50,9 +55,10 @@
   --spacing-xl: 3rem;
   --spacing-xxl: 4rem;
   
-  /* 字體系統 */
-  --font-family-sans: -apple-system, "PingFang TC", "Microsoft YaHei", "Noto Sans TC", system-ui, sans-serif;
-  --font-family-serif: "Playfair Display", -apple-system, "PingFang TC", "Microsoft YaHei", serif;
+  /* 字體系統 - 優雅的中英文搭配 */
+  --font-family-sans: "Noto Sans TC", -apple-system, "PingFang TC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-family-serif: "Lora", "Noto Serif TC", "PingFang TC", "Microsoft YaHei", serif;
+  --font-family-display: "Noto Serif TC", "Lora", serif;
   
   /* 動畫時間 */
   --duration-fast: 200ms;
@@ -126,6 +132,58 @@
   [data-animate='hero'] {
     opacity: 0;
     transform: translateY(20px);
+  }
+  
+  /* 文字陰影工具類別 */
+  .text-shadow-sm {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  }
+  
+  .text-shadow-md {
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  }
+  
+  .text-shadow-xl {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+  }
+  
+  /* 字體優化工具類別 */
+  .font-display {
+    font-family: var(--font-display);
+  }
+  
+  /* 字重優化 - 中文字體 */
+  .font-light-cn {
+    font-weight: 300;
+  }
+  
+  .font-normal-cn {
+    font-weight: 400;
+  }
+  
+  .font-medium-cn {
+    font-weight: 500;
+  }
+  
+  .font-semibold-cn {
+    font-weight: 600;
+  }
+  
+  .font-bold-cn {
+    font-weight: 700;
+  }
+  
+  /* 字距優化 */
+  .tracking-loose-cn {
+    letter-spacing: 0.05em;
+  }
+  
+  .tracking-wide-cn {
+    letter-spacing: 0.1em;
   }
 }
 

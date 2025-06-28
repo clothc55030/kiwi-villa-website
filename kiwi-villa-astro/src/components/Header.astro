@@ -1,15 +1,7 @@
 ---
-const currentPath = Astro.url.pathname;
+import { navigationItems, bookingUrl } from '../config/navigation';
 
-const navItems = [
-  { href: '/', label: '首頁' },
-  { href: '/intro', label: '細說期遇' },
-  { href: '/location', label: '地理資訊' },
-  { href: '/rooms', label: '房型設施' },
-  { href: '/reviews', label: '客戶評價' },
-  { href: '/faq', label: '常見問題' },
-  { href: '/policy', label: '訂房須知' },
-];
+const currentPath = Astro.url.pathname;
 ---
 
 <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-light z-[1000] transition-all duration-300 h-20" id="navbar">
@@ -18,16 +10,21 @@ const navItems = [
     <div class="flex items-center">
       <a href="/" class="flex items-center gap-2">
         <picture>
-          <source srcset="/images/logo/kiwi-villa-logo-small.avif" type="image/avif" media="(max-width: 768px)">
-          <source srcset="/images/logo/kiwi-villa-logo-small.webp" type="image/webp" media="(max-width: 768px)">
+          <!-- 手機版使用標準解析度 -->
+          <source 
+            srcset="/images/logo/kiwi-villa-logo.webp 1x, /images/logo/kiwi-villa-logo.png 2x" 
+            type="image/webp" 
+            media="(max-width: 768px)"
+          >
+          <!-- 桌面版 -->
           <source srcset="/images/logo/kiwi-villa-logo.avif" type="image/avif">
           <source srcset="/images/logo/kiwi-villa-logo.webp" type="image/webp">
           <img 
-            src="/images/logo/kiwi-villa-logo.webp" 
+            src="/images/logo/kiwi-villa-logo.png" 
             alt="澎湖期遇度假會館 Logo" 
-            class="w-[60px] h-auto md:w-[80px] object-contain" 
-            width="80" 
-            height="42" 
+            class="h-[50px] w-auto md:h-[60px] object-contain" 
+            width="160" 
+            height="84"
             loading="eager"
           >
         </picture>
@@ -36,12 +33,12 @@ const navItems = [
 
     <!-- Desktop Navigation -->
     <ul class="hidden md:flex items-center gap-8 m-0 p-0 list-none" id="nav-menu">
-      {navItems.map((item) => (
+      {navigationItems.map((item) => (
         <li>
           <a 
             href={item.href} 
             class={`
-              block py-2 px-4 text-text-primary font-medium text-[0.95rem] 
+              block py-2 px-4 text-text-primary font-medium-cn text-[0.95rem] 
               transition-colors duration-200 hover:text-primary
               relative after:content-[''] after:absolute after:bottom-0 
               after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 
@@ -56,11 +53,11 @@ const navItems = [
       ))}
       <li>
         <a 
-          href="https://booking.owlting.com/kiwi-villa" 
+          href={bookingUrl} 
           class="
             inline-flex items-center gap-2 px-4 py-2 
             bg-gradient-to-br from-primary to-primary-light 
-            text-white font-semibold text-[0.95rem] 
+            text-white font-semibold-cn text-[0.95rem] 
             rounded-full ml-4 transition-all duration-300
             hover:shadow-medium hover:transform hover:-translate-y-0.5
           " 
@@ -104,12 +101,12 @@ const navItems = [
   transition-transform duration-300
   flex m-0 list-none md:hidden z-[1001] shadow-xl
 " id="mobile-nav-menu">
-    {navItems.map((item) => (
+    {navigationItems.map((item) => (
       <li class="w-full">
         <a 
           href={item.href} 
           class={`
-            block text-center py-4 px-6 text-lg font-medium 
+            block text-center py-4 px-6 text-lg font-medium-cn 
             text-text-primary transition-colors duration-200 
             hover:text-primary hover:bg-light-gray rounded-lg
             ${currentPath === item.href ? 'text-primary bg-light-gray' : ''}
@@ -125,7 +122,7 @@ const navItems = [
         class="
           flex items-center justify-center gap-2 w-full py-4 px-6 
           bg-gradient-to-br from-primary to-primary-light 
-          text-white font-semibold text-lg rounded-full 
+          text-white font-semibold-cn text-lg rounded-full 
           transition-all duration-300 
           hover:shadow-medium hover:transform hover:-translate-y-0.5
         " 

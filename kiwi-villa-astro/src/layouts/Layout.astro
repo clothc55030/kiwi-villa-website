@@ -61,6 +61,22 @@ const {
 		<link rel="apple-touch-icon" sizes="180x180" href="/images/logo/apple-touch-icon-180x180.png">
 		<link rel="manifest" href="/manifest.json">
 		
+		<!-- Google Fonts with optimization -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link 
+			href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap&subset=chinese-traditional" 
+			rel="stylesheet"
+			media="print" 
+			onload="this.media='all'"
+		/>
+		<noscript>
+			<link 
+				href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap&subset=chinese-traditional" 
+				rel="stylesheet"
+			/>
+		</noscript>
+		
 		<!-- Canonical URL -->
 		<link rel="canonical" href={canonicalUrl} />
 		
@@ -69,65 +85,32 @@ const {
 			<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 		)}
 		
-		<!-- Critical CSS (關鍵 CSS 內聯) -->
+		<!-- Critical CSS (僅保留真正關鍵的樣式以防止 FOUC) -->
 		<style>
-			/* 關鍵渲染路徑的基礎樣式 */
+			/* 最小化的關鍵 CSS - 其餘樣式已在 globals.css 中定義 */
 			:root {
 				--color-primary: #7c9bb5;
-				--color-primary-dark: #6b8aa0;
 				--color-text-primary: #4a453f;
-				--color-text-secondary: #8a8580;
 				--color-bg-primary: #ffffff;
-				--font-family-sans: -apple-system, "PingFang TC", "Microsoft YaHei", "Noto Sans TC", system-ui, sans-serif;
 			}
 			
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
-			
-			html {
-				font-family: var(--font-family-sans);
-				scroll-behavior: smooth;
-			}
-			
+			/* 防止無樣式內容閃爍 (FOUC) */
 			body {
-				line-height: 1.6;
-				color: var(--color-text-primary);
-				background-color: var(--color-bg-primary);
-				overflow-x: hidden;
+				opacity: 0;
+				transition: opacity 0.3s ease;
 			}
 			
-			/* 防止字體閃爍 */
-			.font-sans {
-				font-family: var(--font-family-sans);
-			}
-			
-			/* Hero 區域關鍵樣式 */
-			.hero-section {
-				position: relative;
-				min-height: 100vh;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-			
-			/* 導覽列關鍵樣式 */
-			.navbar {
-				position: fixed;
-				top: 0;
-				width: 100%;
-				background: rgba(255, 255, 255, 0.95);
-				backdrop-filter: blur(10px);
-				z-index: 1000;
-			}
-			
-			/* 行動裝置優化 */
-			@media (max-width: 768px) {
-				/* 可在此處添加行動裝置特定的關鍵樣式 */
+			body.loaded {
+				opacity: 1;
 			}
 		</style>
+		
+		<script>
+			// 防止 FOUC - 在樣式載入完成後顯示內容
+			document.addEventListener('DOMContentLoaded', () => {
+				document.body.classList.add('loaded');
+			});
+		</script>
 		
 		<!-- 預載入關鍵資源 - 預載入 AVIF 格式（瀏覽器優先使用的格式） -->
 		<link rel="preload" as="image" href="/images/hero/main-hall-environment-mobile-extreme.avif" type="image/avif" media="(max-width: 768px)" />
@@ -149,20 +132,25 @@ const {
 		
 		<!-- 延遲載入非關鍵腳本 -->
 		<script type="module">
-			// 性能監測
-			if ('PerformanceObserver' in window) {
+			// 性能監測（只在開發環境執行）
+			if ('PerformanceObserver' in window && import.meta.env.DEV) {
 				// LCP 監測
 				const lcpObserver = new PerformanceObserver((list) => {
 					const entries = list.getEntries();
 					const lastEntry = entries[entries.length - 1];
-					console.log('LCP:', lastEntry.startTime);
+					// 使用特殊的日誌函數避免被 terser 移除
+					if (window.console && window.console.info) {
+						window.console.info('LCP:', lastEntry.startTime);
+					}
 				});
 				lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
 				
 				// FID 監測
 				const fidObserver = new PerformanceObserver((list) => {
 					for (const entry of list.getEntries()) {
-						console.log('FID:', entry.processingStart - entry.startTime);
+						if (window.console && window.console.info) {
+							window.console.info('FID:', entry.processingStart - entry.startTime);
+						}
 					}
 				});
 				fidObserver.observe({ type: 'first-input', buffered: true });

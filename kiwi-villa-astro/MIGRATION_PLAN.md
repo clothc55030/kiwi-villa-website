@@ -220,6 +220,47 @@
             - 完全移除 `!important` 宣告，使用選擇器特異性
             - 清理所有調試用 console.log
             - 保持代碼整潔和可維護性
+    6. **專案優化與重構**: ✅
+        - **完成日期**: 2025-06-28
+        - **執行的優化項目**:
+          1. **Console.log 策略修復**:
+            - 問題：性能監測 console.log 會被 terser 移除
+            - 解決：加入 `import.meta.env.DEV` 條件判斷，只在開發環境執行
+            - 使用 `window.console.info` 避免被移除
+          2. **移除重複 CSS**:
+            - 問題：Layout.astro 有 60+ 行與 globals.css 重複的內嵌 CSS
+            - 解決：只保留最小化的關鍵 CSS 防止 FOUC
+            - 效能改善：減少約 2KB 內嵌 CSS
+          3. **消除內嵌樣式**:
+            - 問題：index.astro 有 8 處重複的 text-shadow 內嵌樣式
+            - 解決：建立 `.text-shadow-sm/md/lg/xl` 工具類別
+            - 結果：完全符合 CSS 代碼品質標準
+          4. **建立配置檔案系統**:
+            - 新增 `/src/config/navigation.ts` - 導航配置
+            - 新增 `/src/config/social.ts` - 社交媒體和聯絡資訊配置
+            - 更新 Header 和 Footer 使用配置檔案
+          5. **字體系統升級**:
+            - **新字體組合**:
+              - 標題：Noto Serif TC（思源宋體）
+              - 內文：Noto Sans TC（思源黑體）
+              - 英文襯線：Lora
+            - **優化載入**：使用異步載入減少渲染阻塞
+            - **新增工具類別**:
+              - 字重：`.font-light-cn`、`.font-medium-cn`、`.font-semibold-cn` 等
+              - 字距：`.tracking-loose-cn`、`.tracking-wide-cn`
+              - 特殊字體：`.font-display`
+        - **最佳實踐總結**:
+          - ✅ 使用配置檔案管理外部連結和資料
+          - ✅ 抽取重複樣式為工具類別
+          - ✅ 字體使用 Google Fonts 並優化載入
+          - ✅ 避免內嵌樣式和 `!important`
+          - ✅ 生產環境移除調試代碼
+        - **給後續開發的提醒**:
+          - 所有頁面都應使用新的字體系統類別
+          - 文字陰影使用 `.text-shadow-*` 工具類別
+          - 中文字重使用 `*-cn` 後綴的類別（如 `.font-medium-cn`）
+          - 重要標題使用 `.font-display` 搭配 Noto Serif TC
+          - 導航和聯絡資訊從 config 檔案讀取，不要硬編碼
 
 ---
 
