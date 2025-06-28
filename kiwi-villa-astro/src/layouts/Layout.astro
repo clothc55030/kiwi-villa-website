@@ -131,30 +131,32 @@ const {
 		<Footer />
 		
 		<!-- 延遲載入非關鍵腳本 -->
-		<script type="module">
-			// 性能監測（只在開發環境執行）
-			if ('PerformanceObserver' in window && import.meta.env.DEV) {
-				// LCP 監測
-				const lcpObserver = new PerformanceObserver((list) => {
-					const entries = list.getEntries();
-					const lastEntry = entries[entries.length - 1];
-					// 使用特殊的日誌函數避免被 terser 移除
-					if (window.console && window.console.info) {
-						window.console.info('LCP:', lastEntry.startTime);
-					}
-				});
-				lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
-				
-				// FID 監測
-				const fidObserver = new PerformanceObserver((list) => {
-					for (const entry of list.getEntries()) {
+		{import.meta.env.DEV && (
+			<script type="module">
+				// 性能監測（只在開發環境執行）
+				if ('PerformanceObserver' in window) {
+					// LCP 監測
+					const lcpObserver = new PerformanceObserver((list) => {
+						const entries = list.getEntries();
+						const lastEntry = entries[entries.length - 1];
+						// 使用特殊的日誌函數避免被 terser 移除
 						if (window.console && window.console.info) {
-							window.console.info('FID:', entry.processingStart - entry.startTime);
+							window.console.info('LCP:', lastEntry.startTime);
 						}
-					}
-				});
-				fidObserver.observe({ type: 'first-input', buffered: true });
-			}
-		</script>
+					});
+					lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+					
+					// FID 監測
+					const fidObserver = new PerformanceObserver((list) => {
+						for (const entry of list.getEntries()) {
+							if (window.console && window.console.info) {
+								window.console.info('FID:', entry.processingStart - entry.startTime);
+							}
+						}
+					});
+					fidObserver.observe({ type: 'first-input', buffered: true });
+				}
+			</script>
+		)}
 	</body>
 </html> 
