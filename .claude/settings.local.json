@@ -26,7 +26,13 @@
       "Bash(pnpm dev:*)",
       "Bash(pnpm install:*)",
       "Bash(pnpm add:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(mkdir:*)",
+      "Bash(pnpm astro:*)",
+      "Bash(pkill:*)",
+      "Bash(true)",
+      "Bash(pnpm build:*)",
+      "Bash(npm run preview:*)"
     ],
     "deny": []
   }

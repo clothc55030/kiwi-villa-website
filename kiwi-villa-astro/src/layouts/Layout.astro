@@ -17,7 +17,7 @@ const {
 ---
 
 <!DOCTYPE html>
-<html lang="zh-TW" class="scroll-smooth">
+<html lang="zh-TW" class="scroll-smooth no-js">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,6 +75,13 @@ const {
 		
 		<!-- Canonical URL -->
 		<link rel="canonical" href={canonicalUrl} />
+		
+		<!-- JavaScript 檢測腳本 - 必須在 head 最早執行 -->
+		<script>
+			// 移除 no-js class 並加入 js class
+			document.documentElement.classList.remove('no-js');
+			document.documentElement.classList.add('js');
+		</script>
 		
 		<!-- Structured Data -->
 		{structuredData && (

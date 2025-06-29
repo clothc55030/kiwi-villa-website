@@ -20,11 +20,65 @@
   --color-accent: #9bb0c4;
   --color-accent-light: #b8c7d6;
   
+  /* Tailwind 顏色映射 */
+  --color-primary-50: #f0f4f7;
+  --color-primary-100: #e1e9ef;
+  --color-primary-200: #c3d3df;
+  --color-primary-300: #a5bdcf;
+  --color-primary-400: #87a7bf;
+  --color-primary-500: #7c9bb5;
+  --color-primary-600: #6b8aa0;
+  --color-primary-700: #5a798a;
+  --color-primary-800: #4a6373;
+  --color-primary-900: #3a4d5c;
+  
+  --color-secondary-50: #f3f6f9;
+  --color-secondary-100: #e7edf3;
+  --color-secondary-200: #cfdbe7;
+  --color-secondary-300: #b8c7d6;
+  --color-secondary-400: #a8b8c8;
+  --color-secondary-500: #98a9ba;
+  --color-secondary-600: #8899ab;
+  --color-secondary-700: #788a9c;
+  --color-secondary-800: #687a8d;
+  --color-secondary-900: #586b7e;
+  
   /* 中性色 */
   --color-light-gray: #f7f6f4;
   --color-medium-gray: #e6e2dc;
   --color-dark-gray: #8a8580;
   --color-charcoal: #4a453f;
+  
+  /* Tailwind 預設顏色 - 確保基本工具類別可用 */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  
+  /* Gray scale for Tailwind utilities */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+  
+  /* Red scale for error states */
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+  --color-red-950: #450a0a;
   
   /* 語意色彩 */
   --color-text-primary: #4a453f;
@@ -99,6 +153,26 @@
     100% { background-position: 0% 50%; }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* 效能優化：減少動畫 */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -114,6 +188,11 @@
 
 /* 自定義工具類別 */
 @layer utilities {
+  /* 按鈕樣式 */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+  }
+  
   /* 焦點樣式 - 無障礙性增強 */
   *:focus-visible {
     @apply ring-2 ring-primary ring-offset-2 outline-none;
@@ -207,6 +286,15 @@
   .animate-gradient-shift {
     background-size: 400% 400%;
     animation: gradientShift 8s ease-in-out infinite;
+  }
+  
+  /* 動畫類別 */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
   }
   
   /* 動畫延遲工具類別 */

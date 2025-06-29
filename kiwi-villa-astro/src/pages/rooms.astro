@@ -1,0 +1,483 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RoomCard from '../components/RoomCard.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { getCollection } from 'astro:content';
+import { contactInfo } from '../config/social';
+
+const bookingUrl = 'https://booking.owlting.com/kiwi-villa';
+
+// 獲取所有房型資料
+const rooms = await getCollection('rooms');
+// 按 sortOrder 排序
+const sortedRooms = rooms.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
+// SEO 和 Meta 資料
+const pageTitle = '房型設施 - 澎湖期遇度假會館 | 多種房型選擇，滿足不同需求';
+const pageDescription = '澎湖期遇度假會館房型設施，提供豪華家庭房、高級四人房、奢華四人房、高級三人房、高級雙床房、高級雙人房等多種房型選擇。';
+const pageKeywords = '澎湖期遇度假會館,房型設施,豪華家庭房,高級四人房,奢華四人房,民宿房型,澎湖住宿';
+const canonicalURL = 'https://www.kiwi-villa.com/rooms';
+const ogImage = 'https://www.kiwi-villa.com/images/rooms/rooms-og.webp';
+
+// 所有房型的共同設施
+const commonAmenities = [
+  {
+    icon: 'fa6-solid:bath',
+    title: 'TOTO衛浴',
+    description: '全套TOTO淋浴龍頭、洗臉臺、免治馬桶'
+  },
+  {
+    icon: 'fa6-solid:snowflake',
+    title: '大金冷氣',
+    description: '隱藏式獨立冷氣，靜音冷房效能'
+  },
+  {
+    icon: 'fa6-solid:droplet',
+    title: '軟水系統',
+    description: '全屋軟水淨水系統，RO逆滲透飲水'
+  },
+  {
+    icon: 'fa6-solid:wifi',
+    title: '高速網路',
+    description: '500M頻寬，商用級Ubiquiti設備'
+  }
+];
+---
+
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonical={canonicalURL}
+  ogImage={ogImage}
+  currentPage="/rooms"
+>
+  <!-- Hero Section -->
+  <section class="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden animate-gradient-shift" style="background: linear-gradient(135deg, #7c9bb5 0%, #9bb0c4 25%, #b8c7d6 50%, #a8b8c8 75%, #8fa3b3 100%); background-size: 400% 400%;">
+    <!-- Content -->
+    <div class="relative z-10 text-center text-white max-w-[600px] px-4 md:px-6 animate-fade-in-up">
+      <h1 class="hero-title font-display text-[clamp(2.5rem,5vw,4rem)] font-semibold mb-4 text-shadow-lg">
+        房型設施
+      </h1>
+      <p class="hero-subtitle text-[clamp(1.125rem,2.5vw,1.5rem)] font-light mb-6 text-shadow-md">
+        多種房型選擇，滿足不同需求
+      </p>
+      <div class="max-w-[600px] mx-auto">
+        <p class="text-[1.1rem] mb-2 text-shadow-md">
+          舒適雅緻的住宿空間，享受澎湖的悠閒時光
+        </p>
+        <p class="text-[1.1rem] text-shadow-md">
+          每個房型都經過精心設計，提供您最完善的設施
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="py-16 md:py-24 bg-gray-50">
+    <!-- Rooms Section -->
+    <section class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+        {sortedRooms.map((room, index) => (
+          <RoomCard room={room.data} index={index} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Common Amenities Section -->
+    <section class="mt-24 bg-white py-16 md:py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="amenities-title text-3xl md:text-4xl font-display font-bold text-center mb-12">
+          所有房型均包含
+        </h2>
+        
+        <div class="amenities-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {commonAmenities.map((amenity, index) => (
+            <div 
+              class="amenity-item text-center"
+              data-animation-index={index}
+            >
+              <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white shadow-lg transform hover:scale-110 transition-transform duration-300">
+                <iconify-icon icon={amenity.icon} class="text-3xl"></iconify-icon>
+              </div>
+              <h3 class="text-xl font-semibold mb-2 text-gray-800">{amenity.title}</h3>
+              <p class="text-gray-600">{amenity.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="relative mt-24 py-20 overflow-hidden bg-gradient-to-br from-secondary-600 to-secondary-700">
+      <!-- 裝飾性背景 -->
+      <div class="absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-black/20"></div>
+        <!-- 裝飾性圖案 -->
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute -top-24 -left-24 w-96 h-96 bg-white rounded-full"></div>
+          <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-white rounded-full"></div>
+        </div>
+      </div>
+      
+      <!-- CTA 內容 -->
+      <div class="relative z-10 container mx-auto px-4 text-center text-white">
+        <h2 class="cta-title text-3xl md:text-4xl font-display font-bold mb-4">
+          找到您心儀的房型了嗎？
+        </h2>
+        <p class="cta-subtitle text-lg md:text-xl mb-8">
+          立即預訂，享受澎湖最優質的住宿體驗
+        </p>
+        
+        <div class="cta-buttons flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href={bookingUrl}
+            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <iconify-icon icon="heroicons:calendar"></iconify-icon>
+            立即預訂
+          </a>
+          <a 
+            href="/policy"
+            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white/10 backdrop-blur text-white border border-white/30 rounded-lg hover:bg-white/20 transition-all duration-300 font-medium"
+          >
+            <iconify-icon icon="heroicons:information-circle"></iconify-icon>
+            訂房須知
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <Lightbox />
+</Layout>
+
+<!-- 優化的房間圖片資料管理 -->
+<script define:vars={{ roomsData: sortedRooms }}>
+  // 使用更有效的方式存儲房間圖片資料
+  window.roomImages = {};
+  
+  // 從 Astro 傳遞的資料初始化
+  roomsData.forEach(room => {
+    window.roomImages[room.data.id] = room.data.images;
+  });
+</script>
+
+<!-- 房間導航和高亮功能 -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 檢查 URL 參數
+    const urlParams = new URLSearchParams(window.location.search);
+    const gotoRoom = urlParams.get('goto');
+    const hashRoom = window.location.hash.slice(1);
+    
+    let targetId = '';
+    
+    if (gotoRoom) {
+      targetId = `room-${gotoRoom}`;
+    } else if (hashRoom) {
+      targetId = hashRoom;
+    }
+    
+    if (targetId) {
+      // 處理特殊跳轉規則
+      if (targetId === 'room-302') {
+        targetId = 'room-301';
+      } else if (targetId === 'room-306' || targetId === 'room-307') {
+        targetId = 'room-305';
+      }
+      
+      // 延遲執行以確保頁面完全載入
+      setTimeout(() => {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          // 計算滾動位置（考慮導航列高度）
+          const navHeight = 80;
+          const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          const scrollTo = elementTop - navHeight - 20;
+          
+          // 平滑滾動
+          window.scrollTo({
+            top: scrollTo,
+            behavior: 'smooth'
+          });
+          
+          // 添加高亮效果
+          targetElement.classList.add('room-highlight');
+          
+          // 3 秒後移除高亮
+          setTimeout(() => {
+            targetElement.classList.remove('room-highlight');
+          }, 3000);
+        }
+      }, 500);
+    }
+  });
+</script>
+
+<!-- Motion One 動畫 -->
+<script>
+  // 確保內容在動畫載入前是可見的
+  document.addEventListener('DOMContentLoaded', () => {
+    // 房間卡片總是保持可見
+    const roomCards = document.querySelectorAll('.room-card');
+    roomCards.forEach(card => {
+      card.style.opacity = '1';
+    });
+    
+    // 其他元素根據狀態設置
+    const otherElements = document.querySelectorAll('.hero-title, .hero-subtitle, .amenities-title, .amenity-item, .cta-title, .cta-subtitle, .cta-buttons');
+    otherElements.forEach(el => {
+      if (!el.style.opacity) {
+        el.style.opacity = '1';
+      }
+    });
+  });
+  
+  // 確保 Motion One 載入後再執行動畫
+  window.addEventListener('load', async () => {
+    try {
+      const { animate } = await import('motion');
+      
+      // 調試：確認 Motion One 載入成功
+      if (import.meta.env.DEV) {
+        console.info('Motion One loaded successfully');
+      }
+      
+      // 動畫載入成功後，重置元素狀態準備動畫（但不包括 room-card）
+      const animatedElements = document.querySelectorAll('.hero-title, .hero-subtitle, .amenities-title, .amenity-item, .cta-title, .cta-subtitle, .cta-buttons');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+      });
+      
+      // Hero 動畫 - 使用元素選擇而非字串選擇器
+      const heroTitle = document.querySelector('.hero-title');
+      if (heroTitle) {
+        heroTitle.style.opacity = '0';
+        animate(heroTitle, 
+          { opacity: [0, 1], y: [20, 0] }, 
+          { duration: 0.6, easing: 'ease-out' }
+        ).finished.then(() => {
+          heroTitle.classList.add('animation-complete');
+        });
+      }
+      
+      const heroSubtitle = document.querySelector('.hero-subtitle');
+      if (heroSubtitle) {
+        heroSubtitle.style.opacity = '0';
+        animate(heroSubtitle, 
+          { opacity: [0, 1], y: [20, 0] }, 
+          { duration: 0.6, delay: 0.2, easing: 'ease-out' }
+        ).finished.then(() => {
+          heroSubtitle.classList.add('animation-complete');
+        });
+      }
+      
+      // 共同設施標題動畫
+      const amenitiesTitle = document.querySelector('.amenities-title');
+      if (amenitiesTitle) {
+        const titleObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              animate(amenitiesTitle, 
+                { opacity: [0, 1], y: [30, 0] }, 
+                { duration: 0.6, easing: 'ease-out' }
+              );
+              titleObserver.unobserve(amenitiesTitle);
+            }
+          });
+        });
+        titleObserver.observe(amenitiesTitle);
+      }
+      
+      // 共同設施項目動畫 - 批次處理以提升性能
+      const amenityItems = document.querySelectorAll('.amenity-item');
+      if (amenityItems.length > 0) {
+        // 使用 IntersectionObserver 作為後備方案
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const item = entry.target;
+              const index = parseInt(item.getAttribute('data-animation-index') || '0');
+              animate(item,
+                { opacity: [0, 1], y: [30, 0] },
+                { duration: 0.5, delay: index * 0.1, easing: 'ease-out' }
+              ).finished.then(() => {
+                item.classList.add('animation-complete');
+              });
+              observer.unobserve(item);
+            }
+          });
+        }, { rootMargin: '0px 0px -100px 0px' });
+        
+        amenityItems.forEach(item => {
+          observer.observe(item);
+        });
+      }
+      
+      // 房間卡片動畫 - 特殊處理確保可見性
+      const roomCards = document.querySelectorAll('.room-card');
+      if (roomCards.length > 0) {
+        // 先確保所有卡片可見
+        roomCards.forEach((card) => {
+          card.style.opacity = '1';
+        });
+        
+        // 使用 IntersectionObserver
+        const cardObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const card = entry.target;
+              const index = parseInt(card.getAttribute('data-animation-index') || '0');
+              
+              // 設置初始狀態
+              card.style.opacity = '0';
+              card.style.transform = 'translateY(40px)';
+              
+              // 執行動畫
+              animate(card,
+                { opacity: [0, 1], y: [40, 0] },
+                { duration: 0.6, delay: index * 0.1, easing: 'ease-out' }
+              ).finished.then(() => {
+                card.classList.add('animation-complete');
+                card.style.opacity = '1';
+                card.style.transform = '';
+              }).catch(() => {
+                // 如果動畫失敗，確保元素可見
+                card.style.opacity = '1';
+                card.style.transform = '';
+              });
+              
+              cardObserver.unobserve(card);
+            }
+          });
+        }, { rootMargin: '0px 0px -50px 0px' });
+        
+        roomCards.forEach(card => {
+          cardObserver.observe(card);
+        });
+      }
+      
+      // CTA 區塊動畫
+      const ctaElements = [
+        { el: document.querySelector('.cta-title'), animation: { opacity: [0, 1], scale: [0.9, 1] }, delay: 0 },
+        { el: document.querySelector('.cta-subtitle'), animation: { opacity: [0, 1], y: [20, 0] }, delay: 0.2 },
+        { el: document.querySelector('.cta-buttons'), animation: { opacity: [0, 1], y: [20, 0] }, delay: 0.4 }
+      ];
+      
+      const ctaObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const config = ctaElements.find(item => item.el === entry.target);
+            if (config) {
+              animate(entry.target, config.animation, {
+                duration: 0.6,
+                delay: config.delay,
+                easing: 'ease-out'
+              });
+              ctaObserver.unobserve(entry.target);
+            }
+          }
+        });
+      });
+      
+      ctaElements.forEach(({ el }) => {
+        if (el) ctaObserver.observe(el);
+      });
+    } catch (error) {
+      console.error('Motion One 載入失敗:', error);
+      // 如果動畫失敗，確保所有內容可見
+      const allElements = document.querySelectorAll('.hero-title, .hero-subtitle, .amenities-title, .amenity-item, .room-card, .cta-title, .cta-subtitle, .cta-buttons');
+      allElements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = '';
+      });
+    }
+  });
+</script>
+
+<style>
+  /* 房間高亮動畫 */
+  @keyframes roomHighlight {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+      transform: scale(1.02);
+      box-shadow: 0 20px 40px -10px rgba(34, 197, 94, 0.4);
+    }
+  }
+  
+  :global(.room-highlight) {
+    animation: roomHighlight 1s ease-in-out 3;
+  }
+  
+  /* 初始化隱藏元素（Motion One 會處理顯示） */
+  /* 暫時移除對 room-card 的隱藏，確保內容可見 */
+  :global(.js .hero-title),
+  :global(.js .hero-subtitle),
+  :global(.js .amenities-title),
+  :global(.js .amenity-item),
+  :global(.js .cta-title),
+  :global(.js .cta-subtitle),
+  :global(.js .cta-buttons) {
+    opacity: 0;
+  }
+  
+  /* room-card 使用不同的策略，確保始終可見 */
+  :global(.js .room-card) {
+    opacity: 1;
+  }
+  
+  /* No-JS 降級方案 - 確保沒有 JavaScript 時內容可見 */
+  :global(.no-js .hero-title),
+  :global(.no-js .hero-subtitle),
+  :global(.no-js .amenities-title),
+  :global(.no-js .amenity-item),
+  :global(.no-js .room-card),
+  :global(.no-js .cta-title),
+  :global(.no-js .cta-subtitle),
+  :global(.no-js .cta-buttons) {
+    opacity: 1;
+  }
+  
+  /* 動畫性能優化 */
+  :global(.hero-title),
+  :global(.hero-subtitle),
+  :global(.amenities-title),
+  :global(.amenity-item),
+  :global(.room-card),
+  :global(.cta-title),
+  :global(.cta-subtitle),
+  :global(.cta-buttons) {
+    will-change: opacity, transform;
+  }
+  
+  /* 動畫完成後移除 will-change */
+  :global(.animation-complete) {
+    will-change: auto;
+  }
+  
+  /* 手機版優化 */
+  @media (max-width: 768px) {
+    /* 減少動畫效果 */
+    @media (prefers-reduced-motion: reduce) {
+      :global(.hero-title),
+      :global(.hero-subtitle),
+      :global(.amenities-title),
+      :global(.amenity-item),
+      :global(.room-card),
+      :global(.cta-title),
+      :global(.cta-subtitle),
+      :global(.cta-buttons) {
+        opacity: 1;
+        animation: none;
+        transition: none;
+      }
+    }
+  }
+</style>

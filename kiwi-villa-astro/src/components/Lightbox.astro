@@ -1,0 +1,295 @@
+---
+// 燈箱組件不需要 props，它會動態顯示點擊的圖片
+---
+
+<div id="lightbox" class="lightbox fixed inset-0 z-[2000] hidden" role="dialog" aria-label="圖片預覽" aria-modal="true">
+  <!-- 背景遮罩 -->
+  <div class="lightbox-overlay absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
+  
+  <!-- 關閉按鈕 -->
+  <button 
+    class="lightbox-close absolute top-4 right-4 z-10 text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2"
+    aria-label="關閉圖片預覽"
+    tabindex="0"
+  >
+    <iconify-icon icon="heroicons:x-mark" class="text-3xl"></iconify-icon>
+  </button>
+  
+  <!-- 導航按鈕 -->
+  <button 
+    class="lightbox-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2"
+    aria-label="上一張圖片"
+    tabindex="0"
+  >
+    <iconify-icon icon="heroicons:chevron-left" class="text-4xl"></iconify-icon>
+  </button>
+  
+  <button 
+    class="lightbox-next absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2"
+    aria-label="下一張圖片"
+    tabindex="0"
+  >
+    <iconify-icon icon="heroicons:chevron-right" class="text-4xl"></iconify-icon>
+  </button>
+  
+  <!-- 圖片容器 -->
+  <div class="lightbox-content relative w-full h-full flex items-center justify-center p-4">
+    <img 
+      class="lightbox-image max-w-full max-h-full object-contain"
+      src="" 
+      alt=""
+      role="img"
+      aria-describedby="lightbox-counter"
+    />
+    
+    <!-- 載入中指示器 -->
+    <div class="lightbox-loading absolute inset-0 flex items-center justify-center">
+      <div class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+    </div>
+  </div>
+  
+  <!-- 圖片計數器 -->
+  <div id="lightbox-counter" class="lightbox-counter absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm" aria-live="polite" aria-atomic="true">
+    第 <span class="current-index">1</span> 張，共 <span class="total-count">1</span> 張圖片
+  </div>
+</div>
+
+<style>
+  .lightbox {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .lightbox.active {
+    opacity: 1;
+  }
+  
+  .lightbox-image {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .lightbox-image.loaded {
+    opacity: 1;
+  }
+  
+  .lightbox-loading {
+    transition: opacity 0.3s ease;
+  }
+  
+  .lightbox-loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* 防止背景滾動 */
+  :global(body.lightbox-open) {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  class LightboxManager {
+    private lightbox: HTMLElement;
+    private overlay: HTMLElement;
+    private image: HTMLImageElement;
+    private loading: HTMLElement;
+    private closeBtn: HTMLElement;
+    private prevBtn: HTMLElement;
+    private nextBtn: HTMLElement;
+    private currentIndexEl: HTMLElement;
+    private totalCountEl: HTMLElement;
+    
+    private images: Array<{src: string; alt: string}> = [];
+    private currentIndex: number = 0;
+    private touchStartX: number = 0;
+    private touchEndX: number = 0;
+    
+    constructor() {
+      this.lightbox = document.getElementById('lightbox')!;
+      this.overlay = this.lightbox.querySelector('.lightbox-overlay')!;
+      this.image = this.lightbox.querySelector('.lightbox-image')!;
+      this.loading = this.lightbox.querySelector('.lightbox-loading')!;
+      this.closeBtn = this.lightbox.querySelector('.lightbox-close')!;
+      this.prevBtn = this.lightbox.querySelector('.lightbox-prev')!;
+      this.nextBtn = this.lightbox.querySelector('.lightbox-next')!;
+      this.currentIndexEl = this.lightbox.querySelector('.current-index')!;
+      this.totalCountEl = this.lightbox.querySelector('.total-count')!;
+      
+      this.init();
+    }
+    
+    private init() {
+      // 綁定事件
+      this.closeBtn.addEventListener('click', () => this.close());
+      this.overlay.addEventListener('click', () => this.close());
+      this.prevBtn.addEventListener('click', () => this.prev());
+      this.nextBtn.addEventListener('click', () => this.next());
+      
+      // 鍵盤事件
+      document.addEventListener('keydown', (e) => {
+        if (!this.isOpen()) return;
+        
+        switch(e.key) {
+          case 'Escape':
+            this.close();
+            break;
+          case 'ArrowLeft':
+            this.prev();
+            break;
+          case 'ArrowRight':
+            this.next();
+            break;
+        }
+      });
+      
+      // 觸控事件 - 使用 passive 選項提升性能
+      this.lightbox.addEventListener('touchstart', (e) => {
+        this.touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      
+      this.lightbox.addEventListener('touchend', (e) => {
+        this.touchEndX = e.changedTouches[0].clientX;
+        this.handleSwipe();
+      }, { passive: true });
+      
+      // 圖片點擊事件 - 改進的選擇器和事件處理
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        
+        // 檢查是否點擊了圖片或其父容器
+        let clickedElement: HTMLElement | null = null;
+        
+        // 情況1: 直接點擊圖片
+        if (target.tagName === 'IMG' && target.closest('.gallery-item, .main-image, .thumbnail')) {
+          clickedElement = target;
+        }
+        // 情況2: 點擊圖片容器
+        else if (target.classList.contains('gallery-item') || target.classList.contains('main-image')) {
+          clickedElement = target;
+        }
+        // 情況3: 點擊縮略圖按鈕
+        else if (target.closest('.thumbnail')) {
+          clickedElement = target.closest('.thumbnail');
+        }
+        
+        if (clickedElement) {
+          const roomCard = clickedElement.closest('[data-room-id]');
+          if (roomCard) {
+            e.preventDefault();
+            const roomId = roomCard.getAttribute('data-room-id');
+            let currentSrc = '';
+            
+            // 獲取圖片 src
+            if (clickedElement.tagName === 'IMG') {
+              currentSrc = (clickedElement as HTMLImageElement).src;
+            } else {
+              const img = clickedElement.querySelector('img');
+              if (img) currentSrc = img.src;
+            }
+            
+            // 從全局變數獲取該房間的所有圖片
+            if (window.roomImages && roomId && window.roomImages[roomId]) {
+              this.images = window.roomImages[roomId];
+              this.currentIndex = this.images.findIndex(img => img.src === currentSrc);
+              if (this.currentIndex === -1) this.currentIndex = 0;
+              this.open();
+            }
+          }
+        }
+      });
+    }
+    
+    private handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = this.touchStartX - this.touchEndX;
+      
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          this.next();
+        } else {
+          this.prev();
+        }
+      }
+    }
+    
+    open() {
+      this.lightbox.classList.remove('hidden');
+      document.body.classList.add('lightbox-open');
+      
+      requestAnimationFrame(() => {
+        this.lightbox.classList.add('active');
+        this.showImage(this.currentIndex);
+        // 將焦點設置到關閉按鈕以支援鍵盤導航
+        this.closeBtn.focus();
+      });
+    }
+    
+    close() {
+      this.lightbox.classList.remove('active');
+      
+      setTimeout(() => {
+        this.lightbox.classList.add('hidden');
+        document.body.classList.remove('lightbox-open');
+      }, 300);
+    }
+    
+    isOpen() {
+      return this.lightbox.classList.contains('active');
+    }
+    
+    prev() {
+      this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+      this.showImage(this.currentIndex);
+    }
+    
+    next() {
+      this.currentIndex = (this.currentIndex + 1) % this.images.length;
+      this.showImage(this.currentIndex);
+    }
+    
+    private showImage(index: number) {
+      const imageData = this.images[index];
+      if (!imageData) return;
+      
+      // 顯示載入中
+      this.loading.classList.remove('hidden');
+      this.image.classList.remove('loaded');
+      
+      // 更新計數器
+      this.currentIndexEl.textContent = String(index + 1);
+      this.totalCountEl.textContent = String(this.images.length);
+      
+      // 預載圖片
+      const tempImg = new Image();
+      tempImg.onload = () => {
+        this.image.src = imageData.src;
+        this.image.alt = imageData.alt;
+        this.image.classList.add('loaded');
+        this.loading.classList.add('hidden');
+        
+        // 預載下一張圖片（如果存在）
+        if (this.images.length > 1) {
+          const nextIndex = (index + 1) % this.images.length;
+          const preloadImg = new Image();
+          preloadImg.src = this.images[nextIndex].src;
+        }
+      };
+      tempImg.onerror = () => {
+        // 圖片載入失敗處理
+        this.loading.classList.add('hidden');
+        this.image.alt = '圖片載入失敗';
+      };
+      tempImg.src = imageData.src;
+      
+      // 更新導航按鈕狀態
+      this.prevBtn.style.display = this.images.length > 1 ? 'block' : 'none';
+      this.nextBtn.style.display = this.images.length > 1 ? 'block' : 'none';
+    }
+  }
+  
+  // 初始化燈箱
+  document.addEventListener('DOMContentLoaded', () => {
+    new LightboxManager();
+  });
+</script>
