@@ -1,0 +1,35 @@
+---
+export interface Props {
+  icon: string;
+  iconColor: string;
+  iconBgColor: string;
+  title: string;
+  rules: string[];
+  bulletColor: string;
+  delay?: number;
+}
+
+const { icon, iconColor, iconBgColor, title, rules, bulletColor, delay = 0 } = Astro.props;
+---
+
+<div class="bg-white rounded-2xl shadow-lg p-8" data-animate data-animate-delay={delay}>
+  <div class="flex items-center gap-3 mb-6">
+    <div class={`w-12 h-12 ${iconBgColor} rounded-full flex items-center justify-center`}>
+      <iconify-icon 
+        icon={icon} 
+        class={`w-7 h-7 ${iconColor}`}
+        aria-label={title}
+        role="img"
+      ></iconify-icon>
+    </div>
+    <h3 class="text-xl font-semibold-cn text-gray-800">{title}</h3>
+  </div>
+  <ul class="space-y-2">
+    {rules.map(rule => (
+      <li class="text-gray-700 flex items-start gap-2">
+        <span class={`${bulletColor} mt-1`}>•</span>
+        <span>{rule}</span>
+      </li>
+    ))}
+  </ul>
+</div>

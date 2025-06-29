@@ -1,0 +1,37 @@
+---
+export interface Props {
+  period: string;
+  refund: string;
+  color: 'green' | 'yellow' | 'orange' | 'red';
+}
+
+const { period, refund, color } = Astro.props;
+
+const colorClasses = {
+  green: {
+    bg: 'bg-green-50',
+    badge: 'bg-green-100 text-green-700'
+  },
+  yellow: {
+    bg: 'bg-yellow-50',
+    badge: 'bg-yellow-100 text-yellow-700'
+  },
+  orange: {
+    bg: 'bg-orange-50',
+    badge: 'bg-orange-100 text-orange-700'
+  },
+  red: {
+    bg: 'bg-red-50',
+    badge: 'bg-red-100 text-red-700'
+  }
+};
+
+const { bg, badge } = colorClasses[color];
+---
+
+<div class={`flex items-center justify-between p-4 rounded-xl ${bg} hover:shadow-md transition-shadow duration-300`}>
+  <span class="font-medium-cn text-gray-700">{period}</span>
+  <span class={`px-4 py-2 rounded-full font-bold text-sm ${badge}`}>
+    {refund}{refund !== '不退款' ? '退款' : ''}
+  </span>
+</div>
