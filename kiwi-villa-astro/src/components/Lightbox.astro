@@ -100,7 +100,7 @@
     private currentIndexEl: HTMLElement;
     private totalCountEl: HTMLElement;
     
-    private images: Array<{src: string; alt: string}> = [];
+    private images: any[] = [];
     private currentIndex: number = 0;
     private touchStartX: number = 0;
     private touchEndX: number = 0;
@@ -153,51 +153,14 @@
         this.handleSwipe();
       }, { passive: true });
       
-      // 圖片點擊事件 - 改進的選擇器和事件處理
-      document.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        
-        // 檢查是否點擊了圖片或其父容器
-        let clickedElement: HTMLElement | null = null;
-        
-        // 情況1: 直接點擊圖片
-        if (target.tagName === 'IMG' && target.closest('.gallery-item, .main-image, .thumbnail')) {
-          clickedElement = target;
+      // 暴露全局函數供外部調用
+      (window as any).openLightbox = (images: any[], startIndex: number = 0) => {
+        if (Array.isArray(images) && images.length > 0) {
+          this.images = images;
+          this.currentIndex = startIndex;
+          this.open();
         }
-        // 情況2: 點擊圖片容器
-        else if (target.classList.contains('gallery-item') || target.classList.contains('main-image')) {
-          clickedElement = target;
-        }
-        // 情況3: 點擊縮略圖按鈕
-        else if (target.closest('.thumbnail')) {
-          clickedElement = target.closest('.thumbnail');
-        }
-        
-        if (clickedElement) {
-          const roomCard = clickedElement.closest('[data-room-id]');
-          if (roomCard) {
-            e.preventDefault();
-            const roomId = roomCard.getAttribute('data-room-id');
-            let currentSrc = '';
-            
-            // 獲取圖片 src
-            if (clickedElement.tagName === 'IMG') {
-              currentSrc = (clickedElement as HTMLImageElement).src;
-            } else {
-              const img = clickedElement.querySelector('img');
-              if (img) currentSrc = img.src;
-            }
-            
-            // 從全局變數獲取該房間的所有圖片
-            if (window.roomImages && roomId && window.roomImages[roomId]) {
-              this.images = window.roomImages[roomId];
-              this.currentIndex = this.images.findIndex(img => img.src === currentSrc);
-              if (this.currentIndex === -1) this.currentIndex = 0;
-              this.open();
-            }
-          }
-        }
-      });
+      };
     }
     
     private handleSwipe() {
