@@ -217,6 +217,68 @@
   .animate-delay-400 {
     animation-delay: 0.4s;
   }
+
+  /* Float 動畫效果 */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-float-delay-500 {
+    animation: float 3s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  .animate-float-delay-1000 {
+    animation: float 3s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  /* 3D 卡片效果 */
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-3d:hover {
+    transform: rotateY(10deg) rotateX(-10deg) translateZ(20px);
+  }
+
+  /* 卡片陰影效果 */
+  .card-shadow-hover {
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .card-shadow-hover:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 0, 0, 0.05);
+  }
+
+  /* 行動裝置觸控優化 */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+
+  @media (max-width: 768px) {
+    /* 行動版滑動優化 */
+    .mobile-scroll-snap {
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .mobile-scroll-snap::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mobile-scroll-snap > * {
+      scroll-snap-align: center;
+    }
+
+    /* 行動版按鈕最小高度 */
+    .min-touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
   
   /* 動畫性能優化 - will-change */
   .will-change-transform {
@@ -258,6 +320,56 @@
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
   }
+
+  /* Float 動畫 */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Iconify 圖標全域樣式 */
+  iconify-icon {
+    display: inline-flex;
+    vertical-align: middle;
+    width: 1em;
+    height: 1em;
+    font-size: inherit;
+  }
+  
+  /* 確保 Tailwind 的寬高類別能正確覆蓋預設大小 */
+  iconify-icon[class*="w-"] {
+    width: auto;
+  }
+  
+  iconify-icon[class*="h-"] {
+    height: auto;
+  }
+  
+  /* Tailwind 寬高類別對應的字體大小 */
+  iconify-icon.w-4 { font-size: 1rem; }
+  iconify-icon.w-5 { font-size: 1.25rem; }
+  iconify-icon.w-6 { font-size: 1.5rem; }
+  iconify-icon.w-8 { font-size: 2rem; }
+  iconify-icon.w-10 { font-size: 2.5rem; }
+  iconify-icon.w-12 { font-size: 3rem; }
+  iconify-icon.w-16 { font-size: 4rem; }
+  iconify-icon.w-20 { font-size: 5rem; }
+  iconify-icon.w-24 { font-size: 6rem; }
+  
+  /* 文字大小類別 */
+  iconify-icon.text-xs { font-size: 0.75rem; }
+  iconify-icon.text-sm { font-size: 0.875rem; }
+  iconify-icon.text-base { font-size: 1rem; }
+  iconify-icon.text-lg { font-size: 1.125rem; }
+  iconify-icon.text-xl { font-size: 1.25rem; }
+  iconify-icon.text-2xl { font-size: 1.5rem; }
+  iconify-icon.text-3xl { font-size: 1.875rem; }
+  iconify-icon.text-4xl { font-size: 2.25rem; }
+  iconify-icon.text-5xl { font-size: 3rem; }
 }
 
 /* 高對比度支援 */

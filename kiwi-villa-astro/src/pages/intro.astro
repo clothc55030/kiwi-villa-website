@@ -134,115 +134,193 @@ const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背�
     <section class="py-16 md:py-24 bg-gray-50">
       <div class="container mx-auto px-4">
         <div class="max-w-7xl mx-auto space-y-12">
-          <!-- Luxury Bed (Highlighted) -->
-          <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl overflow-hidden border-2 border-primary/20 md:grid md:grid-cols-2 md:gap-0" data-animate data-animate-delay="100">
-            <div class="aspect-[4/3] md:aspect-auto overflow-hidden">
-              <picture>
-                <source data-srcset="/images/intro/bed.avif" type="image/avif">
-                <source data-srcset="/images/intro/bed.webp" type="image/webp">
-                <img 
-                  data-src="/images/intro/bed.webp"
-                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E" 
-                  alt="期遇度假會館豪華客房床組，配備加大雙人床（1.8m×2.0m）、獨立袋裝彈簧護背床墊，搭配奢華床頭背板設計，營造舒適典雅的睡眠環境" 
-                  width="800"
-                  height="600"
-                  loading="lazy"
-                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                >
-              </picture>
-            </div>
-            <div class="p-8 md:p-12 flex flex-col justify-center">
-              <h3 class="text-2xl md:text-3xl font-display mb-4 text-primary">奢享床組</h3>
-              <p class="text-gray-700 leading-relaxed text-lg">
-                民宿特別定制國際品質加密加粗獨立袋裝彈簧護背床墊加大雙人床（1.8m×2.0m）規格，盡享舒適。配套定制風格各異奢華床頭背板，讓每間房各有特色，令人享受其中！
-              </p>
-              <p class="mt-4">
-                <a href="/rooms" class="inline-flex items-center text-primary hover:text-primary-dark font-medium-cn transition-colors">
-                  探索我們的房型 
-                  <iconify-icon icon="heroicons:arrow-right" class="ml-2" aria-label="前往房型頁面"></iconify-icon>
+            <!-- Luxury Bed - 特色展示 -->
+            <div class="grid lg:grid-cols-2 gap-8 items-center" data-animate>
+              <div class="lg:order-1">
+                <div class="relative group">
+                  <div class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                    <picture>
+                      <source data-srcset="/images/intro/bed.avif" type="image/avif">
+                      <source data-srcset="/images/intro/bed.webp" type="image/webp">
+                      <img 
+                        data-src="/images/intro/bed.webp"
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E" 
+                        alt="期遇度假會館豪華客房床組，配備加大雙人床（1.8m×2.0m）、獨立袋裝彈簧護背床墊，搭配奢華床頭背板設計，營造舒適典雅的睡眠環境" 
+                        width="800"
+                        height="600"
+                        loading="lazy"
+                        class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                      >
+                    </picture>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="lg:order-2 lg:pl-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+                  <iconify-icon icon="heroicons:star" class="text-lg"></iconify-icon>
+                  旗艦級配備
+                </div>
+                
+                <h3 class="text-3xl md:text-4xl font-display mb-6 text-gray-800">
+                  奢享<span class="text-primary">床組</span>
+                </h3>
+                
+                <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                  特別定制國際品質加密加粗獨立袋裝彈簧護背床墊，採用加大雙人床（1.8m×2.0m）規格，給您雲端般的睡眠體驗。
+                </p>
+                
+                <!-- 規格列表 -->
+                <div class="space-y-3 mb-8">
+                  <div class="flex items-center gap-3">
+                    <iconify-icon icon="heroicons:check-circle" class="text-primary text-xl flex-shrink-0"></iconify-icon>
+                    <span class="text-gray-700">1.8m × 2.0m 加大雙人床規格</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <iconify-icon icon="heroicons:check-circle" class="text-primary text-xl flex-shrink-0"></iconify-icon>
+                    <span class="text-gray-700">獨立袋裝彈簧護背設計</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <iconify-icon icon="heroicons:check-circle" class="text-primary text-xl flex-shrink-0"></iconify-icon>
+                    <span class="text-gray-700">各房定制奢華床頭背板</span>
+                  </div>
+                </div>
+                
+                <a href="/rooms" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-full font-medium-cn hover:bg-primary-dark transform hover:scale-105 transition-all duration-300">
+                  探索房型
+                  <iconify-icon icon="heroicons:arrow-right" class="text-lg"></iconify-icon>
                 </a>
-              </p>
+              </div>
             </div>
-          </div>
 
-          <!-- Other Features Grid -->
-          <div class="grid md:grid-cols-2 gap-8">
-            <!-- Custom Furniture -->
-            <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" data-animate data-animate-delay="200">
-              <div class="md:grid md:grid-cols-1 lg:grid-cols-2 h-full">
-                <div class="aspect-[4/3] lg:aspect-auto overflow-hidden lg:order-2">
-                  <picture>
-                    <source data-srcset="/images/intro/furniture.avif" type="image/avif">
-                    <source data-srcset="/images/intro/furniture.webp" type="image/webp">
-                    <img 
-                      data-src="/images/intro/furniture.webp"
-                      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E" 
-                      alt="期遇度假會館精品定制家具展示，包含大理石桌面搭配玫瑰金配件、實木與皮革混搭的高級座椅，彰顯優質工藝與品味" 
-                      width="400"
-                      height="300"
+            <!-- 其他特色 - 交錯式佈局 -->
+            <div class="space-y-24">
+              <!-- Custom Furniture -->
+              <div class="grid lg:grid-cols-2 gap-8 items-center" data-animate>
+                <div class="lg:order-2">
+                  <div class="relative overflow-hidden rounded-3xl shadow-xl group">
+                    <picture>
+                      <source data-srcset="/images/intro/furniture.avif" type="image/avif">
+                      <source data-srcset="/images/intro/furniture.webp" type="image/webp">
+                      <img 
+                        data-src="/images/intro/furniture.webp"
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E" 
+                        alt="期遇度假會館精品定制家具展示，包含大理石桌面搭配玫瑰金配件、實木與皮革混搭的高級座椅，彰顯優質工藝與品味" 
+                        width="400"
+                        height="300"
+                        loading="lazy"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      >
+                    </picture>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent"></div>
+                  </div>
+                </div>
+                <div class="lg:order-1">
+                  <h3 class="text-2xl md:text-3xl font-display mb-4 text-gray-800">
+                    精品定制<span class="text-secondary">家具</span>
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed mb-6">
+                    從知名大廠根據室內面積量身定制，每一件都是藝術品。
+                  </p>
+                  <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center p-4 bg-gray-50 rounded-xl">
+                      <iconify-icon icon="heroicons:cube" class="text-3xl text-secondary mb-2"></iconify-icon>
+                      <p class="text-sm font-medium-cn text-gray-700">大理石桌面</p>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-xl">
+                      <iconify-icon icon="heroicons:sparkles" class="text-3xl text-secondary mb-2"></iconify-icon>
+                      <p class="text-sm font-medium-cn text-gray-700">玫瑰金配件</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Elevator & Windows -->
+              <div class="grid lg:grid-cols-2 gap-8 items-center" data-animate>
+                <div>
+                  <div class="relative overflow-hidden rounded-3xl shadow-xl group">
+                    <BlurImage
+                      src="/images/intro/elevator.jpg"
+                      alt="期遇度假會館無障礙設施，配備八人座豪華電梯，方便攜帶大型行李的旅客與行動不便者進出，展現人性化的貼心設計"
+                      width={400}
+                      height={300}
                       loading="lazy"
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 will-change-transform"
-                    >
-                  </picture>
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-tl from-accent/20 via-transparent to-transparent"></div>
+                  </div>
                 </div>
-                <div class="p-6 lg:p-8 flex flex-col justify-center lg:order-1">
-                  <h3 class="text-xl lg:text-2xl font-display mb-3 text-primary">精品定制家具</h3>
-                  <p class="text-gray-700 leading-relaxed">
-                    客房及大廳中的家具，皆從知名大廠中根據室內面積定制，優質工藝切割大理石配優質玫瑰金配件，運用皮革及實木之混搭，彰顯品質。
+                <div>
+                  <h3 class="text-2xl md:text-3xl font-display mb-4 text-gray-800">
+                    貼心<span class="text-accent">設施</span>
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed mb-6">
+                    從隔音到無障礙，每個細節都為您的舒適著想。
                   </p>
+                  <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                      <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <iconify-icon icon="heroicons:shield-check" class="text-accent text-lg"></iconify-icon>
+                      </div>
+                      <div>
+                        <h4 class="font-semibold-cn text-gray-800 mb-1">頂級隔音系統</h4>
+                        <p class="text-sm text-gray-600">14cm超寬軌道 + 中空雙層玻璃</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                      <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <iconify-icon icon="heroicons:arrow-up-circle" class="text-accent text-lg"></iconify-icon>
+                      </div>
+                      <div>
+                        <h4 class="font-semibold-cn text-gray-800 mb-1">八人座電梯</h4>
+                        <p class="text-sm text-gray-600">大型行李、無障礙友善</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Elevator & Windows -->
-            <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" data-animate data-animate-delay="300">
-              <div class="md:grid md:grid-cols-1 lg:grid-cols-2 h-full">
-                <div class="aspect-[4/3] lg:aspect-auto overflow-hidden">
-                  <BlurImage
-                    src="/images/intro/elevator.jpg"
-                    alt="期遇度假會館無障礙設施，配備八人座豪華電梯，方便攜帶大型行李的旅客與行動不便者進出，展現人性化的貼心設計"
-                    width={400}
-                    height={300}
-                    loading="lazy"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 will-change-transform"
-                  />
+              <!-- Smart Curtains -->
+              <div class="grid lg:grid-cols-2 gap-8 items-center" data-animate>
+                <div class="lg:order-2">
+                  <div class="relative overflow-hidden rounded-3xl shadow-xl group">
+                    <picture>
+                      <source data-srcset="/images/intro/curtains.avif" type="image/avif">
+                      <source data-srcset="/images/intro/curtains.webp" type="image/webp">
+                      <img 
+                        data-src="/images/intro/curtains.webp"
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E" 
+                        alt="期遇度假會館客房智慧電動窗簾系統，配備遮光簾與紗簾雙層設計，搭配陽台無敵採光，可遙控調節享受澎湖海景與陽光" 
+                        width="400"
+                        height="300"
+                        loading="lazy"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      >
+                    </picture>
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent"></div>
+                  </div>
                 </div>
-                <div class="p-6 lg:p-8 flex flex-col justify-center">
-                  <h3 class="text-xl lg:text-2xl font-display mb-3 text-primary">隔音鋁門窗 + 電梯</h3>
-                  <p class="text-gray-700 leading-relaxed">
-                    特別配置的14cm超寬軌道加上中空雙層玻璃，阻隔海島白天的喧囂以及熱絡，讓旅客享受一夜好眠。舒適八人座豪華電梯，攜帶超大行李也不怕，讓行動不便之旅客人性化進出。
+                <div class="lg:order-1">
+                  <h3 class="text-2xl md:text-3xl font-display mb-4 text-gray-800">
+                    智慧<span class="text-primary">光控</span>
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed mb-6">
+                    陽台採光配電動窗簾，完美掌控您的光線體驗。
                   </p>
+                  <!-- 特色亮點 -->
+                  <div class="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-3">
+                      <iconify-icon icon="heroicons:sun" class="text-2xl text-primary"></iconify-icon>
+                      <h4 class="font-semibold-cn text-gray-800">晨光喚醒</h4>
+                    </div>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                      遙控開啟窗簾，讓第一縷陽光溫柔地喚醒您的美好一天
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <!-- Smart Curtains -->
-            <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 md:col-span-2 lg:col-span-1" data-animate data-animate-delay="400">
-              <div class="md:grid md:grid-cols-1 lg:grid-cols-2 h-full">
-                <div class="aspect-[4/3] lg:aspect-auto overflow-hidden lg:order-2">
-                  <picture>
-                    <source data-srcset="/images/intro/curtains.avif" type="image/avif">
-                    <source data-srcset="/images/intro/curtains.webp" type="image/webp">
-                    <img 
-                      data-src="/images/intro/curtains.webp"
-                      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E" 
-                      alt="期遇度假會館客房智慧電動窗簾系統，配備遮光簾與紗簾雙層設計，搭配陽台無敵採光，可遙控調節享受澎湖海景與陽光" 
-                      width="400"
-                      height="300"
-                      loading="lazy"
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 will-change-transform"
-                    >
-                  </picture>
-                </div>
-                <div class="p-6 lg:p-8 flex flex-col justify-center lg:order-1">
-                  <h3 class="text-xl lg:text-2xl font-display mb-3 text-primary">無敵採光+遙控遮光簾</h3>
-                  <p class="text-gray-700 leading-relaxed">
-                    每間客房都設有陽台，採光非常好。與此同時，配置遮光簾+紗簾，夜晚將遮光簾關上，睡至中午都沒有任何問題！除此之外，清晨起床時，只需要按手邊的窗簾遙控器便能將窗簾打開，可以靜靜的再床上迎接第一縷照進房間的陽光。
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -379,7 +457,7 @@ const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背�
 
   <!-- Scroll-triggered animations -->
   <script>
-    import { animate } from 'motion';
+    import { animate, scroll } from 'motion';
     import { initLazyLoad } from '../utils/lazyload';
 
     // 初始化懶加載
@@ -392,7 +470,7 @@ const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背�
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const shouldReduceAnimations = isMobile || prefersReducedMotion;
 
-    // Scroll animations
+    // 基礎滾動動畫
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -406,18 +484,28 @@ const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背�
           
           setTimeout(() => {
             if (shouldReduceAnimations) {
-              // 行動裝置或偏好減少動畫時，直接顯示內容
               target.style.opacity = '1';
               target.style.transform = 'translateY(0)';
             } else {
-              animate(target, 
-                { opacity: [0, 1], y: [30, 0] },
-                { duration: 0.8, easing: 'ease-out' }
-              ).finished.then(() => {
-                // 動畫完成後移除 will-change
-                target.classList.add('will-change-auto');
-                target.classList.remove('will-change-transform', 'will-change-opacity');
-              });
+              // 根據元素類型使用不同的動畫
+              if (target.dataset.animateSlide) {
+                animate(target, 
+                  { opacity: [0, 1], x: [-30, 0] },
+                  { duration: 0.8, easing: 'ease-out' }
+                );
+              } else if (target.classList.contains('lg:col-span-2')) {
+                // 大卡片的特殊動畫
+                animate(target, 
+                  { opacity: [0, 1], scale: [0.95, 1] },
+                  { duration: 0.8, easing: 'ease-out' }
+                );
+              } else {
+                // 默認動畫
+                animate(target, 
+                  { opacity: [0, 1], y: [30, 0] },
+                  { duration: 0.8, easing: 'ease-out' }
+                );
+              }
             }
           }, shouldReduceAnimations ? 0 : parseInt(delay));
           
@@ -431,5 +519,36 @@ const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背�
       el.style.opacity = '0';
       observer.observe(el);
     });
+    
+    // 特殊的視差滾動效果（僅桌面版）
+    if (!shouldReduceAnimations) {
+      // 設計理念區塊的標籤動畫
+      const tags = document.querySelectorAll('.flex.flex-wrap.gap-3 span');
+      tags.forEach((tag, index) => {
+        scroll(
+          animate(tag, { 
+            transform: ['translateY(0px)', 'translateY(-10px)', 'translateY(0px)'] 
+          }, { 
+            duration: 2,
+            repeat: Infinity,
+            delay: index * 0.2
+          })
+        );
+      });
+      
+      // 環境畫廊的懸浮效果增強
+      const galleryCards = document.querySelectorAll('.grid.lg\\:grid-cols-2.gap-8 .group');
+      galleryCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          const img = card.querySelector('img');
+          animate(img, { scale: 1.1 }, { duration: 0.6, easing: 'ease-out' });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          const img = card.querySelector('img');
+          animate(img, { scale: 1 }, { duration: 0.6, easing: 'ease-in-out' });
+        });
+      });
+    }
   </script>
 </Layout>

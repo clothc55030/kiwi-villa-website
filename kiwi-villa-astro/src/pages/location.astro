@@ -3,6 +3,49 @@ import Layout from '../layouts/Layout.astro';
 
 const pageTitle = '地理資訊 - 澎湖期遇度假會館 | 絕佳位置，交通便捷';
 const pageDescription = '澎湖期遇度假會館絕佳地理位置，距離機場12分鐘、碼頭9分鐘車程，靠近市區商圈與澎科大，外送覆蓋範圍內，交通便捷生活機能佳。';
+
+// 結構化數據 - 麵包屑
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "首頁",
+    "item": "https://www.kiwi-villa.com"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "地理資訊",
+    "item": "https://www.kiwi-villa.com/location"
+  }]
+};
+
+// 結構化數據 - 地點
+const placeStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  "name": "澎湖期遇度假會館",
+  "description": pageDescription,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "澎湖縣馬公市西衛里347號",
+    "addressLocality": "馬公市",
+    "addressRegion": "澎湖縣",
+    "postalCode": "880",
+    "addressCountry": "TW"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "23.5869",
+    "longitude": "119.5818"
+  },
+  "publicAccess": true,
+  "isAccessibleForFree": false,
+  "touristType": ["Family", "Couple", "Adventure"],
+  "availableLanguage": ["zh-TW", "en"],
+  "openingHours": "Mo-Su 00:00-24:00"
+};
 ---
 
 <Layout 
@@ -11,39 +54,213 @@ const pageDescription = '澎湖期遇度假會館絕佳地理位置，距離機�
   ogImage="https://www.kiwi-villa.com/images/location/location-og.webp"
   keywords="澎湖期遇度假會館,地理位置,交通便捷,澎湖機場,馬公港,澎科大,西衛里,澎湖地圖,交通指南"
 >
-  <!-- Hero Section -->
-  <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center bg-gradient-to-br from-primary to-secondary">
-    <!-- Pattern overlay -->
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+  <!-- Breadcrumb -->
+  <nav class="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
+    <div class="container mx-auto px-4 py-3">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a href="/" class="text-gray-600 hover:text-primary transition-colors">
+            <iconify-icon icon="heroicons:home" class="text-base"></iconify-icon>
+          </a>
+        </li>
+        <li class="flex items-center">
+          <iconify-icon icon="heroicons:chevron-right" class="mx-1 text-gray-400"></iconify-icon>
+          <span class="text-gray-800 font-medium-cn">地理資訊</span>
+        </li>
+      </ol>
     </div>
-    
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden animate-gradient-shift" style="background: linear-gradient(135deg, #7c9bb5 0%, #9bb0c4 25%, #b8c7d6 50%, #a8b8c8 75%, #8fa3b3 100%); background-size: 400% 400%;">
     <!-- Content -->
-    <div class="relative z-10 text-center text-white px-4 animate-fade-in-up">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 text-shadow-lg">
+    <div class="relative z-10 text-center text-white max-w-[600px] px-4 md:px-6 animate-fade-in-up">
+      <h1 class="font-display text-[clamp(2.5rem,5vw,4rem)] font-semibold mb-4 text-shadow-md">
         地理資訊
       </h1>
-      <p class="text-xl md:text-2xl text-shadow-md font-light-cn">
+      <p class="text-[clamp(1.125rem,2.5vw,1.5rem)] font-light mb-6 text-shadow-sm">
         絕佳位置，交通便捷
       </p>
+      <div class="max-w-[600px] mx-auto">
+        <p class="text-[1.1rem] mb-2 text-shadow-sm">
+          位於澎湖交通樞紐，連接機場與市區的核心地帶
+        </p>
+        <p class="text-[1.1rem] text-shadow-sm">
+          生活機能完善，是您探索澎湖的最佳起點
+        </p>
+      </div>
     </div>
   </section>
 
+  <!-- Skip to content link -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-md z-50">
+    跳至主要內容
+  </a>
+
   <!-- Main Content -->
-  <main>
-    <!-- Introduction Section -->
-    <section class="py-16 md:py-24 bg-white">
+  <main id="main-content" tabindex="-1">
+    <!-- Penghu Overview Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50" aria-labelledby="overview-heading">
       <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto" data-animate>
-          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full">
-            如何挑選澎湖住宿位置？
-            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
-          </h2>
-          <div class="space-y-6 text-gray-700 text-lg leading-relaxed">
-            <p>澎湖群島位於台灣島與中國大陸之間的臺灣海峽上，由90座大小不等之島嶼組成。澎湖人常說的本島是由馬公市、湖西、白沙、西嶼組成。</p>
-            <p>澎湖的市區主要指在馬公市中正路（麥當勞）附近，但是馬公市除了以下地圖標識的市區部分，南邊的區域也都在馬公市範圍內！如果希望住的地方離市區不要太遠，建議Google地圖搜尋一下住宿地址到澎湖麥當勞的距離是否能接受。</p>
-            <p>澎湖雖然四面環海但是澎湖的沙灘主要集中在澎湖的南邊，因此若是需要離沙灘近的住宿地點可挑選山水地區的民宿。</p>
-            <p>西嶼、白沙、湖西這三個地方離市區較遠民宿不多，但是大部分都有海景，可以根據個人需求考慮！</p>
+        <div class="max-w-7xl mx-auto">
+          <!-- Section Header -->
+          <div class="text-center mb-16" data-animate>
+            <h2 id="overview-heading" class="text-3xl md:text-4xl font-display mb-4 text-gray-800 relative inline-block">
+              澎湖地理概覽
+              <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full" aria-hidden="true"></span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-8">
+              了解澎湖群島的地理特色，選擇最適合您的住宿位置
+            </p>
+          </div>
+
+          <!-- Map and Info Grid -->
+          <div class="grid lg:grid-cols-2 gap-12 items-start">
+            <!-- Map Section -->
+            <div class="" data-animate data-animate-delay="100">
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-white">
+                <picture>
+                  <source srcset="/images/location/penghu-map-optimized.avif" type="image/avif">
+                  <source srcset="/images/location/penghu-map-optimized.webp" type="image/webp">
+                  <img 
+                    src="/images/location/penghu-map-optimized.jpg"
+                    alt="澎湖群島地圖，標示馬公市、湖西、白沙、西嶼等主要區域位置"
+                    class="w-full h-auto lazy-img"
+                    loading="lazy"
+                    width="800"
+                    height="600"
+                    decoding="async"
+                  >
+                </picture>
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                  <p class="text-white text-sm font-medium-cn text-shadow-sm">
+                    澎湖本島地圖 
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Info Cards -->
+            <div class="space-y-6" data-animate data-animate-delay="200">
+              <!-- 本島組成 -->
+              <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-all duration-300 card-shadow-hover hover:-translate-y-1">
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <iconify-icon icon="heroicons:map" class="text-primary text-xl"></iconify-icon>
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-semibold-cn text-gray-800 mb-2">澎湖本島組成</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                      澎湖本島由<span class="text-primary font-medium-cn">馬公市、湖西鄉、白沙鄉、西嶼鄉</span>四個行政區組成，透過跨海大橋相連，形成完整的生活圈。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 市區定義 -->
+              <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-all duration-300 card-shadow-hover hover:-translate-y-1">
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <iconify-icon icon="heroicons:building-office-2" class="text-secondary text-xl"></iconify-icon>
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-semibold-cn text-gray-800 mb-2">市區核心地帶</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                      馬公市中正路商圈為澎湖最熱鬧的區域，<span class="text-secondary font-medium-cn">麥當勞</span>是當地人判斷是否在市區的地標。期遇距離市區僅9分鐘車程，購物用餐都很方便。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 沙灘分布 -->
+              <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-all duration-300 card-shadow-hover hover:-translate-y-1">
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <iconify-icon icon="heroicons:sun" class="text-accent text-xl"></iconify-icon>
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-semibold-cn text-gray-800 mb-2">美麗海灘分布</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                      澎湖的沙灘主要集中在<span class="text-accent font-medium-cn">南部海岸</span>，如山水沙灘、嵵裡沙灘等。北部則以玄武岩地形為主，各有不同的海岸風情。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 住宿建議 -->
+              <div class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl p-6 border border-primary/20">
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                    <iconify-icon icon="heroicons:light-bulb" class="text-primary text-xl"></iconify-icon>
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-semibold-cn text-gray-800 mb-2">選擇住宿小貼士</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                      期遇度假會館位於<span class="font-medium-cn text-primary">西衛里</span>，兼具便利性與寧靜度，是探索澎湖的理想據點。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Kiwi Section -->
+    <section class="py-16 md:py-24 bg-white" aria-labelledby="why-choose-heading">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16" data-animate>
+            <h2 id="why-choose-heading" class="text-3xl md:text-4xl font-display mb-4 text-gray-800 relative inline-block">
+              為什麼選擇期遇？
+              <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full" aria-hidden="true"></span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-8">
+              戰略位置優勢，讓您的澎湖之旅更加便利精彩
+            </p>
+          </div>
+
+          <!-- Features Grid -->
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Feature 1: Strategic Location -->
+            <div class="group" data-animate data-animate-delay="100">
+              <div class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 animate-float will-change-transform">
+                  <iconify-icon icon="heroicons:map-pin" class="text-white text-2xl"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-semibold-cn text-gray-800 mb-3">戰略核心位置</h3>
+                <p class="text-gray-600 leading-relaxed">
+                  位於靠近市區的黃金地段，去景點或搭船，都能節省寶貴的交通時間。
+                </p>
+              </div>
+            </div>
+
+            <!-- Feature 2: Quiet Environment -->
+            <div class="group" data-animate data-animate-delay="200">
+              <div class="bg-gradient-to-br from-secondary/5 to-secondary/10 rounded-2xl p-8 h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 animate-float-delay-500 will-change-transform">
+                  <iconify-icon icon="heroicons:home-modern" class="text-white text-2xl"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-semibold-cn text-gray-800 mb-3">鬧中取靜</h3>
+                <p class="text-gray-600 leading-relaxed">
+                  遠離市區喧囂，享受寧靜的度假氛圍，同時保持到各景點的便利性，給您最舒適的住宿體驗。
+                </p>
+              </div>
+            </div>
+
+            <!-- Feature 3: Complete Facilities -->
+            <div class="group" data-animate data-animate-delay="300">
+              <div class="bg-gradient-to-br from-accent/5 to-accent/10 rounded-2xl p-8 h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 animate-float-delay-1000 will-change-transform">
+                  <iconify-icon icon="heroicons:shopping-bag" class="text-white text-2xl"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-semibold-cn text-gray-800 mb-3">生活機能完善</h3>
+                <p class="text-gray-600 leading-relaxed">
+                  步行可達便利商店，外送服務全覆蓋，讓您即使不出門也能享受便利的生活機能。
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -54,99 +271,158 @@ const pageDescription = '澎湖期遇度假會館絕佳地理位置，距離機�
       <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto">
           <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full" data-animate>
-            期遇絕佳的地理位置
+            位置詳細資訊
             <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
           </h2>
 
           <div class="space-y-8">
             <!-- Transportation Hub -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300" data-animate data-animate-delay="100">
-              <h3 class="text-2xl font-semibold-cn mb-6 text-primary flex items-center gap-3">
-                <iconify-icon icon="heroicons:map-pin" class="w-8 h-8 text-accent" aria-label="地圖釘選圖標"></iconify-icon>
-                交通便利樞紐
-              </h3>
-              <div class="grid md:grid-cols-2 gap-6 mb-6">
-                <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
-                  <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <iconify-icon icon="heroicons:paper-airplane" class="w-8 h-8 text-primary" aria-label="飛機圖標"></iconify-icon>
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1" data-animate data-animate-delay="100">
+              <div class="bg-gradient-to-r from-primary to-secondary p-1">
+                <div class="bg-white p-8">
+                  <h3 class="text-2xl font-semibold-cn mb-6 text-gray-800 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                      <iconify-icon icon="heroicons:rocket-launch" class="text-primary text-xl"></iconify-icon>
+                    </div>
+                    交通樞紐優勢
+                  </h3>
+                  <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="group cursor-pointer">
+                      <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl group-hover:shadow-md transition-all duration-300">
+                        <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+                          <iconify-icon icon="heroicons:paper-airplane" class="w-7 h-7 text-blue-600"></iconify-icon>
+                        </div>
+                        <div>
+                          <h4 class="text-lg font-medium-cn text-gray-800">澎湖機場</h4>
+                          <p class="text-gray-600">8.5公里 · 12分鐘</p>
+                          <p class="text-xs text-gray-500 mt-1">計程車約 $250-300</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="group cursor-pointer">
+                      <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-cyan-50 to-cyan-100 rounded-xl group-hover:shadow-md transition-all duration-300">
+                        <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+                          <iconify-icon icon="heroicons:building-office-2" class="w-7 h-7 text-cyan-600"></iconify-icon>
+                        </div>
+                        <div>
+                          <h4 class="text-lg font-medium-cn text-gray-800">馬公港</h4>
+                          <p class="text-gray-600">3.5公里 · 9分鐘</p>
+                          <p class="text-xs text-gray-500 mt-1">計程車約 $150-200</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h4 class="text-lg font-medium-cn text-gray-800">澎湖機場</h4>
-                    <p class="text-gray-600">8.5公里 · 12分鐘車程</p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
-                  <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <iconify-icon icon="heroicons:building-office-2" class="w-8 h-8 text-primary" aria-label="建築物圖標"></iconify-icon>
-                  </div>
-                  <div>
-                    <h4 class="text-lg font-medium-cn text-gray-800">馬公港碼頭</h4>
-                    <p class="text-gray-600">3.5公里 · 9分鐘車程</p>
+                  <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                    <iconify-icon icon="heroicons:information-circle" class="text-gray-400 text-xl flex-shrink-0 mt-0.5"></iconify-icon>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                      期遇位於機場到市區的方向上，無論您選擇租車自駕或搭乘計程車，都能輕鬆抵達。
+                    </p>
                   </div>
                 </div>
               </div>
-              <p class="text-gray-700 leading-relaxed">
-                期遇度假會館位於澎湖本島交通核心位置，無論從機場或港口抵達，皆可快速入住，開始您的澎湖之旅。
-              </p>
             </div>
 
-            <!-- Core Area -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300" data-animate data-animate-delay="200">
-              <h3 class="text-2xl font-semibold-cn mb-6 text-primary flex items-center gap-3">
-                <iconify-icon icon="heroicons:building-storefront" class="w-8 h-8 text-accent" aria-label="商店圖標"></iconify-icon>
-                核心商圈
-              </h3>
-              <div class="grid md:grid-cols-3 gap-4 mb-6">
-                <div class="text-center p-4 bg-gradient-to-b from-gray-50 to-gray-100 rounded-xl">
-                  <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <iconify-icon icon="heroicons:shopping-cart" class="w-7 h-7 text-primary" aria-label="購物車圖標"></iconify-icon>
+            <!-- Living Convenience -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1" data-animate data-animate-delay="200">
+              <div class="bg-gradient-to-r from-secondary to-accent p-1">
+                <div class="bg-white p-8">
+                  <h3 class="text-2xl font-semibold-cn mb-6 text-gray-800 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center">
+                      <iconify-icon icon="heroicons:building-storefront" class="text-secondary text-xl"></iconify-icon>
+                    </div>
+                    生活機能完善
+                  </h3>
+                  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                    <div class="text-center p-3 bg-gradient-to-b from-purple-50 to-purple-100 rounded-xl group hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-2 card-shadow-hover">
+                      <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-2 shadow-sm group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
+                        <iconify-icon icon="simple-icons:mcdonalds" class="text-yellow-500 text-xl"></iconify-icon>
+                      </div>
+                      <h4 class="font-medium-cn text-gray-800 text-sm">麥當勞</h4>
+                      <p class="text-xs text-gray-600 mt-1">9分鐘</p>
+                    </div>
+                    <div class="text-center p-3 bg-gradient-to-b from-green-50 to-green-100 rounded-xl group hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-2 card-shadow-hover">
+                      <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-2 shadow-sm group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300">
+                        <img src="/images/7-eleven-logo-icon.svg" alt="7-11" class="w-8 h-8" loading="lazy">
+                      </div>
+                      <h4 class="font-medium-cn text-gray-800 text-sm">7-11</h4>
+                      <p class="text-xs text-gray-600 mt-1">800公尺</p>
+                    </div>
+                    <div class="text-center p-3 bg-gradient-to-b from-orange-50 to-orange-100 rounded-xl group hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-2 card-shadow-hover">
+                      <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-2 shadow-sm group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
+                        <iconify-icon icon="heroicons:academic-cap" class="text-orange-600 text-xl"></iconify-icon>
+                      </div>
+                      <h4 class="font-medium-cn text-gray-800 text-sm">澎科大</h4>
+                      <p class="text-xs text-gray-600 mt-1">2公里</p>
+                    </div>
+                    <div class="text-center p-3 bg-gradient-to-b from-pink-50 to-pink-100 rounded-xl group hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-2 card-shadow-hover">
+                      <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-2 shadow-sm group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300">
+                        <iconify-icon icon="heroicons:shopping-cart" class="text-pink-600 text-xl"></iconify-icon>
+                      </div>
+                      <h4 class="font-medium-cn text-gray-800 text-sm">商圈</h4>
+                      <p class="text-xs text-gray-600 mt-1">9分鐘</p>
+                    </div>
                   </div>
-                  <h4 class="font-medium-cn text-gray-800 mb-1">市區商圈</h4>
-                  <p class="text-sm text-gray-600">9分鐘車程</p>
-                </div>
-                <div class="text-center p-4 bg-gradient-to-b from-gray-50 to-gray-100 rounded-xl">
-                  <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <iconify-icon icon="heroicons:academic-cap" class="w-7 h-7 text-primary" aria-label="學士帽圖標"></iconify-icon>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <iconify-icon icon="heroicons:check-circle" class="text-green-500 text-lg flex-shrink-0"></iconify-icon>
+                      <span class="text-sm text-gray-700">步行即可到達便利商店，日常採買超方便</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <iconify-icon icon="heroicons:check-circle" class="text-green-500 text-lg flex-shrink-0"></iconify-icon>
+                      <span class="text-sm text-gray-700">鄰近澎科大與三多商圈，美食選擇多樣</span>
+                    </div>
                   </div>
-                  <h4 class="font-medium-cn text-gray-800 mb-1">澎科大</h4>
-                  <p class="text-sm text-gray-600">2公里</p>
-                </div>
-                <div class="text-center p-4 bg-gradient-to-b from-gray-50 to-gray-100 rounded-xl">
-                  <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <iconify-icon icon="heroicons:building-storefront" class="w-7 h-7 text-primary" aria-label="便利商店圖標"></iconify-icon>
-                  </div>
-                  <h4 class="font-medium-cn text-gray-800 mb-1">7-11</h4>
-                  <p class="text-sm text-gray-600">800公尺</p>
                 </div>
               </div>
-              <p class="text-gray-700 leading-relaxed">
-                馬公市西衛里距離澎湖最熱鬧的市區商圈約9分鐘車程，距離澎湖唯一的大學澎湖科技大學以及大學生常去的三多商圈僅2公里路程，距離最近的7-11僅800公尺！
-              </p>
             </div>
 
-            <!-- Delivery Coverage -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300" data-animate data-animate-delay="300">
-              <h3 class="text-2xl font-semibold-cn mb-6 text-primary flex items-center gap-3">
-                <iconify-icon icon="heroicons:truck" class="w-8 h-8 text-accent" aria-label="貨車圖標"></iconify-icon>
-                外送覆蓋範圍
-              </h3>
-              <div class="grid md:grid-cols-2 gap-4 mb-6">
-                <div class="flex items-center gap-3 p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-xl">
-                  <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                    <iconify-icon icon="simple-icons:ubereats" class="w-8 h-8 text-white" aria-label="UberEats 圖標"></iconify-icon>
+            <!-- Delivery & Services -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1" data-animate data-animate-delay="300">
+              <div class="bg-gradient-to-r from-accent to-primary p-1">
+                <div class="bg-white p-8">
+                  <h3 class="text-2xl font-semibold-cn mb-6 text-gray-800 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
+                      <iconify-icon icon="heroicons:truck" class="text-accent text-xl"></iconify-icon>
+                    </div>
+                    外送服務全覆蓋
+                  </h3>
+                  <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="group cursor-pointer">
+                      <div class="flex items-center gap-3 p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-xl border border-green-200 group-hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-md">
+                          <iconify-icon icon="simple-icons:ubereats" class="w-8 h-8 text-white"></iconify-icon>
+                        </div>
+                        <div>
+                          <span class="font-medium-cn text-gray-800">UberEats</span>
+                          <p class="text-xs text-gray-600 mt-1">✓ 配送範圍內</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="group cursor-pointer">
+                      <div class="flex items-center gap-3 p-4 bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl border border-pink-200 group-hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center shadow-md">
+                          <iconify-icon icon="simple-icons:foodpanda" class="w-8 h-8 text-white"></iconify-icon>
+                        </div>
+                        <div>
+                          <span class="font-medium-cn text-gray-800">Foodpanda</span>
+                          <p class="text-xs text-gray-600 mt-1">✓ 配送範圍內</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <span class="font-medium-cn text-gray-800">UberEats 配送範圍</span>
-                </div>
-                <div class="flex items-center gap-3 p-4 bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl">
-                  <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center">
-                    <iconify-icon icon="simple-icons:foodpanda" class="w-8 h-8 text-white" aria-label="Foodpanda 圖標"></iconify-icon>
+                  <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 border border-amber-200">
+                    <div class="flex items-start gap-3">
+                      <iconify-icon icon="heroicons:light-bulb" class="text-amber-600 text-xl flex-shrink-0 mt-0.5"></iconify-icon>
+                      <div>
+                        <p class="text-sm text-gray-700 font-medium-cn mb-1">美食推薦</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                          我們的服務人員樂意為您推薦當地美食，從道地小吃到精緻餐廳，滿足您的各種需求。
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <span class="font-medium-cn text-gray-800">Foodpanda 配送範圍</span>
                 </div>
               </div>
-              <p class="text-gray-700 leading-relaxed">
-                期遇處於澎湖外送平台規定的外送範圍內，即使不出門也可點外送！
-              </p>
             </div>
           </div>
         </div>
@@ -154,79 +430,184 @@ const pageDescription = '澎湖期遇度假會館絕佳地理位置，距離機�
     </section>
 
     <!-- Transportation Guide Section -->
-    <section class="py-16 md:py-24 bg-white">
+    <section class="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full" data-animate>
-            交通指南
-            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
-          </h2>
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-16" data-animate>
+            <h2 class="text-3xl md:text-4xl font-display mb-4 text-gray-800 relative inline-block">
+              抵達期遇
+              <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-8">
+              詳細的交通指引，讓您輕鬆找到我們
+            </p>
+          </div>
 
-          <div class="grid md:grid-cols-2 gap-8">
-            <!-- From Airport -->
-            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8" data-animate data-animate-delay="100">
-              <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
-                  <iconify-icon icon="heroicons:paper-airplane" class="w-8 h-8 text-white" aria-label="飛機圖標"></iconify-icon>
-                </div>
-                <h3 class="text-2xl font-semibold-cn text-gray-800">從澎湖機場</h3>
-              </div>
-              
-              <div class="space-y-4 mb-6">
-                <div class="flex gap-4">
-                  <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 text-blue-600 font-bold">1</div>
-                  <p class="text-gray-700 leading-relaxed">開車沿201縣道往馬公市區方向</p>
-                </div>
-                <div class="flex gap-4">
-                  <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 text-blue-600 font-bold">2</div>
-                  <p class="text-gray-700 leading-relaxed">約12分鐘即可抵達期遇度假會館</p>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-2 gap-4 bg-white/50 rounded-lg p-4">
-                <div class="text-center">
-                  <p class="text-sm text-gray-600">距離</p>
-                  <p class="text-lg font-semibold-cn text-gray-800">8.5公里</p>
-                </div>
-                <div class="text-center">
-                  <p class="text-sm text-gray-600">車程</p>
-                  <p class="text-lg font-semibold-cn text-gray-800">約12分鐘</p>
+          <!-- Transport Options -->
+          <div class="grid lg:grid-cols-3 gap-8 mb-12">
+            <!-- By Plane -->
+            <div class="group" data-animate data-animate-delay="100">
+              <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="h-2 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+                <div class="p-6">
+                  <div class="flex items-center gap-4 mb-4">
+                    <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-float will-change-transform">
+                      <iconify-icon icon="heroicons:paper-airplane" class="text-blue-600 text-2xl"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-semibold-cn text-gray-800">飛機抵達</h3>
+                  </div>
+                  <div class="space-y-3 text-gray-600">
+                    <p class="text-sm leading-relaxed">
+                      <span class="font-medium-cn text-gray-800">澎湖機場</span><br>
+                      距離：8.5 公里<br>
+                      車程：約 12 分鐘<br>
+                      計程車費：約 $250-300
+                    </p>
+                    <div class="pt-3 border-t border-gray-100">
+                      
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- From Port -->
-            <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl p-8" data-animate data-animate-delay="200">
-              <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center">
-                  <iconify-icon icon="heroicons:building-office-2" class="w-8 h-8 text-white" aria-label="碼頭圖標"></iconify-icon>
+            <!-- By Ship -->
+            <div class="group" data-animate data-animate-delay="200">
+              <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="h-2 bg-gradient-to-r from-cyan-400 to-cyan-600"></div>
+                <div class="p-6">
+                  <div class="flex items-center gap-4 mb-4">
+                    <div class="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-float-delay-500 will-change-transform">
+                      <iconify-icon icon="heroicons:building-office-2" class="text-cyan-600 text-2xl"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-semibold-cn text-gray-800">輪船抵達</h3>
+                  </div>
+                  <div class="space-y-3 text-gray-600">
+                    <p class="text-sm leading-relaxed">
+                      <span class="font-medium-cn text-gray-800">馬公港</span><br>
+                      距離：3.5 公里<br>
+                      車程：約 9 分鐘<br>
+                      計程車費：約 $150-200
+                    </p>
+                    <div class="pt-3 border-t border-gray-100">
+                      <p class="text-xs text-gray-500">碼頭有計程車排班站</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 class="text-2xl font-semibold-cn text-gray-800">從馬公港碼頭</h3>
               </div>
-              
-              <div class="space-y-4 mb-6">
-                <div class="flex gap-4">
-                  <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 text-cyan-600 font-bold">1</div>
-                  <p class="text-gray-700 leading-relaxed">出碼頭後往市區方向</p>
+            </div>
+
+            <!-- By Car -->
+            <div class="group" data-animate data-animate-delay="300">
+              <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="h-2 bg-gradient-to-r from-green-400 to-green-600"></div>
+                <div class="p-6">
+                  <div class="flex items-center gap-4 mb-4">
+                    <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-float-delay-1000 will-change-transform">
+                      <iconify-icon icon="heroicons:truck" class="text-green-600 text-2xl"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-semibold-cn text-gray-800">自行開車</h3>
+                  </div>
+                  <div class="space-y-3 text-gray-600">
+                    <p class="text-sm leading-relaxed">
+                      <span class="font-medium-cn text-gray-800">導航地址</span><br>
+                      澎湖縣馬公市西衛里347號<br>
+                      Google Maps 搜尋<br>
+                      「期遇度假會館」
+                    </p>
+                    <div class="pt-3 border-t border-gray-100">
+                      <p class="text-xs text-gray-500">提供免費停車位</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="flex gap-4">
-                  <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 text-cyan-600 font-bold">2</div>
-                  <p class="text-gray-700 leading-relaxed">沿中正路往西衛方向</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Route -->
+          <div class="bg-white rounded-3xl shadow-xl overflow-hidden" data-animate data-animate-delay="400">
+            <div class="grid lg:grid-cols-2">
+              <!-- Route Steps -->
+              <div class="p-8 lg:p-12">
+                <h3 class="text-2xl font-semibold-cn text-gray-800 mb-8 flex items-center gap-3">
+                  <iconify-icon icon="heroicons:map" class="text-primary text-2xl"></iconify-icon>
+                  詳細路線指引
+                </h3>
+                
+                <!-- From Airport -->
+                <div class="mb-8">
+                  <h4 class="font-medium-cn text-gray-800 mb-4 flex items-center gap-2">
+                    <iconify-icon icon="heroicons:paper-airplane" class="text-blue-500"></iconify-icon>
+                    從機場出發
+                  </h4>
+                  <div class="space-y-3 ml-6">
+                    <div class="flex gap-3">
+                      <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-blue-600">1</div>
+                      <p class="text-gray-700 text-sm">出機場後右轉進入<span class="font-medium-cn">201縣道</span></p>
+                    </div>
+                    <div class="flex gap-3">
+                      <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-blue-600">2</div>
+                      <p class="text-gray-700 text-sm">沿201縣道直行往<span class="font-medium-cn">馬公市區</span>方向</p>
+                    </div>
+                    <div class="flex gap-3">
+                      <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-blue-600">3</div>
+                      <p class="text-gray-700 text-sm">經過<span class="font-medium-cn">澎科大</span>後約2分鐘即抵達</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="flex gap-4">
-                  <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 text-cyan-600 font-bold">3</div>
-                  <p class="text-gray-700 leading-relaxed">約9分鐘即可抵達會館</p>
+
+                <!-- From Port -->
+                <div>
+                  <h4 class="font-medium-cn text-gray-800 mb-4 flex items-center gap-2">
+                    <iconify-icon icon="heroicons:building-office-2" class="text-cyan-500"></iconify-icon>
+                    從馬公港出發
+                  </h4>
+                  <div class="space-y-3 ml-6">
+                    <div class="flex gap-3">
+                      <div class="w-8 h-8 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-cyan-600">1</div>
+                      <p class="text-gray-700 text-sm">出港區後往<span class="font-medium-cn">中正路</span>方向</p>
+                    </div>
+                    <div class="flex gap-3">
+                      <div class="w-8 h-8 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-cyan-600">2</div>
+                      <p class="text-gray-700 text-sm">沿中正路往<span class="font-medium-cn">西衛</span>方向直行</p>
+                    </div>
+                    <div class="flex gap-3">
+                      <div class="w-8 h-8 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-cyan-600">3</div>
+                      <p class="text-gray-700 text-sm">看到<span class="font-medium-cn">7-11</span>後再開800公尺即抵達</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div class="grid grid-cols-2 gap-4 bg-white/50 rounded-lg p-4">
-                <div class="text-center">
-                  <p class="text-sm text-gray-600">距離</p>
-                  <p class="text-lg font-semibold-cn text-gray-800">3.5公里</p>
-                </div>
-                <div class="text-center">
-                  <p class="text-sm text-gray-600">車程</p>
-                  <p class="text-lg font-semibold-cn text-gray-800">約9分鐘</p>
+              <!-- Visual Guide -->
+              <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-8 lg:p-12 flex flex-col justify-center">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                  <h4 class="font-semibold-cn text-gray-800 mb-4 text-center">重要地標參考</h4>
+                  <div class="space-y-4">
+                    <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                      <iconify-icon icon="heroicons:academic-cap" class="text-blue-600 text-xl flex-shrink-0"></iconify-icon>
+                      <div>
+                        <p class="font-medium-cn text-gray-800 text-sm">澎湖科技大學</p>
+                        <p class="text-xs text-gray-600">經過後約2分鐘抵達</p>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                      <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <img src="/images/7-eleven-logo-icon.svg" alt="7-11" class="w-7 h-7" loading="lazy">
+                      </div>
+                      <div>
+                        <p class="font-medium-cn text-gray-800 text-sm">7-11 西衛門市</p>
+                        <p class="text-xs text-gray-600">距離期遇800公尺</p>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
+                      <iconify-icon icon="heroicons:home-modern" class="text-purple-600 text-xl flex-shrink-0"></iconify-icon>
+                      <div>
+                        <p class="font-medium-cn text-gray-800 text-sm">期遇度假會館</p>
+                        <p class="text-xs text-gray-600">西衛里347號</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -236,60 +617,125 @@ const pageDescription = '澎湖期遇度假會館絕佳地理位置，距離機�
     </section>
 
     <!-- Google Map Section -->
-    <section class="py-16 md:py-24 bg-gray-50">
+    <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-display text-center mb-8 text-gray-800 relative inline-block w-full" data-animate>
-            詳細地址資訊
-            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
-          </h2>
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12" data-animate>
+            <h2 class="text-3xl md:text-4xl font-display mb-4 text-gray-800 relative inline-block">
+              地圖定位
+              <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+            </h2>
+          </div>
           
-          <div class="bg-white rounded-2xl shadow-lg p-6 mb-8" data-animate data-animate-delay="100">
-            <div class="flex items-center justify-center gap-3 text-lg">
-              <iconify-icon icon="heroicons:map-pin" class="w-6 h-6 text-primary" aria-label="地圖釘選圖標"></iconify-icon>
-              <span class="font-medium-cn text-gray-800">澎湖縣馬公市西衛里347號</span>
+          <!-- Address Card -->
+          <div class="max-w-3xl mx-auto mb-8" data-animate data-animate-delay="100">
+            <div class="bg-gradient-to-r from-primary to-secondary p-1 rounded-2xl">
+              <div class="bg-white rounded-2xl p-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                      <iconify-icon icon="heroicons:map-pin" class="text-primary text-2xl"></iconify-icon>
+                    </div>
+                    <div class="cursor-pointer" onclick="navigator.clipboard.writeText('澎湖縣馬公市西衛里347號').then(() => { const btn = event.currentTarget; btn.classList.add('bg-green-50'); setTimeout(() => btn.classList.remove('bg-green-50'), 1000); })" role="button" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }" aria-label="點擊複製地址">
+                      <p class="font-semibold-cn text-gray-800">澎湖縣馬公市西衛里347號</p>
+                      <p class="text-sm text-gray-600">Kiwi Villa, No. 347, Xiwei Village, Magong City</p>
+                      <p class="text-xs text-primary mt-1 opacity-0 hover:opacity-100 transition-opacity" aria-hidden="true">點擊複製地址</p>
+                    </div>
+                  </div>
+                  <a 
+                    href="https://goo.gl/maps/YourGoogleMapsLink" 
+                    target="_blank"
+                    class="inline-flex items-center gap-2 px-6 py-3 md:px-4 md:py-2 bg-primary text-white rounded-full text-base md:text-sm font-medium-cn hover:bg-primary-dark transition-colors duration-300 touch-manipulation"
+                  >
+                    <iconify-icon icon="simple-icons:googlemaps" class="text-lg"></iconify-icon>
+                    <span class="hidden sm:inline">在 Google Maps 開啟</span>
+                    <span class="sm:hidden">開啟地圖</span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="rounded-2xl overflow-hidden shadow-2xl" data-animate data-animate-delay="200">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3652.7!2d119.5818231!3d23.5868865!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x2157a9c94466e69b!2z5pyf6YGH5bqm5YGH6KeG6aSo!5e0!3m2!1szh-TW!2stw!4v1642000000000!5m2!1szh-TW!2stw" 
-              width="100%" 
-              height="500" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade" 
-              title="期遇度假會館位置地圖">
-            </iframe>
+          <!-- Map Container -->
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl group" data-animate data-animate-delay="200">
+            <div class="w-full" style="height: 70vh; min-height: 500px; max-height: 800px;">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3652.7!2d119.5818231!3d23.5868865!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x2157a9c94466e69b!2z5pyf6YGH5bqm5YGH6KeG6aSo!5e0!3m2!1szh-TW!2stw!4v1642000000000!5m2!1szh-TW!2stw" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade" 
+                title="期遇度假會館位置地圖"
+                class="w-full h-full"
+              >
+              </iframe>
+              <!-- 地圖控制按鈕 -->
+              <div class="absolute top-4 right-4 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <button 
+                  onclick="window.open('https://goo.gl/maps/YourGoogleMapsLink', '_blank')"
+                  class="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg hover:bg-white hover:shadow-xl transition-all duration-300 touch-manipulation"
+                  aria-label="在 Google Maps 中開啟"
+                >
+                  <iconify-icon icon="heroicons:arrow-top-right-on-square" class="text-gray-700 text-xl"></iconify-icon>
+                </button>
+                <button 
+                  onclick="navigator.share && navigator.share({title: '期遇度假會館', text: '澎湖縣馬公市西衛里347號', url: window.location.href})"
+                  class="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg hover:bg-white hover:shadow-xl transition-all duration-300 touch-manipulation"
+                  aria-label="分享位置"
+                >
+                  <iconify-icon icon="heroicons:share" class="text-gray-700 text-xl"></iconify-icon>
+                </button>
+              </div>
+            </div>
+            <!-- Overlay Info -->
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent p-6 md:p-8">
+              <div class="max-w-4xl mx-auto text-white">
+                <div class="grid md:grid-cols-3 gap-4 text-center">
+                  <div>
+                    <p class="text-sm opacity-80">營業時間</p>
+                    <p class="font-medium-cn">24小時電話在線</p>
+                  </div>
+                  <div>
+                    <p class="text-sm opacity-80">聯絡電話</p>
+                    <p class="font-medium-cn">0933-636-373</p>
+                  </div>
+                  <div>
+                    <p class="text-sm opacity-80">GPS 座標</p>
+                    <p class="font-medium-cn">23.5869°N, 119.5818°E</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="relative py-24 overflow-hidden">
-      <!-- Dark gradient background -->
-      <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
+    <section class="relative py-24 overflow-hidden bg-gradient-to-b from-gray-50 to-charcoal/10">
+      <!-- Subtle gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5"></div>
       
-      <!-- Animated pattern overlay -->
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+      <!-- Pattern overlay -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23000000" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
       </div>
       
       <!-- Content -->
       <div class="relative z-10 container mx-auto px-4 text-center">
         <div class="max-w-3xl mx-auto" data-animate>
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-6 text-shadow-lg animate-delay-200">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-gray-800 mb-6">
             絕佳位置，完美旅程
           </h2>
-          <p class="text-xl md:text-2xl text-white mb-10 text-shadow-md animate-delay-400">
+          <p class="text-xl md:text-2xl text-gray-700 mb-10">
             期遇度假會館，澎湖之旅的最佳起點
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
               href="https://booking.owlting.com/kiwi-villa" 
-              class="group inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-full font-medium-cn text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              class="group inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-full font-medium-cn text-lg shadow-xl hover:shadow-2xl hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 touch-manipulation min-touch-target"
               target="_blank"
             >
               <iconify-icon icon="heroicons:calendar" class="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" aria-label="日曆圖標"></iconify-icon>
@@ -297,7 +743,7 @@ const pageDescription = '澎湖期遇度假會館絕佳地理位置，距離機�
             </a>
             <a 
               href="/rooms" 
-              class="group inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 px-8 py-4 rounded-full font-medium-cn text-lg hover:bg-white/20 transform hover:scale-105 transition-all duration-300"
+              class="group inline-flex items-center justify-center gap-3 bg-white text-gray-800 border-2 border-gray-300 px-8 py-4 rounded-full font-medium-cn text-lg hover:bg-gray-50 hover:border-gray-400 transform hover:scale-105 transition-all duration-300 touch-manipulation min-touch-target"
             >
               <iconify-icon icon="heroicons:home" class="w-6 h-6 group-hover:scale-110 transition-transform duration-300" aria-label="房屋圖標"></iconify-icon>
               <span>查看房型</span>
@@ -341,5 +787,28 @@ const pageDescription = '澎湖期遇度假會館絕佳地理位置，距離機�
       el.style.opacity = '0';
       observer.observe(el);
     });
+
+    // Lazy loading for images
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.classList.add('loaded');
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '50px 0px',
+      threshold: 0.01
+    });
+
+    // Observe all lazy images
+    document.querySelectorAll('.lazy-img').forEach(img => {
+      imageObserver.observe(img);
+    });
   </script>
+
+  <!-- 結構化數據 -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)} />
+  <script type="application/ld+json" set:html={JSON.stringify(placeStructuredData)} />
 </Layout>

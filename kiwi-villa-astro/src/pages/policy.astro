@@ -3,6 +3,58 @@ import Layout from '../layouts/Layout.astro';
 
 const pageTitle = '訂房須知 - 澎湖期遇度假會館 | 詳細住宿規定與注意事項';
 const pageDescription = '澎湖期遇度假會館訂房須知，詳細住宿規定與注意事項。包含入住退房時間、取消政策、住宿規定、設施服務等完整資訊。';
+
+// 定義政策數據
+const checkInOutInfo = {
+  checkIn: {
+    time: '下午 15:00 後',
+    notes: ['提早到達可先寄放行李', '入住時請出示身分證件辦理登記手續']
+  },
+  checkOut: {
+    time: '上午 11:00 前',
+    notes: ['退房可寄存行李', '退房時請檢查是否有遺留物品']
+  }
+};
+
+const cancellationPolicy = [
+  { period: '入住前14天以上', refund: '90%', color: 'green' },
+  { period: '入住前10-13天', refund: '70%', color: 'green' },
+  { period: '入住前7-9天', refund: '50%', color: 'yellow' },
+  { period: '入住前4-6天', refund: '40%', color: 'orange' },
+  { period: '入住前2-3天', refund: '30%', color: 'orange' },
+  { period: '入住前1天', refund: '20%', color: 'red' },
+  { period: '當天取消或未到', refund: '不退款', color: 'red' }
+];
+
+const rules = {
+  quiet: ['23:00 - 08:00 請保持安靜', '避免大聲喧嘩影響其他房客', '公共區域請輕聲細語'],
+  prohibited: ['全館室內禁止吸菸（包含電子菸）', '禁止攜帶寵物', '禁止烤肉、打麻將', '禁止攜帶榴蓮等氣味強烈食物', '禁止訪客參觀'],
+  guests: ['嚴格按訂房人數入住', '0~12歲兒童不佔床：加收500元/晚', '超過12歲必須加床入住', '加沙發床：1000元/晚', '雙人房不提供加床服務', '其餘房型限加1張床'],
+  safety: ['請妥善保管房間鑰匙', '離開房間請鎖好門窗', '貴重物品請自行保管', '緊急情況請立即聯繫櫃檯']
+};
+
+const facilities = [
+  { 
+    icon: 'heroicons:cake', 
+    title: '餐飲服務', 
+    items: ['提供中式早餐（8:30-10:00）', '可提前準備外帶早餐', '公共區域有飲水機']
+  },
+  { 
+    icon: 'heroicons:sparkles', 
+    title: '休閒設施', 
+    items: ['頂樓戲水池（3m×6m）', '100吋大螢幕影視設備', '公共休憩區域']
+  },
+  { 
+    icon: 'heroicons:truck', 
+    title: '交通服務', 
+    items: ['免費停車位', '機車租賃資訊提供', '景點交通諮詢']
+  },
+  { 
+    icon: 'heroicons:hand-raised', 
+    title: '其他服務', 
+    items: ['行李寄存服務', '旅遊諮詢與建議', '代訂行程服務']
+  }
+];
 ---
 
 <Layout 
@@ -12,379 +64,212 @@ const pageDescription = '澎湖期遇度假會館訂房須知，詳細住宿規�
   keywords="澎湖期遇度假會館,訂房須知,住宿規定,取消政策,入住退房時間,訂房條款"
 >
   <!-- Hero Section -->
-  <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900">
-    <!-- Pattern overlay -->
-    <div class="absolute inset-0 opacity-5">
-      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-    </div>
-    
+  <section class="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden animate-gradient-shift" style="background: linear-gradient(135deg, #7c9bb5 0%, #9bb0c4 25%, #b8c7d6 50%, #a8b8c8 75%, #8fa3b3 100%); background-size: 400% 400%;">
     <!-- Content -->
-    <div class="relative z-10 text-center text-white px-4 animate-fade-in-up">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 text-shadow-lg">
+    <div class="relative z-10 text-center text-white max-w-[600px] px-4 md:px-6 animate-fade-in-up">
+      <h1 class="font-display text-[clamp(2.5rem,5vw,4rem)] font-semibold mb-4 text-shadow-md">
         訂房須知
       </h1>
-      <p class="text-xl md:text-2xl text-shadow-md font-light-cn">
+      <p class="text-[clamp(1.125rem,2.5vw,1.5rem)] font-light mb-6 text-shadow-sm">
         詳細住宿規定與注意事項
       </p>
+      <div class="max-w-[600px] mx-auto">
+        <p class="text-[1.1rem] mb-2 text-shadow-sm">
+          完善的規範讓您享受無憂的度假體驗
+        </p>
+        <p class="text-[1.1rem] text-shadow-sm">
+          請詳細閱讀以下須知，共同維護美好的住宿環境
+        </p>
+      </div>
     </div>
   </section>
 
   <!-- Main Content -->
   <main>
-    <!-- Important Notice Section -->
-    <section class="py-12 md:py-16 bg-red-50">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto" data-animate>
-          <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 text-center border-2 border-red-200">
-            <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <iconify-icon icon="heroicons:exclamation-triangle" class="w-12 h-12 text-red-600"></iconify-icon>
-            </div>
-            <h2 class="text-2xl md:text-3xl font-display font-bold text-gray-800 mb-4">重要提醒</h2>
-            <p class="text-lg text-gray-700 leading-relaxed">
-              請詳細閱讀以下訂房須知，完成訂房即表示您同意並遵守相關規定。如有疑問請於訂房前聯繫我們。
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Check-in/out Section -->
-    <section class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full" data-animate>
-            入住退房時間
-            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
-          </h2>
-          
-          <div class="grid md:grid-cols-2 gap-8">
-            <!-- Check-in -->
-            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8" data-animate data-animate-delay="100">
-              <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
-                  <iconify-icon icon="heroicons:clock" class="w-8 h-8 text-white"></iconify-icon>
-                </div>
-                <h3 class="text-2xl font-semibold-cn text-gray-800">入住時間</h3>
-              </div>
-              <div class="text-3xl font-bold text-blue-600 mb-4">下午 15:00 後</div>
-              <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start gap-2">
-                  <iconify-icon icon="heroicons:check-circle" class="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0"></iconify-icon>
-                  <span>提早到達可先寄放行李</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <iconify-icon icon="heroicons:check-circle" class="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0"></iconify-icon>
-                  <span>入住時請出示身分證件辦理登記手續</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Check-out -->
-            <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8" data-animate data-animate-delay="200">
-              <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center">
-                  <iconify-icon icon="heroicons:arrow-right-on-rectangle" class="w-8 h-8 text-white"></iconify-icon>
-                </div>
-                <h3 class="text-2xl font-semibold-cn text-gray-800">退房時間</h3>
-              </div>
-              <div class="text-3xl font-bold text-orange-600 mb-4">上午 11:00 前</div>
-              <ul class="space-y-2 text-gray-700">
-                <li class="flex items-start gap-2">
-                  <iconify-icon icon="heroicons:check-circle" class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0"></iconify-icon>
-                  <span>退房可寄存行李</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <iconify-icon icon="heroicons:check-circle" class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0"></iconify-icon>
-                  <span>退房時請檢查是否有遺留物品</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Booking & Payment Section -->
+    <!-- Quick Info Cards -->
     <section class="py-16 md:py-24 bg-gray-50">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full" data-animate>
-            訂房與付款
-            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
-          </h2>
-          
-          <div class="grid md:grid-cols-3 gap-6">
-            <!-- Payment Methods -->
-            <div class="bg-white rounded-xl shadow-lg p-6" data-animate data-animate-delay="100">
-              <h3 class="text-xl font-semibold-cn mb-4 text-gray-800">付款方式</h3>
-              <ul class="space-y-3">
-                <li class="flex items-center gap-3">
-                  <iconify-icon icon="heroicons:building-library" class="w-5 h-5 text-primary"></iconify-icon>
-                  <span>銀行轉帳（推薦）</span>
-                </li>
-                <li class="flex items-center gap-3">
-                  <iconify-icon icon="heroicons:banknotes" class="w-5 h-5 text-primary"></iconify-icon>
-                  <span>現金付款</span>
-                </li>
-                <li class="flex items-center gap-3">
-                  <iconify-icon icon="heroicons:credit-card" class="w-5 h-5 text-primary"></iconify-icon>
-                  <span>刷卡</span>
-                </li>
-              </ul>
+        <div class="max-w-5xl mx-auto">
+          <!-- Check-in/out Info -->
+          <div class="grid md:grid-cols-2 gap-6 mb-12" data-animate>
+            <div class="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-primary">
+              <div class="flex items-center gap-3 mb-4">
+                <iconify-icon icon="heroicons:arrow-right-circle" class="w-8 h-8 text-primary"></iconify-icon>
+                <h3 class="text-2xl font-semibold-cn text-gray-800">入住時間</h3>
+              </div>
+              <p class="text-3xl font-bold text-primary mb-4">{checkInOutInfo.checkIn.time}</p>
+              {checkInOutInfo.checkIn.notes.map(note => (
+                <p class="text-gray-600 mb-2 flex items-start gap-2">
+                  <iconify-icon icon="heroicons:check" class="w-5 h-5 text-primary mt-0.5 flex-shrink-0"></iconify-icon>
+                  <span>{note}</span>
+                </p>
+              ))}
             </div>
-
-            <!-- Deposit Policy -->
-            <div class="bg-white rounded-xl shadow-lg p-6" data-animate data-animate-delay="200">
-              <h3 class="text-xl font-semibold-cn mb-4 text-gray-800">訂金政策</h3>
-              <ul class="space-y-3">
-                <li class="flex items-start gap-2">
-                  <span class="text-primary font-bold">•</span>
-                  <span>訂房需付50%訂金</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-primary font-bold">•</span>
-                  <span>餘款於入住當日付清</span>
-                </li>
-              </ul>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-secondary">
+              <div class="flex items-center gap-3 mb-4">
+                <iconify-icon icon="heroicons:arrow-left-circle" class="w-8 h-8 text-secondary"></iconify-icon>
+                <h3 class="text-2xl font-semibold-cn text-gray-800">退房時間</h3>
+              </div>
+              <p class="text-3xl font-bold text-secondary mb-4">{checkInOutInfo.checkOut.time}</p>
+              {checkInOutInfo.checkOut.notes.map(note => (
+                <p class="text-gray-600 mb-2 flex items-start gap-2">
+                  <iconify-icon icon="heroicons:check" class="w-5 h-5 text-secondary mt-0.5 flex-shrink-0"></iconify-icon>
+                  <span>{note}</span>
+                </p>
+              ))}
             </div>
+          </div>
 
-            <!-- Booking Notes -->
-            <div class="bg-white rounded-xl shadow-lg p-6" data-animate data-animate-delay="300">
-              <h3 class="text-xl font-semibold-cn mb-4 text-gray-800">訂房注意事項</h3>
-              <ul class="space-y-3">
-                <li class="flex items-start gap-2">
-                  <span class="text-primary font-bold">•</span>
-                  <span>訂房確認以收到訂金為準</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-primary font-bold">•</span>
-                  <span>請於訂房後24小時內完成付款</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-primary font-bold">•</span>
-                  <span>逾期未付款訂單將自動取消</span>
-                </li>
-              </ul>
+          <!-- Important Reminders -->
+          <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-8 border border-red-200" data-animate data-animate-delay="100">
+            <div class="flex items-start gap-4">
+              <iconify-icon icon="heroicons:exclamation-triangle" class="w-8 h-8 text-red-500 flex-shrink-0"></iconify-icon>
+              <div>
+                <h3 class="text-xl font-semibold-cn text-gray-800 mb-2">重要提醒</h3>
+                <p class="text-gray-700">
+                  完成訂房即表示您同意並遵守相關規定。如有疑問請於訂房前聯繫我們。
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Cancellation Policy Section -->
+    <!-- Cancellation Policy -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full" data-animate>
-            取消與更改政策
-            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800" data-animate>
+            取消政策
           </h2>
           
-          <!-- Cancellation Table -->
-          <div class="overflow-x-auto rounded-xl shadow-lg" data-animate data-animate-delay="100">
-            <table class="w-full bg-white">
-              <thead class="bg-gray-100">
-                <tr>
-                  <th class="px-6 py-4 text-left font-semibold-cn text-gray-800">取消時間</th>
-                  <th class="px-6 py-4 text-center font-semibold-cn text-gray-800">退款比例</th>
-                  <th class="px-6 py-4 text-left font-semibold-cn text-gray-800">說明</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200">
-                <tr class="bg-green-50">
-                  <td class="px-6 py-4">入住前14天以上</td>
-                  <td class="px-6 py-4 text-center">
-                    <span class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full font-bold">90%退款</span>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-700">旅客解約通知於預定住宿日前第14日以前到達者，退還已付訂金比例之90%</td>
-                </tr>
-                <tr class="bg-green-50/50">
-                  <td class="px-6 py-4">入住前10-13天</td>
-                  <td class="px-6 py-4 text-center">
-                    <span class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full font-bold">70%退款</span>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-700">旅客解約通知於預定住宿日前第10至第13日以前到達者，退還已付訂金比例之70%</td>
-                </tr>
-                <tr class="bg-yellow-50">
-                  <td class="px-6 py-4">入住前7-9天</td>
-                  <td class="px-6 py-4 text-center">
-                    <span class="inline-block px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full font-bold">50%退款</span>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-700">旅客解約通知於預定住宿日前第7至第9日以前到達者，退還已付訂金比例之50%</td>
-                </tr>
-                <tr class="bg-orange-50">
-                  <td class="px-6 py-4">入住前4-6天</td>
-                  <td class="px-6 py-4 text-center">
-                    <span class="inline-block px-3 py-1 bg-orange-100 text-orange-700 rounded-full font-bold">40%退款</span>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-700">旅客解約通知於預定住宿日前第4至第6日以前到達者，退還已付訂金比例之40%，不得延期</td>
-                </tr>
-                <tr class="bg-orange-50">
-                  <td class="px-6 py-4">入住前2-3天</td>
-                  <td class="px-6 py-4 text-center">
-                    <span class="inline-block px-3 py-1 bg-orange-100 text-orange-700 rounded-full font-bold">30%退款</span>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-700">旅客解約通知於預定住宿日前第2至第3日以前到達者，退還已付訂金比例之30%，不得延期</td>
-                </tr>
-                <tr class="bg-red-50">
-                  <td class="px-6 py-4">入住前1天</td>
-                  <td class="px-6 py-4 text-center">
-                    <span class="inline-block px-3 py-1 bg-red-100 text-red-700 rounded-full font-bold">20%退款</span>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-700">旅客解約通知於預定住宿日前1日以前到達者，退還已付訂金比例之20%，不得延期</td>
-                </tr>
-                <tr class="bg-red-50">
-                  <td class="px-6 py-4">當天取消或未到</td>
-                  <td class="px-6 py-4 text-center">
-                    <span class="inline-block px-3 py-1 bg-red-200 text-red-800 rounded-full font-bold">不退款</span>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-700">旅客解約通知於預定住宿日當日到達或未為解約通知者，退還已付訂金比例之0%，不得延期</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="bg-gray-50 rounded-2xl p-2" data-animate data-animate-delay="100">
+            <div class="grid gap-2">
+              {cancellationPolicy.map((policy, index) => (
+                <div class={`
+                  flex items-center justify-between p-4 rounded-xl
+                  ${policy.color === 'green' ? 'bg-green-50' : ''}
+                  ${policy.color === 'yellow' ? 'bg-yellow-50' : ''}
+                  ${policy.color === 'orange' ? 'bg-orange-50' : ''}
+                  ${policy.color === 'red' ? 'bg-red-50' : ''}
+                `}>
+                  <span class="font-medium-cn text-gray-700">{policy.period}</span>
+                  <span class={`
+                    px-4 py-2 rounded-full font-bold text-sm
+                    ${policy.color === 'green' ? 'bg-green-100 text-green-700' : ''}
+                    ${policy.color === 'yellow' ? 'bg-yellow-100 text-yellow-700' : ''}
+                    ${policy.color === 'orange' ? 'bg-orange-100 text-orange-700' : ''}
+                    ${policy.color === 'red' ? 'bg-red-100 text-red-700' : ''}
+                  `}>
+                    {policy.refund}{policy.refund !== '不退款' ? '退款' : ''}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
           <!-- Special Cases -->
-          <div class="mt-8 bg-blue-50 rounded-xl p-8" data-animate data-animate-delay="200">
-            <h3 class="text-2xl font-semibold-cn mb-6 text-gray-800">特殊情況</h3>
-            <ul class="space-y-3">
-              <li class="flex items-start gap-3">
-                <iconify-icon icon="heroicons:cloud" class="w-6 h-6 text-blue-600 mt-0.5 flex-shrink-0"></iconify-icon>
-                <span class="text-gray-700">因天然災害（颱風、地震等）導致無法入住，可全額退款</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <iconify-icon icon="heroicons:x-circle" class="w-6 h-6 text-blue-600 mt-0.5 flex-shrink-0"></iconify-icon>
-                <span class="text-gray-700">政府宣布停班停課時，可免費取消</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <iconify-icon icon="heroicons:shield-exclamation" class="w-6 h-6 text-blue-600 mt-0.5 flex-shrink-0"></iconify-icon>
-                <span class="text-gray-700">疫情相關隔離或確診，請提供相關證明文件</span>
-              </li>
-            </ul>
+          <div class="mt-8 bg-blue-50 rounded-2xl p-6" data-animate data-animate-delay="200">
+            <h3 class="text-xl font-semibold-cn mb-4 text-gray-800">特殊情況</h3>
+            <div class="space-y-2 text-gray-700">
+              <p class="flex items-start gap-2">
+                <iconify-icon icon="heroicons:check-circle" class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"></iconify-icon>
+                <span>因天然災害（颱風、地震等）導致無法入住，可全額退款</span>
+              </p>
+              <p class="flex items-start gap-2">
+                <iconify-icon icon="heroicons:check-circle" class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"></iconify-icon>
+                <span>政府宣布停班停課時，可免費取消</span>
+              </p>
+              <p class="flex items-start gap-2">
+                <iconify-icon icon="heroicons:check-circle" class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"></iconify-icon>
+                <span>疫情相關隔離或確診，請提供相關證明文件</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Rules Section -->
+    <!-- House Rules -->
     <section class="py-16 md:py-24 bg-gray-50">
       <div class="container mx-auto px-4">
-        <div class="max-w-7xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full" data-animate>
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800" data-animate>
             住宿規定
-            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
           </h2>
           
           <div class="grid md:grid-cols-2 gap-8">
             <!-- Quiet Hours -->
-            <div class="bg-white rounded-xl shadow-lg p-8" data-animate data-animate-delay="100">
-              <h3 class="text-xl font-semibold-cn mb-6 text-gray-800 flex items-center gap-3">
-                <iconify-icon icon="heroicons:speaker-x-mark" class="w-8 h-8 text-purple-600"></iconify-icon>
-                安靜時間
-              </h3>
-              <ul class="space-y-3 text-gray-700">
-                <li class="flex items-start gap-2">
-                  <span class="text-purple-600 font-bold">•</span>
-                  <span>23:00 - 08:00 請保持安靜</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-purple-600 font-bold">•</span>
-                  <span>避免大聲喧嘩影響其他房客</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-purple-600 font-bold">•</span>
-                  <span>公共區域請輕聲細語</span>
-                </li>
+            <div class="bg-white rounded-2xl shadow-lg p-8" data-animate data-animate-delay="100">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                  <iconify-icon icon="heroicons:speaker-x-mark" class="w-7 h-7 text-purple-600"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-semibold-cn text-gray-800">安靜時間</h3>
+              </div>
+              <ul class="space-y-2">
+                {rules.quiet.map(rule => (
+                  <li class="text-gray-700 flex items-start gap-2">
+                    <span class="text-purple-600 mt-1">•</span>
+                    <span>{rule}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <!-- Prohibited Items -->
-            <div class="bg-white rounded-xl shadow-lg p-8" data-animate data-animate-delay="200">
-              <h3 class="text-xl font-semibold-cn mb-6 text-gray-800 flex items-center gap-3">
-                <iconify-icon icon="heroicons:x-circle" class="w-8 h-8 text-red-600" aria-label="禁止圖標"></iconify-icon>
-                禁止事項
-              </h3>
-              <ul class="space-y-3 text-gray-700">
-                <li class="flex items-start gap-2">
-                  <span class="text-red-600 font-bold">•</span>
-                  <span>全館室內禁止吸菸（包含電子菸）</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-red-600 font-bold">•</span>
-                  <span>禁止攜帶寵物</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-red-600 font-bold">•</span>
-                  <span>禁止烤肉、打麻將</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-red-600 font-bold">•</span>
-                  <span>禁止攜帶榴蓮等氣味強烈食物</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-red-600 font-bold">•</span>
-                  <span>禁止訪客參觀</span>
-                </li>
+            <div class="bg-white rounded-2xl shadow-lg p-8" data-animate data-animate-delay="200">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                  <iconify-icon icon="heroicons:x-circle" class="w-7 h-7 text-red-600"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-semibold-cn text-gray-800">禁止事項</h3>
+              </div>
+              <ul class="space-y-2">
+                {rules.prohibited.map(rule => (
+                  <li class="text-gray-700 flex items-start gap-2">
+                    <span class="text-red-600 mt-1">•</span>
+                    <span>{rule}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            <!-- Guest Limit -->
-            <div class="bg-white rounded-xl shadow-lg p-8" data-animate data-animate-delay="300">
-              <h3 class="text-xl font-semibold-cn mb-6 text-gray-800 flex items-center gap-3">
-                <iconify-icon icon="heroicons:user-group" class="w-8 h-8 text-blue-600" aria-label="人群圖標"></iconify-icon>
-                人數限制與加人政策
-              </h3>
-              <ul class="space-y-3 text-gray-700">
-                <li class="flex items-start gap-2">
-                  <span class="text-blue-600 font-bold">•</span>
-                  <span>嚴格按訂房人數入住</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-blue-600 font-bold">•</span>
-                  <span>0~12歲兒童不佔床：加收500元/晚</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-blue-600 font-bold">•</span>
-                  <span>超過12歲必須加床入住</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-blue-600 font-bold">•</span>
-                  <span>加沙發床：1000元/晚</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-blue-600 font-bold">•</span>
-                  <span>雙人房不提供加床服務</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-blue-600 font-bold">•</span>
-                  <span>其餘房型限加1張床</span>
-                </li>
+            <!-- Guest Policy -->
+            <div class="bg-white rounded-2xl shadow-lg p-8" data-animate data-animate-delay="300">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <iconify-icon icon="heroicons:user-group" class="w-7 h-7 text-blue-600"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-semibold-cn text-gray-800">人數與加床政策</h3>
+              </div>
+              <ul class="space-y-2">
+                {rules.guests.map(rule => (
+                  <li class="text-gray-700 flex items-start gap-2">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span>{rule}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <!-- Safety Rules -->
-            <div class="bg-white rounded-xl shadow-lg p-8" data-animate data-animate-delay="400">
-              <h3 class="text-xl font-semibold-cn mb-6 text-gray-800 flex items-center gap-3">
-                <iconify-icon icon="heroicons:shield-check" class="w-8 h-8 text-green-600" aria-label="安全盾牌圖標"></iconify-icon>
-                安全須知
-              </h3>
-              <ul class="space-y-3 text-gray-700">
-                <li class="flex items-start gap-2">
-                  <span class="text-green-600 font-bold">•</span>
-                  <span>請妥善保管房間鑰匙</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-green-600 font-bold">•</span>
-                  <span>離開房間請鎖好門窗</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-green-600 font-bold">•</span>
-                  <span>貴重物品請自行保管</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-green-600 font-bold">•</span>
-                  <span>緊急情況請立即聯繫櫃檯</span>
-                </li>
+            <div class="bg-white rounded-2xl shadow-lg p-8" data-animate data-animate-delay="400">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                  <iconify-icon icon="heroicons:shield-check" class="w-7 h-7 text-green-600"></iconify-icon>
+                </div>
+                <h3 class="text-xl font-semibold-cn text-gray-800">安全須知</h3>
+              </div>
+              <ul class="space-y-2">
+                {rules.safety.map(rule => (
+                  <li class="text-gray-700 flex items-start gap-2">
+                    <span class="text-green-600 mt-1">•</span>
+                    <span>{rule}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -392,144 +277,76 @@ const pageDescription = '澎湖期遇度假會館訂房須知，詳細住宿規�
       </div>
     </section>
 
-    <!-- Facilities & Services Section -->
+    <!-- Facilities & Services -->
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full" data-animate>
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800" data-animate>
             設施與服務
-            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
           </h2>
           
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Food Service -->
-            <div class="text-center" data-animate data-animate-delay="100">
-              <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <iconify-icon icon="heroicons:cake" class="w-10 h-10 text-orange-600"></iconify-icon>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {facilities.map((facility, index) => (
+              <div class="text-center" data-animate data-animate-delay={`${(index + 1) * 100}`}>
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <iconify-icon icon={facility.icon} class="w-8 h-8 text-primary"></iconify-icon>
+                </div>
+                <h3 class="text-lg font-semibold-cn mb-3 text-gray-800">{facility.title}</h3>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  {facility.items.map(item => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
               </div>
-              <h3 class="text-xl font-semibold-cn mb-3 text-gray-800">餐飲服務</h3>
-              <ul class="text-gray-700 space-y-2">
-                <li>提供中式早餐（8:30-10:00）</li>
-                <li>可提前準備外帶早餐</li>
-                <li>公共區域有飲水機</li>
-              </ul>
-            </div>
-
-            <!-- Recreation -->
-            <div class="text-center" data-animate data-animate-delay="200">
-              <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <iconify-icon icon="heroicons:sparkles" class="w-10 h-10 text-blue-600"></iconify-icon>
-              </div>
-              <h3 class="text-xl font-semibold-cn mb-3 text-gray-800">休閒設施</h3>
-              <ul class="text-gray-700 space-y-2">
-                <li>頂樓戲水池（3m×6m）</li>
-                <li>100吋大螢幕影視設備</li>
-                <li>公共休憩區域</li>
-              </ul>
-            </div>
-
-            <!-- Transportation -->
-            <div class="text-center" data-animate data-animate-delay="300">
-              <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <iconify-icon icon="heroicons:truck" class="w-10 h-10 text-green-600"></iconify-icon>
-              </div>
-              <h3 class="text-xl font-semibold-cn mb-3 text-gray-800">交通服務</h3>
-              <ul class="text-gray-700 space-y-2">
-                <li>免費停車位</li>
-                <li>機車租賃資訊提供</li>
-                <li>景點交通諮詢</li>
-              </ul>
-            </div>
-
-            <!-- Other Services -->
-            <div class="text-center" data-animate data-animate-delay="400">
-              <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <iconify-icon icon="heroicons:hand-raised" class="w-10 h-10 text-purple-600"></iconify-icon>
-              </div>
-              <h3 class="text-xl font-semibold-cn mb-3 text-gray-800">其他服務</h3>
-              <ul class="text-gray-700 space-y-2">
-                <li>行李寄存服務</li>
-                <li>旅遊諮詢與建議</li>
-                <li>代訂行程服務</li>
-              </ul>
-            </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="py-16 md:py-24 bg-gray-50">
+    <!-- Payment & Contact CTA -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-primary to-secondary">
       <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full" data-animate>
-            聯絡資訊
-            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+        <div class="max-w-4xl mx-auto text-center" data-animate>
+          <h2 class="text-3xl md:text-4xl font-display text-white mb-6">
+            準備好您的假期了嗎？
           </h2>
+          <p class="text-xl text-white/90 mb-10">
+            了解完整訂房須知，現在就開始規劃您的澎湖之旅
+          </p>
           
-          <div class="grid md:grid-cols-3 gap-6">
-            <!-- LINE -->
-            <div class="bg-white rounded-xl shadow-lg p-8 text-center" data-animate data-animate-delay="100">
-              <div class="w-16 h-16 bg-line rounded-full flex items-center justify-center mx-auto mb-4">
-                <iconify-icon icon="simple-icons:line" class="w-10 h-10 text-white"></iconify-icon>
-              </div>
-              <h3 class="text-xl font-semibold-cn mb-2 text-gray-800">Line 官方帳號</h3>
-              <p class="text-2xl font-bold text-primary mb-1">@kiwivilla</p>
-              <p class="text-gray-600">線上客服</p>
-            </div>
-
-            <!-- WeChat -->
-            <div class="bg-white rounded-xl shadow-lg p-8 text-center" data-animate data-animate-delay="200">
-              <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <iconify-icon icon="simple-icons:wechat" class="w-10 h-10 text-white"></iconify-icon>
-              </div>
-              <h3 class="text-xl font-semibold-cn mb-2 text-gray-800">WeChat</h3>
-              <p class="text-2xl font-bold text-primary mb-1">rickywang4159</p>
-              <p class="text-gray-600">線上客服</p>
-            </div>
-
-            <!-- Phone -->
-            <div class="bg-white rounded-xl shadow-lg p-8 text-center" data-animate data-animate-delay="300">
-              <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <iconify-icon icon="heroicons:phone" class="w-10 h-10 text-white"></iconify-icon>
-              </div>
-              <h3 class="text-xl font-semibold-cn mb-2 text-gray-800">電話</h3>
-              <p class="text-2xl font-bold text-primary mb-1">0933-636-373</p>
-              <p class="text-gray-600">緊急聯繫專線</p>
-            </div>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="https://booking.owlting.com/kiwi-villa" 
+              class="inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-full font-medium-cn text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              target="_blank"
+            >
+              <iconify-icon icon="heroicons:calendar" class="w-6 h-6"></iconify-icon>
+              <span>立即訂房</span>
+            </a>
+            
+            <a 
+              href="/faq" 
+              class="inline-flex items-center justify-center gap-3 bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 px-8 py-4 rounded-full font-medium-cn text-lg hover:bg-white/30 transform hover:scale-105 transition-all duration-300"
+            >
+              <iconify-icon icon="heroicons:question-mark-circle" class="w-6 h-6"></iconify-icon>
+              <span>常見問題</span>
+            </a>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Agreement Section -->
-    <section class="py-16 md:py-24 bg-gradient-to-br from-gray-800 to-gray-900">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto" data-animate>
-          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 text-center border border-white/20">
-            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-6">住宿協議</h2>
-            <p class="text-lg text-white mb-4 leading-relaxed">
-              完成訂房手續即表示您已詳細閱讀並同意遵守以上所有規定。期遇度假會館保留最終解釋權，並有權要求違反規定的房客立即離開。
-            </p>
-            <p class="text-xl text-white font-light-cn mb-10">
-              感謝您選擇期遇度假會館，我們將竭誠為您提供最優質的住宿體驗！
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="https://booking.owlting.com/kiwi-villa" 
-                class="group inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-full font-medium-cn text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-                target="_blank"
-              >
-                <iconify-icon icon="heroicons:check" class="w-6 h-6" />
-                <span>我同意並開始訂房</span>
-              </a>
-              <a 
-                href="/faq" 
-                class="group inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 px-8 py-4 rounded-full font-medium-cn text-lg hover:bg-white/20 transform hover:scale-105 transition-all duration-300"
-              >
-                <iconify-icon icon="heroicons:question-mark-circle" class="w-6 h-6" />
-                <span>查看常見問題</span>
-              </a>
+          <!-- Quick Contact -->
+          <div class="mt-12 flex flex-wrap justify-center gap-6 text-white">
+            <div class="flex items-center gap-2">
+              <iconify-icon icon="simple-icons:line" class="w-6 h-6"></iconify-icon>
+              <span class="font-medium-cn">@kiwivilla</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <iconify-icon icon="heroicons:phone" class="w-6 h-6"></iconify-icon>
+              <span class="font-medium-cn">0933-636-373</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <iconify-icon icon="simple-icons:wechat" class="w-6 h-6"></iconify-icon>
+              <span class="font-medium-cn">rickywang4159</span>
             </div>
           </div>
         </div>
