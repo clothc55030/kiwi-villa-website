@@ -507,7 +507,10 @@ if ('IntersectionObserver' in window) {
 
 // Error handling
 window.addEventListener('error', function(e) {
-    console.error('JavaScript error:', e.error);
+    // 只在開發環境中顯示錯誤
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.error('JavaScript error:', e.error);
+    }
     
     // Optional: Send error to analytics or logging service
     // analytics.track('JavaScript Error', { message: e.message, filename: e.filename, lineno: e.lineno });
@@ -846,7 +849,10 @@ if ('serviceWorker' in navigator) {
                 }
             })
             .catch(function(error) {
-                console.error('❌ Service Worker 註冊失敗:', error);
+                // 只在開發環境中顯示錯誤
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.error('❌ Service Worker 註冊失敗:', error);
+                }
             });
     });
 }

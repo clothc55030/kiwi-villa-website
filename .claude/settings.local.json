@@ -24,7 +24,9 @@
       "Bash(for file in location.html reviews.html faq.html)",
       "WebFetch(domain:docs.anthropic.com)",
       "Bash(pnpm dev:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "Bash(pnpm add:*)",
+      "Bash(npm run dev:*)"
     ],
     "deny": []
   }

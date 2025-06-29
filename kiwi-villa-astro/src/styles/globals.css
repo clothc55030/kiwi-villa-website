@@ -114,6 +114,24 @@
 
 /* 自定義工具類別 */
 @layer utilities {
+  /* 焦點樣式 - 無障礙性增強 */
+  *:focus-visible {
+    @apply ring-2 ring-primary ring-offset-2 outline-none;
+  }
+  
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply ring-2 ring-primary ring-offset-2 outline-none transition-all duration-200;
+  }
+  
+  /* 暗色背景上的焦點樣式 */
+  .dark-bg *:focus-visible {
+    @apply ring-2 ring-white ring-offset-2 ring-offset-transparent;
+  }
+  
   .bg-radial-gradient {
     background: radial-gradient(circle at center, var(--tw-gradient-stops));
   }
@@ -198,6 +216,47 @@
   
   .animate-delay-400 {
     animation-delay: 0.4s;
+  }
+  
+  /* 動畫性能優化 - will-change */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .will-change-auto {
+    will-change: auto;
+  }
+  
+  /* 背景漸層優化 */
+  .bg-gradient-morandi {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 25%, var(--color-secondary-light) 50%, var(--color-secondary) 75%, var(--color-secondary-dark) 100%);
+    background-size: 400% 400%;
+  }
+  
+  /* 懶加載狀態 */
+  .lazy-img {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .lazy-img.loaded {
+    opacity: 1;
+  }
+  
+  /* 圖片占位符效果 */
+  .img-placeholder {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 }
 

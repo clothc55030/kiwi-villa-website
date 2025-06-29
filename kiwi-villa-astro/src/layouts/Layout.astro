@@ -2,22 +2,18 @@
 import '../styles/globals.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import type { LayoutProps } from '../components/types';
 
-export interface Props {
-	title: string;
-	description: string;
-	ogImage?: string;
-	canonicalUrl?: string;
-	structuredData?: object;
-}
+export type Props = LayoutProps;
 
 const { 
 	title = '澎湖期遇度假會館 - 澎湖民宿推薦 | 三面環海歐風建築度假首選',
 	description = '澎湖期遇度假會館，座落於三面環海半島，融合歐洲巴洛克古典建築美學。在陽光海洋微風星光中，開啟您的期遇之旅，體驗潮流與經典融合的海島度假時光。',
 	ogImage = 'https://www.kiwi-villa.com/assets/og-image.webp',
 	canonicalUrl = 'https://www.kiwi-villa.com/',
-	structuredData
-} = Astro.props;
+	structuredData,
+	keywords = '澎湖民宿推薦,澎湖期遇度假會館,澎湖住宿,三面環海,歐洲巴洛克建築,澎湖旅遊,海島度假,澎湖民宿'
+} = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
@@ -27,7 +23,7 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta name="keywords" content="澎湖民宿推薦,澎湖期遇度假會館,澎湖住宿,三面環海,歐洲巴洛克建築,澎湖旅遊,海島度假,澎湖民宿" />
+		<meta name="keywords" content={keywords} />
 		
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website">
@@ -90,6 +86,11 @@ const {
 			/* 最小化的關鍵 CSS - 其餘樣式已在 globals.css 中定義 */
 			:root {
 				--color-primary: #7c9bb5;
+				--color-primary-light: #9bb0c4;
+				--color-secondary: #a8b8c8;
+				--color-secondary-light: #b8c7d6;
+				--color-secondary-dark: #8fa3b3;
+				--color-accent: #9bb0c4;
 				--color-text-primary: #4a453f;
 				--color-bg-primary: #ffffff;
 			}
@@ -103,6 +104,21 @@ const {
 			body.loaded {
 				opacity: 1;
 			}
+			
+			/* 首屏關鍵樣式 - Hero Section */
+			.min-h-\[70vh\] { min-height: 70vh; }
+			.min-h-\[80vh\] { min-height: 80vh; }
+			.animate-gradient-shift {
+				background-size: 400% 400%;
+				animation: gradientShift 8s ease-in-out infinite;
+			}
+			@keyframes gradientShift {
+				0% { background-position: 0% 50%; }
+				50% { background-position: 100% 50%; }
+				100% { background-position: 0% 50%; }
+			}
+			.text-shadow-sm { text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8); }
+			.text-shadow-md { text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8); }
 		</style>
 		
 		<script>
@@ -128,6 +144,16 @@ const {
 		<meta name="color-scheme" content="light" />
 
 		<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+		
+		<!-- 錯誤處理初始化 -->
+		<script>
+			import('../utils/error-handler.ts').then(({ errorHandler }) => {
+				// 錯誤處理器已自動初始化
+				console.log('錯誤處理器已啟動');
+			}).catch(err => {
+				console.error('錯誤處理器載入失敗:', err);
+			});
+		</script>
 	</head>
 	<body class="font-sans">
 		<Header />
@@ -135,6 +161,34 @@ const {
 			<slot />
 		</main>
 		<Footer />
+		
+		<!-- Service Worker 註冊 -->
+		<script>
+			if ('serviceWorker' in navigator && !import.meta.env.DEV) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('/sw.js')
+						.then((registration) => {
+							console.log('Service Worker 註冊成功:', registration.scope);
+							
+							// 檢查更新
+							registration.addEventListener('updatefound', () => {
+								const newWorker = registration.installing;
+								if (newWorker) {
+									newWorker.addEventListener('statechange', () => {
+										if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+											// 新版本可用，可以提示用戶刷新
+											console.log('新版本 Service Worker 已安裝');
+										}
+									});
+								}
+							});
+						})
+						.catch((error) => {
+							console.error('Service Worker 註冊失敗:', error);
+						});
+				});
+			}
+		</script>
 		
 		<!-- 延遲載入非關鍵腳本 -->
 		{import.meta.env.DEV && (
