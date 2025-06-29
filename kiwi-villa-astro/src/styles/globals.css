@@ -92,12 +92,11 @@
 
 /* 動畫定義 */
 @keyframes gradientShift {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 0%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 100%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* 效能優化：減少動畫 */
@@ -184,6 +183,21 @@
   
   .tracking-wide-cn {
     letter-spacing: 0.1em;
+  }
+  
+  /* 漸變動畫 */
+  .animate-gradient-shift {
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease-in-out infinite;
+  }
+  
+  /* 動畫延遲工具類別 */
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  .animate-delay-400 {
+    animation-delay: 0.4s;
   }
 }
 

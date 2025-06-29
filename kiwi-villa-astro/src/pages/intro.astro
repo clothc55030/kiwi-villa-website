@@ -1,0 +1,383 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = '細說期遇 - 澎湖期遇度假會館 | 歐式典雅設計與頂級設備的完美融合';
+const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背後的設計理念與品質堅持。從歐式典雅裝潢到頂級設備規格，每個細節都體現對品質的極致追求。';
+---
+
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  ogImage="https://www.kiwi-villa.com/images/intro/intro-og.webp"
+  keywords="澎湖期遇度假會館,細說期遇,民宿設計理念,歐式典雅裝潢,頂級設備,大金冷氣,TOTO衛浴,法國Mimare"
+>
+  <!-- Hero Section -->
+  <section class="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden animate-gradient-shift" style="background: linear-gradient(135deg, #7c9bb5 0%, #9bb0c4 25%, #b8c7d6 50%, #a8b8c8 75%, #8fa3b3 100%); background-size: 400% 400%;">
+    <!-- Content -->
+    <div class="relative z-10 text-center text-white max-w-[600px] px-4 md:px-6 animate-fade-in-up">
+      <h1 class="font-display text-[clamp(2.5rem,5vw,4rem)] font-semibold mb-4 text-shadow-md" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
+        細說期遇
+      </h1>
+      <p class="text-[clamp(1.125rem,2.5vw,1.5rem)] font-light opacity-90 mb-6" style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);">
+        澎湖最優質民宿
+      </p>
+      <div class="max-w-[600px] mx-auto">
+        <p class="text-[1.1rem] mb-2 opacity-[0.85]" style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);">
+          民宿主人鎖定旅客對當下經濟形勢的旅遊住宿訴求
+        </p>
+        <p class="text-[1.1rem] opacity-[0.85]" style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);">
+          打造出滿足旅客個性化、品質化、社交化等多方面的民宿
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Vision Section -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto" data-animate>
+          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full">
+            設計理念
+            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+          </h2>
+          <div class="space-y-6 text-gray-700">
+            <p class="text-lg leading-relaxed">
+              同時選擇毗鄰市區靠近大海的核心地區，塑造民宿新風向。期遇度假會館在內部動線設計理念上注重：<strong class="text-primary font-medium-cn">舒適、優質、寬敞、典雅</strong>，不追求過多客房，確保住宿品質。
+            </p>
+            <p class="text-lg leading-relaxed">
+              會館尤其注重營造旅客入住時的方便性，不僅實際考慮到旅客的切身需要，還提供多元互動休閒開放空間。
+            </p>
+            <p class="text-lg leading-relaxed">
+              同時會館大廳公共空間輕鬆容納30人，可實現多功能轉換，有效提供空間的利用性，實現一個多功能全方位實用性的大廳。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Environment Gallery Section -->
+    <section class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-gray-800 relative inline-block w-full" data-animate>
+            期遇環境
+            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+          </h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="group" data-animate data-animate-delay="100">
+              <div class="relative overflow-hidden rounded-lg shadow-lg">
+                <picture>
+                  <source srcset="/images/intro/lobby.webp" type="image/webp">
+                  <img 
+                    src="/images/intro/lobby.webp" 
+                    alt="期遇環境圖-大廳" 
+                    loading="lazy"
+                    class="w-full h-auto aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-110"
+                  >
+                </picture>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <h3 class="text-xl font-medium-cn text-center mt-4 text-gray-800">
+                期遇環境圖-大廳
+              </h3>
+            </div>
+            
+            <div class="group" data-animate data-animate-delay="200">
+              <div class="relative overflow-hidden rounded-lg shadow-lg">
+                <picture>
+                  <source srcset="/images/intro/restaurant.webp" type="image/webp">
+                  <img 
+                    src="/images/intro/restaurant.webp" 
+                    alt="期遇環境圖-餐廳" 
+                    loading="lazy"
+                    class="w-full h-auto aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-110"
+                  >
+                </picture>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <h3 class="text-xl font-medium-cn text-center mt-4 text-gray-800">
+                期遇環境圖-餐廳
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Design Excellence Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-[#a8b8c8] to-[#b8c7d6] text-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center" data-animate>
+          <h2 class="text-3xl md:text-4xl font-display mb-8 text-white relative">
+            典雅設計高品質享受
+            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-white/60 rounded-full"></span>
+          </h2>
+          <p class="text-lg leading-relaxed text-white/90 mt-8">
+            為了將不屬於海島的典雅歐風，民宿特別請著名設計師親自操刀。其中大廳的燈塔以及一大片的海洋沙灘壁畫，再奢華中一點也不違和，定制的實木家具、大理石桌面以及玫瑰金五金件更顯奢華。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto space-y-12">
+          <!-- Luxury Bed (Highlighted) -->
+          <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl overflow-hidden border-2 border-primary/20 md:grid md:grid-cols-2 md:gap-0" data-animate data-animate-delay="100">
+            <div class="aspect-[4/3] md:aspect-auto overflow-hidden">
+              <picture>
+                <source srcset="/images/intro/bed.webp" type="image/webp">
+                <img 
+                  src="/images/intro/bed.webp" 
+                  alt="期遇設備圖-床組" 
+                  loading="lazy"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                >
+              </picture>
+            </div>
+            <div class="p-8 md:p-12 flex flex-col justify-center">
+              <h3 class="text-2xl md:text-3xl font-display mb-4 text-primary">奢享床組</h3>
+              <p class="text-gray-700 leading-relaxed text-lg">
+                民宿特別定制國際品質加密加粗獨立袋裝彈簧護背床墊加大雙人床（1.8m×2.0m）規格，盡享舒適。配套定制風格各異奢華床頭背板，讓每間房各有特色，令人享受其中！
+              </p>
+            </div>
+          </div>
+
+          <!-- Other Features Grid -->
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Custom Furniture -->
+            <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" data-animate data-animate-delay="200">
+              <div class="md:grid md:grid-cols-1 lg:grid-cols-2 h-full">
+                <div class="aspect-[4/3] lg:aspect-auto overflow-hidden lg:order-2">
+                  <picture>
+                    <source srcset="/images/intro/furniture.webp" type="image/webp">
+                    <img 
+                      src="/images/intro/furniture.webp" 
+                      alt="期遇家具圖-桌椅" 
+                      loading="lazy"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    >
+                  </picture>
+                </div>
+                <div class="p-6 lg:p-8 flex flex-col justify-center lg:order-1">
+                  <h3 class="text-xl lg:text-2xl font-display mb-3 text-primary">精品定制家具</h3>
+                  <p class="text-gray-700 leading-relaxed">
+                    客房及大廳中的家具，皆從知名大廠中根據室內面積定制，優質工藝切割大理石配優質玫瑰金配件，運用皮革及實木之混搭，彰顯品質。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Elevator & Windows -->
+            <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" data-animate data-animate-delay="300">
+              <div class="md:grid md:grid-cols-1 lg:grid-cols-2 h-full">
+                <div class="aspect-[4/3] lg:aspect-auto overflow-hidden">
+                  <picture>
+                    <source srcset="/images/intro/elevator.webp" type="image/webp">
+                    <img 
+                      src="/images/intro/elevator.webp" 
+                      alt="期遇設備圖-電梯" 
+                      loading="lazy"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    >
+                  </picture>
+                </div>
+                <div class="p-6 lg:p-8 flex flex-col justify-center">
+                  <h3 class="text-xl lg:text-2xl font-display mb-3 text-primary">隔音鋁門窗 + 電梯</h3>
+                  <p class="text-gray-700 leading-relaxed">
+                    特別配置的14cm超寬軌道加上中空雙層玻璃，阻隔海島白天的喧囂以及熱絡，讓旅客享受一夜好眠。舒適八人座豪華電梯，攜帶超大行李也不怕，讓行動不便之旅客人性化進出。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Smart Curtains -->
+            <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 md:col-span-2 lg:col-span-1" data-animate data-animate-delay="400">
+              <div class="md:grid md:grid-cols-1 lg:grid-cols-2 h-full">
+                <div class="aspect-[4/3] lg:aspect-auto overflow-hidden lg:order-2">
+                  <picture>
+                    <source srcset="/images/intro/curtains.webp" type="image/webp">
+                    <img 
+                      src="/images/intro/curtains.webp" 
+                      alt="期遇設備圖-電動窗簾" 
+                      loading="lazy"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    >
+                  </picture>
+                </div>
+                <div class="p-6 lg:p-8 flex flex-col justify-center lg:order-1">
+                  <h3 class="text-xl lg:text-2xl font-display mb-3 text-primary">無敵採光+遙控遮光簾</h3>
+                  <p class="text-gray-700 leading-relaxed">
+                    每間客房都設有陽台，採光非常好。與此同時，配置遮光簾+紗簾，夜晚將遮光簾關上，睡至中午都沒有任何問題！除此之外，清晨起床時，只需要按手邊的窗簾遙控器便能將窗簾打開，可以靜靜的再床上迎接第一縷照進房間的陽光。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Premium Equipment Section -->
+    <section class="relative py-16 md:py-24 bg-gradient-to-br from-primary to-secondary overflow-hidden">
+      <!-- Dark overlay -->
+      <div class="absolute inset-0 bg-black/30"></div>
+      
+      <div class="relative z-10 container mx-auto px-4">
+        <div class="max-w-7xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-display text-center mb-12 text-white relative inline-block w-full text-shadow-lg" data-animate>
+            頂級設備規格
+            <span class="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-20 h-[3px] bg-white/80 rounded-full"></span>
+          </h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Water System -->
+            <div class="text-center group bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/30 hover:bg-black/50 transition-all duration-300 hover:-translate-y-2" data-animate data-animate-delay="100">
+              <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 text-white rounded-full mb-6">
+                <iconify-icon icon="heroicons:beaker" class="w-10 h-10"></iconify-icon>
+              </div>
+              <h3 class="text-xl font-semibold-cn mb-4 text-white text-shadow-sm">全屋淨水軟水系統</h3>
+              <p class="text-white/95 leading-relaxed text-shadow-sm">
+                民宿為了對抗澎湖惡劣的水質，採用五星級飯店等級使用的全屋軟水的淨水方案，搭配全館RO逆滲透飲水，層層防護，保證旅客飲水及用水的質量！
+              </p>
+            </div>
+
+            <!-- AC System -->
+            <div class="text-center group bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/30 hover:bg-black/50 transition-all duration-300 hover:-translate-y-2" data-animate data-animate-delay="200">
+              <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 text-white rounded-full mb-6">
+                <iconify-icon icon="heroicons:sparkles" class="w-10 h-10"></iconify-icon>
+              </div>
+              <h3 class="text-xl font-semibold-cn mb-4 text-white text-shadow-sm">大金冷氣</h3>
+              <p class="text-white/95 leading-relaxed text-shadow-sm">
+                對於澎湖這種炎熱的地方，冷氣是必不可少。全館配置國際優質品牌大金冷氣，為了房間美觀，更是特別採用隱藏式獨立冷氣，保證靜音冷房效能！
+              </p>
+            </div>
+
+            <!-- TOTO -->
+            <div class="text-center group bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/30 hover:bg-black/50 transition-all duration-300 hover:-translate-y-2" data-animate data-animate-delay="300">
+              <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 text-white rounded-full mb-6">
+                <iconify-icon icon="heroicons:home-modern" class="w-10 h-10"></iconify-icon>
+              </div>
+              <h3 class="text-xl font-semibold-cn mb-4 text-white text-shadow-sm">TOTO精品全套衛浴</h3>
+              <p class="text-white/95 leading-relaxed text-shadow-sm">
+                全館使用TOTO優質淋浴龍頭、洗臉臺、浴缸設備，並全配有高配多功能免治馬桶，舒適品質感受的到！
+              </p>
+            </div>
+
+            <!-- Mimare -->
+            <div class="text-center group bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/30 hover:bg-black/50 transition-all duration-300 hover:-translate-y-2" data-animate data-animate-delay="400">
+              <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 text-white rounded-full mb-6">
+                <iconify-icon icon="heroicons:sparkles" class="w-10 h-10"></iconify-icon>
+              </div>
+              <h3 class="text-xl font-semibold-cn mb-4 text-white text-shadow-sm">法國Mimare沐浴用品</h3>
+              <p class="text-white/95 leading-relaxed text-shadow-sm">
+                結束了一天的澎湖之旅，精緻的沐浴能讓人褪去旅途的疲憊，民宿特別採用法國Mimare沐浴用品，它堅持不添加矽靈，臉部肌膚保養等級，保證純天然。
+              </p>
+            </div>
+
+            <!-- Aromatherapy -->
+            <div class="text-center group bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/30 hover:bg-black/50 transition-all duration-300 hover:-translate-y-2" data-animate data-animate-delay="500">
+              <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 text-white rounded-full mb-6">
+                <iconify-icon icon="heroicons:sparkles" class="w-10 h-10"></iconify-icon>
+              </div>
+              <h3 class="text-xl font-semibold-cn mb-4 text-white text-shadow-sm">dōTERRA香氛系統</h3>
+              <p class="text-white/95 leading-relaxed text-shadow-sm">
+                從步入酒店的那一刻，第一時間就能感受到清新的香氣，即使在130平方米的大廳中都能讓人盡享呼吸的舒適，從呼吸的細節感受到民宿主人對細節的把控。
+              </p>
+            </div>
+
+            <!-- Network -->
+            <div class="text-center group bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/30 hover:bg-black/50 transition-all duration-300 hover:-translate-y-2" data-animate data-animate-delay="600">
+              <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 text-white rounded-full mb-6">
+                <iconify-icon icon="heroicons:wifi" class="w-10 h-10"></iconify-icon>
+              </div>
+              <h3 class="text-xl font-semibold-cn mb-4 text-white text-shadow-sm">高速網絡</h3>
+              <p class="text-white/95 leading-relaxed text-shadow-sm">
+                對於需求度最高的網絡，民宿更是配置帶寬500M，并採用美國Ubiquiti Networks公司商用產品，保證民宿內網絡流暢！
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="relative py-24 overflow-hidden">
+      <!-- Animated gradient background -->
+      <div class="absolute inset-0 animate-gradient-shift">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent opacity-90"></div>
+      </div>
+      
+      <!-- Pattern overlay -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+      </div>
+      
+      <!-- Content -->
+      <div class="relative z-10 container mx-auto px-4 text-center">
+        <div class="max-w-3xl mx-auto" data-animate>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-6 text-shadow-lg animate-delay-200">
+            連細節都如此用心的民宿
+          </h2>
+          <p class="text-xl md:text-2xl text-white/90 mb-10 text-shadow-md animate-delay-400">
+            還有什麼理由不來呢！
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="https://booking.owlting.com/kiwi-villa" 
+              class="group inline-flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 rounded-full font-medium-cn text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              target="_blank"
+            >
+              <iconify-icon icon="heroicons:calendar" class="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+              <span>即刻預訂</span>
+            </a>
+            <a 
+              href="/rooms" 
+              class="group inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 px-8 py-4 rounded-full font-medium-cn text-lg hover:bg-white/20 transform hover:scale-105 transition-all duration-300"
+            >
+              <iconify-icon icon="heroicons:eye" class="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+              <span>查看房型</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scroll-triggered animations -->
+  <script>
+    import { animate } from 'motion';
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const delay = target.dataset.animateDelay || 0;
+          
+          setTimeout(() => {
+            animate(target, 
+              { opacity: [0, 1], y: [30, 0] },
+              { duration: 0.8, easing: 'ease-out' }
+            );
+          }, parseInt(delay));
+          
+          observer.unobserve(target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with data-animate
+    document.querySelectorAll('[data-animate]').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+  </script>
+</Layout>

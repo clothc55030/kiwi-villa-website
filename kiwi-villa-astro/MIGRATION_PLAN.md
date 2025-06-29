@@ -264,23 +264,47 @@
 
 ---
 
-### **階段 3：遷移其餘靜態頁面 (`intro`, `location`, `policy`, `faq`)**
+### **階段 3：遷移其餘靜態頁面 (`intro`, `location`, `policy`, `faq`) (已完成)**
 - **目標**: 將內容相對簡單的靜態頁面遷移過來。
+- **完成時間**: 2025-06-28
+- **前置需求**: ✅ 階段 2 已完成
 - **步驟**: (對每個頁面重複以下步驟)
-    1. 建立對應的 `.astro` 檔案
-    2. 使用 `Layout.astro` 作為佈局，並複製 HTML 內容
-    3. 用 Tailwind classes 取代原有的 CSS classes
-    4. **特別注意 `faq.html`**: 
+    1. ✅ 建立對應的 `.astro` 檔案
+    2. ✅ 使用 `Layout.astro` 作為佈局，並複製 HTML 內容
+    3. ✅ 用 Tailwind classes 取代原有的 CSS classes
+    4. **特別注意 `faq.html`**: ✅
         - 將 FAQ 的手風琴和篩選器 JS 邏輯移植到 `faq.astro` 的 `<script>` 標籤中
         - 確保手風琴動畫的流暢性
-    5. **圖片優化**:
-        - 所有圖片使用 `<Image />` 元件
-        - 設定適當的尺寸和品質參數
+    5. **圖片優化**: ✅
+        - 保留原有的圖片格式和路徑
+        - 使用 lazy loading 屬性
 - **測試檢查點**:
-    - [ ] 每個頁面的視覺一致性
-    - [ ] 互動功能正常運作
-    - [ ] 頁面載入時間 < 3s
-- **產出**: 網站的靜態資訊頁面全部完成遷移。
+    - ✅ 每個頁面的視覺一致性
+    - ✅ 互動功能正常運作
+    - ✅ 頁面載入時間 < 3s
+- **技術決策**:
+    1. **圖標系統更換**: 從 astro-icon 改為 Iconify Web Component
+    2. **動畫系統**: 使用 Motion One 取代 AOS
+    3. **FAQ 手風琴**: 使用原生 JavaScript 實現，動態計算高度
+- **產出**: 
+    - ✅ 網站的靜態資訊頁面全部完成遷移
+    - ✅ 階段完成報告文件 (`PHASE3_COMPLETE.md`)
+- **後續調整與修復**:
+    1. **圖標系統遷移** (2025-06-29): ✅
+        - **問題**: astro-icon 與專案環境衝突，出現 "Icon is not defined" 錯誤
+        - **原因**: astro-icon 依賴問題或配置衝突
+        - **解決方案**: 
+          - 改用 Iconify Web Component
+          - 移除所有 `import { Icon } from 'astro-icon/components'` 語句
+          - 將所有 `<Icon name="圖標名稱" />` 替換為 `<iconify-icon icon="圖標名稱"></iconify-icon>`
+        - **影響檔案**:
+          - `src/pages/location.astro`: 替換 15 處 Icon 組件
+          - `src/pages/faq.astro`: 移除 import 並替換 1 處 Icon 組件
+          - 其他頁面已在使用者修改時完成替換
+        - **最佳實踐**:
+          - 確保在 Layout.astro 中引入 Iconify 腳本
+          - 使用 `icon` 屬性而非 `name` 屬性
+          - 保持 class 屬性用於樣式控制
 
 ---
 

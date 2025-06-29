@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from "@astrojs/sitemap";
-import icon from "astro-icon";
 import partytown from "@astrojs/partytown";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -10,14 +9,6 @@ export default defineConfig({
   site: 'https://www.kiwi-villa.com', // Necessary for sitemap
   integrations: [
     sitemap(),
-    icon({
-      include: {
-        // HeroIcons for UI
-        heroicons: ["*"],
-        // Simple Icons for brand logos
-        "simple-icons": ["*"]
-      }
-    }),
     partytown()
   ],
   build: {

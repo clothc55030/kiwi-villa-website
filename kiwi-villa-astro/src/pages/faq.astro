@@ -1,0 +1,383 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = '常見問題 - 澎湖期遇度假會館 | 專業解答您的疑問';
+const pageDescription = '澎湖期遇度假會館常見問題解答，包含房價說明、設施服務、訂房須知等詳細資訊，為您的澎湖之旅提供完整指引。';
+
+// FAQ 資料
+const faqs = [
+  {
+    id: 'price',
+    question: '為什麼我們房價比周圍的都貴？',
+    answer: {
+      intro: '簡單來說：我們的建造成本、早餐成本、備品成本、布草成本都比別人高，也可以自信的說比別人好！',
+      details: '詳細來講：',
+      list: [
+        '建材用料：民宿本身主體結構、建材、油漆用料這些看不到的東西，都用料實在',
+        '裝潢設計：雖然不像網美民宿如此浮誇，但是整體風格一致，細節豐滿',
+        '早餐品質：請參考各大平台旅客們的評價',
+        '床組用品：床單被單皆採用 100 支全棉製品，極致的親膚感（我們沒有賣，可自行查詢相關規格採購）'
+      ],
+      conclusion: '我們明碼標價，需要任何照片皆可跟小編索取，若是價格不合適，真的不勉強訂房！'
+    }
+  },
+  {
+    id: 'sea-view',
+    question: '民宿有海景嗎？',
+    answer: {
+      intro: '民宿每一間都沒有海景，但是都有落地窗跟獨立陽台。'
+    }
+  },
+  {
+    id: 'whole-house',
+    question: '民宿可以包棟嗎？',
+    answer: {
+      intro: '我們並非專營包棟民宿，主人都是自住裡面的，請加 LINE 詢問包棟規定，如果能接受是可以包全部房間的。',
+      details: '注意事項：',
+      list: [
+        '民宿比較大間，一共可以住 25 位',
+        '不適合 15 位以下的包棟'
+      ]
+    }
+  },
+  {
+    id: 'bbq-mahjong',
+    question: '民宿可以烤肉、打麻將嗎？',
+    answer: {
+      sections: [
+        {
+          title: '關於麻將：',
+          list: [
+            '我們不提供麻將桌以及麻將',
+            '民宿桌子為大理石板，若是要自帶麻將請維護桌面，避免損毀'
+          ]
+        },
+        {
+          title: '關於烤肉：',
+          list: [
+            '即使包棟也不能烤肉！',
+            '真的想吃烤肉，我們可以請外燴業者上門為您服務（可私訊我們了解詳情）'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'facilities',
+    question: '民宿有提供什麼設施嗎？',
+    answer: {
+      sections: [
+        {
+          title: '住宿設施：',
+          list: [
+            '舒服的大床',
+            '好睡的棉被',
+            '全採用 TOTO 的衛浴設備及免治馬桶'
+          ]
+        },
+        {
+          title: '館內設施：',
+          list: [
+            '電梯（方便攜帶行李）',
+            '一樓舒適的公共空間',
+            '100 吋大熒幕影視設備',
+            '頂樓戲水池（3m × 6m）'
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 'breakfast',
+    question: '民宿提供的早餐是什麼樣的？',
+    answer: {
+      sections: [
+        {
+          title: '早餐規格：',
+          list: [
+            '一人一份中式早餐',
+            '用餐時間：8:30-10:00'
+          ]
+        },
+        {
+          title: '特殊需求：',
+          text: '若是要配合出海行程提前用餐，請提前一天 21:00 前通知，我們會為您提早準備可外帶的早餐。'
+        }
+      ]
+    }
+  },
+  {
+    id: 'booking-services',
+    question: '民宿可以代訂機票、船票、包套行程嗎？',
+    answer: {
+      sections: [
+        {
+          title: '機票服務：',
+          list: [
+            '人數不多的情況下，建議自行到華信、立榮官網訂票，後續若有需要退改會比較方便',
+            '團體的部分，我們有配合的旅行社可以協助處理'
+          ]
+        },
+        {
+          title: '行程規劃：',
+          list: [
+            '旅客在完成訂房後，我們會提供詳細行程咨詢',
+            '全程有任何問題皆可詢問',
+            '若需要協助安排，會提前詢問您們的需求，然後幫您介紹並規劃好行程',
+            '如果滿意再幫您跟行程的業者下訂'
+          ]
+        },
+        {
+          title: '船票服務：',
+          text: '有配合旅行社代訂船票，需要請加 LINE 咨詢。'
+        }
+      ]
+    }
+  },
+  {
+    id: 'special-offer',
+    question: '有什麼特別優惠嗎？',
+    answer: {
+      sections: [
+        {
+          title: '特別優惠：',
+          text: '若您確實有閱讀完民宿相關規定，並以匯訂金方式訂房者，請聯繫訂房小編，會給您額外優惠（僅限匯款前告知）。'
+        }
+      ]
+    }
+  },
+  {
+    id: 'transportation',
+    question: '澎湖適合開汽車還是騎機車呢？',
+    answer: {
+      sections: [
+        {
+          title: '機車優點：',
+          list: [
+            '費用較低',
+            '一群人出遊可以不需要集體行動'
+          ]
+        },
+        {
+          title: '汽車優點：',
+          list: [
+            '比較涼快，不會被曬',
+            '除了花火施放時間市區不好停車外，其餘景點都很好停車'
+          ]
+        }
+      ],
+      conclusion: '請自行考慮選擇最適合您的交通方式。'
+    }
+  }
+];
+---
+
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  ogImage="https://www.kiwi-villa.com/images/faq/faq-og.webp"
+  keywords="澎湖期遇度假會館,常見問題,FAQ,訂房須知,民宿設施,房價說明,澎湖民宿,旅遊諮詢"
+>
+  <!-- Hero Section -->
+  <section class="relative h-[50vh] min-h-[400px] flex items-center justify-center bg-gradient-to-br from-primary via-secondary to-accent overflow-hidden">
+    <!-- Animated background pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+    
+    <!-- Content -->
+    <div class="relative z-10 text-center text-white px-4 animate-fade-in-up">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 text-shadow-lg">
+        常見問題
+      </h1>
+      <p class="text-xl md:text-2xl text-shadow-md font-light-cn mb-6">
+        專業解答您的疑問
+      </p>
+      <div class="max-w-2xl mx-auto">
+        <p class="text-base md:text-lg text-white/90 text-shadow-sm">我們深知每位旅客心中的疑慮與期待</p>
+        <p class="text-base md:text-lg text-white/90 text-shadow-sm">用最真誠的回答，為您的澎湖旅程保駕護航</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="py-16 md:py-24 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <!-- FAQ Items -->
+        <div class="space-y-4" id="faq-container">
+          {faqs.map((faq, index) => (
+            <div 
+              class="faq-item bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" 
+              data-animate 
+              data-animate-delay={`${(index + 1) * 100}`}
+            >
+              <button 
+                class="faq-button w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors duration-200 group"
+                aria-expanded="false"
+                aria-controls={`answer-${faq.id}`}
+              >
+                <span class="text-lg font-medium-cn text-gray-800 pr-4">{faq.question}</span>
+                <iconify-icon 
+                  icon="heroicons:chevron-down" 
+                  class="faq-icon w-5 h-5 text-primary flex-shrink-0 transform transition-transform duration-300 group-hover:text-secondary" 
+                ></iconify-icon>
+              </button>
+              <div 
+                id={`answer-${faq.id}`}
+                class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+              >
+                <div class="px-6 pb-5 pt-2 bg-gray-50 border-t border-gray-200">
+                  <div class="text-gray-700 leading-relaxed space-y-4">
+                    {faq.answer.intro && (
+                      <p><strong>{faq.answer.intro}</strong></p>
+                    )}
+                    
+                    {faq.answer.details && (
+                      <p><strong>{faq.answer.details}</strong></p>
+                    )}
+                    
+                    {faq.answer.list && (
+                      <ul class="space-y-2 ml-6">
+                        {faq.answer.list.map(item => (
+                          <li class="flex items-start gap-2">
+                            <span class="text-primary mt-1">•</span>
+                            <span><strong>{item.split('：')[0]}：</strong>{item.split('：')[1]}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    
+                    {faq.answer.sections && faq.answer.sections.map(section => (
+                      <div>
+                        {section.title && <p><strong>{section.title}</strong></p>}
+                        {section.list && (
+                          <ul class="space-y-2 ml-6 mt-2">
+                            {section.list.map(item => (
+                              <li class="flex items-start gap-2">
+                                <span class="text-primary mt-1">•</span>
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {section.text && <p class="mt-2">{section.text}</p>}
+                      </div>
+                    ))}
+                    
+                    {faq.answer.conclusion && (
+                      <p class="mt-4">{faq.answer.conclusion}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- CTA Section -->
+        <section class="mt-20 relative rounded-2xl overflow-hidden" data-animate>
+          <!-- Gradient background -->
+          <div class="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent"></div>
+          
+          <!-- Pattern overlay -->
+          <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+          </div>
+          
+          <!-- Content -->
+          <div class="relative z-10 p-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4 text-shadow-lg">
+              還有其他問題嗎？
+            </h2>
+            <p class="text-lg md:text-xl text-white/90 mb-8 text-shadow-md">
+              歡迎隨時聯繫我們，讓我們為您的澎湖之旅提供專業建議
+            </p>
+            <div class="mt-8">
+              <a href="https://page.line.me/ucz4004x" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors">
+                <iconify-icon icon="simple-icons:line" class="w-6 h-6"></iconify-icon>
+                <span class="ml-2">透過 LINE 聯絡我們</span>
+              </a>
+              <a href="https://booking.owlting.com/kiwi-villa" target="_blank" rel="noopener noreferrer" class="ml-4 inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
+                <iconify-icon icon="heroicons:calendar" class="w-6 h-6"></iconify-icon>
+                <span class="ml-2">線上訂房</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Accordion functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqButtons = document.querySelectorAll('.faq-button');
+      
+      faqButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const faqItem = button.parentElement;
+          const answer = faqItem.querySelector('.faq-answer');
+          const icon = button.querySelector('.faq-icon');
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          
+          // Toggle current item
+          if (isExpanded) {
+            button.setAttribute('aria-expanded', 'false');
+            answer.style.maxHeight = '0';
+            icon.classList.remove('rotate-180');
+            button.classList.remove('bg-primary', 'text-white');
+          } else {
+            // Close all other items
+            faqButtons.forEach(otherButton => {
+              const otherAnswer = otherButton.parentElement.querySelector('.faq-answer');
+              const otherIcon = otherButton.querySelector('.faq-icon');
+              otherButton.setAttribute('aria-expanded', 'false');
+              otherAnswer.style.maxHeight = '0';
+              otherIcon.classList.remove('rotate-180');
+              otherButton.classList.remove('bg-primary', 'text-white');
+            });
+            
+            // Open current item
+            button.setAttribute('aria-expanded', 'true');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            icon.classList.add('rotate-180');
+            button.classList.add('bg-primary', 'text-white');
+          }
+        });
+      });
+    });
+
+    // Scroll animations
+    import { animate } from 'motion';
+    
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const delay = target.dataset.animateDelay || 0;
+          
+          setTimeout(() => {
+            animate(target, 
+              { opacity: [0, 1], y: [30, 0] },
+              { duration: 0.6, easing: 'ease-out' }
+            );
+          }, parseInt(delay));
+          
+          observer.unobserve(target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with data-animate
+    document.querySelectorAll('[data-animate]').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+  </script>
+</Layout>

@@ -112,9 +112,13 @@ const {
 			});
 		</script>
 		
-		<!-- 預載入關鍵資源 - 預載入 AVIF 格式（瀏覽器優先使用的格式） -->
-		<link rel="preload" as="image" href="/images/hero/main-hall-environment-mobile-extreme.avif" type="image/avif" media="(max-width: 768px)" />
-		<link rel="preload" as="image" href="/images/hero/main-hall-environment-new.avif" type="image/avif" media="(min-width: 769px)" />
+		<!-- 預載入關鍵資源 - 只在首頁預載入 hero 圖片 -->
+		{Astro.url.pathname === '/' && (
+			<>
+				<link rel="preload" as="image" href="/images/hero/main-hall-environment-mobile-extreme.avif" type="image/avif" media="(max-width: 768px)" />
+				<link rel="preload" as="image" href="/images/hero/main-hall-environment-new.avif" type="image/avif" media="(min-width: 769px)" />
+			</>
+		)}
 		
 		<!-- DNS 預取 -->
 		<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
@@ -122,6 +126,8 @@ const {
 		<!-- 資源提示 -->
 		<meta name="theme-color" content="#7c9bb5" />
 		<meta name="color-scheme" content="light" />
+
+		<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 	</head>
 	<body class="font-sans">
 		<Header />
