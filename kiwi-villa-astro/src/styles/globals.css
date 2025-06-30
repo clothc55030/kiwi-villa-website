@@ -169,26 +169,6 @@
     100% { background-position: 0% 50%; }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* 效能優化：減少動畫 */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -313,15 +293,6 @@
   .animate-gradient-shift {
     background-size: 400% 400%;
     animation: gradientShift 8s ease-in-out infinite;
-  }
-  
-  /* 動畫類別 */
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-  }
-  
-  .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
   }
   
   /* 動畫延遲工具類別 */
@@ -488,29 +459,6 @@
 
   .text-balance {
     text-wrap: balance;
-  }
-  .text-shadow-sm {
-    text-shadow: 0 1px 2px theme('colors.black / 20%');
-  }
-  .text-shadow-md {
-    text-shadow: 0 2px 4px theme('colors.black / 20%');
-  }
-  .text-shadow-lg {
-    text-shadow: 0 4px 8px theme('colors.black / 20%');
-  }
-  .text-shadow-xl {
-    text-shadow: 0 6px 12px theme('colors.black / 25%');
-  }
-
-  /* Button Styles */
-  .btn {
-    @apply inline-flex items-center justify-center px-8 py-3 font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-800;
-  }
-  .btn-primary {
-    @apply bg-amber-500 text-stone-900 hover:bg-amber-400 focus:ring-amber-400;
-  }
-  .btn-secondary {
-    @apply bg-stone-700 text-white hover:bg-stone-600 focus:ring-stone-500;
   }
 }
 

@@ -1,6 +1,13 @@
 ---
+import { Picture } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import BlurImage from '../components/BlurImage.astro';
+
+import lobbyImg from '../assets/images/intro/lobby.webp';
+import restaurantImg from '../assets/images/intro/restaurant.webp';
+import bedImg from '../assets/images/intro/bed.webp';
+import furnitureImg from '../assets/images/intro/furniture.webp';
+import elevatorImg from '../assets/images/intro/elevator.webp';
+import curtainsImg from '../assets/images/intro/curtains.webp';
 
 const pageTitle = '細說期遇 - 澎湖期遇度假會館 | 歐式典雅設計與頂級設備的完美融合';
 const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背後的設計理念與品質堅持。從歐式典雅裝潢到頂級設備規格，每個細節都體現對品質的極致追求。';
@@ -71,19 +78,16 @@ const svgPattern = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 
           <div class="grid md:grid-cols-2 gap-8">
             <div class="group" data-animate data-animate-delay="100">
               <div class="relative overflow-hidden rounded-lg shadow-lg">
-                <picture>
-                  <source data-srcset="/images/intro/lobby.avif" type="image/avif">
-                  <source data-srcset="/images/intro/lobby.webp" type="image/webp">
-                  <img 
-                    data-src="/images/intro/lobby.webp" 
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
-                    alt="澎湖期遇度假會館寬敞大廳內部照片，展示歐洲巴洛克風格的挑高空間設計，配有精緻水晶吊燈、大理石地板與優雅家具佈置，可容納30人的多功能聚會空間" 
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                    class="w-full h-auto aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
-                  >
-                </picture>
+                <Picture 
+                  src={lobbyImg}
+                  alt="澎湖期遇度假會館寬敞大廳內部照片，展示歐洲巴洛克風格的挑高空間設計，配有精緻水晶吊燈、大理石地板與優雅家具佈置，可容納30人的多功能聚會空間" 
+                  widths={[400, 800]}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  formats={['avif', 'webp']}
+                  loading="eager"
+                  decoding="async"
+                  class="w-full h-auto aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
+                />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 will-change-opacity"></div>
               </div>
               <h3 class="text-xl font-medium-cn text-center mt-4 text-gray-800">
@@ -93,19 +97,16 @@ const svgPattern = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 
             
             <div class="group" data-animate data-animate-delay="200">
               <div class="relative overflow-hidden rounded-lg shadow-lg">
-                <picture>
-                  <source data-srcset="/images/intro/restaurant.avif" type="image/avif">
-                  <source data-srcset="/images/intro/restaurant.webp" type="image/webp">
-                  <img 
-                    data-src="/images/intro/restaurant.webp" 
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
-                    alt="期遇度假會館餐廳區域，展現溫馨典雅的用餐環境，配備實木餐桌椅與精緻餐具，自然採光充足，提供賓客舒適的早餐用餐體驗" 
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                    class="w-full h-auto aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
-                  >
-                </picture>
+                <Picture 
+                  src={restaurantImg}
+                  alt="期遇度假會館餐廳區域，展現溫馨典雅的用餐環境，配備實木餐桌椅與精緻餐具，自然採光充足，提供賓客舒適的早餐用餐體驗" 
+                  widths={[400, 800]}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  formats={['avif', 'webp']}
+                  loading="eager"
+                  decoding="async"
+                  class="w-full h-auto aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
+                />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 will-change-opacity"></div>
               </div>
               <h3 class="text-xl font-medium-cn text-center mt-4 text-gray-800">
@@ -142,19 +143,16 @@ const svgPattern = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 
                 <div class="relative group">
                   <div class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div class="relative overflow-hidden rounded-3xl shadow-2xl">
-                    <picture>
-                      <source data-srcset="/images/intro/bed.avif" type="image/avif">
-                      <source data-srcset="/images/intro/bed.webp" type="image/webp">
-                      <img 
-                        data-src="/images/intro/bed.webp"
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E" 
-                        alt="期遇度假會館豪華客房床組，配備加大雙人床（1.8m×2.0m）、獨立袋裝彈簧護背床墊，搭配奢華床頭背板設計，營造舒適典雅的睡眠環境" 
-                        width="800"
-                        height="600"
-                        loading="lazy"
-                        class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                      >
-                    </picture>
+                    <Picture
+                      src={bedImg}
+                      alt="期遇度假會館豪華客房床組，配備加大雙人床（1.8m×2.0m）、獨立袋裝彈簧護背床墊，搭配奢華床頭背板設計，營造舒適典雅的睡眠環境"
+                      widths={[400, 800]}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      formats={['avif', 'webp']}
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
                   </div>
                 </div>
               </div>
@@ -202,19 +200,16 @@ const svgPattern = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 
               <div class="grid lg:grid-cols-2 gap-8 items-center" data-animate>
                 <div class="lg:order-2">
                   <div class="relative overflow-hidden rounded-3xl shadow-xl group">
-                    <picture>
-                      <source data-srcset="/images/intro/furniture.avif" type="image/avif">
-                      <source data-srcset="/images/intro/furniture.webp" type="image/webp">
-                      <img 
-                        data-src="/images/intro/furniture.webp"
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E" 
-                        alt="期遇度假會館精品定制家具展示，包含大理石桌面搭配玫瑰金配件、實木與皮革混搭的高級座椅，彰顯優質工藝與品味" 
-                        width="400"
-                        height="300"
-                        loading="lazy"
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      >
-                    </picture>
+                    <Picture 
+                      src={furnitureImg}
+                      alt="期遇度假會館精品定制家具展示，包含大理石桌面搭配玫瑰金配件、實木與皮革混搭的高級座椅，彰顯優質工藝與品味"
+                      widths={[400, 800]}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      formats={['avif', 'webp']}
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
                     <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent"></div>
                   </div>
                 </div>
@@ -242,12 +237,14 @@ const svgPattern = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 
               <div class="grid lg:grid-cols-2 gap-8 items-center" data-animate>
                 <div>
                   <div class="relative overflow-hidden rounded-3xl shadow-xl group">
-                    <BlurImage
-                      src="/images/intro/elevator.jpg"
+                    <Picture
+                      src={elevatorImg}
                       alt="期遇度假會館無障礙設施，配備八人座豪華電梯，方便攜帶大型行李的旅客與行動不便者進出，展現人性化的貼心設計"
-                      width={400}
-                      height={300}
+                      widths={[400, 800]}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      formats={['avif', 'webp']}
                       loading="lazy"
+                      decoding="async"
                       class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div class="absolute inset-0 bg-gradient-to-tl from-accent/20 via-transparent to-transparent"></div>
@@ -287,19 +284,16 @@ const svgPattern = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 
               <div class="grid lg:grid-cols-2 gap-8 items-center" data-animate>
                 <div class="lg:order-2">
                   <div class="relative overflow-hidden rounded-3xl shadow-xl group">
-                    <picture>
-                      <source data-srcset="/images/intro/curtains.avif" type="image/avif">
-                      <source data-srcset="/images/intro/curtains.webp" type="image/webp">
-                      <img 
-                        data-src="/images/intro/curtains.webp"
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E" 
-                        alt="期遇度假會館客房智慧電動窗簾系統，配備遮光簾與紗簾雙層設計，搭配陽台無敵採光，可遙控調節享受澎湖海景與陽光" 
-                        width="400"
-                        height="300"
-                        loading="lazy"
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      >
-                    </picture>
+                    <Picture
+                      src={curtainsImg}
+                      alt="期遇度假會館客房智慧電動窗簾系統，配備遮光簾與紗簾雙層設計，搭配陽台無敵採光，可遙控調節享受澎湖海景與陽光"
+                      widths={[400, 800]}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      formats={['avif', 'webp']}
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent"></div>
                   </div>
                 </div>
@@ -459,12 +453,6 @@ const svgPattern = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 
   <!-- Scroll-triggered animations -->
   <script>
     import('motion').then(({ animate, scroll }) => {
-      import('../utils/lazyload').then(({ initLazyLoad }) => {
-        document.addEventListener('DOMContentLoaded', () => {
-          initLazyLoad();
-        });
-      });
-
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const shouldReduceAnimations = isMobile || prefersReducedMotion;

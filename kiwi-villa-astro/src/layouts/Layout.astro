@@ -132,8 +132,6 @@ const {
 				50% { background-position: 100% 50%; }
 				100% { background-position: 0% 50%; }
 			}
-			.text-shadow-sm { text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8); }
-			.text-shadow-md { text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8); }
 		</style>
 		
 		<script>
@@ -165,7 +163,9 @@ const {
 		<script>
 			import('../utils/error-handler.ts').then(({ errorHandler }) => {
 				// 錯誤處理器已自動初始化
-				console.log('錯誤處理器已啟動');
+				if (import.meta.env.DEV) {
+					console.log('錯誤處理器已啟動');
+				}
 			}).catch(err => {
 				console.error('錯誤處理器載入失敗:', err);
 			});
@@ -184,7 +184,9 @@ const {
 				window.addEventListener('load', () => {
 					navigator.serviceWorker.register('/sw.js')
 						.then((registration) => {
-							console.log('Service Worker 註冊成功:', registration.scope);
+							if (import.meta.env.DEV) {
+								console.log('Service Worker 註冊成功:', registration.scope);
+							}
 							
 							// 檢查更新
 							registration.addEventListener('updatefound', () => {
@@ -193,7 +195,9 @@ const {
 									newWorker.addEventListener('statechange', () => {
 										if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
 											// 新版本可用，可以提示用戶刷新
-											console.log('新版本 Service Worker 已安裝');
+											if (import.meta.env.DEV) {
+												console.log('新版本 Service Worker 已安裝');
+											}
 										}
 									});
 								}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Reviews Widget</title>
+  <style>
+    /* 確保 widget 填滿整個空間且沒有不必要的邊距 */
+    body { 
+      margin: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    /* Elfsight widget 有時會產生內外邊距，我們在這裡強制重設 */
+    .elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf {
+      background: transparent !important;
+      padding: 0 !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Elfsight Google Reviews Widget -->
+  <div class="elfsight-app-e293512e-82e9-44d4-a2d3-985ea51c4baf" data-elfsight-app-lazy></div>
+
+  <!-- Elfsight Platform Script -->
+  <script src="https://static.elfsight.com/platform/platform.js" data-elfsight-app-lazy defer></script>
+</body>
+</html> 
