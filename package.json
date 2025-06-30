@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/sitemap": "^3.4.1",
+    "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/vite": "^4.0.0-beta",
     "astro": "^5.10.1",
     "astro-seo": "^0.8.4",

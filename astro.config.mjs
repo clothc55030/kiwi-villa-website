@@ -2,14 +2,18 @@
 import { defineConfig } from 'astro/config';
 import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
-import tailwindcss from "@tailwindcss/vite";
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.kiwi-villa.com', // Necessary for sitemap
   integrations: [
     sitemap(),
-    partytown()
+    partytown(),
+    tailwind({
+      // Example: Disable injecting a basic CSS reset
+      applyBaseStyles: false,
+    }),
   ],
   build: {
     format: 'file'
