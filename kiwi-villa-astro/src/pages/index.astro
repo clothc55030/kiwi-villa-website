@@ -269,7 +269,7 @@ const structuredData = {
 			{ opacity: [0, 1], y: [20, 0] },
 			{ 
 				duration: 0.8, 
-				delay: stagger(0.05, { start: 0.3 }),
+				delay: stagger(0.05),
 				easing: "ease-out"
 			}
 		);
@@ -290,7 +290,7 @@ const structuredData = {
 					const animationDelay = delay ? parseInt(delay) / 1000 : 0; // 將毫秒轉換為秒
 					
 					animate(
-						element,
+						element as HTMLElement,
 						{ opacity: [0, 1], y: [30, 0] },
 						{ 
 							duration: 0.8, 

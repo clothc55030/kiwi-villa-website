@@ -267,7 +267,7 @@ const currentPath = Astro.url.pathname;
       });
 
       // 視窗大小改變時關閉選單
-      let resizeTimer;
+      let resizeTimer: NodeJS.Timeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {

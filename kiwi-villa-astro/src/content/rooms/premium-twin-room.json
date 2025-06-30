@@ -21,15 +21,15 @@
     "超靜音冰箱"
   ],
   "images": [
-    { "src": "/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp", "alt": "高級雙床房-圖片-1" },
-    { "src": "/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room2.webp", "alt": "高級雙床房-圖片-2" },
-    { "src": "/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room3.webp", "alt": "高級雙床房-圖片-3" },
-    { "src": "/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room4.webp", "alt": "高級雙床房-圖片-4" },
-    { "src": "/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room5.webp", "alt": "高級雙床房-圖片-5" },
-    { "src": "/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room6.webp", "alt": "高級雙床房-圖片-6" },
-    { "src": "/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room7.webp", "alt": "高級雙床房-圖片-7" },
-    { "src": "/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room8.webp", "alt": "高級雙床房-圖片-8" },
-    { "src": "/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room9.webp", "alt": "高級雙床房-圖片-9" }
+    { "src": "../../assets/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp", "alt": "高級雙床房-圖片-1" },
+    { "src": "../../assets/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room2.webp", "alt": "高級雙床房-圖片-2" },
+    { "src": "../../assets/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room3.webp", "alt": "高級雙床房-圖片-3" },
+    { "src": "../../assets/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room4.webp", "alt": "高級雙床房-圖片-4" },
+    { "src": "../../assets/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room5.webp", "alt": "高級雙床房-圖片-5" },
+    { "src": "../../assets/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room6.webp", "alt": "高級雙床房-圖片-6" },
+    { "src": "../../assets/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room7.webp", "alt": "高級雙床房-圖片-7" },
+    { "src": "../../assets/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room8.webp", "alt": "高級雙床房-圖片-8" },
+    { "src": "../../assets/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room9.webp", "alt": "高級雙床房-圖片-9" }
   ],
   "featured": false,
   "sortOrder": 5,

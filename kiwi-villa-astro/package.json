@@ -25,5 +25,12 @@
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "terser": "^5.43.1"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp"
+    ]
   }
 }

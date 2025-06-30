@@ -4,12 +4,14 @@ import type { BlurImageProps } from './types';
 
 export type Props = BlurImageProps;
 
+const typedBlurhashes: Record<string, { blurhash: string; width: number; height: number }> = blurhashes;
+
 const { src, alt, class: className, width, height, loading = 'lazy', fetchpriority } = Astro.props as Props;
 
 // 從 src 中提取相對路徑
 const relativeSrc = src.startsWith('/') ? src.slice(1) : src;
 const jpgPath = relativeSrc.replace(/\.(webp|avif)$/, '.jpg');
-const blurhashData = blurhashes[jpgPath];
+const blurhashData = typedBlurhashes[jpgPath];
 
 // 生成 srcset
 const basePath = src.substring(0, src.lastIndexOf('.'));

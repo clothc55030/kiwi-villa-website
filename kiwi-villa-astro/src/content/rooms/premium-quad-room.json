@@ -21,14 +21,14 @@
     "超靜音冰箱"
   ],
   "images": [
-    { "src": "/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp", "alt": "高級四人房-圖片-1" },
-    { "src": "/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room2.webp", "alt": "高級四人房-圖片-2" },
-    { "src": "/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room3.webp", "alt": "高級四人房-圖片-3" },
-    { "src": "/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room4.webp", "alt": "高級四人房-圖片-4" },
-    { "src": "/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room5.webp", "alt": "高級四人房-圖片-5" },
-    { "src": "/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room6.webp", "alt": "高級四人房-圖片-6" },
-    { "src": "/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room7.webp", "alt": "高級四人房-圖片-7" },
-    { "src": "/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room8.webp", "alt": "高級四人房-圖片-8" }
+    { "src": "../../assets/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp", "alt": "高級四人房-圖片-1" },
+    { "src": "../../assets/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room2.webp", "alt": "高級四人房-圖片-2" },
+    { "src": "../../assets/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room3.webp", "alt": "高級四人房-圖片-3" },
+    { "src": "../../assets/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room4.webp", "alt": "高級四人房-圖片-4" },
+    { "src": "../../assets/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room5.webp", "alt": "高級四人房-圖片-5" },
+    { "src": "../../assets/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room6.webp", "alt": "高級四人房-圖片-6" },
+    { "src": "../../assets/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room7.webp", "alt": "高級四人房-圖片-7" },
+    { "src": "../../assets/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room8.webp", "alt": "高級四人房-圖片-8" }
   ],
   "featured": false,
   "sortOrder": 2,

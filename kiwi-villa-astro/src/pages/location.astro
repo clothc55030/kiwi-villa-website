@@ -4,6 +4,8 @@ import Layout from '../layouts/Layout.astro';
 const pageTitle = '地理資訊 - 澎湖期遇度假會館 | 絕佳位置，交通便捷';
 const pageDescription = '澎湖期遇度假會館絕佳地理位置，距離機場12分鐘、碼頭9分鐘車程，靠近市區商圈與澎科大，外送覆蓋範圍內，交通便捷生活機能佳。';
 
+const svgPatternBlack = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E";
+
 // 結構化數據 - 麵包屑
 const breadcrumbStructuredData = {
   "@context": "https://schema.org",
@@ -636,7 +638,7 @@ const placeStructuredData = {
                     <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
                       <iconify-icon icon="heroicons:map-pin" class="text-primary text-2xl"></iconify-icon>
                     </div>
-                    <div class="cursor-pointer" onclick="navigator.clipboard.writeText('澎湖縣馬公市西衛里347號').then(() => { const btn = event.currentTarget; btn.classList.add('bg-green-50'); setTimeout(() => btn.classList.remove('bg-green-50'), 1000); })" role="button" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }" aria-label="點擊複製地址">
+                    <div class="cursor-pointer" onclick="(event) => { navigator.clipboard.writeText('澎湖縣馬公市西衛里347號').then(() => { const btn = (event.currentTarget as HTMLElement); btn.classList.add('bg-green-50'); setTimeout(() => btn.classList.remove('bg-green-50'), 1000); }) }" role="button" tabindex="0" onkeydown="(event) => { if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); (event.currentTarget as HTMLElement).click(); } }" aria-label="點擊複製地址">
                       <p class="font-semibold-cn text-gray-800">澎湖縣馬公市西衛里347號</p>
                       <p class="text-sm text-gray-600">Kiwi Villa, No. 347, Xiwei Village, Magong City</p>
                       <p class="text-xs text-primary mt-1 opacity-0 hover:opacity-100 transition-opacity" aria-hidden="true">點擊複製地址</p>
@@ -719,8 +721,7 @@ const placeStructuredData = {
       <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5"></div>
       
       <!-- Pattern overlay -->
-      <div class="absolute inset-0 opacity-5">
-        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23000000" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+      <div class="absolute inset-0 opacity-5" style={`background-image: url("${svgPatternBlack}")`}>
       </div>
       
       <!-- Content -->
@@ -756,43 +757,41 @@ const placeStructuredData = {
 
   <!-- Scroll-triggered animations -->
   <script>
-    import { animate, scroll } from 'motion';
+    import('motion').then(({ animate }) => {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
 
-    // Scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            const delay = parseInt(target.dataset.animateDelay || '0', 10);
+            
+            setTimeout(() => {
+              animate(target, 
+                { opacity: [0, 1], y: [30, 0] },
+                { duration: 0.8, easing: 'ease-out' }
+              );
+            }, delay);
+            
+            observer.unobserve(target);
+          }
+        });
+      }, observerOptions);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = entry.target;
-          const delay = target.dataset.animateDelay || 0;
-          
-          setTimeout(() => {
-            animate(target, 
-              { opacity: [0, 1], y: [30, 0] },
-              { duration: 0.8, easing: 'ease-out' }
-            );
-          }, parseInt(delay));
-          
-          observer.unobserve(target);
-        }
+      document.querySelectorAll<HTMLElement>('[data-animate]').forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
       });
-    }, observerOptions);
-
-    // Observe all elements with data-animate
-    document.querySelectorAll('[data-animate]').forEach(el => {
-      el.style.opacity = '0';
-      observer.observe(el);
-    });
+    }).catch(console.error);
 
     // Lazy loading for images
     const imageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const img = entry.target;
+          const img = entry.target as HTMLImageElement;
           img.classList.add('loaded');
           observer.unobserve(img);
         }
@@ -802,8 +801,7 @@ const placeStructuredData = {
       threshold: 0.01
     });
 
-    // Observe all lazy images
-    document.querySelectorAll('.lazy-img').forEach(img => {
+    document.querySelectorAll<HTMLImageElement>('.lazy-img').forEach(img => {
       imageObserver.observe(img);
     });
   </script>

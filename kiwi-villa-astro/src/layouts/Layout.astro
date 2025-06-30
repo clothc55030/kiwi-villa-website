@@ -2,9 +2,16 @@
 import '../styles/globals.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import type { LayoutProps } from '../components/types';
 
-export type Props = LayoutProps;
+export interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string;
+	canonicalUrl?: string;
+	structuredData?: Record<string, any>;
+	keywords?: string;
+	currentPage?: string;
+}
 
 const { 
 	title = '澎湖期遇度假會館 - 澎湖民宿推薦 | 三面環海歐風建築度假首選',
@@ -12,7 +19,8 @@ const {
 	ogImage = 'https://www.kiwi-villa.com/assets/og-image.webp',
 	canonicalUrl = 'https://www.kiwi-villa.com/',
 	structuredData,
-	keywords = '澎湖民宿推薦,澎湖期遇度假會館,澎湖住宿,三面環海,歐洲巴洛克建築,澎湖旅遊,海島度假,澎湖民宿'
+	keywords = '澎湖民宿推薦,澎湖期遇度假會館,澎湖住宿,三面環海,歐洲巴洛克建築,澎湖旅遊,海島度假,澎湖民宿',
+	currentPage
 } = Astro.props as Props;
 ---
 

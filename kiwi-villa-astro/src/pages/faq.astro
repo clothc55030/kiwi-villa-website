@@ -5,8 +5,29 @@ const pageTitle = '常見問題 - 澎湖期遇度假會館 | 專業解答您的�
 const pageDescription = '澎湖期遇度假會館常見問題解答，包含房價說明、設施服務、訂房須知等詳細資訊，為您的澎湖之旅提供完整指引。';
 const canonicalURL = 'https://www.kiwi-villa.com/faq';
 
+// 定義 FAQ 資料結構的類型
+interface FaqSection {
+  title?: string;
+  list?: string[];
+  text?: string;
+}
+
+interface FaqAnswer {
+  intro?: string;
+  details?: string;
+  list?: string[];
+  sections?: FaqSection[];
+  conclusion?: string;
+}
+
+interface Faq {
+  id: string;
+  question: string;
+  answer: FaqAnswer;
+}
+
 // FAQ 資料
-const faqs = [
+const faqs: Faq[] = [
   {
     id: 'price',
     question: '為什麼我們房價比周圍的都貴？',
@@ -421,50 +442,52 @@ const faqSchema = {
 
   <!-- JavaScript -->
   <script>
-    // FAQ 手風琴功能
     document.addEventListener('DOMContentLoaded', () => {
       const faqButtons = document.querySelectorAll('.faq-button');
       
-      // FAQ 展開/收合功能
       faqButtons.forEach(button => {
         button.addEventListener('click', () => {
-          const faqItem = button.parentElement;
-          const answer = faqItem.querySelector('.faq-answer');
+          const faqItem = button.parentElement as HTMLElement | null;
+          if (!faqItem) return;
+
+          const answer = faqItem.querySelector('.faq-answer') as HTMLElement | null;
           const iconPlus = button.querySelector('.faq-icon-plus');
           const iconMinus = button.querySelector('.faq-icon-minus');
           const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+          if (!answer || !iconPlus || !iconMinus) return;
           
           if (isExpanded) {
-            // 收合
             button.setAttribute('aria-expanded', 'false');
             answer.style.maxHeight = '0';
             iconPlus.classList.remove('hidden');
             iconMinus.classList.add('hidden');
             faqItem.classList.remove('shadow-xl', 'ring-2', 'ring-primary/20');
           } else {
-            // 關閉其他項目
             faqButtons.forEach(otherButton => {
               if (otherButton !== button) {
-                const otherItem = otherButton.parentElement;
-                const otherAnswer = otherItem.querySelector('.faq-answer');
+                const otherItem = otherButton.parentElement as HTMLElement | null;
+                if (!otherItem) return;
+                const otherAnswer = otherItem.querySelector('.faq-answer') as HTMLElement | null;
                 const otherIconPlus = otherButton.querySelector('.faq-icon-plus');
                 const otherIconMinus = otherButton.querySelector('.faq-icon-minus');
-                otherButton.setAttribute('aria-expanded', 'false');
-                otherAnswer.style.maxHeight = '0';
-                otherIconPlus.classList.remove('hidden');
-                otherIconMinus.classList.add('hidden');
-                otherItem.classList.remove('shadow-xl', 'ring-2', 'ring-primary/20');
+                
+                if (otherAnswer && otherIconPlus && otherIconMinus) {
+                  otherButton.setAttribute('aria-expanded', 'false');
+                  otherAnswer.style.maxHeight = '0';
+                  otherIconPlus.classList.remove('hidden');
+                  otherIconMinus.classList.add('hidden');
+                  otherItem.classList.remove('shadow-xl', 'ring-2', 'ring-primary/20');
+                }
               }
             });
             
-            // 展開當前項目
             button.setAttribute('aria-expanded', 'true');
             answer.style.maxHeight = answer.scrollHeight + 'px';
             iconPlus.classList.add('hidden');
             iconMinus.classList.remove('hidden');
             faqItem.classList.add('shadow-xl', 'ring-2', 'ring-primary/20');
             
-            // 平滑滾動到項目
             setTimeout(() => {
               faqItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }, 100);
@@ -473,36 +496,34 @@ const faqSchema = {
       });
     });
 
-    // 滾動動畫
-    import { animate } from 'motion';
-    
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+    import('motion').then(({ animate }) => {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = entry.target;
-          const delay = target.dataset.animateDelay || 0;
-          
-          setTimeout(() => {
-            animate(target, 
-              { opacity: [0, 1], y: [20, 0] },
-              { duration: 0.6, easing: 'ease-out' }
-            );
-          }, parseInt(delay));
-          
-          observer.unobserve(target);
-        }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            const delay = parseInt(target.dataset.animateDelay || '0', 10);
+            
+            setTimeout(() => {
+              animate(target, 
+                { opacity: [0, 1], y: [20, 0] },
+                { duration: 0.6, easing: 'ease-out' }
+              );
+            }, delay);
+            
+            observer.unobserve(target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll<HTMLElement>('[data-animate]').forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
       });
-    }, observerOptions);
-
-    // 觀察所有需要動畫的元素
-    document.querySelectorAll('[data-animate]').forEach(el => {
-      el.style.opacity = '0';
-      observer.observe(el);
-    });
+    }).catch(console.error);
   </script>
 </Layout>

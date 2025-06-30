@@ -94,8 +94,8 @@ const pageDescription = '抱歉，您訪問的頁面不存在。請返回首頁�
       };
       
       // 可以發送到分析服務
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'exception', {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'exception', {
           description: '404_page_not_found',
           fatal: false,
           error_url: window.location.href,

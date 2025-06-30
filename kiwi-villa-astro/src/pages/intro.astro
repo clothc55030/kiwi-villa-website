@@ -4,6 +4,8 @@ import BlurImage from '../components/BlurImage.astro';
 
 const pageTitle = '細說期遇 - 澎湖期遇度假會館 | 歐式典雅設計與頂級設備的完美融合';
 const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背後的設計理念與品質堅持。從歐式典雅裝潢到頂級設備規格，每個細節都體現對品質的極致追求。';
+
+const svgPattern = "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E";
 ---
 
 <Layout 
@@ -415,8 +417,7 @@ const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背�
       </div>
       
       <!-- Pattern overlay -->
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+      <div class="absolute inset-0 opacity-10" style={`background-image: url("${svgPattern}")`}>
       </div>
       
       <!-- Content -->
@@ -457,98 +458,80 @@ const pageDescription = '澎湖期遇度假會館細說期遇，揭示民宿背�
 
   <!-- Scroll-triggered animations -->
   <script>
-    import { animate, scroll } from 'motion';
-    import { initLazyLoad } from '../utils/lazyload';
-
-    // 初始化懶加載
-    document.addEventListener('DOMContentLoaded', () => {
-      initLazyLoad();
-    });
-
-    // 檢測是否為行動裝置或用戶偏好減少動畫
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const shouldReduceAnimations = isMobile || prefersReducedMotion;
-
-    // 基礎滾動動畫
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = entry.target;
-          const delay = target.dataset.animateDelay || 0;
-          
-          setTimeout(() => {
-            if (shouldReduceAnimations) {
-              target.style.opacity = '1';
-              target.style.transform = 'translateY(0)';
-            } else {
-              // 根據元素類型使用不同的動畫
-              if (target.dataset.animateSlide) {
-                animate(target, 
-                  { opacity: [0, 1], x: [-30, 0] },
-                  { duration: 0.8, easing: 'ease-out' }
-                );
-              } else if (target.classList.contains('lg:col-span-2')) {
-                // 大卡片的特殊動畫
-                animate(target, 
-                  { opacity: [0, 1], scale: [0.95, 1] },
-                  { duration: 0.8, easing: 'ease-out' }
-                );
-              } else {
-                // 默認動畫
-                animate(target, 
-                  { opacity: [0, 1], y: [30, 0] },
-                  { duration: 0.8, easing: 'ease-out' }
-                );
-              }
-            }
-          }, shouldReduceAnimations ? 0 : parseInt(delay));
-          
-          observer.unobserve(target);
-        }
+    import('motion').then(({ animate, scroll }) => {
+      import('../utils/lazyload').then(({ initLazyLoad }) => {
+        document.addEventListener('DOMContentLoaded', () => {
+          initLazyLoad();
+        });
       });
-    }, observerOptions);
 
-    // Observe all elements with data-animate
-    document.querySelectorAll('[data-animate]').forEach(el => {
-      el.style.opacity = '0';
-      observer.observe(el);
-    });
-    
-    // 特殊的視差滾動效果（僅桌面版）
-    if (!shouldReduceAnimations) {
-      // 設計理念區塊的標籤動畫
-      const tags = document.querySelectorAll('.flex.flex-wrap.gap-3 span');
-      tags.forEach((tag, index) => {
-        scroll(
-          animate(tag, { 
-            transform: ['translateY(0px)', 'translateY(-10px)', 'translateY(0px)'] 
-          }, { 
-            duration: 2,
-            repeat: Infinity,
-            delay: index * 0.2
-          })
-        );
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const shouldReduceAnimations = isMobile || prefersReducedMotion;
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            const delay = parseInt(target.dataset.animateDelay || '0', 10);
+            
+            setTimeout(() => {
+              if (shouldReduceAnimations) {
+                target.style.opacity = '1';
+                target.style.transform = 'translateY(0)';
+              } else {
+                if (target.dataset.animateSlide) {
+                  animate(target, { opacity: [0, 1], x: [-30, 0] }, { duration: 0.8, easing: 'ease-out' });
+                } else if (target.classList.contains('lg:col-span-2')) {
+                  animate(target, { opacity: [0, 1], scale: [0.95, 1] }, { duration: 0.8, easing: 'ease-out' });
+                } else {
+                  animate(target, { opacity: [0, 1], y: [30, 0] }, { duration: 0.8, easing: 'ease-out' });
+                }
+              }
+            }, shouldReduceAnimations ? 0 : delay);
+            
+            observer.unobserve(target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll<HTMLElement>('[data-animate]').forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
       });
       
-      // 環境畫廊的懸浮效果增強
-      const galleryCards = document.querySelectorAll('.grid.lg\\:grid-cols-2.gap-8 .group');
-      galleryCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          const img = card.querySelector('img');
-          animate(img, { scale: 1.1 }, { duration: 0.6, easing: 'ease-out' });
+      if (!shouldReduceAnimations) {
+        const tags = document.querySelectorAll('.flex.flex-wrap.gap-3 span');
+        tags.forEach((tag, index) => {
+          scroll(
+            animate(tag as HTMLElement, { 
+              transform: ['translateY(0px)', 'translateY(-10px)', 'translateY(0px)'] 
+            }, { 
+              duration: 2,
+              repeat: Infinity,
+              delay: index * 0.2
+            })
+          );
         });
         
-        card.addEventListener('mouseleave', () => {
-          const img = card.querySelector('img');
-          animate(img, { scale: 1 }, { duration: 0.6, easing: 'ease-in-out' });
+        const galleryCards = document.querySelectorAll('.grid.lg\\:grid-cols-2.gap-8 .group');
+        galleryCards.forEach(card => {
+          card.addEventListener('mouseenter', () => {
+            const img = card.querySelector('img');
+            if (img) animate(img, { scale: 1.1 }, { duration: 0.6, easing: 'ease-out' });
+          });
+          
+          card.addEventListener('mouseleave', () => {
+            const img = card.querySelector('img');
+            if (img) animate(img, { scale: 1 }, { duration: 0.6, easing: 'ease-in-out' });
+          });
         });
-      });
-    }
+      }
+    }).catch(console.error);
   </script>
 </Layout>

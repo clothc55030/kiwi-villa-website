@@ -64,8 +64,8 @@ class ErrorHandler {
 
     // 監聽資源載入錯誤
     window.addEventListener('error', (event) => {
-      const target = event.target as HTMLElement;
-      if (target !== window && target.tagName) {
+      const target = event.target;
+      if (target instanceof HTMLElement && target.tagName) {
         this.logError({
           message: `資源載入失敗: ${target.tagName}`,
           type: 'error',
@@ -100,6 +100,7 @@ class ErrorHandler {
     };
 
     // 在開發環境中直接輸出
+    // @ts-ignore - Vite/Astro specific env var
     if (import.meta.env.DEV) {
       console.error('錯誤處理器:', errorInfo);
       return;

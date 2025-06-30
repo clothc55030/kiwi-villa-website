@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PolicyCard from '../components/PolicyCard.astro';
 import FacilityCard from '../components/FacilityCard.astro';
-import RefundBadge from '../components/RefundBadge.astro';
+import RefundBadge, { type RefundColor } from '../components/RefundBadge.astro';
 
 const pageTitle = '訂房須知 - 澎湖期遇度假會館 | 詳細住宿規定與注意事項';
 const pageDescription = '澎湖期遇度假會館訂房須知，詳細住宿規定與注意事項。包含入住退房時間、取消政策、住宿規定、設施服務等完整資訊。';
@@ -19,7 +19,7 @@ const checkInOutInfo = {
   }
 };
 
-const cancellationPolicy = [
+const cancellationPolicy: { period: string; refund: string; color: RefundColor }[] = [
   { period: '入住前14天以上', refund: '90%', color: 'green' },
   { period: '入住前10-13天', refund: '70%', color: 'green' },
   { period: '入住前7-9天', refund: '50%', color: 'yellow' },
@@ -313,45 +313,42 @@ const facilities = [
 
   <!-- Scroll-triggered animations -->
   <script>
-    import { animate, stagger } from 'motion';
+    import('motion').then(({ animate, stagger }) => {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
 
-    // Scroll animations with improved performance
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+      const animateElements = (elements: Element[]) => {
+        animate(
+          elements, 
+          { opacity: [0, 1], y: [30, 0] },
+          { 
+            duration: 0.8, 
+            easing: 'ease-out',
+            delay: stagger(0.1, { start: 0.05 })
+          }
+        );
+      };
 
-    // Batch animate elements for better performance
-    const animateElements = (elements) => {
-      animate(
-        elements, 
-        { opacity: [0, 1], y: [30, 0] },
-        { 
-          duration: 0.8, 
-          easing: 'ease-out',
-          delay: stagger(0.1, { start: 0.05 })
+      const observer = new IntersectionObserver((entries) => {
+        const visibleElements = entries
+          .filter(entry => entry.isIntersecting)
+          .map(entry => entry.target);
+        
+        if (visibleElements.length > 0) {
+          animateElements(visibleElements);
+          visibleElements.forEach(el => observer.unobserve(el));
         }
-      );
-    };
+      }, observerOptions);
 
-    const observer = new IntersectionObserver((entries) => {
-      const visibleElements = entries
-        .filter(entry => entry.isIntersecting)
-        .map(entry => entry.target);
-      
-      if (visibleElements.length > 0) {
-        animateElements(visibleElements);
-        visibleElements.forEach(el => observer.unobserve(el));
-      }
-    }, observerOptions);
-
-    // Initialize animations with requestAnimationFrame for better performance
-    requestAnimationFrame(() => {
-      const elements = document.querySelectorAll('[data-animate]');
-      elements.forEach(el => {
-        el.style.opacity = '0';
-        observer.observe(el);
+      requestAnimationFrame(() => {
+        const elements = document.querySelectorAll<HTMLElement>('[data-animate]');
+        elements.forEach(el => {
+          el.style.opacity = '0';
+          observer.observe(el);
+        });
       });
-    });
+    }).catch(console.error);
   </script>
 </Layout>

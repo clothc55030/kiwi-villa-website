@@ -1,9 +1,9 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z, type SchemaContext } from 'astro:content';
 
 // 房型資料結構
 const roomsCollection = defineCollection({
   type: 'data',
-  schema: z.object({
+  schema: ({ image }: SchemaContext) => z.object({
     // 基本資訊
     id: z.string(),
     name: z.string(),
@@ -11,7 +11,7 @@ const roomsCollection = defineCollection({
     roomNumbers: z.array(z.string()),
     description: z.string(),
     capacity: z.number(),
-    size: z.number(), // 平方米
+    size: z.number(), // 坪
     price: z.object({
       min: z.number(),
       max: z.number(),
@@ -25,7 +25,7 @@ const roomsCollection = defineCollection({
     
     // 圖片資料
     images: z.array(z.object({
-      src: z.string(),
+      src: image(),
       alt: z.string(),
     })),
     

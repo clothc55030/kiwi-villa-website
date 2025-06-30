@@ -8,6 +8,16 @@
   --font-serif: "Lora", "Noto Serif TC", "PingFang TC", "Microsoft YaHei", serif;
   --font-display: "Noto Serif TC", "Lora", serif;
   
+  /* 陰影定義 */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --shadow-none: 0 0 #0000;
+  
   /* 顏色系統 - 直接映射到 Tailwind 顏色名稱 */
   --color-primary: #7c9bb5;
   --color-primary-light: #9bb0c4;
@@ -119,6 +129,12 @@
   --duration-normal: 300ms;
   --duration-slow: 500ms;
   
+  /* 轉換值 */
+  --translate-y-0-5: -0.125rem;
+  --translate-y-1: -0.25rem;
+  --scale-105: 1.05;
+  --scale-110: 1.1;
+  
   /* 斷點 */
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
@@ -190,12 +206,22 @@
 @layer utilities {
   /* 按鈕樣式 */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 font-medium;
+    background-color: var(--color-primary-600);
+    color: var(--color-white);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-primary-700);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(var(--translate-y-0-5));
   }
   
   /* 焦點樣式 - 無障礙性增強 */
   *:focus-visible {
-    @apply ring-2 ring-primary ring-offset-2 outline-none;
+    @apply ring-2 ring-offset-2 outline-none;
+    --tw-ring-color: var(--color-primary);
   }
   
   button:focus-visible,
@@ -203,7 +229,8 @@
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    @apply ring-2 ring-primary ring-offset-2 outline-none transition-all duration-200;
+    @apply ring-2 ring-offset-2 outline-none transition-all duration-200;
+    --tw-ring-color: var(--color-primary);
   }
   
   /* 暗色背景上的焦點樣式 */

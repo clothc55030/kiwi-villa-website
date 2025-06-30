@@ -2,13 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import RoomCard from '../components/RoomCard.astro';
 import Lightbox from '../components/Lightbox.astro';
-import { getCollection } from 'astro:content';
+import RoomFeatureIcon from '../components/RoomFeatureIcon.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { contactInfo } from '../config/social';
+import { Image } from 'astro:assets';
+import ogImageSrc from '../assets/images/rooms/rooms-og.webp';
 
 const bookingUrl = 'https://booking.owlting.com/kiwi-villa';
 
 // 獲取所有房型資料
-const rooms = await getCollection('rooms');
+const rooms: CollectionEntry<'rooms'>[] = await getCollection('rooms');
 // 按 sortOrder 排序
 const sortedRooms = rooms.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
 
@@ -17,7 +20,67 @@ const pageTitle = '房型設施 - 澎湖期遇度假會館 | 多種房型選擇�
 const pageDescription = '澎湖期遇度假會館房型設施，提供豪華家庭房、高級四人房、奢華四人房、高級三人房、高級雙床房、高級雙人房等多種房型選擇。';
 const pageKeywords = '澎湖期遇度假會館,房型設施,豪華家庭房,高級四人房,奢華四人房,民宿房型,澎湖住宿';
 const canonicalURL = 'https://www.kiwi-villa.com/rooms';
-const ogImage = 'https://www.kiwi-villa.com/images/rooms/rooms-og.webp';
+const ogImage = ogImageSrc.src;
+
+// 結構化資料
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: '澎湖期遇度假會館',
+  description: pageDescription,
+  url: 'https://www.kiwi-villa.com',
+  telephone: contactInfo.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: contactInfo.address,
+    addressLocality: '馬公市',
+    addressRegion: '澎湖縣',
+    postalCode: '880',
+    addressCountry: 'TW'
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: '房型設施',
+    itemListElement: sortedRooms.map((room, index) => ({
+      '@type': 'HotelRoom',
+      '@id': `https://www.kiwi-villa.com/rooms#${room.data.id}`,
+      position: index + 1,
+      name: room.data.name,
+      description: room.data.description,
+      occupancy: {
+        '@type': 'QuantitativeValue',
+        value: room.data.capacity,
+        unitText: '人'
+      },
+      floorSize: {
+        '@type': 'QuantitativeValue',
+        value: room.data.size,
+        unitText: '坪'
+      },
+      bed: room.data.beds.map(bed => ({
+        '@type': 'BedDetails',
+        typeOfBed: bed.type,
+        quantity: bed.count
+      })),
+      amenityFeature: room.data.facilities.map((facility: string) => ({
+        '@type': 'LocationFeatureSpecification',
+        name: facility,
+        value: true
+      })),
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        minPrice: room.data.price.min,
+        maxPrice: room.data.price.max,
+        priceCurrency: 'TWD'
+      },
+      image: room.data.images.map(img => ({
+        '@type': 'ImageObject',
+        url: new URL(img.src.src, Astro.url).href,
+        name: img.alt
+      }))
+    }))
+  }
+};
 
 // 所有房型的共同設施
 const commonAmenities = [
@@ -48,12 +111,15 @@ const commonAmenities = [
   title={pageTitle}
   description={pageDescription}
   keywords={pageKeywords}
-  canonical={canonicalURL}
+  canonicalUrl={canonicalURL}
   ogImage={ogImage}
   currentPage="/rooms"
 >
+  <!-- 結構化資料 -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  
   <!-- Hero Section -->
-  <section class="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden animate-gradient-shift" style="background: linear-gradient(135deg, #7c9bb5 0%, #9bb0c4 25%, #b8c7d6 50%, #a8b8c8 75%, #8fa3b3 100%); background-size: 400% 400%;">
+  <section class="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden animate-gradient-shift bg-gradient-hero">
     <!-- Content -->
     <div class="relative z-10 text-center text-white max-w-[600px] px-4 md:px-6 animate-fade-in-up">
       <h1 class="hero-title font-display text-[clamp(2.5rem,5vw,4rem)] font-semibold mb-4 text-shadow-lg">
@@ -76,18 +142,30 @@ const commonAmenities = [
   <!-- Main Content -->
   <main class="bg-white">
     <!-- 房型導覽 -->
-    <section class="sticky top-20 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 py-4">
+    <section class="sticky top-20 z-40 bg-white/95 border-b border-gray-200 py-4 backdrop-blur-sm">
       <div class="container mx-auto px-4">
-        <nav class="flex gap-2 md:gap-4 overflow-x-auto pb-2 scrollbar-hide">
+        <nav 
+          class="room-nav-container flex gap-2 md:gap-4 overflow-x-auto pb-2 scrollbar-hide"
+          role="navigation"
+          aria-label="房型導覽"
+        >
           {sortedRooms.map((room) => (
             <button
               data-room-nav={room.data.id}
-              class="room-nav-btn flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300 whitespace-nowrap"
+              class="room-nav-btn flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-gray-600 transition-all duration-300 whitespace-nowrap focus:ring-2 focus:outline-none"
+              aria-label={`查看${room.data.name}，價格${room.data.price.min}-${room.data.price.max}元`}
             >
-              {room.data.name}
+              <span class="block">{room.data.name}</span>
+              <span class="text-xs text-gray-500 mt-0.5">
+                NT$ {room.data.price.min.toLocaleString()}-{room.data.price.max.toLocaleString()}
+              </span>
             </button>
           ))}
         </nav>
+        <!-- 手機版拖曳提示 -->
+        <div class="md:hidden text-center text-xs text-gray-400 mt-1">
+          ← 滑動查看更多房型 →
+        </div>
       </div>
     </section>
 
@@ -106,17 +184,21 @@ const commonAmenities = [
                 <!-- 圖片區 -->
                 <div class={`room-images ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                   <div class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                    <img 
+                    <Image 
                       src={room.data.images[0].src}
                       alt={room.data.images[0].alt}
                       class="w-full h-full object-cover"
                       loading="lazy"
+                      widths={[400, 800]}
+                      sizes="(max-width: 1023px) 90vw, 45vw"
+                      quality={80}
                     />
                     <button 
-                      class="absolute inset-0 bg-black/20 hover:bg-black/40 transition-colors duration-300 flex items-center justify-center group"
+                      class="absolute inset-0 bg-black/20 hover:bg-black/40 transition-colors duration-300 flex items-center justify-center group focus:outline-none focus:ring-2 focus:ring-primary-500"
                       data-room-gallery={room.data.id}
+                      aria-label={`查看${room.data.name}的所有照片，共${room.data.images.length}張`}
                     >
-                      <div class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 flex items-center gap-2 group-hover:scale-105 transition-transform duration-300">
+                      <div class="bg-white/90 rounded-lg px-6 py-3 flex items-center gap-2 group-hover-scale-105 transition-transform duration-300 backdrop-blur-sm">
                         <iconify-icon icon="heroicons:photo" class="text-xl"></iconify-icon>
                         <span class="font-medium">查看所有照片</span>
                       </div>
@@ -128,13 +210,16 @@ const commonAmenities = [
                       <button 
                         class="aspect-square rounded-lg overflow-hidden hover:opacity-80 transition-opacity duration-300"
                         data-room-gallery={room.data.id}
-                        data-image-index={imgIndex + 1}
+                        data-image-index={String(imgIndex + 1)}
                       >
-                        <img 
+                        <Image 
                           src={img.src}
                           alt={img.alt}
                           class="w-full h-full object-cover"
                           loading="lazy"
+                          width={200}
+                          height={200}
+                          quality="low"
                         />
                       </button>
                     ))}
@@ -150,13 +235,13 @@ const commonAmenities = [
                     <p class="text-lg text-gray-600 mb-2">{room.data.nameEn}</p>
                     <div class="flex items-center gap-2">
                       <iconify-icon icon="heroicons:home" class="text-primary-600"></iconify-icon>
-                      <span class="text-primary-700 font-medium">房號：{room.data.roomNumbers.join('、')}</span>
+                      <span class="font-medium text-primary-700">房號：{room.data.roomNumbers.join('、')}</span>
                     </div>
                   </div>
 
                   <div class="flex flex-wrap gap-3">
-                    {room.data.features && room.data.features.map((feature) => (
-                      <span class="px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-medium">
+                    {room.data.features && room.data.features.map((feature: string) => (
+                      <span class="px-4 py-2 rounded-full text-sm font-medium bg-primary-50 text-primary-700">
                         {feature}
                       </span>
                     ))}
@@ -168,40 +253,28 @@ const commonAmenities = [
 
                   <!-- 房型特色 -->
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                        <iconify-icon icon="heroicons:users" class="text-primary-600"></iconify-icon>
-                      </div>
-                      <div>
-                        <p class="text-sm text-gray-500">可住人數</p>
-                        <p class="font-semibold">{room.data.capacity}人</p>
-                      </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                        <iconify-icon icon="heroicons:squares-2x2" class="text-primary-600"></iconify-icon>
-                      </div>
-                      <div>
-                        <p class="text-sm text-gray-500">房間大小</p>
-                        <p class="font-semibold">{room.data.size}坪</p>
-                      </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                        <iconify-icon icon="fa6-solid:bed" class="text-primary-600"></iconify-icon>
-                      </div>
-                      <div>
-                        <p class="text-sm text-gray-500">床型</p>
-                        <p class="font-semibold">{room.data.beds[0].type}</p>
-                      </div>
-                    </div>
+                    <RoomFeatureIcon 
+                      icon="heroicons:users" 
+                      label="可住人數" 
+                      value={`${room.data.capacity}人`} 
+                    />
+                    <RoomFeatureIcon 
+                      icon="heroicons:squares-2x2" 
+                      label="房間大小" 
+                      value={`${room.data.size}坪`} 
+                    />
+                    <RoomFeatureIcon 
+                      icon="fa6-solid:bed" 
+                      label="床型" 
+                      value={room.data.beds[0].type} 
+                    />
                   </div>
 
                   <!-- 房間設施 -->
                   <div>
                     <h3 class="text-lg font-semibold mb-3">房間設施</h3>
                     <div class="grid grid-cols-2 gap-2">
-                      {room.data.facilities && room.data.facilities.slice(0, 6).map((facility) => (
+                      {room.data.facilities && room.data.facilities.slice(0, 6).map((facility: string) => (
                         <div class="flex items-center gap-2 text-gray-600">
                           <iconify-icon icon="heroicons:check-circle" class="text-primary-500"></iconify-icon>
                           <span class="text-sm">{facility}</span>
@@ -214,9 +287,10 @@ const commonAmenities = [
                   <div class="pt-6 border-t border-gray-200">
                     <a 
                       href={bookingUrl}
-                      class="inline-flex items-center gap-2 px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 w-full justify-center"
+                      class="btn-primary inline-flex items-center gap-2 px-8 py-3 rounded-lg font-medium w-full justify-center"
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`預訂${room.data.name}`}
                     >
                       <iconify-icon icon="heroicons:calendar"></iconify-icon>
                       查看房價與預訂
@@ -246,10 +320,10 @@ const commonAmenities = [
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {commonAmenities.map((amenity, index) => (
             <div 
-              class="amenity-card group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              class="amenity-card group bg-white rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 shadow-lg"
               data-animation-index={index}
             >
-              <div class="w-16 h-16 mb-4 bg-gradient-to-br from-primary-100 to-primary-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div class="w-16 h-16 mb-4 rounded-xl flex items-center justify-center group-hover-scale-110 transition-transform duration-300 bg-gradient-to-br from-primary-100 to-primary-200">
                 <iconify-icon icon={amenity.icon} class="text-2xl text-primary-600"></iconify-icon>
               </div>
               <h3 class="text-xl font-semibold mb-2 text-gray-800">{amenity.title}</h3>
@@ -272,9 +346,9 @@ const commonAmenities = [
               '公共休息區',
               '戶外陽台空間',
               '24小時前台服務'
-            ].map((service) => (
+            ].map((service: string) => (
               <div class="flex items-center gap-2">
-                <iconify-icon icon="heroicons:check-badge" class="text-primary-500 text-xl"></iconify-icon>
+                <iconify-icon icon="heroicons:check-badge" class="text-xl text-primary-500"></iconify-icon>
                 <span class="text-gray-700">{service}</span>
               </div>
             ))}
@@ -307,18 +381,18 @@ const commonAmenities = [
           <div class="cta-buttons flex flex-col sm:flex-row gap-4 justify-center">
             <a 
               href={bookingUrl}
-              class="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-primary-700 rounded-xl hover:bg-gray-50 transition-all duration-300 font-semibold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1"
+              class="btn-cta-primary group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold text-lg"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <iconify-icon icon="heroicons:calendar" class="text-2xl group-hover:scale-110 transition-transform duration-300"></iconify-icon>
+              <iconify-icon icon="heroicons:calendar" class="text-2xl transition-transform duration-300 group-hover-scale-110"></iconify-icon>
               立即預訂房間
             </a>
             <a 
               href={`tel:${contactInfo.phone}`}
-              class="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur text-white border-2 border-white/30 rounded-xl hover:bg-white/20 transition-all duration-300 font-semibold text-lg"
+              class="btn-cta-secondary group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold text-lg"
             >
-              <iconify-icon icon="heroicons:phone" class="text-2xl group-hover:scale-110 transition-transform duration-300"></iconify-icon>
+              <iconify-icon icon="heroicons:phone" class="text-2xl transition-transform duration-300 group-hover-scale-110"></iconify-icon>
               電話諮詢
             </a>
           </div>
@@ -329,34 +403,94 @@ const commonAmenities = [
 
   <!-- Lightbox -->
   <Lightbox />
+  
+  <!-- 回到頂部按鈕 -->
+  <button 
+    id="back-to-top" 
+    class="fixed bottom-8 right-8 w-12 h-12 text-white rounded-full transition-all duration-300 opacity-0 invisible focus:outline-none focus:ring-2 z-50 bg-primary-600 shadow-lg ring-primary-500"
+    aria-label="回到頂部"
+  >
+    <iconify-icon icon="heroicons:chevron-up" class="text-2xl"></iconify-icon>
+  </button>
 </Layout>
 
-<!-- 優化的房間圖片資料管理 -->
-<script define:vars={{ roomsData: sortedRooms }}>
-  // 使用更有效的方式存儲房間圖片資料
-  window.roomImages = {};
+<!-- 懶載入房間圖片資料 -->
+<script>
+  const lazyImageLoader = {
+    loaded: new Set<string>(),
+    async loadRoomImages(roomId: string): Promise<RoomImage[]> {
+      if (this.loaded.has(roomId) || (window.roomImages && window.roomImages[roomId])) {
+        return window.roomImages[roomId];
+      }
+      
+      if (!window.roomImagesData) {
+        window.roomImagesData = {};
+      }
+      
+      this.loaded.add(roomId);
+      return (window.roomImagesData[roomId] || []).map((img: any) => ({
+        src: img.src.src,
+        alt: img.alt,
+        width: img.src.width,
+        height: img.src.height,
+      }));
+    }
+  };
   
-  // 從 Astro 傳遞的資料初始化
-  roomsData.forEach(room => {
-    // 保持圖片物件陣列格式，Lightbox 需要 src 和 alt
+  window.lazyImageLoader = lazyImageLoader;
+</script>
+
+<!-- 初始化房間圖片資料 -->
+<script define:vars={{ sortedRooms }}>
+  window.roomImages = {};
+  window.roomImagesData = {};
+  
+  sortedRooms.slice(0, 2).forEach(room => {
     window.roomImages[room.data.id] = room.data.images;
+    window.roomImagesData[room.data.id] = room.data.images;
+  });
+  
+  sortedRooms.slice(2).forEach(room => {
+    window.roomImagesData[room.data.id] = room.data.images;
   });
 </script>
 
 <!-- 房間導航和高亮功能 -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // 房型導覽按鈕功能
-    const navButtons = document.querySelectorAll('[data-room-nav]');
-    const roomSections = document.querySelectorAll('.room-section');
+    const backToTopBtn = document.getElementById('back-to-top') as HTMLButtonElement | null;
+    if (backToTopBtn) {
+      const toggleBackToTop = () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.remove('opacity-0', 'invisible');
+          backToTopBtn.classList.add('opacity-100', 'visible');
+        } else {
+          backToTopBtn.classList.remove('opacity-100', 'visible');
+          backToTopBtn.classList.add('opacity-0', 'invisible');
+        }
+      };
+      
+      window.addEventListener('scroll', toggleBackToTop, { passive: true });
+      
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+    
+    const navButtons = document.querySelectorAll<HTMLButtonElement>('[data-room-nav]');
+    const roomSections = document.querySelectorAll<HTMLElement>('.room-section');
     
     navButtons.forEach(button => {
       button.addEventListener('click', () => {
         const roomId = button.getAttribute('data-room-nav');
-        const targetSection = document.getElementById(`room-${roomId}`);
+        if (!roomId) return;
         
+        const targetSection = document.getElementById(`room-${roomId}`) as HTMLElement | null;
         if (targetSection) {
-          const stickyNavHeight = 144; // sticky nav + header
+          const stickyNavHeight = 144;
           const targetPosition = targetSection.offsetTop - stickyNavHeight;
           
           window.scrollTo({
@@ -367,7 +501,6 @@ const commonAmenities = [
       });
     });
     
-    // 滾動時更新活動按鈕
     const updateActiveButton = () => {
       const scrollY = window.scrollY;
       const stickyNavHeight = 144;
@@ -379,19 +512,16 @@ const commonAmenities = [
         if (scrollY >= sectionTop && scrollY < sectionBottom) {
           const roomId = section.getAttribute('data-room-id');
           navButtons.forEach(btn => {
-            if (btn.getAttribute('data-room-nav') === roomId) {
-              btn.classList.add('bg-primary-100', 'text-primary-700', 'font-semibold');
-              btn.classList.remove('text-gray-600');
-            } else {
-              btn.classList.remove('bg-primary-100', 'text-primary-700', 'font-semibold');
-              btn.classList.add('text-gray-600');
-            }
+            const isTarget = btn.getAttribute('data-room-nav') === roomId;
+            btn.classList.toggle('bg-primary-100', isTarget);
+            btn.classList.toggle('text-primary-700', isTarget);
+            btn.classList.toggle('font-semibold', isTarget);
+            btn.classList.toggle('text-gray-600', !isTarget);
           });
         }
       });
     };
     
-    // 節流函數
     let ticking = false;
     const scrollHandler = () => {
       if (!ticking) {
@@ -403,24 +533,31 @@ const commonAmenities = [
       }
     };
     
-    window.addEventListener('scroll', scrollHandler);
+    window.addEventListener('scroll', scrollHandler, { passive: true });
     
-    // 圖片畫廊按鈕功能
-    const galleryButtons = document.querySelectorAll('[data-room-gallery]');
+    const galleryButtons = document.querySelectorAll<HTMLButtonElement>('[data-room-gallery]');
     
     galleryButtons.forEach(button => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', async () => {
         const roomId = button.getAttribute('data-room-gallery');
         const imageIndex = button.getAttribute('data-image-index') || '0';
         
-        // 觸發 Lightbox
-        if (window.openLightbox && window.roomImages[roomId]) {
-          window.openLightbox(window.roomImages[roomId], parseInt(imageIndex));
+        if (roomId && !window.roomImages[roomId] && window.roomImagesData[roomId]) {
+          window.roomImages[roomId] = window.roomImagesData[roomId];
+        }
+        
+        if (roomId && window.openLightbox && window.roomImages[roomId]) {
+          const lightboxImages = window.roomImages[roomId].map((img: any) => ({
+            src: img.src.src,
+            alt: img.alt,
+            width: img.src.width,
+            height: img.src.height
+          }));
+          window.openLightbox(lightboxImages, parseInt(imageIndex));
         }
       });
     });
     
-    // 檢查 URL 參數（保留原有功能）
     const urlParams = new URLSearchParams(window.location.search);
     const gotoRoom = urlParams.get('goto');
     const hashRoom = window.location.hash.slice(1);
@@ -434,29 +571,24 @@ const commonAmenities = [
     }
     
     if (targetId) {
-      // 處理特殊跳轉規則
       if (targetId === 'room-302') {
         targetId = 'room-301';
       } else if (targetId === 'room-306' || targetId === 'room-307') {
         targetId = 'room-305';
       }
       
-      // 延遲執行以確保頁面完全載入
       setTimeout(() => {
-        const targetElement = document.getElementById(targetId);
+        const targetElement = document.getElementById(targetId) as HTMLElement | null;
         if (targetElement) {
-          // 計算滾動位置（考慮導航列高度）
           const stickyNavHeight = 144;
           const elementTop = targetElement.offsetTop;
           const scrollTo = elementTop - stickyNavHeight;
           
-          // 平滑滾動
           window.scrollTo({
             top: scrollTo,
             behavior: 'smooth'
           });
           
-          // 更新活動按鈕
           setTimeout(updateActiveButton, 100);
         }
       }, 500);
@@ -466,16 +598,13 @@ const commonAmenities = [
 
 <!-- Motion One 動畫 -->
 <script>
-  // 確保內容在動畫載入前是可見的
   document.addEventListener('DOMContentLoaded', () => {
-    // 房間區段總是保持可見
-    const roomSections = document.querySelectorAll('.room-section');
+    const roomSections = document.querySelectorAll<HTMLElement>('.room-section');
     roomSections.forEach(section => {
       section.style.opacity = '1';
     });
     
-    // 其他元素根據狀態設置
-    const otherElements = document.querySelectorAll('.hero-title, .hero-subtitle, .amenities-title, .amenity-card, .cta-title, .cta-subtitle, .cta-buttons');
+    const otherElements = document.querySelectorAll<HTMLElement>('.hero-title, .hero-subtitle, .amenities-title, .amenity-card, .cta-title, .cta-subtitle, .cta-buttons');
     otherElements.forEach(el => {
       if (!el.style.opacity) {
         el.style.opacity = '1';
@@ -483,24 +612,31 @@ const commonAmenities = [
     });
   });
   
-  // 確保 Motion One 載入後再執行動畫
   window.addEventListener('load', async () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      const allElements = document.querySelectorAll<HTMLElement>('.hero-title, .hero-subtitle, .amenities-title, .amenity-card, .room-section, .cta-title, .cta-subtitle, .cta-buttons');
+      allElements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = '';
+      });
+      return;
+    }
+    
     try {
       const { animate, stagger } = await import('motion');
       
-      // 調試：確認 Motion One 載入成功
       if (import.meta.env.DEV) {
         console.info('Motion One loaded successfully');
       }
       
-      // 動畫載入成功後，重置元素狀態準備動畫
-      const animatedElements = document.querySelectorAll('.hero-title, .hero-subtitle, .amenities-title, .amenity-card, .cta-title, .cta-subtitle, .cta-buttons');
+      const animatedElements = document.querySelectorAll<HTMLElement>('.hero-title, .hero-subtitle, .amenities-title, .amenity-card, .cta-title, .cta-subtitle, .cta-buttons');
       animatedElements.forEach(el => {
         el.style.opacity = '0';
       });
       
-      // Hero 動畫
-      const heroTitle = document.querySelector('.hero-title');
+      const heroTitle = document.querySelector<HTMLElement>('.hero-title');
       if (heroTitle) {
         heroTitle.style.opacity = '0';
         animate(heroTitle, 
@@ -509,7 +645,7 @@ const commonAmenities = [
         );
       }
       
-      const heroSubtitle = document.querySelector('.hero-subtitle');
+      const heroSubtitle = document.querySelector<HTMLElement>('.hero-subtitle');
       if (heroSubtitle) {
         heroSubtitle.style.opacity = '0';
         animate(heroSubtitle, 
@@ -518,41 +654,41 @@ const commonAmenities = [
         );
       }
       
-      // 房間區段動畫
-      const roomSections = document.querySelectorAll('.room-section');
+      const roomSections = document.querySelectorAll<HTMLElement>('.room-section');
       if (roomSections.length > 0) {
         const sectionObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              const section = entry.target;
-              const images = section.querySelector('.room-images');
-              const info = section.querySelector('.room-info');
+              const section = entry.target as HTMLElement;
+              const images = section.querySelector<HTMLElement>('.room-images');
+              const info = section.querySelector<HTMLElement>('.room-info');
               
-              // 圖片區動畫
+              const isMobile = window.innerWidth < 768;
+              const animDistance = isMobile ? 20 : 50;
+              const animDuration = isMobile ? 0.5 : 0.8;
+              
               if (images) {
                 animate(images,
-                  { opacity: [0, 1], x: [-50, 0] },
-                  { duration: 0.8, easing: 'ease-out' }
+                  { opacity: [0, 1], x: [-animDistance, 0] },
+                  { duration: animDuration, easing: 'ease-out' }
                 );
               }
               
-              // 資訊區動畫
               if (info) {
                 animate(info,
-                  { opacity: [0, 1], x: [50, 0] },
-                  { duration: 0.8, delay: 0.2, easing: 'ease-out' }
+                  { opacity: [0, 1], x: [animDistance, 0] },
+                  { duration: animDuration, delay: isMobile ? 0.1 : 0.2, easing: 'ease-out' }
                 );
               }
               
               sectionObserver.unobserve(section);
             }
           });
-        }, { rootMargin: '0px 0px -100px 0px' });
+        }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
         
         roomSections.forEach(section => {
-          // 設置初始狀態
-          const images = section.querySelector('.room-images');
-          const info = section.querySelector('.room-info');
+          const images = section.querySelector<HTMLElement>('.room-images');
+          const info = section.querySelector<HTMLElement>('.room-info');
           if (images) images.style.opacity = '0';
           if (info) info.style.opacity = '0';
           
@@ -560,8 +696,7 @@ const commonAmenities = [
         });
       }
       
-      // 共同設施標題動畫
-      const amenitiesTitle = document.querySelector('.amenities-title');
+      const amenitiesTitle = document.querySelector<HTMLElement>('.amenities-title');
       if (amenitiesTitle) {
         const titleObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
@@ -577,11 +712,10 @@ const commonAmenities = [
         titleObserver.observe(amenitiesTitle);
       }
       
-      // 設施卡片動畫
-      const amenityCards = document.querySelectorAll('.amenity-card');
+      const amenityCards = document.querySelectorAll<HTMLElement>('.amenity-card');
       if (amenityCards.length > 0) {
         const cardObserver = new IntersectionObserver((entries) => {
-          const visibleCards = entries.filter(entry => entry.isIntersecting).map(entry => entry.target);
+          const visibleCards = entries.filter(entry => entry.isIntersecting).map(entry => entry.target as HTMLElement);
           
           if (visibleCards.length > 0) {
             animate(visibleCards,
@@ -598,19 +732,18 @@ const commonAmenities = [
         });
       }
       
-      // CTA 區塊動畫
       const ctaElements = [
-        { el: document.querySelector('.cta-title'), animation: { opacity: [0, 1], scale: [0.9, 1] }, delay: 0 },
-        { el: document.querySelector('.cta-subtitle'), animation: { opacity: [0, 1], y: [20, 0] }, delay: 0.2 },
-        { el: document.querySelector('.cta-buttons'), animation: { opacity: [0, 1], y: [20, 0] }, delay: 0.4 }
+        { el: document.querySelector<HTMLElement>('.cta-title'), animation: { opacity: [0, 1], scale: [0.9, 1] }, delay: 0 },
+        { el: document.querySelector<HTMLElement>('.cta-subtitle'), animation: { opacity: [0, 1], y: [20, 0] }, delay: 0.2 },
+        { el: document.querySelector<HTMLElement>('.cta-buttons'), animation: { opacity: [0, 1], y: [20, 0] }, delay: 0.4 }
       ];
       
       const ctaObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const config = ctaElements.find(item => item.el === entry.target);
-            if (config) {
-              animate(entry.target, config.animation, {
+            if (config && config.el) {
+              animate(config.el, config.animation, {
                 duration: 0.6,
                 delay: config.delay,
                 easing: 'ease-out'
@@ -626,8 +759,7 @@ const commonAmenities = [
       });
     } catch (error) {
       console.error('Motion One 載入失敗:', error);
-      // 如果動畫失敗，確保所有內容可見
-      const allElements = document.querySelectorAll('.hero-title, .hero-subtitle, .amenities-title, .amenity-card, .room-section, .cta-title, .cta-subtitle, .cta-buttons');
+      const allElements = document.querySelectorAll<HTMLElement>('.hero-title, .hero-subtitle, .amenities-title, .amenity-card, .room-section, .cta-title, .cta-subtitle, .cta-buttons');
       allElements.forEach(el => {
         el.style.opacity = '1';
         el.style.transform = '';
@@ -637,13 +769,99 @@ const commonAmenities = [
 </script>
 
 <style>
+  /* Hero 背景漸層 */
+  :global(.bg-gradient-hero) {
+    background: linear-gradient(135deg, #7c9bb5 0%, #9bb0c4 25%, #b8c7d6 50%, #a8b8c8 75%, #8fa3b3 100%);
+    background-size: 400% 400%;
+  }
+  
+  /* 房型導覽按鈕樣式 */
+  :global(.room-nav-btn:hover) {
+    color: var(--color-primary-600);
+    background-color: var(--color-primary-50);
+  }
+  
+  :global(.room-nav-btn:focus) {
+    --tw-ring-color: var(--color-primary-500);
+  }
+  
+  /* 回到頂部按鈕 */
+  :global(#back-to-top:hover) {
+    background-color: var(--color-primary-700);
+    transform: scale(1.1);
+  }
+  
+  :global(#back-to-top:focus) {
+    --tw-ring-color: var(--ring-color);
+  }
+  
+  /* 設施卡片 hover 效果 */
+  :global(.amenity-card:hover) {
+    box-shadow: var(--shadow-xl);
+  }
+  
+  /* Scale hover 效果 */
+  :global(.group:hover .group-hover-scale-105) {
+    transform: scale(1.05);
+  }
+  
+  :global(.group:hover .group-hover-scale-110) {
+    transform: scale(1.1);
+  }
+  
+  /* 統一 CTA 按鈕樣式 */
+  :global(.btn-primary) {
+    background-color: var(--color-primary-600);
+    color: var(--color-white);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  :global(.btn-primary:hover) {
+    background-color: var(--color-primary-700);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(var(--translate-y-0-5));
+  }
+  
+  :global(.btn-cta-primary) {
+    background-color: var(--color-white);
+    color: var(--color-primary-700);
+    box-shadow: var(--shadow-xl);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  :global(.btn-cta-primary:hover) {
+    background-color: var(--color-gray-50);
+    box-shadow: var(--shadow-2xl);
+    transform: translateY(var(--translate-y-1));
+  }
+  
+  :global(.btn-cta-secondary) {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  :global(.btn-cta-secondary:hover) {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
   /* 隱藏水平捲軸 */
   :global(.scrollbar-hide) {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
   
-  :global(.scrollbar-hide::-webkit-scrollbar) {
+  /* Webkit scrollbar */
+  .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
   
@@ -693,22 +911,19 @@ const commonAmenities = [
     will-change: auto;
   }
   
-  /* 手機版優化 */
-  @media (max-width: 768px) {
-    /* 減少動畫效果 */
-    @media (prefers-reduced-motion: reduce) {
-      :global(.hero-title),
-      :global(.hero-subtitle),
-      :global(.amenities-title),
-      :global(.amenity-card),
-      :global(.room-section),
-      :global(.cta-title),
-      :global(.cta-subtitle),
-      :global(.cta-buttons) {
-        opacity: 1;
-        animation: none;
-        transition: none;
-      }
+  /* 減少動畫效果 */
+  @media (prefers-reduced-motion: reduce) {
+    :global(.hero-title),
+    :global(.hero-subtitle),
+    :global(.amenities-title),
+    :global(.amenity-card),
+    :global(.room-section),
+    :global(.cta-title),
+    :global(.cta-subtitle),
+    :global(.cta-buttons) {
+      opacity: 1;
+      animation: none;
+      transition: none;
     }
   }
 </style>

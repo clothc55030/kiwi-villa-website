@@ -6,14 +6,52 @@
   <!-- 背景遮罩 -->
   <div class="lightbox-overlay absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
   
-  <!-- 關閉按鈕 -->
-  <button 
-    class="lightbox-close absolute top-4 right-4 z-10 text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2"
-    aria-label="關閉圖片預覽"
-    tabindex="0"
-  >
-    <iconify-icon icon="heroicons:x-mark" class="text-3xl"></iconify-icon>
-  </button>
+  <!-- 控制按鈕區 -->
+  <div class="absolute top-4 right-4 z-10 flex gap-2">
+    <!-- 縮放按鈕 -->
+    <button 
+      class="lightbox-zoom-in text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2 bg-black/30 backdrop-blur-sm"
+      aria-label="放大圖片"
+      tabindex="0"
+    >
+      <iconify-icon icon="heroicons:magnifying-glass-plus" class="text-2xl"></iconify-icon>
+    </button>
+    
+    <button 
+      class="lightbox-zoom-out text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2 bg-black/30 backdrop-blur-sm"
+      aria-label="縮小圖片"
+      tabindex="0"
+    >
+      <iconify-icon icon="heroicons:magnifying-glass-minus" class="text-2xl"></iconify-icon>
+    </button>
+    
+    <!-- 全螢幕按鈕 -->
+    <button 
+      class="lightbox-fullscreen text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2 bg-black/30 backdrop-blur-sm"
+      aria-label="全螢幕"
+      tabindex="0"
+    >
+      <iconify-icon icon="heroicons:arrows-pointing-out" class="text-2xl"></iconify-icon>
+    </button>
+    
+    <!-- 下載按鈕 -->
+    <button 
+      class="lightbox-download text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2 bg-black/30 backdrop-blur-sm"
+      aria-label="下載圖片"
+      tabindex="0"
+    >
+      <iconify-icon icon="heroicons:arrow-down-tray" class="text-2xl"></iconify-icon>
+    </button>
+    
+    <!-- 關閉按鈕 -->
+    <button 
+      class="lightbox-close text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-2 bg-black/30 backdrop-blur-sm"
+      aria-label="關閉圖片預覽"
+      tabindex="0"
+    >
+      <iconify-icon icon="heroicons:x-mark" class="text-3xl"></iconify-icon>
+    </button>
+  </div>
   
   <!-- 導航按鈕 -->
   <button 
@@ -33,14 +71,17 @@
   </button>
   
   <!-- 圖片容器 -->
-  <div class="lightbox-content relative w-full h-full flex items-center justify-center p-4">
-    <img 
-      class="lightbox-image max-w-full max-h-full object-contain"
-      src="" 
-      alt=""
-      role="img"
-      aria-describedby="lightbox-counter"
-    />
+  <div class="lightbox-content relative w-full h-full flex items-center justify-center p-4 overflow-hidden">
+    <div class="lightbox-image-container relative transition-transform duration-300" style="transform-origin: center center;">
+      <img 
+        class="lightbox-image max-w-full max-h-full object-contain cursor-move"
+        src="" 
+        alt=""
+        role="img"
+        aria-describedby="lightbox-counter"
+        draggable="false"
+      />
+    </div>
     
     <!-- 載入中指示器 -->
     <div class="lightbox-loading absolute inset-0 flex items-center justify-center">
@@ -67,10 +108,19 @@
   .lightbox-image {
     opacity: 0;
     transition: opacity 0.3s ease;
+    user-select: none;
   }
   
   .lightbox-image.loaded {
     opacity: 1;
+  }
+  
+  .lightbox-image.zoomed {
+    cursor: grab;
+  }
+  
+  .lightbox-image.dragging {
+    cursor: grabbing;
   }
   
   .lightbox-loading {
@@ -93,10 +143,15 @@
     private lightbox: HTMLElement;
     private overlay: HTMLElement;
     private image: HTMLImageElement;
+    private imageContainer: HTMLElement;
     private loading: HTMLElement;
     private closeBtn: HTMLElement;
     private prevBtn: HTMLElement;
     private nextBtn: HTMLElement;
+    private zoomInBtn: HTMLElement;
+    private zoomOutBtn: HTMLElement;
+    private fullscreenBtn: HTMLElement;
+    private downloadBtn: HTMLElement;
     private currentIndexEl: HTMLElement;
     private totalCountEl: HTMLElement;
     
@@ -104,15 +159,26 @@
     private currentIndex: number = 0;
     private touchStartX: number = 0;
     private touchEndX: number = 0;
+    private zoomLevel: number = 1;
+    private isDragging: boolean = false;
+    private dragStartX: number = 0;
+    private dragStartY: number = 0;
+    private translateX: number = 0;
+    private translateY: number = 0;
     
     constructor() {
       this.lightbox = document.getElementById('lightbox')!;
       this.overlay = this.lightbox.querySelector('.lightbox-overlay')!;
       this.image = this.lightbox.querySelector('.lightbox-image')!;
+      this.imageContainer = this.lightbox.querySelector('.lightbox-image-container')!;
       this.loading = this.lightbox.querySelector('.lightbox-loading')!;
       this.closeBtn = this.lightbox.querySelector('.lightbox-close')!;
       this.prevBtn = this.lightbox.querySelector('.lightbox-prev')!;
       this.nextBtn = this.lightbox.querySelector('.lightbox-next')!;
+      this.zoomInBtn = this.lightbox.querySelector('.lightbox-zoom-in')!;
+      this.zoomOutBtn = this.lightbox.querySelector('.lightbox-zoom-out')!;
+      this.fullscreenBtn = this.lightbox.querySelector('.lightbox-fullscreen')!;
+      this.downloadBtn = this.lightbox.querySelector('.lightbox-download')!;
       this.currentIndexEl = this.lightbox.querySelector('.current-index')!;
       this.totalCountEl = this.lightbox.querySelector('.total-count')!;
       
@@ -125,6 +191,25 @@
       this.overlay.addEventListener('click', () => this.close());
       this.prevBtn.addEventListener('click', () => this.prev());
       this.nextBtn.addEventListener('click', () => this.next());
+      this.zoomInBtn.addEventListener('click', () => this.zoomIn());
+      this.zoomOutBtn.addEventListener('click', () => this.zoomOut());
+      this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+      this.downloadBtn.addEventListener('click', () => this.downloadImage());
+      
+      // 拖曳事件
+      this.image.addEventListener('mousedown', (e) => this.startDrag(e));
+      document.addEventListener('mousemove', (e) => this.drag(e));
+      document.addEventListener('mouseup', () => this.endDrag());
+      
+      // 滑鼠滾輪縮放
+      this.imageContainer.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (e.deltaY < 0) {
+          this.zoomIn();
+        } else {
+          this.zoomOut();
+        }
+      }, { passive: false });
       
       // 鍵盤事件
       document.addEventListener('keydown', (e) => {
@@ -179,6 +264,7 @@
     open() {
       this.lightbox.classList.remove('hidden');
       document.body.classList.add('lightbox-open');
+      this.resetZoom();
       
       requestAnimationFrame(() => {
         this.lightbox.classList.add('active');
@@ -215,6 +301,9 @@
       const imageData = this.images[index];
       if (!imageData) return;
       
+      // 重置縮放和位置
+      this.resetZoom();
+      
       // 顯示載入中
       this.loading.classList.remove('hidden');
       this.image.classList.remove('loaded');
@@ -248,6 +337,81 @@
       // 更新導航按鈕狀態
       this.prevBtn.style.display = this.images.length > 1 ? 'block' : 'none';
       this.nextBtn.style.display = this.images.length > 1 ? 'block' : 'none';
+    }
+    
+    // 縮放功能
+    private zoomIn() {
+      if (this.zoomLevel < 3) {
+        this.zoomLevel += 0.5;
+        this.updateZoom();
+      }
+    }
+    
+    private zoomOut() {
+      if (this.zoomLevel > 0.5) {
+        this.zoomLevel -= 0.5;
+        this.updateZoom();
+      }
+    }
+    
+    private resetZoom() {
+      this.zoomLevel = 1;
+      this.translateX = 0;
+      this.translateY = 0;
+      this.updateZoom();
+    }
+    
+    private updateZoom() {
+      this.imageContainer.style.transform = `scale(${this.zoomLevel}) translate(${this.translateX}px, ${this.translateY}px)`;
+      
+      if (this.zoomLevel > 1) {
+        this.image.classList.add('zoomed');
+      } else {
+        this.image.classList.remove('zoomed');
+      }
+    }
+    
+    // 拖曳功能
+    private startDrag(e: MouseEvent) {
+      if (this.zoomLevel > 1) {
+        this.isDragging = true;
+        this.dragStartX = e.clientX - this.translateX;
+        this.dragStartY = e.clientY - this.translateY;
+        this.image.classList.add('dragging');
+      }
+    }
+    
+    private drag(e: MouseEvent) {
+      if (this.isDragging) {
+        this.translateX = e.clientX - this.dragStartX;
+        this.translateY = e.clientY - this.dragStartY;
+        this.updateZoom();
+      }
+    }
+    
+    private endDrag() {
+      this.isDragging = false;
+      this.image.classList.remove('dragging');
+    }
+    
+    // 全螢幕功能
+    private toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        this.lightbox.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+    
+    // 下載功能
+    private downloadImage() {
+      const imageData = this.images[this.currentIndex];
+      if (!imageData) return;
+      
+      const link = document.createElement('a');
+      link.href = imageData.src;
+      link.download = imageData.alt || 'image';
+      link.click();
     }
   }
   
