@@ -717,8 +717,6 @@ function initImageLightbox() {
         const restraint = 100; // 垂直方向最大偏移
         const allowedTime = 500; // 最大滑動時間
         
-        lightboxContainer.style.touchAction = 'pan-y';
-
         lightboxContainer.addEventListener('touchstart', function(e) {
             if (!lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
             
@@ -731,15 +729,9 @@ function initImageLightbox() {
         lightboxContainer.addEventListener('touchmove', function(e) {
             if (!lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
             
-            const touchObj = e.changedTouches[0];
-            distX = touchObj.pageX - startX;
-            distY = touchObj.pageY - startY;
-
-            // 只在水平滑動時阻止預設行為
-            if (Math.abs(distX) > Math.abs(distY)) {
-                e.preventDefault();
-            }
-        }, { passive: false });
+            // 防止頁面滾動
+            e.preventDefault();
+        });
         
         lightboxContainer.addEventListener('touchend', function(e) {
             if (!lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
@@ -759,7 +751,7 @@ function initImageLightbox() {
                     showNextImage();
                 }
             }
-        }, { passive: true });
+        }, { passive: false });
         
         // 滑鼠事件支援（桌面版測試用）
         let isMouseDown = false;
@@ -774,13 +766,13 @@ function initImageLightbox() {
             mouseStartY = e.pageY;
             startTime = new Date().getTime();
             e.preventDefault();
-        }, { passive: true });
+        });
         
         lightboxContainer.addEventListener('mousemove', function(e) {
             if (!isMouseDown || !lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
             
             e.preventDefault();
-        }, { passive: true });
+        });
         
         lightboxContainer.addEventListener('mouseup', function(e) {
             if (!isMouseDown || !lightbox.classList.contains('active') || currentGalleryImages.length <= 1) return;
@@ -800,11 +792,11 @@ function initImageLightbox() {
                     showNextImage();
                 }
             }
-        }, { passive: true });
+        });
         
         lightboxContainer.addEventListener('mouseleave', function() {
             isMouseDown = false;
-        }, { passive: true });
+        });
     }
 }
 
@@ -955,7 +947,7 @@ function initGallerySwipe(gallery, galleryItems) {
         isScrolling = true;
         gallery.style.scrollBehavior = 'auto';
         e.preventDefault();
-    }, { passive: true });
+    });
     
     gallery.addEventListener('mousemove', (e) => {
         if (!isScrolling) return;
@@ -964,18 +956,18 @@ function initGallerySwipe(gallery, galleryItems) {
         const walk = (x - startX) * 1.5;
         gallery.scrollLeft = scrollLeft - walk;
         e.preventDefault();
-    }, { passive: true });
+    });
     
     gallery.addEventListener('mouseup', () => {
         isScrolling = false;
         gallery.style.scrollBehavior = 'smooth';
         snapToNearestImage(gallery, galleryItems);
-    }, { passive: true });
+    });
     
     gallery.addEventListener('mouseleave', () => {
         isScrolling = false;
         gallery.style.scrollBehavior = 'smooth';
-    }, { passive: true });
+    });
 }
 
 function snapToNearestImage(gallery, galleryItems) {

@@ -1,0 +1,36 @@
+{
+  "name": "kiwi-villa-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/partytown": "^2.1.4",
+    "@astrojs/sitemap": "^3.4.1",
+    "@tailwindcss/vite": "^4.0.0-beta",
+    "astro": "^5.10.1",
+    "astro-seo": "^0.8.4",
+    "blurhash": "^2.0.5",
+    "iconify-icon": "^3.0.0",
+    "motion": "^12.19.2",
+    "sharp": "^0.34.2",
+    "tailwindcss": "^4.0.0-beta"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "terser": "^5.43.1"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp"
+    ]
+  }
+}

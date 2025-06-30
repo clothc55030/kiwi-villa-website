@@ -1,0 +1,817 @@
+/* ==========================================================================
+   Index Page Styles - 首頁專用樣式
+   ========================================================================== */
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Hero圖片結構 - 使用picture/img取代CSS背景 */
+.hero-picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    /* 性能優化 */
+    will-change: auto;
+    transform: translate3d(0, 0, 0);
+    aspect-ratio: 16/9;
+}
+
+/* 多格式圖片支援現在由HTML picture元素處理 */
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 方案一：純色遮罩 - 最佳性能 */
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    /* 移除複雜漸變以提升LCP性能 */
+    /* background: linear-gradient(...); */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 900px;
+    padding: var(--space-xl) var(--space-md) calc(var(--space-xl) * 2);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 30px;
+    /* 性能優化 - 使用更簡單的背景效果 */
+    /* backdrop-filter: blur(10px); */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* 立即顯示優化 - 簡潔0.3s淡入 */
+.hero-content-immediate {
+    animation: heroFadeIn 0.3s ease-out;
+}
+
+.hero-scroll-immediate {
+    animation: heroScrollFade 0.3s ease-out 0.2s both;
+}
+
+/* 簡潔動畫 - 只有淡入效果 */
+@keyframes heroFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes heroScrollFade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.hero-subtitle-small {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+    margin-bottom: var(--space-sm);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: var(--space-sm);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero-subtitle {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: var(--space-lg);
+    font-style: italic;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+}
+
+.hero-poem {
+    margin-bottom: var(--space-lg);
+}
+
+.hero-poem p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: var(--space-xs);
+    font-style: italic;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-call-to-action {
+    margin-bottom: var(--space-xl);
+}
+
+.hero-call-to-action p {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    color: var(--white);
+    line-height: 1.7;
+    margin-bottom: var(--space-xs);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-call-to-action strong {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 600;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.hero-final-line {
+    font-size: clamp(0.95rem, 2vw, 1.125rem);
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    margin-top: var(--space-sm);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xxl);
+}
+
+.hero-buttons .btn {
+    padding: 16px 32px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    border-radius: 10px;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* 性能優化 - 移除backdrop-filter */
+    /* backdrop-filter: blur(10px); */
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    color: var(--white);
+    animation: bounce 1s ease-in-out infinite;
+    cursor: pointer;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-scroll-indicator i {
+    font-size: 1.5rem;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* Quick Intro Section */
+.quick-intro-section {
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.quick-intro-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+.intro-content {
+    margin-bottom: var(--space-xxl);
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-xl);
+}
+
+.intro-card {
+    background: var(--white);
+    padding: var(--space-xl);
+    border-radius: 16px;
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    transition: all var(--transition-normal) ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.intro-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(160, 146, 125, 0.05), transparent);
+    transition: left var(--transition-slow) ease;
+}
+
+.intro-card:hover::before {
+    left: 100%;
+}
+
+.intro-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.card-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-lg);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.card-icon i {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.card-title {
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+.card-description {
+    margin-bottom: var(--space-lg);
+    line-height: 1.7;
+}
+
+.card-link {
+    color: var(--primary-color);
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: all var(--transition-fast) ease;
+}
+
+.card-link:hover {
+    color: var(--primary-dark);
+    transform: translateX(4px);
+}
+
+.card-link i {
+    font-size: 0.875rem;
+    transition: transform var(--transition-fast) ease;
+}
+
+.card-link:hover i {
+    transform: translateX(4px);
+}
+
+/* Social Media Section - 優化版DOM結構 */
+.social-media-section {
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.social-media-content {
+    text-align: center;
+}
+
+.social-media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+}
+
+/* 簡化的社交媒體卡片 - 減少DOM深度 */
+.social-card {
+    background: var(--white);
+    padding: var(--space-xl);
+    border-radius: 20px;
+    text-decoration: none;
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-normal) ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left var(--transition-slow) ease;
+}
+
+.social-card:hover::before {
+    left: 100%;
+}
+
+.social-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+}
+
+/* 簡化的圖標樣式 - 直接應用於i元素 */
+.social-card i {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-lg);
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.social-card.instagram i {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+}
+
+.social-card.facebook i {
+    background: #1877f2;
+}
+
+.social-card.line i {
+    background: #00c300;
+}
+
+.social-card h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+    font-size: 1.25rem;
+}
+
+.social-card p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+    font-size: 1rem;
+}
+
+.hashtag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--white);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* CTA Section */
+.cta-section {
+    position: relative;
+    padding: var(--space-xxl) 0;
+    overflow: hidden;
+}
+
+.cta-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        var(--secondary-color) 0%, 
+        var(--primary-color) 50%, 
+        var(--accent-color) 100%
+    );
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease-in-out infinite;
+    z-index: 1;
+}
+
+.cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(74, 69, 63, 0.7);
+    z-index: 2;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: var(--white);
+}
+
+.cta-title {
+    color: var(--white);
+    margin-bottom: var(--space-md);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cta-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xl);
+    font-weight: 300;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    padding: 16px 32px;
+    font-size: 1.125rem;
+    border-radius: 10px;
+    /* 性能優化 - 移除backdrop-filter */
+    /* backdrop-filter: blur(10px); */
+}
+
+.cta-buttons .btn-primary {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+}
+
+.cta-buttons .btn-primary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.cta-buttons .btn-secondary {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: var(--white);
+}
+
+.cta-buttons .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+}
+
+/* Hero 圖片響應式優化 */
+@media (max-width: 768px) {
+    .hero-image {
+        aspect-ratio: 4/3;
+    }
+}
+
+/* 針對高密度螢幕優化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-image {
+        /* 高DPI螢幕優化 */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 100vh;
+        height: auto;
+        padding-bottom: var(--space-xl);
+    }
+    
+    .hero-content {
+        padding: var(--space-lg) var(--space-sm) calc(var(--space-lg) * 2);
+        margin: 0 var(--space-sm) 0;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: calc(var(--space-xxl) + var(--space-lg));
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .hero-scroll-indicator {
+        bottom: 15px;
+    }
+    
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .intro-card {
+        padding: var(--space-lg);
+    }
+    
+    .card-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .card-icon i {
+        font-size: 1.5rem;
+    }
+    
+
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .social-media-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .social-card {
+        padding: var(--space-lg);
+    }
+    
+    .social-card i {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        min-height: 100vh;
+        height: auto;
+        padding-bottom: calc(var(--space-xl) * 1.5);
+    }
+    
+    .hero-content {
+        padding: var(--space-md) var(--space-sm) calc(var(--space-md) * 2.5);
+        margin-top: 0;
+    }
+    
+    .hero-buttons {
+        margin-bottom: calc(var(--space-xxl) * 1.5);
+    }
+    
+    .hero-scroll-indicator {
+        bottom: 10px;
+    }
+    
+    .intro-card {
+        padding: var(--space-md);
+    }
+    
+    .card-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: var(--space-md);
+    }
+    
+    .card-icon i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Scroll Animations - 僅桌面版 */
+@media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+    .intro-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+    }
+    
+    .intro-card.aos-animate {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .feature-item {
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: all 0.4s ease;
+    }
+    
+    .feature-item.aos-animate {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .hero-section {
+        height: auto;
+        min-height: auto;
+        padding: var(--space-xl) 0;
+    }
+    
+    .hero-background,
+    .hero-overlay,
+    .cta-background,
+    .cta-overlay {
+        display: none;
+    }
+    
+    .hero-content,
+    .cta-content {
+        color: var(--text-primary);
+    }
+    
+    .cta-title {
+        color: var(--text-primary);
+    }
+}
+
+/* 手機版性能優化 - 禁用複雜動畫和效果 */
+@media (max-width: 768px) {
+    /* 禁用複雜的偽元素動畫以提升性能 */
+    .intro-card::before,
+    .social-card::before {
+        display: none;
+    }
+    
+    /* 簡化hover效果，只保留基本的transform */
+    .intro-card:hover,
+    .social-card:hover {
+        transform: translateY(-4px);
+        transition: transform 0.2s ease;
+    }
+    
+    /* 減少box-shadow複雜度 */
+    .intro-card,
+    .social-card {
+        box-shadow: 0 2px 8px rgba(74, 69, 63, 0.08);
+    }
+    
+    .intro-card:hover,
+    .social-card:hover {
+        box-shadow: 0 4px 12px rgba(74, 69, 63, 0.12);
+    }
+    
+    /* Hero區塊優化 - 減少層疊和複雜背景 */
+    .hero-content {
+        background: rgba(0, 0, 0, 0.4); /* 簡化背景 */
+        border: none; /* 移除邊框 */
+    }
+    
+    /* 禁用不必要的will-change */
+    .hero-image {
+        will-change: auto;
+        transform: none;
+    }
+    
+    /* 簡化按鈕樣式 */
+    .hero-buttons .btn,
+    .cta-buttons .btn {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: transform 0.15s ease;
+    }
+    
+    .hero-buttons .btn:hover,
+    .cta-buttons .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* 關鍵渲染路徑優化 - 立即顯示重要內容 */
+    .hero-content-immediate,
+    .hero-scroll-immediate {
+        animation: none; /* 手機版禁用動畫 */
+        opacity: 1;
+    }
+}
+
+/* 極小螢幕優化 - 進一步減少DOM複雜度 */
+@media (max-width: 480px) {
+    /* 移除所有陰影效果以提升渲染性能 */
+    .intro-card,
+    .social-card,
+    .hero-buttons .btn,
+    .cta-buttons .btn {
+        box-shadow: none;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    /* 簡化圖標樣式 */
+    .social-card i {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+    
+    /* 減少內間距 */
+    .social-card {
+        padding: var(--space-md);
+    }
+    
+    /* Hero區塊極簡化 */
+    .hero-content {
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 12px;
+    }
+}
+
+/* 低性能設備優化 */
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+    /* 完全禁用所有動畫和過渡 */
+    *,
+    *::before,
+    *::after {
+        animation: none;
+        transition: none;
+    }
+    
+    /* 移除hover效果 */
+    .intro-card:hover,
+    .social-card:hover,
+    .hero-buttons .btn:hover,
+    .cta-buttons .btn:hover {
+        transform: none;
+        box-shadow: inherit;
+    }
+}
+
+/* 慢速連線優化 - 通過JavaScript動態添加此類 */
+.slow-connection {
+    /* 禁用所有非關鍵動畫 */
+    .hero-content-immediate,
+    .hero-scroll-immediate {
+        animation: none;
+    }
+    
+    /* 簡化背景 */
+    .cta-background {
+        background: var(--primary-color);
+        animation: none;
+    }
+    
+    /* 移除複雜渐变 */
+    .card-icon,
+    .social-card i {
+        background: var(--primary-color);
+    }
+} 
