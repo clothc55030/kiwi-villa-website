@@ -485,6 +485,33 @@
   iconify-icon.text-3xl { font-size: 1.875rem; }
   iconify-icon.text-4xl { font-size: 2.25rem; }
   iconify-icon.text-5xl { font-size: 3rem; }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px theme('colors.black / 20%');
+  }
+  .text-shadow-md {
+    text-shadow: 0 2px 4px theme('colors.black / 20%');
+  }
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px theme('colors.black / 20%');
+  }
+  .text-shadow-xl {
+    text-shadow: 0 6px 12px theme('colors.black / 25%');
+  }
+
+  /* Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-8 py-3 font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-800;
+  }
+  .btn-primary {
+    @apply bg-amber-500 text-stone-900 hover:bg-amber-400 focus:ring-amber-400;
+  }
+  .btn-secondary {
+    @apply bg-stone-700 text-white hover:bg-stone-600 focus:ring-stone-500;
+  }
 }
 
 /* 高對比度支援 */

@@ -5,7 +5,7 @@ import Lightbox from '../components/Lightbox.astro';
 import RoomFeatureIcon from '../components/RoomFeatureIcon.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { contactInfo } from '../config/social';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import ogImageSrc from '../assets/images/rooms/rooms-og.webp';
 
 const bookingUrl = 'https://booking.owlting.com/kiwi-villa';
@@ -14,6 +14,17 @@ const bookingUrl = 'https://booking.owlting.com/kiwi-villa';
 const rooms: CollectionEntry<'rooms'>[] = await getCollection('rooms');
 // 按 sortOrder 排序
 const sortedRooms = rooms.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
+// 為第一張主圖準備預載入屬性
+const firstRoomImage = sortedRooms.length > 0 ? sortedRooms[0].data.images[0] : null;
+const preloadImageProps = firstRoomImage
+  ? await getImage({
+      src: firstRoomImage.src,
+      widths: [400, 800],
+      quality: 80,
+    })
+  : null;
+const imageSizes = '(max-width: 1023px) 90vw, 45vw';
 
 // SEO 和 Meta 資料
 const pageTitle = '房型設施 - 澎湖期遇度假會館 | 多種房型選擇，滿足不同需求';
@@ -55,7 +66,7 @@ const structuredData = {
       floorSize: {
         '@type': 'QuantitativeValue',
         value: room.data.size,
-        unitText: '坪'
+        unitText: '㎡'
       },
       bed: room.data.beds.map(bed => ({
         '@type': 'BedDetails',
@@ -118,6 +129,17 @@ const commonAmenities = [
   <!-- 結構化資料 -->
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   
+  <!-- 預載入第一個房型的主圖片 -->
+  {preloadImageProps && preloadImageProps.srcset && (
+    <link
+      rel="preload"
+      as="image"
+      href={preloadImageProps.src}
+      imagesrcset={preloadImageProps.srcset.attribute}
+      imagesizes={imageSizes}
+    />
+  )}
+
   <!-- Hero Section -->
   <section class="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden animate-gradient-shift bg-gradient-hero">
     <!-- Content -->
@@ -145,7 +167,7 @@ const commonAmenities = [
     <section class="sticky top-20 z-40 bg-white/95 border-b border-gray-200 py-4 backdrop-blur-sm">
       <div class="container mx-auto px-4">
         <nav 
-          class="room-nav-container flex gap-2 md:gap-4 overflow-x-auto pb-2 scrollbar-hide"
+          class="room-nav-container flex gap-2 md:gap-4 overflow-x-auto p-2 scrollbar-hide"
           role="navigation"
           aria-label="房型導覽"
         >
@@ -188,9 +210,9 @@ const commonAmenities = [
                       src={room.data.images[0].src}
                       alt={room.data.images[0].alt}
                       class="w-full h-full object-cover"
-                      loading="lazy"
+                      loading={index === 0 ? 'eager' : 'lazy'}
                       widths={[400, 800]}
-                      sizes="(max-width: 1023px) 90vw, 45vw"
+                      sizes={imageSizes}
                       quality={80}
                     />
                     <button 
@@ -261,7 +283,7 @@ const commonAmenities = [
                     <RoomFeatureIcon 
                       icon="heroicons:squares-2x2" 
                       label="房間大小" 
-                      value={`${room.data.size}坪`} 
+                      value={`${room.data.size}㎡`} 
                     />
                     <RoomFeatureIcon 
                       icon="fa6-solid:bed" 

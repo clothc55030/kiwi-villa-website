@@ -11,7 +11,7 @@ const roomsCollection = defineCollection({
     roomNumbers: z.array(z.string()),
     description: z.string(),
     capacity: z.number(),
-    size: z.number(), // 坪
+    size: z.number(), // ㎡
     price: z.object({
       min: z.number(),
       max: z.number(),
