@@ -516,6 +516,16 @@ window.addEventListener('error', function(e) {
     // analytics.track('JavaScript Error', { message: e.message, filename: e.filename, lineno: e.lineno });
 });
 
+// Dynamic copyright year function
+function updateCopyrightYear() {
+    const currentYear = new Date().getFullYear();
+    const copyrightElements = document.querySelectorAll('.copyright-year');
+    
+    copyrightElements.forEach(element => {
+        element.textContent = currentYear;
+    });
+}
+
 // Image Lightbox functionality - 已移至 lightbox-optimized.js
 /* 註釋掉舊的 lightbox 以避免重複
 function initImageLightbox() {
