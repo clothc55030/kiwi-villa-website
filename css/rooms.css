@@ -2,7 +2,7 @@
    Rooms Page Styles - 房型設施頁面樣式
    ========================================================================== */
 
-/* Hero Section - 頁面特定樣式 */
+/* Hero Section - 使用 core.css 的基礎樣式，只覆寫必要部分 */
 .hero-section {
     padding: 6rem 0 4rem;
 }
@@ -35,11 +35,61 @@
     position: relative;
     transition: all 0.3s ease;
     border: 1px solid rgba(184, 199, 214, 0.3);
+    will-change: transform, box-shadow;
+}
+
+.room-card.animated {
+    will-change: auto;
 }
 
 .room-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 48px rgba(124, 155, 181, 0.15);
+}
+
+/* 優化圖片載入 */
+.gallery-item img.lazyload {
+    opacity: 0;
+    filter: blur(5px);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.gallery-item img.lazyloaded {
+    opacity: 1;
+    filter: blur(0);
+}
+
+/* Lightbox 優化樣式 */
+.lightbox-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
+    display: none;
+}
+
+.lightbox-image {
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-counter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* 禁用的導航按鈕 */
+.lightbox-prev:disabled,
+.lightbox-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
 }
 
 .room-card.featured {

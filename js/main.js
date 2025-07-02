@@ -47,15 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
         initRoomSlider();
     }
     
-    // Image lightbox functionality
-    if (document.querySelector('.room-gallery')) {
-        initImageLightbox();
-    }
+    // Image lightbox functionality - 已移至 lightbox-optimized.js
+    // if (document.querySelector('.room-gallery')) {
+    //     initImageLightbox();
+    // }
     
-    // Room gallery swipe functionality for mobile
-    if (document.querySelector('.room-gallery')) {
-        initRoomGallerySwipe();
-    }
+    // Room gallery swipe functionality for mobile - 已移至 room-gallery-optimized.js
+    // if (document.querySelector('.room-gallery')) {
+    //     initRoomGallerySwipe();
+    // }
     
     // Room direct navigation functionality - 延遲執行確保所有元素都已載入
     setTimeout(() => {
@@ -516,7 +516,8 @@ window.addEventListener('error', function(e) {
     // analytics.track('JavaScript Error', { message: e.message, filename: e.filename, lineno: e.lineno });
 });
 
-// Image Lightbox functionality
+// Image Lightbox functionality - 已移至 lightbox-optimized.js
+/* 註釋掉舊的 lightbox 以避免重複
 function initImageLightbox() {
     const galleryImages = document.querySelectorAll('.room-gallery img');
     
@@ -813,7 +814,10 @@ function updateCopyrightYear() {
     });
 }
 
-// Room Gallery Swipe functionality for mobile
+*/
+
+// Room Gallery Swipe functionality for mobile - 已移至 room-gallery-optimized.js
+/* 註釋掉舊的 gallery swipe 以避免重複
 function initRoomGallerySwipe() {
     // 只在手機版啟用滑動功能
     if (DOMCache.viewportWidth > 768) return;
