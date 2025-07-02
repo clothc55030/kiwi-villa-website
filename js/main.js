@@ -1018,38 +1018,18 @@ function initRoomNavigation() {
     
     // 房間跳轉功能已啟用
     
-    // 檢查當前URL錨點或查詢參數
+    // 檢查當前URL錨點
     function checkRoomNavigation() {
         const hash = window.location.hash;
-        const urlParams = new URLSearchParams(window.location.search);
-        const gotoParam = urlParams.get('goto');
         
         let targetRoomId = null;
         let roomNumber = null;
         
-        // 檢查 URL 資訊
-        
-        // 優先檢查查詢參數（從 Cloudflare Pages 重定向）
-        if (gotoParam) {
-            roomNumber = gotoParam;
-            targetRoomId = 'room-' + roomNumber;
-            // 檢測到房間查詢參數
-            
-            // 標記body元素，禁用進場動畫
-            document.body.classList.add('has-room-navigation');
-            
-            // 更新URL為錨點形式，移除查詢參數
-            const newUrl = window.location.pathname + '#' + targetRoomId;
-            history.replaceState(null, '', newUrl);
-        }
         // 檢查是否有房間錨點
-        else if (hash && hash.includes('room-')) {
+        if (hash && hash.includes('room-')) {
             targetRoomId = hash.substring(1); // 移除 # 符號
             roomNumber = targetRoomId.replace('room-', '');
             // 檢測到房間錨點
-            
-            // 標記body元素，禁用進場動畫
-            document.body.classList.add('has-room-navigation');
         }
         
         if (targetRoomId && roomNumber) {
@@ -1155,10 +1135,9 @@ function initRoomNavigation() {
                 
                 let initialDelay;
                 if (prefersReducedMotion || isMobile) {
-                    initialDelay = 100; // 手機版或減少動畫模式：快速執行
+                    initialDelay = 300; // 手機版或減少動畫模式
                 } else {
-                    // 因為已禁用進場動畫，可以更快執行
-                    initialDelay = 300; // 桌面版：短延遲即可
+                    initialDelay = 800; // 桌面版：等待其他房間動畫完成
                 }
                 
                 // 設定延遲執行時間
@@ -1246,27 +1225,14 @@ function initRoomNavigation() {
             room.classList.remove('highlighted');
         });
         
-        // 確保房間元素完全可見再添加高亮
-        requestAnimationFrame(() => {
-            // 強制重繪，確保之前的樣式已應用
-            roomElement.offsetHeight;
-            
-            // 添加高亮效果
-            roomElement.classList.add('highlighted');
-            // 房間高亮效果已添加
-        });
+        // 添加高亮效果
+        roomElement.classList.add('highlighted');
+        // 房間高亮效果已添加
         
         // 3秒後移除高亮
         setTimeout(() => {
             roomElement.classList.remove('highlighted');
             // 房間高亮效果已移除
-            
-            // 高亮結束後，如果沒有其他導航，移除標記
-            setTimeout(() => {
-                if (!window.location.hash.includes('room-')) {
-                    document.body.classList.remove('has-room-navigation');
-                }
-            }, 500);
         }, 3000);
     }
     

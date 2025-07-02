@@ -612,19 +612,19 @@
     animation: fadeInUp 0.6s ease forwards;
 }
 
-/* 當有房間導航參數時，禁用進場動畫避免衝突 */
-body.has-room-navigation .room-card {
-    animation: none;
-    opacity: 1;
-    transform: none;
-}
-
 .room-card:nth-child(1) { animation-delay: 0.1s; }
 .room-card:nth-child(2) { animation-delay: 0.2s; }
 .room-card:nth-child(3) { animation-delay: 0.3s; }
 .room-card:nth-child(4) { animation-delay: 0.4s; }
 .room-card:nth-child(5) { animation-delay: 0.5s; }
 .room-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* 當頁面載入時有房間錨點，確保目標房間立即可見 */
+.room-card:target {
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
 
 @keyframes fadeInUp {
     to {
@@ -698,12 +698,6 @@ body.has-room-navigation .room-card {
     border: 3px solid var(--primary-color);
     box-shadow: 0 8px 32px rgba(124, 155, 181, 0.3), 
                 0 0 0 4px rgba(124, 155, 181, 0.1);
-}
-
-/* 確保高亮時房間卡片完全可見 */
-body.has-room-navigation .room-card.highlighted {
-    opacity: 1;
-    transform: none;
 }
 
 @keyframes roomHighlight {
