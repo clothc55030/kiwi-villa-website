@@ -958,6 +958,7 @@ function updateActiveIndicator(gallery) {
         }
     });
 }
+*/
 
 // Room Navigation - 房間直接跳轉功能
 function initRoomNavigation() {
