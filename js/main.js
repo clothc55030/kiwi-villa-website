@@ -800,62 +800,8 @@ function initImageLightbox() {
     }
 }
 
-// Service Worker registration with version management
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js')
-            .then(function(registration) {
-                // Service Worker 註冊成功
-                
-                // 檢查是否有新版本
-                registration.addEventListener('updatefound', () => {
-                    // 發現 Service Worker 新版本
-                    const newWorker = registration.installing;
-                    
-                    newWorker.addEventListener('statechange', () => {
-                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            // 新版本 Service Worker 已安裝，準備更新
-                            
-                            // 可以在這裡顯示更新提示給用戶
-                            // showUpdateNotification();
-                            
-                            // 自動跳過等待，立即激活新版本
-                            newWorker.postMessage({ type: 'SKIP_WAITING' });
-                        }
-                    });
-                });
-                
-                // 監聽 Service Worker 控制權變化
-                navigator.serviceWorker.addEventListener('controllerchange', () => {
-                    // Service Worker 控制權已更新，即將重新載入頁面
-                    // 延遲重新載入，避免打斷用戶操作
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
-                });
-                
-                // 獲取當前版本信息
-                if (navigator.serviceWorker.controller) {
-                    const messageChannel = new MessageChannel();
-                    messageChannel.port1.onmessage = (event) => {
-                        if (event.data.version) {
-                            // 當前 Service Worker 版本: event.data.version
-                        }
-                    };
-                    navigator.serviceWorker.controller.postMessage(
-                        { type: 'GET_VERSION' }, 
-                        [messageChannel.port2]
-                    );
-                }
-            })
-            .catch(function(error) {
-                // 只在開發環境中顯示錯誤
-                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                    console.error('❌ Service Worker 註冊失敗:', error);
-                }
-            });
-    });
-}
+// Service Worker 已移除以解決頁面刷新問題
+// 網站現在依賴 Cloudflare Pages 的 CDN 和緩存功能
 
 // Dynamic copyright year function
 function updateCopyrightYear() {
