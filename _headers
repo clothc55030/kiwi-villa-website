@@ -1,0 +1,44 @@
+# Cloudflare Pages Security Headers
+# 所有路徑的安全標頭設定
+
+/*
+  # 內容安全政策 - 防止 XSS 攻擊
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  
+  # 防止點擊劫持
+  X-Frame-Options: DENY
+  
+  # 防止 MIME 類型嗅探
+  X-Content-Type-Options: nosniff
+  
+  # 啟用瀏覽器 XSS 過濾器
+  X-XSS-Protection: 1; mode=block
+  
+  # 強制使用 HTTPS
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  
+  # 控制 Referrer 資訊
+  Referrer-Policy: strict-origin-when-cross-origin
+  
+  # 限制瀏覽器功能
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+# 靜態資源的快取設定
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+  
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+  
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+  
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML 檔案的快取設定（較短時間）
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+  
+/
+  Cache-Control: public, max-age=3600, must-revalidate
