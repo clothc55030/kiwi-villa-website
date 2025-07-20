@@ -39,7 +39,9 @@
       "mcp__sequential-thinking__sequentialthinking",
       "Bash(pip3 install:*)",
       "Bash(source:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(diff:*)",
+      "Bash(md5sum:*)"
     ],
     "deny": []
   }
