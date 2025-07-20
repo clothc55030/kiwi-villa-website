@@ -35,7 +35,11 @@
       "Bash(npm run preview:*)",
       "Bash(claude mcp add:*)",
       "Bash(git clone:*)",
-      "Bash(./install.sh)"
+      "Bash(./install.sh)",
+      "mcp__sequential-thinking__sequentialthinking",
+      "Bash(pip3 install:*)",
+      "Bash(source:*)",
+      "Bash(pip install:*)"
     ],
     "deny": []
   }
