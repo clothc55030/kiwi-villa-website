@@ -421,14 +421,21 @@
 }
 
 @media (max-width: 768px) {
+    /* 修復手機版燈箱張數與關閉按鈕重疊問題 */
+    .lightbox-counter {
+        top: 20px;
+        left: 20px;
+        right: auto;
+    }
+
     .hero-section {
         padding: 4rem 0 3rem;
     }
-    
+
     .rooms-main {
         padding: 2rem 0;
     }
-    
+
     .rooms-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -590,10 +597,19 @@
 }
 
 @media (max-width: 480px) {
+    /* 小螢幕也確保張數在左側 */
+    .lightbox-counter {
+        top: 15px;
+        left: 15px;
+        right: auto;
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+
     .rooms-grid {
         gap: 1rem;
     }
-    
+
     .room-gallery {
         height: 200px;
         display: flex;
