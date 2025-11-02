@@ -463,10 +463,7 @@ function validatePhone(phone) {
 
 // Error handling
 window.addEventListener('error', function(e) {
-    // 只在開發環境中顯示錯誤
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.error('JavaScript error:', e.error);
-    }
+    // Silent error handling - errors can be sent to analytics if needed
 });
 
 // Dynamic copyright year function

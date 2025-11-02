@@ -1,48 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cp:*)",
-      "Bash(rm:*)",
-      "Bash(ls:*)",
-      "Bash(find:*)",
-      "Bash(grep:*)",
-      "Bash(python3:*)",
-      "Bash(npm run build:*)",
-      "Bash(npm install:*)",
-      "Bash(timeout 30s npx @11ty/eleventy --input=src/intro.html --output=dist)",
-      "Bash(timeout 300s npm run build)",
-      "Bash(npm uninstall:*)",
-      "Bash(timeout 60s npx @11ty/eleventy --input=src/intro.html --output=dist)",
-      "Bash(node:*)",
-      "Bash(for file in reviews.html location.html faq.html policy.html intro.html)",
-      "Bash(do echo \"=== $file ===\")",
-      "Bash(done)",
-      "Bash(for file in *.html)",
-      "Bash(do echo -n \"$file: \")",
-      "Bash(rg:*)",
-      "Bash(sed:*)",
-      "Bash(for file in location.html reviews.html faq.html)",
-      "WebFetch(domain:docs.anthropic.com)",
-      "Bash(pnpm dev:*)",
-      "Bash(pnpm install:*)",
-      "Bash(pnpm add:*)",
-      "Bash(npm run dev:*)",
-      "Bash(mkdir:*)",
-      "Bash(pnpm astro:*)",
-      "Bash(pkill:*)",
-      "Bash(true)",
-      "Bash(pnpm build:*)",
-      "Bash(npm run preview:*)",
-      "Bash(claude mcp add:*)",
-      "Bash(git clone:*)",
-      "Bash(./install.sh)",
-      "mcp__sequential-thinking__sequentialthinking",
-      "Bash(pip3 install:*)",
-      "Bash(source:*)",
-      "Bash(pip install:*)",
-      "Bash(diff:*)",
-      "Bash(md5sum:*)"
+      "Bash(dir /B \"C:\\kiwi-villa-website\\css\\*.css\")",
+      "Bash(python:*)"
     ],
-    "deny": []
+    "deny": [],
+    "ask": []
   }
 }

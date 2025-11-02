@@ -46,7 +46,6 @@ export function initLazyLoading() {
     // 支援檢測
     if (!('IntersectionObserver' in window)) {
         // 如果不支援 Intersection Observer，立即載入所有圖片
-        console.warn('IntersectionObserver not supported, loading all images');
         const lazyImages = document.querySelectorAll('img[data-src], picture');
         lazyImages.forEach(element => {
             if (element.tagName === 'PICTURE') {
