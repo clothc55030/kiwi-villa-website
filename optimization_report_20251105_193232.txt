@@ -1,0 +1,756 @@
+澎湖期遇度假會館 - 圖片優化報告
+================================================================================
+生成時間: 2025-11-05 19:32:32
+
+處理檔案數: 106
+跳過檔案數: 1
+錯誤檔案數: 0
+
+原始總大小: 48.19 MB
+優化後大小: 10.13 MB
+節省空間: 38.06 MB (79.0%)
+
+詳細檔案清單:
+--------------------------------------------------------------------------------
+
+檔案: main-hall-environment.jpg
+  原始大小: 2.82 MB
+  JPG: 1.85 MB
+  WEBP: 849.5 KB
+  AVIF: 554.7 KB
+  節省: 2.27 MB (80.8%)
+
+檔案: penghu-kiwi-villa-premium-triple-room8.jpg
+  原始大小: 1.39 MB
+  JPG: 336.2 KB
+  WEBP: 287.7 KB
+  AVIF: 223.9 KB
+  節省: 1.17 MB (84.3%)
+
+檔案: penghu-kiwi-villa-premium-twin-room4.jpg
+  原始大小: 1.40 MB
+  JPG: 331.9 KB
+  WEBP: 298.5 KB
+  AVIF: 250.2 KB
+  節省: 1.16 MB (82.6%)
+
+檔案: penghu-kiwi-villa-premium-double-room10.jpg
+  原始大小: 998.7 KB
+  JPG: 237.9 KB
+  WEBP: 171.8 KB
+  AVIF: 138.2 KB
+  節省: 860.4 KB (86.2%)
+
+檔案: penghu-kiwi-villa-premium-double-room24.jpg
+  原始大小: 771.6 KB
+  JPG: 186.9 KB
+  WEBP: 102.4 KB
+  AVIF: 80.8 KB
+  節省: 690.8 KB (89.5%)
+
+檔案: penghu-kiwi-villa-premium-twin-room7.jpg
+  原始大小: 790.3 KB
+  JPG: 190.8 KB
+  WEBP: 132.2 KB
+  AVIF: 103.7 KB
+  節省: 686.5 KB (86.9%)
+
+檔案: penghu-kiwi-villa-premium-triple-room3.jpg
+  原始大小: 756.0 KB
+  JPG: 168.8 KB
+  WEBP: 96.8 KB
+  AVIF: 78.7 KB
+  節省: 677.2 KB (89.6%)
+
+檔案: premium-triple-room-3.jpg
+  原始大小: 756.0 KB
+  JPG: 168.8 KB
+  WEBP: 96.8 KB
+  AVIF: 78.7 KB
+  節省: 677.2 KB (89.6%)
+
+檔案: penghu-kiwi-villa-premium-quad-room6.jpg
+  原始大小: 729.7 KB
+  JPG: 155.7 KB
+  WEBP: 85.7 KB
+  AVIF: 70.3 KB
+  節省: 659.4 KB (90.4%)
+
+檔案: premium-triple-room.jpg
+  原始大小: 699.5 KB
+  JPG: 145.0 KB
+  WEBP: 72.2 KB
+  AVIF: 60.2 KB
+  節省: 639.3 KB (91.4%)
+
+檔案: penghu-kiwi-villa-premium-triple-room4.jpg
+  原始大小: 699.5 KB
+  JPG: 145.0 KB
+  WEBP: 72.2 KB
+  AVIF: 60.2 KB
+  節省: 639.3 KB (91.4%)
+
+檔案: penghu-kiwi-villa-premium-twin-room8.jpg
+  原始大小: 689.9 KB
+  JPG: 156.7 KB
+  WEBP: 87.8 KB
+  AVIF: 74.3 KB
+  節省: 615.6 KB (89.2%)
+
+檔案: penghu-kiwi-villa-luxury-family-room8.jpg
+  原始大小: 682.4 KB
+  JPG: 154.7 KB
+  WEBP: 91.6 KB
+  AVIF: 78.6 KB
+  節省: 603.8 KB (88.5%)
+
+檔案: penghu-kiwi-villa-premium-double-room19.jpg
+  原始大小: 647.6 KB
+  JPG: 142.0 KB
+  WEBP: 75.6 KB
+  AVIF: 64.8 KB
+  節省: 582.8 KB (90.0%)
+
+檔案: penghu-kiwi-villa-premium-twin-room5.jpg
+  原始大小: 635.4 KB
+  JPG: 149.5 KB
+  WEBP: 71.3 KB
+  AVIF: 59.9 KB
+  節省: 575.5 KB (90.6%)
+
+檔案: premium-twin-room.jpg
+  原始大小: 635.4 KB
+  JPG: 149.5 KB
+  WEBP: 71.3 KB
+  AVIF: 59.9 KB
+  節省: 575.5 KB (90.6%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room9.jpg
+  原始大小: 598.3 KB
+  JPG: 137.4 KB
+  WEBP: 66.7 KB
+  AVIF: 60.2 KB
+  節省: 538.1 KB (89.9%)
+
+檔案: deluxe-quad-room.jpg
+  原始大小: 584.8 KB
+  JPG: 124.2 KB
+  WEBP: 62.3 KB
+  AVIF: 54.7 KB
+  節省: 530.0 KB (90.6%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room10.jpg
+  原始大小: 584.8 KB
+  JPG: 124.2 KB
+  WEBP: 62.3 KB
+  AVIF: 54.7 KB
+  節省: 530.0 KB (90.6%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room6.jpg
+  原始大小: 627.6 KB
+  JPG: 138.5 KB
+  WEBP: 114.7 KB
+  AVIF: 107.8 KB
+  節省: 519.8 KB (82.8%)
+
+檔案: penghu-kiwi-villa-luxury-family-room9.jpg
+  原始大小: 562.6 KB
+  JPG: 121.3 KB
+  WEBP: 92.5 KB
+  AVIF: 85.1 KB
+  節省: 477.4 KB (84.9%)
+
+檔案: luxury-family-room-4.jpg
+  原始大小: 509.0 KB
+  JPG: 96.7 KB
+  WEBP: 38.6 KB
+  AVIF: 37.1 KB
+  節省: 471.9 KB (92.7%)
+
+檔案: penghu-kiwi-villa-luxury-family-room4.jpg
+  原始大小: 509.0 KB
+  JPG: 96.7 KB
+  WEBP: 38.6 KB
+  AVIF: 37.1 KB
+  節省: 471.9 KB (92.7%)
+
+檔案: penghu-kiwi-villa-premium-quad-room8.jpg
+  原始大小: 560.0 KB
+  JPG: 127.3 KB
+  WEBP: 99.7 KB
+  AVIF: 89.5 KB
+  節省: 470.5 KB (84.0%)
+
+檔案: penghu-kiwi-villa-premium-triple-room7.jpg
+  原始大小: 496.4 KB
+  JPG: 117.3 KB
+  WEBP: 81.6 KB
+  AVIF: 77.3 KB
+  節省: 419.0 KB (84.4%)
+
+檔案: penghu-kiwi-villa-premium-double-room16.jpg
+  原始大小: 456.3 KB
+  JPG: 98.2 KB
+  WEBP: 59.2 KB
+  AVIF: 55.1 KB
+  節省: 401.2 KB (87.9%)
+
+檔案: penghu-kiwi-villa-premium-quad-room1.jpg
+  原始大小: 438.5 KB
+  JPG: 89.4 KB
+  WEBP: 64.6 KB
+  AVIF: 61.4 KB
+  節省: 377.2 KB (86.0%)
+
+檔案: premium-quad-room.jpg
+  原始大小: 438.5 KB
+  JPG: 89.4 KB
+  WEBP: 64.6 KB
+  AVIF: 61.4 KB
+  節省: 377.2 KB (86.0%)
+
+檔案: luxury-family-room-3.jpg
+  原始大小: 419.0 KB
+  JPG: 92.7 KB
+  WEBP: 62.4 KB
+  AVIF: 58.4 KB
+  節省: 360.5 KB (86.1%)
+
+檔案: penghu-kiwi-villa-luxury-family-room3.jpg
+  原始大小: 419.0 KB
+  JPG: 92.7 KB
+  WEBP: 62.4 KB
+  AVIF: 58.4 KB
+  節省: 360.5 KB (86.1%)
+
+檔案: penghu-kiwi-villa-premium-double-room6.jpg
+  原始大小: 388.1 KB
+  JPG: 85.0 KB
+  WEBP: 46.4 KB
+  AVIF: 47.4 KB
+  節省: 341.7 KB (88.0%)
+
+檔案: penghu-kiwi-villa-luxury-family-room1.jpg
+  原始大小: 378.3 KB
+  JPG: 78.9 KB
+  WEBP: 49.4 KB
+  AVIF: 49.4 KB
+  節省: 328.9 KB (86.9%)
+
+檔案: luxury-family-room.jpg
+  原始大小: 378.3 KB
+  JPG: 78.9 KB
+  WEBP: 49.4 KB
+  AVIF: 49.4 KB
+  節省: 328.9 KB (86.9%)
+
+檔案: penghu-kiwi-villa-premium-double-room20.jpg
+  原始大小: 375.4 KB
+  JPG: 84.1 KB
+  WEBP: 50.4 KB
+  AVIF: 49.2 KB
+  節省: 326.2 KB (86.9%)
+
+檔案: penghu-kiwi-villa-luxury-family-room10.jpg
+  原始大小: 372.0 KB
+  JPG: 85.8 KB
+  WEBP: 46.9 KB
+  AVIF: 53.2 KB
+  節省: 325.1 KB (87.4%)
+
+檔案: penghu-kiwi-villa-premium-twin-room1.jpg
+  原始大小: 366.1 KB
+  JPG: 78.7 KB
+  WEBP: 46.9 KB
+  AVIF: 49.0 KB
+  節省: 319.2 KB (87.2%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room8.jpg
+  原始大小: 358.5 KB
+  JPG: 78.6 KB
+  WEBP: 44.1 KB
+  AVIF: 46.1 KB
+  節省: 314.5 KB (87.7%)
+
+檔案: penghu-kiwi-villa-premium-double-room17.jpg
+  原始大小: 353.4 KB
+  JPG: 77.3 KB
+  WEBP: 45.5 KB
+  AVIF: 46.5 KB
+  節省: 307.8 KB (87.1%)
+
+檔案: penghu-kiwi-villa-luxury-family-room7.jpg
+  原始大小: 350.3 KB
+  JPG: 73.7 KB
+  WEBP: 43.1 KB
+  AVIF: 45.0 KB
+  節省: 307.2 KB (87.7%)
+
+檔案: penghu-kiwi-villa-premium-double-room21.jpg
+  原始大小: 347.8 KB
+  JPG: 73.7 KB
+  WEBP: 41.5 KB
+  AVIF: 44.0 KB
+  節省: 306.3 KB (88.1%)
+
+檔案: penghu-kiwi-villa-premium-quad-room2.jpg
+  原始大小: 342.3 KB
+  JPG: 71.5 KB
+  WEBP: 39.7 KB
+  AVIF: 43.8 KB
+  節省: 302.6 KB (88.4%)
+
+檔案: premium-quad-room-2.jpg
+  原始大小: 342.3 KB
+  JPG: 71.5 KB
+  WEBP: 39.7 KB
+  AVIF: 43.8 KB
+  節省: 302.6 KB (88.4%)
+
+檔案: deluxe-quad-room-2.jpg
+  原始大小: 350.0 KB
+  JPG: 82.3 KB
+  WEBP: 47.6 KB
+  AVIF: 49.8 KB
+  節省: 302.4 KB (86.4%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room2.jpg
+  原始大小: 350.0 KB
+  JPG: 82.3 KB
+  WEBP: 47.6 KB
+  AVIF: 49.8 KB
+  節省: 302.4 KB (86.4%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room4.jpg
+  原始大小: 341.0 KB
+  JPG: 73.6 KB
+  WEBP: 41.8 KB
+  AVIF: 44.9 KB
+  節省: 299.3 KB (87.8%)
+
+檔案: deluxe-quad-room-4.jpg
+  原始大小: 341.0 KB
+  JPG: 73.6 KB
+  WEBP: 41.8 KB
+  AVIF: 44.9 KB
+  節省: 299.3 KB (87.8%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room5.jpg
+  原始大小: 338.0 KB
+  JPG: 71.0 KB
+  WEBP: 39.1 KB
+  AVIF: 42.9 KB
+  節省: 298.9 KB (88.4%)
+
+檔案: premium-twin-room-2.jpg
+  原始大小: 330.2 KB
+  JPG: 62.1 KB
+  WEBP: 34.7 KB
+  AVIF: 39.5 KB
+  節省: 295.5 KB (89.5%)
+
+檔案: penghu-kiwi-villa-premium-twin-room2.jpg
+  原始大小: 330.2 KB
+  JPG: 62.1 KB
+  WEBP: 34.7 KB
+  AVIF: 39.5 KB
+  節省: 295.5 KB (89.5%)
+
+檔案: penghu-kiwi-villa-premium-double-room11.jpg
+  原始大小: 339.3 KB
+  JPG: 67.4 KB
+  WEBP: 45.7 KB
+  AVIF: 45.3 KB
+  節省: 294.0 KB (86.6%)
+
+檔案: penghu-kiwi-villa-premium-quad-room5.jpg
+  原始大小: 328.8 KB
+  JPG: 68.5 KB
+  WEBP: 36.5 KB
+  AVIF: 41.1 KB
+  節省: 292.4 KB (88.9%)
+
+檔案: penghu-kiwi-villa-premium-twin-room6.jpg
+  原始大小: 329.1 KB
+  JPG: 66.6 KB
+  WEBP: 37.3 KB
+  AVIF: 41.5 KB
+  節省: 291.8 KB (88.7%)
+
+檔案: penghu-kiwi-villa-premium-triple-room6.jpg
+  原始大小: 322.6 KB
+  JPG: 63.7 KB
+  WEBP: 31.9 KB
+  AVIF: 34.9 KB
+  節省: 290.7 KB (90.1%)
+
+檔案: penghu-kiwi-villa-premium-quad-room3.jpg
+  原始大小: 319.0 KB
+  JPG: 60.8 KB
+  WEBP: 28.6 KB
+  AVIF: 35.4 KB
+  節省: 290.3 KB (91.0%)
+
+檔案: premium-quad-room-3.jpg
+  原始大小: 319.0 KB
+  JPG: 60.8 KB
+  WEBP: 28.6 KB
+  AVIF: 35.4 KB
+  節省: 290.3 KB (91.0%)
+
+檔案: luxury-family-room-2.jpg
+  原始大小: 319.4 KB
+  JPG: 60.8 KB
+  WEBP: 29.6 KB
+  AVIF: 35.6 KB
+  節省: 289.8 KB (90.7%)
+
+檔案: penghu-kiwi-villa-luxury-family-room2.jpg
+  原始大小: 319.4 KB
+  JPG: 60.8 KB
+  WEBP: 29.6 KB
+  AVIF: 35.6 KB
+  節省: 289.8 KB (90.7%)
+
+檔案: penghu-kiwi-villa-luxury-family-room5.jpg
+  原始大小: 327.9 KB
+  JPG: 66.3 KB
+  WEBP: 38.3 KB
+  AVIF: 40.7 KB
+  節省: 289.6 KB (88.3%)
+
+檔案: penghu-kiwi-villa-premium-triple-room5.jpg
+  原始大小: 325.6 KB
+  JPG: 64.3 KB
+  WEBP: 36.6 KB
+  AVIF: 39.9 KB
+  節省: 289.0 KB (88.8%)
+
+檔案: penghu-kiwi-villa-premium-double-room15.jpg
+  原始大小: 328.2 KB
+  JPG: 70.5 KB
+  WEBP: 43.5 KB
+  AVIF: 46.9 KB
+  節省: 284.7 KB (86.7%)
+
+檔案: penghu-kiwi-villa-premium-quad-room7.jpg
+  原始大小: 314.7 KB
+  JPG: 64.5 KB
+  WEBP: 35.8 KB
+  AVIF: 39.4 KB
+  節省: 278.9 KB (88.6%)
+
+檔案: penghu-kiwi-villa-premium-double-room18.jpg
+  原始大小: 312.5 KB
+  JPG: 65.3 KB
+  WEBP: 34.5 KB
+  AVIF: 40.3 KB
+  節省: 278.0 KB (89.0%)
+
+檔案: penghu-kiwi-villa-premium-twin-room3.jpg
+  原始大小: 307.5 KB
+  JPG: 60.1 KB
+  WEBP: 31.6 KB
+  AVIF: 37.5 KB
+  節省: 275.9 KB (89.7%)
+
+檔案: premium-twin-room-3.jpg
+  原始大小: 307.5 KB
+  JPG: 60.1 KB
+  WEBP: 31.6 KB
+  AVIF: 37.5 KB
+  節省: 275.9 KB (89.7%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room1.jpg
+  原始大小: 307.6 KB
+  JPG: 62.8 KB
+  WEBP: 34.5 KB
+  AVIF: 39.7 KB
+  節省: 273.1 KB (88.8%)
+
+檔案: penghu-kiwi-villa-premium-double-room3.jpg
+  原始大小: 304.6 KB
+  JPG: 62.1 KB
+  WEBP: 32.5 KB
+  AVIF: 38.5 KB
+  節省: 272.1 KB (89.3%)
+
+檔案: premium-double-room-3.jpg
+  原始大小: 304.6 KB
+  JPG: 62.1 KB
+  WEBP: 32.5 KB
+  AVIF: 38.5 KB
+  節省: 272.1 KB (89.3%)
+
+檔案: penghu-kiwi-villa-premium-double-room22.jpg
+  原始大小: 307.2 KB
+  JPG: 65.3 KB
+  WEBP: 35.3 KB
+  AVIF: 40.2 KB
+  節省: 272.0 KB (88.5%)
+
+檔案: penghu-kiwi-villa-premium-double-room7.jpg
+  原始大小: 302.6 KB
+  JPG: 59.2 KB
+  WEBP: 31.0 KB
+  AVIF: 37.1 KB
+  節省: 271.6 KB (89.8%)
+
+檔案: penghu-kiwi-villa-premium-triple-room1.jpg
+  原始大小: 300.8 KB
+  JPG: 57.9 KB
+  WEBP: 29.6 KB
+  AVIF: 35.6 KB
+  節省: 271.2 KB (90.2%)
+
+檔案: premium-double-room.jpg
+  原始大小: 307.9 KB
+  JPG: 68.7 KB
+  WEBP: 37.5 KB
+  AVIF: 41.2 KB
+  節省: 270.3 KB (87.8%)
+
+檔案: penghu-kiwi-villa-premium-double-room12.jpg
+  原始大小: 307.9 KB
+  JPG: 68.7 KB
+  WEBP: 37.5 KB
+  AVIF: 41.2 KB
+  節省: 270.3 KB (87.8%)
+
+檔案: deluxe-quad-room-3.jpg
+  原始大小: 298.8 KB
+  JPG: 64.0 KB
+  WEBP: 32.4 KB
+  AVIF: 37.5 KB
+  節省: 266.5 KB (89.2%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room3.jpg
+  原始大小: 298.8 KB
+  JPG: 64.0 KB
+  WEBP: 32.4 KB
+  AVIF: 37.5 KB
+  節省: 266.5 KB (89.2%)
+
+檔案: penghu-kiwi-villa-premium-double-room14.jpg
+  原始大小: 296.0 KB
+  JPG: 59.6 KB
+  WEBP: 30.1 KB
+  AVIF: 35.7 KB
+  節省: 265.9 KB (89.8%)
+
+檔案: penghu-kiwi-villa-premium-double-room13.jpg
+  原始大小: 299.3 KB
+  JPG: 60.9 KB
+  WEBP: 33.8 KB
+  AVIF: 38.3 KB
+  節省: 265.6 KB (88.7%)
+
+檔案: penghu-kiwi-villa-premium-double-room5.jpg
+  原始大小: 297.7 KB
+  JPG: 59.2 KB
+  WEBP: 32.4 KB
+  AVIF: 37.3 KB
+  節省: 265.3 KB (89.1%)
+
+檔案: penghu-kiwi-villa-premium-double-room1.jpg
+  原始大小: 286.8 KB
+  JPG: 57.8 KB
+  WEBP: 26.4 KB
+  AVIF: 32.6 KB
+  節省: 260.3 KB (90.8%)
+
+檔案: penghu-kiwi-villa-deluxe-quad-room7.jpg
+  原始大小: 288.9 KB
+  JPG: 59.1 KB
+  WEBP: 31.1 KB
+  AVIF: 35.7 KB
+  節省: 257.8 KB (89.2%)
+
+檔案: premium-double-room-2.jpg
+  原始大小: 284.5 KB
+  JPG: 57.2 KB
+  WEBP: 28.7 KB
+  AVIF: 35.0 KB
+  節省: 255.8 KB (89.9%)
+
+檔案: penghu-kiwi-villa-premium-double-room2.jpg
+  原始大小: 284.5 KB
+  JPG: 57.2 KB
+  WEBP: 28.7 KB
+  AVIF: 35.0 KB
+  節省: 255.8 KB (89.9%)
+
+檔案: penghu-kiwi-villa-premium-quad-room4.jpg
+  原始大小: 279.9 KB
+  JPG: 54.5 KB
+  WEBP: 26.5 KB
+  AVIF: 34.0 KB
+  節省: 253.4 KB (90.5%)
+
+檔案: penghu-kiwi-villa-premium-twin-room9.jpg
+  原始大小: 281.9 KB
+  JPG: 56.2 KB
+  WEBP: 29.1 KB
+  AVIF: 34.2 KB
+  節省: 252.8 KB (89.7%)
+
+檔案: bed-set.jpg
+  原始大小: 574.1 KB
+  JPG: 757.8 KB
+  WEBP: 506.9 KB
+  AVIF: 324.3 KB
+  節省: 249.9 KB (43.5%)
+
+檔案: bed-set.jpg
+  原始大小: 574.1 KB
+  JPG: 757.8 KB
+  WEBP: 506.9 KB
+  AVIF: 324.3 KB
+  節省: 249.9 KB (43.5%)
+
+檔案: penghu-kiwi-villa-premium-double-room23.jpg
+  原始大小: 279.1 KB
+  JPG: 56.6 KB
+  WEBP: 29.6 KB
+  AVIF: 36.2 KB
+  節省: 249.5 KB (89.4%)
+
+檔案: penghu-kiwi-villa-luxury-family-room6.jpg
+  原始大小: 277.1 KB
+  JPG: 49.6 KB
+  WEBP: 27.8 KB
+  AVIF: 31.7 KB
+  節省: 249.3 KB (90.0%)
+
+檔案: penghu-kiwi-villa-premium-double-room9.jpg
+  原始大小: 277.5 KB
+  JPG: 55.1 KB
+  WEBP: 28.8 KB
+  AVIF: 35.4 KB
+  節省: 248.7 KB (89.6%)
+
+檔案: penghu-kiwi-villa-premium-triple-room2.jpg
+  原始大小: 274.3 KB
+  JPG: 50.3 KB
+  WEBP: 27.7 KB
+  AVIF: 34.1 KB
+  節省: 246.6 KB (89.9%)
+
+檔案: premium-triple-room-2.jpg
+  原始大小: 274.3 KB
+  JPG: 50.3 KB
+  WEBP: 27.7 KB
+  AVIF: 34.1 KB
+  節省: 246.6 KB (89.9%)
+
+檔案: penghu-kiwi-villa-premium-double-room4.jpg
+  原始大小: 266.3 KB
+  JPG: 53.1 KB
+  WEBP: 24.3 KB
+  AVIF: 32.1 KB
+  節省: 242.0 KB (90.9%)
+
+檔案: main-hall-environment-optimized.jpg
+  原始大小: 354.3 KB
+  JPG: 284.8 KB
+  WEBP: 187.0 KB
+  AVIF: 119.2 KB
+  節省: 235.1 KB (66.3%)
+
+檔案: penghu-kiwi-villa-premium-double-room25.jpg
+  原始大小: 251.8 KB
+  JPG: 52.6 KB
+  WEBP: 24.9 KB
+  AVIF: 32.9 KB
+  節省: 226.9 KB (90.1%)
+
+檔案: penghu-kiwi-villa-premium-double-room26.jpg
+  原始大小: 243.9 KB
+  JPG: 45.0 KB
+  WEBP: 21.9 KB
+  AVIF: 29.9 KB
+  節省: 222.0 KB (91.0%)
+
+檔案: penghu-kiwi-villa-premium-double-room8.jpg
+  原始大小: 225.2 KB
+  JPG: 36.5 KB
+  WEBP: 14.3 KB
+  AVIF: 23.7 KB
+  節省: 210.9 KB (93.7%)
+
+檔案: electric-curtains.jpg
+  原始大小: 565.9 KB
+  JPG: 742.3 KB
+  WEBP: 626.0 KB
+  AVIF: 396.4 KB
+  節省: 169.5 KB (29.9%)
+
+檔案: electric-curtains.jpg
+  原始大小: 565.9 KB
+  JPG: 742.3 KB
+  WEBP: 626.0 KB
+  AVIF: 396.4 KB
+  節省: 169.5 KB (29.9%)
+
+檔案: furniture-table-chairs.jpg
+  原始大小: 584.7 KB
+  JPG: 819.7 KB
+  WEBP: 705.6 KB
+  AVIF: 447.6 KB
+  節省: 137.1 KB (23.4%)
+
+檔案: furniture-table-chairs.jpg
+  原始大小: 584.7 KB
+  JPG: 819.7 KB
+  WEBP: 705.6 KB
+  AVIF: 447.6 KB
+  節省: 137.1 KB (23.4%)
+
+檔案: elevator.jpg
+  原始大小: 580.4 KB
+  JPG: 797.0 KB
+  WEBP: 913.1 KB
+  AVIF: 463.1 KB
+  節省: 117.3 KB (20.2%)
+
+檔案: elevator.jpg
+  原始大小: 580.4 KB
+  JPG: 797.0 KB
+  WEBP: 913.1 KB
+  AVIF: 463.1 KB
+  節省: 117.3 KB (20.2%)
+
+檔案: dining-area.jpg
+  原始大小: 532.5 KB
+  JPG: 724.9 KB
+  WEBP: 676.1 KB
+  AVIF: 425.6 KB
+  節省: 106.9 KB (20.1%)
+
+檔案: dining-area.jpg
+  原始大小: 532.5 KB
+  JPG: 724.9 KB
+  WEBP: 676.1 KB
+  AVIF: 425.6 KB
+  節省: 106.9 KB (20.1%)
+
+檔案: main-hall.jpg
+  原始大小: 583.2 KB
+  JPG: 869.5 KB
+  WEBP: 897.7 KB
+  AVIF: 479.9 KB
+  節省: 103.4 KB (17.7%)
+
+檔案: main-hall.jpg
+  原始大小: 583.2 KB
+  JPG: 869.5 KB
+  WEBP: 897.7 KB
+  AVIF: 479.9 KB
+  節省: 103.4 KB (17.7%)
+
+檔案: main-hall-optimized.jpg
+  原始大小: 138.2 KB
+  JPG: 135.2 KB
+  WEBP: 92.4 KB
+  AVIF: 65.9 KB
+  節省: 72.3 KB (52.3%)

@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(dir /B \"C:\\kiwi-villa-website\\css\\*.css\")",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(dir /S /B \"C:\\kiwi-villa-website\\images\")",
+      "Bash(find:*)",
+      "Bash(dir:*)",
+      "Bash(ls:*)",
+      "Bash(awk:*)"
     ],
     "deny": [],
     "ask": []
