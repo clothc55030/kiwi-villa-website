@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+    <script>
+        // 處理房型短網址跳轉 (例如: /205 -> /rooms#room-205)
+        const path = window.location.pathname;
+        const roomMatch = path.match(/^\/(201|203|205|301|302|303|305)\/?$/);
+        if (roomMatch) {
+            // 301和302是同一個房型區塊
+            const roomNumber = roomMatch[1] === '302' ? '301' : roomMatch[1]; 
+            window.location.replace('/rooms#room-' + roomNumber);
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>找不到頁面 - 澎湖期遇度假會館</title>

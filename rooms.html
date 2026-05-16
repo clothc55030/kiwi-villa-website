@@ -149,7 +149,7 @@
             transform: translateX(0);
         }
 
-        
+
 
         /* Rooms Hero Section */
         .rooms-hero {
@@ -201,6 +201,7 @@
             max-width: 1600px;
             margin: 0 auto var(--spacing-xxl);
             position: relative;
+            scroll-margin-top: 100px; /* 預留給 navbar 的空間 */
         }
 
         /* 偶數翻轉排版 */
@@ -279,7 +280,7 @@
             object-fit: contain;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             transform: scale(0.95);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
         }
 
         .lightbox-overlay.active .lightbox-img {
@@ -302,6 +303,46 @@
 
         .lightbox-close:hover {
             opacity: 1;
+        }
+
+        .lightbox-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 100000;
+            padding: 20px;
+        }
+
+        .lightbox-btn:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            opacity: 0.8;
         }
 
         .room-slider {
@@ -563,6 +604,19 @@
             .room-features-list {
                 grid-template-columns: 1fr;
             }
+
+            .lightbox-btn {
+                font-size: 1.5rem;
+                padding: 10px;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
         }
 
         /* Global Mobile Fixes */
@@ -602,7 +656,8 @@
                 gap: var(--spacing-md);
             }
         }
-            /* ========================
+
+        /* ========================
            MENU SYSTEM (DEFINITIVE)
            ======================== */
 
@@ -623,7 +678,7 @@
             visibility: hidden;
             opacity: 0;
             transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                        visibility 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+                visibility 0.45s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: opacity;
         }
 
@@ -653,8 +708,8 @@
             /* Stagger animation uses opacity+transform, hover uses color.
                Use separate transition so hover never inherits stagger delay. */
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        color 0.15s ease;
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.15s ease;
         }
 
         /* Reveal state (when menu is open) */
@@ -664,11 +719,12 @@
         }
 
         /* Stagger delays — only for opacity & transform (index 0 & 1), NOT color (index 2) */
-/* Hover: instant color change, no delay whatsoever */
+        /* Hover: instant color change, no delay whatsoever */
         .menu-link:hover {
             color: var(--color-accent);
             transition-delay: 0s, 0s, 0s;
         }
+
         /* Navbar overrides when menu is open */
         body.menu-open nav {
             mix-blend-mode: normal !important;
@@ -688,20 +744,42 @@
 
 
         /* Stagger delays apply ONLY on open, not on close */
-        .fullscreen-menu.open .menu-links a:nth-child(1) { transition-delay: 0.05s, 0.05s, 0s; }
-        .fullscreen-menu.open .menu-links a:nth-child(2) { transition-delay: 0.10s, 0.10s, 0s; }
-        .fullscreen-menu.open .menu-links a:nth-child(3) { transition-delay: 0.15s, 0.15s, 0s; }
-        .fullscreen-menu.open .menu-links a:nth-child(4) { transition-delay: 0.20s, 0.20s, 0s; }
-        .fullscreen-menu.open .menu-links a:nth-child(5) { transition-delay: 0.25s, 0.25s, 0s; }
-        .fullscreen-menu.open .menu-links a:nth-child(6) { transition-delay: 0.30s, 0.30s, 0s; }
-        .fullscreen-menu.open .menu-links a:nth-child(7) { transition-delay: 0.35s, 0.35s, 0s; }
-        .fullscreen-menu.open .menu-links a:nth-child(8) { transition-delay: 0.40s, 0.40s, 0s; }
+        .fullscreen-menu.open .menu-links a:nth-child(1) {
+            transition-delay: 0.05s, 0.05s, 0s;
+        }
+
+        .fullscreen-menu.open .menu-links a:nth-child(2) {
+            transition-delay: 0.10s, 0.10s, 0s;
+        }
+
+        .fullscreen-menu.open .menu-links a:nth-child(3) {
+            transition-delay: 0.15s, 0.15s, 0s;
+        }
+
+        .fullscreen-menu.open .menu-links a:nth-child(4) {
+            transition-delay: 0.20s, 0.20s, 0s;
+        }
+
+        .fullscreen-menu.open .menu-links a:nth-child(5) {
+            transition-delay: 0.25s, 0.25s, 0s;
+        }
+
+        .fullscreen-menu.open .menu-links a:nth-child(6) {
+            transition-delay: 0.30s, 0.30s, 0s;
+        }
+
+        .fullscreen-menu.open .menu-links a:nth-child(7) {
+            transition-delay: 0.35s, 0.35s, 0s;
+        }
+
+        .fullscreen-menu.open .menu-links a:nth-child(8) {
+            transition-delay: 0.40s, 0.40s, 0s;
+        }
 
         /* On close: all items exit simultaneously, no delay */
         .fullscreen-menu:not(.open) .menu-link {
             transition-delay: 0s !important;
         }
-
     </style>
 </head>
 
@@ -728,8 +806,7 @@
             <a href="/reviews" class="menu-link">客戶評價 Reviews</a>
             <a href="/faq" class="menu-link">常見問題 FAQ</a>
             <a href="/policy" class="menu-link">訂房須知 Policy</a>
-            <a href="https://booking.owlting.com/kiwi-villa" class="menu-link"
-                target="_blank">立即訂房 Book Now</a>
+            <a href="https://booking.owlting.com/kiwi-villa" class="menu-link" target="_blank">立即訂房 Book Now</a>
         </div>
     </div>
 
@@ -743,7 +820,7 @@
         <section class="room-collection">
 
             <!-- 房型 1: 豪華家庭房 (201) -->
-            <article class="room-showcase reveal-up">
+            <article class="room-showcase reveal-up" id="room-201">
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp" alt="豪華家庭房 1"
@@ -800,7 +877,7 @@
             </article>
 
             <!-- 房型 2: 高級四人房 (203) -->
-            <article class="room-showcase reveal-up">
+            <article class="room-showcase reveal-up" id="room-203">
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp" alt="高級四人房 1"
@@ -851,7 +928,7 @@
             </article>
 
             <!-- 房型 3: 奢華四人房 (205) -->
-            <article class="room-showcase reveal-up">
+            <article class="room-showcase reveal-up" id="room-205">
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp" alt="奢華四人房 1"
@@ -907,7 +984,7 @@
             </article>
 
             <!-- 房型 4: 高級雙床房 (301, 302) -->
-            <article class="room-showcase reveal-up">
+            <article class="room-showcase reveal-up" id="room-301">
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp" alt="高級雙床房 1"
@@ -961,7 +1038,7 @@
             </article>
 
             <!-- 房型 5: 高級三人房 (303) -->
-            <article class="room-showcase reveal-up">
+            <article class="room-showcase reveal-up" id="room-303">
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp" alt="高級三人房 1"
@@ -1013,7 +1090,7 @@
             </article>
 
             <!-- 房型 6: 高級雙人房 (305) -->
-            <article class="room-showcase reveal-up">
+            <article class="room-showcase reveal-up" id="room-305">
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp" alt="高級雙人房 1"
@@ -1130,7 +1207,10 @@
     <!-- Lightbox -->
     <div class="lightbox-overlay" id="lightbox">
         <button class="lightbox-close" id="lightbox-close">&times;</button>
+        <button class="lightbox-btn lightbox-prev" id="lightbox-prev" aria-label="上一張圖片"><i class="fas fa-chevron-left"></i></button>
         <img src="" alt="大圖檢視" class="lightbox-img" id="lightbox-img">
+        <button class="lightbox-btn lightbox-next" id="lightbox-next" aria-label="下一張圖片"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
 
     <script>
@@ -1237,19 +1317,58 @@
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+
+            let currentLightboxImages = [];
+            let currentLightboxIndex = 0;
+
+            const updateLightboxImage = () => {
+                if (currentLightboxImages.length > 0) {
+                    lightboxImg.style.opacity = '0.5';
+                    setTimeout(() => {
+                        lightboxImg.src = currentLightboxImages[currentLightboxIndex];
+                        lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
+                        lightboxImg.style.opacity = '1';
+                    }, 150);
+                }
+            };
 
             sliders.forEach(sliderWrap => {
                 const roomSlider = sliderWrap.querySelector('.room-slider');
                 if (!roomSlider) return;
 
                 roomSlider.addEventListener('click', () => {
+                    const slides = Array.from(roomSlider.querySelectorAll('.slide'));
+                    currentLightboxImages = slides.map(slide => slide.src);
                     const activeSlide = roomSlider.querySelector('.slide.active');
-                    if (activeSlide) {
-                        lightboxImg.src = activeSlide.src;
+                    currentLightboxIndex = slides.indexOf(activeSlide);
+                    
+                    if (currentLightboxIndex !== -1) {
+                        lightboxImg.style.opacity = '1'; // Reset opacity
+                        lightboxImg.src = currentLightboxImages[currentLightboxIndex];
+                        lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
                         lightbox.classList.add('active');
                         document.body.style.overflow = 'hidden';
                     }
                 });
+            });
+
+            lightboxPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (currentLightboxImages.length > 0) {
+                    currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+                    updateLightboxImage();
+                }
+            });
+
+            lightboxNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (currentLightboxImages.length > 0) {
+                    currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+                    updateLightboxImage();
+                }
             });
 
             const closeLightbox = () => {
@@ -1264,8 +1383,13 @@
                 }
             });
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') {
                     closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    lightboxPrev.click();
+                } else if (e.key === 'ArrowRight') {
+                    lightboxNext.click();
                 }
             });
         });
