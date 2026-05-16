@@ -67,7 +67,9 @@
             pointer-events: none;
             z-index: 9999;
             opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAP////////////////////////8zX/HkAAAACHRSTlMAf4+Pj4+Pj/BP/0AAAAAoSURBVDjLxdGxDQAgDATAxX7/nbxgI0TqS6z70rZfXdd1Xdd1Xdc9G2kEwQv6rJAAAAAASUVORK5CYII=");
+            background-repeat: repeat;
+            opacity: 0.03;
         }
 
         /* Navbar */
@@ -133,70 +135,7 @@
             transform: translateX(0);
         }
 
-        /* 全螢幕選單 */
-        .fullscreen-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: var(--color-ocean);
-            z-index: 90;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .fullscreen-menu.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .menu-links {
-            display: flex;
-            flex-direction: column;
-            gap: clamp(0.5rem, 2vh, 1.5rem);
-            text-align: center;
-        }
-
-        .menu-link {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 5vh, 3rem);
-            color: var(--color-bg);
-            text-decoration: none;
-            font-style: italic;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .fullscreen-menu.open .menu-link {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .menu-link:hover {
-            color: var(--color-accent);
-        }
-
-        body.menu-open nav {
-            mix-blend-mode: normal !important;
-            color: var(--color-bg) !important;
-            background: transparent !important;
-            box-shadow: none !important;
-        }
-
-        body.menu-open {
-            overflow: hidden;
-        }
-
-        body.menu-open .logo-img {
-            filter: brightness(0) invert(1) !important;
-        }
+        
 
         /* Hero 區塊 */
         .location-hero {
@@ -513,6 +452,106 @@
                 gap: var(--spacing-md);
             }
         }
+            /* ========================
+           MENU SYSTEM (DEFINITIVE)
+           ======================== */
+
+        /* Fullscreen overlay */
+        .fullscreen-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--color-ocean);
+            z-index: 90;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Use visibility instead of pointer-events for better perf */
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                        visibility 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: opacity;
+        }
+
+        .fullscreen-menu.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Menu item list */
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.5rem, 2vh, 1.5rem);
+            text-align: center;
+        }
+
+        /* SINGLE, COMPLETE .menu-link definition */
+        .menu-link {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 5vh, 3rem);
+            color: var(--color-bg);
+            text-decoration: none;
+            font-style: italic;
+            display: block;
+            opacity: 0;
+            transform: translateY(20px);
+            /* Stagger animation uses opacity+transform, hover uses color.
+               Use separate transition so hover never inherits stagger delay. */
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        color 0.15s ease;
+        }
+
+        /* Reveal state (when menu is open) */
+        .fullscreen-menu.open .menu-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays — only for opacity & transform (index 0 & 1), NOT color (index 2) */
+/* Hover: instant color change, no delay whatsoever */
+        .menu-link:hover {
+            color: var(--color-accent);
+            transition-delay: 0s, 0s, 0s;
+        }
+        /* Navbar overrides when menu is open */
+        body.menu-open nav {
+            mix-blend-mode: normal !important;
+            color: var(--color-bg) !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        body.menu-open .logo-img {
+            filter: brightness(0) invert(1) !important;
+        }
+
+        /* Hide noise when menu open (avoids compositing overhead) */
+        body.menu-open .noise-overlay {
+            display: none;
+        }
+
+
+        /* Stagger delays apply ONLY on open, not on close */
+        .fullscreen-menu.open .menu-links a:nth-child(1) { transition-delay: 0.05s, 0.05s, 0s; }
+        .fullscreen-menu.open .menu-links a:nth-child(2) { transition-delay: 0.10s, 0.10s, 0s; }
+        .fullscreen-menu.open .menu-links a:nth-child(3) { transition-delay: 0.15s, 0.15s, 0s; }
+        .fullscreen-menu.open .menu-links a:nth-child(4) { transition-delay: 0.20s, 0.20s, 0s; }
+        .fullscreen-menu.open .menu-links a:nth-child(5) { transition-delay: 0.25s, 0.25s, 0s; }
+        .fullscreen-menu.open .menu-links a:nth-child(6) { transition-delay: 0.30s, 0.30s, 0s; }
+        .fullscreen-menu.open .menu-links a:nth-child(7) { transition-delay: 0.35s, 0.35s, 0s; }
+        .fullscreen-menu.open .menu-links a:nth-child(8) { transition-delay: 0.40s, 0.40s, 0s; }
+
+        /* On close: all items exit simultaneously, no delay */
+        .fullscreen-menu:not(.open) .menu-link {
+            transition-delay: 0s !important;
+        }
+
     </style>
 </head>
 
@@ -532,14 +571,14 @@
 
     <div class="fullscreen-menu" id="fullscreen-menu">
         <div class="menu-links">
-            <a href="/" class="menu-link" style="transition-delay: 0.1s">首頁 Home</a>
-            <a href="/intro" class="menu-link" style="transition-delay: 0.15s">細說期遇 The Villa</a>
-            <a href="/rooms" class="menu-link" style="transition-delay: 0.2s">房型設施 Rooms</a>
-            <a href="/location" class="menu-link" style="transition-delay: 0.25s">地理資訊 Location</a>
-            <a href="/reviews" class="menu-link" style="transition-delay: 0.3s">客戶評價 Reviews</a>
-            <a href="/faq" class="menu-link" style="transition-delay: 0.35s">常見問題 FAQ</a>
-            <a href="/policy" class="menu-link" style="transition-delay: 0.4s">訂房須知 Policy</a>
-            <a href="https://booking.owlting.com/kiwi-villa" class="menu-link" style="transition-delay: 0.45s"
+            <a href="/" class="menu-link">首頁 Home</a>
+            <a href="/intro" class="menu-link">細說期遇 The Villa</a>
+            <a href="/rooms" class="menu-link">房型設施 Rooms</a>
+            <a href="/location" class="menu-link">地理資訊 Location</a>
+            <a href="/reviews" class="menu-link">客戶評價 Reviews</a>
+            <a href="/faq" class="menu-link">常見問題 FAQ</a>
+            <a href="/policy" class="menu-link">訂房須知 Policy</a>
+            <a href="https://booking.owlting.com/kiwi-villa" class="menu-link"
                 target="_blank">立即訂房 Book Now</a>
         </div>
     </div>
