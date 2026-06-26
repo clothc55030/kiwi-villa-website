@@ -336,6 +336,16 @@
             transform: scale(1);
         }
 
+        /* 切換時的純 CSS 快速淡入（不延遲、GPU 合成、不卡） */
+        @keyframes lbImgFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-img.lb-fade {
+            animation: lbImgFade 0.2s ease;
+        }
+
         .lightbox-close {
             position: absolute;
             top: 40px;
@@ -1417,6 +1427,10 @@
                 // 鄰圖已預先載入快取，直接換 src 即可瞬間完成、不卡頓（同步、不依賴 decode）
                 lightboxImg.src = currentLightboxImages[currentLightboxIndex];
                 lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
+                // 重啟純 CSS 快速淡入動畫（移除→強制 reflow→重加，無 setTimeout 延遲）
+                lightboxImg.classList.remove('lb-fade');
+                void lightboxImg.offsetWidth;
+                lightboxImg.classList.add('lb-fade');
                 preloadLightbox(currentLightboxIndex + 1);
                 preloadLightbox(currentLightboxIndex - 1);
             };
