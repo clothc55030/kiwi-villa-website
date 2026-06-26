@@ -6,24 +6,25 @@
 /203   /rooms#room-203   301
 /205   /rooms#room-205   301
 /301   /rooms#room-301   301
-/302   /rooms#room-302   301
+/302   /rooms#room-301   301
 /303   /rooms#room-303   301
 /305   /rooms#room-305   301
-/306   /rooms#room-306   301
-/307   /rooms#room-307   301
+/306   /rooms#room-305   301
+/307   /rooms#room-305   301
 
 # 確保支援帶斜線的版本
 /201/  /rooms#room-201   301
 /203/  /rooms#room-203   301
 /205/  /rooms#room-205   301
 /301/  /rooms#room-301   301
-/302/  /rooms#room-302   301
+/302/  /rooms#room-301   301
 /303/  /rooms#room-303   301
 /305/  /rooms#room-305   301
-/306/  /rooms#room-306   301
-/307/  /rooms#room-307   301
+/306/  /rooms#room-305   301
+/307/  /rooms#room-305   301
 
 # 舊的 .html 重定向到無後綴版本
+/index.html    /         301
 /intro.html    /intro    301
 /rooms.html    /rooms    301
 /location.html /location 301

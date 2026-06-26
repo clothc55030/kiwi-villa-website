@@ -4,10 +4,11 @@
     <script>
         // 處理房型短網址跳轉 (例如: /205 -> /rooms#room-205)
         const path = window.location.pathname;
-        const roomMatch = path.match(/^\/(201|203|205|301|302|303|305)\/?$/);
+        const roomMatch = path.match(/^\/(201|203|205|301|302|303|305|306|307)\/?$/);
         if (roomMatch) {
-            // 301和302是同一個房型區塊
-            const roomNumber = roomMatch[1] === '302' ? '301' : roomMatch[1]; 
+            // 同房型區塊：302→301、306/307→305
+            const roomMap = { '302': '301', '306': '305', '307': '305' };
+            const roomNumber = roomMap[roomMatch[1]] || roomMatch[1]; 
             window.location.replace('/rooms#room-' + roomNumber);
         }
     </script>
