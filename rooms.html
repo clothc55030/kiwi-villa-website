@@ -1406,15 +1406,20 @@
             let currentLightboxImages = [];
             let currentLightboxIndex = 0;
 
+            // 預載指定索引的鄰圖（背景解碼快取，讓下次切換瞬間完成）
+            const preloadLightbox = (i) => {
+                if (!currentLightboxImages.length) return;
+                const k = (i + currentLightboxImages.length) % currentLightboxImages.length;
+                const im = new Image();
+                im.src = currentLightboxImages[k];
+            };
             const updateLightboxImage = () => {
-                if (currentLightboxImages.length > 0) {
-                    lightboxImg.style.opacity = '0.5';
-                    setTimeout(() => {
-                        lightboxImg.src = currentLightboxImages[currentLightboxIndex];
-                        lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
-                        lightboxImg.style.opacity = '1';
-                    }, 150);
-                }
+                if (currentLightboxImages.length === 0) return;
+                // 鄰圖已預先載入快取，直接換 src 即可瞬間完成、不卡頓（同步、不依賴 decode）
+                lightboxImg.src = currentLightboxImages[currentLightboxIndex];
+                lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
+                preloadLightbox(currentLightboxIndex + 1);
+                preloadLightbox(currentLightboxIndex - 1);
             };
 
             sliders.forEach(sliderWrap => {
@@ -1433,6 +1438,8 @@
                         lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
                         lightbox.classList.add('active');
                         document.body.style.overflow = 'hidden';
+                        preloadLightbox(currentLightboxIndex + 1);
+                        preloadLightbox(currentLightboxIndex - 1);
                     }
                 });
             });
