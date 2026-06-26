@@ -715,6 +715,18 @@
             transition-delay: 0s !important;
         }
 
+        /* hero 中文小標：保留 H1 關鍵字，視覺以英文為主 */
+        .intro-hero-title .hero-cn {
+            display: block;
+            font-family: var(--font-body);
+            font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+            letter-spacing: 0.3em;
+            font-weight: 400;
+            font-style: normal;
+            color: inherit;
+            opacity: 0.7;
+            margin-bottom: 0.6rem;
+        }
     </style>
 </head>
 
@@ -760,7 +772,7 @@
 
     <!-- Hero -->
     <header class="intro-hero">
-        <h1 class="intro-hero-title">會館介紹 <span>The Villa</span></h1>
+        <h1 class="intro-hero-title"><span class="hero-cn">會館介紹</span>The <span>Villa</span></h1>
         <p class="intro-hero-subtitle">全館附設陽台與豪華電梯的馬公市質感民宿</p>
         <p class="intro-hero-desc">
             民宿主人鎖定旅客對當下經濟形勢的旅遊住宿訴求，<br>打造出滿足旅客個性化、品質化、社交化等多方面的民宿。

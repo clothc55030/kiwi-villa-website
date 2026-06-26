@@ -612,6 +612,18 @@
             transition-delay: 0s !important;
         }
 
+        /* hero 中文小標：保留 H1 關鍵字，視覺以英文為主 */
+        .location-hero-title .hero-cn {
+            display: block;
+            font-family: var(--font-body);
+            font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+            letter-spacing: 0.3em;
+            font-weight: 400;
+            font-style: normal;
+            color: inherit;
+            opacity: 0.7;
+            margin-bottom: 0.6rem;
+        }
     </style>
 </head>
 
@@ -657,7 +669,7 @@
 
     <!-- Hero -->
     <header class="location-hero">
-        <h1 class="location-hero-title">交通位置 <span>The Location</span></h1>
+        <h1 class="location-hero-title"><span class="hero-cn">交通位置</span>The <span>Location</span></h1>
         <p class="location-hero-subtitle">絕佳位置，交通便捷</p>
     </header>
 

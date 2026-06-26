@@ -591,6 +591,18 @@
             transition-delay: 0s !important;
         }
 
+        /* hero 中文小標：保留 H1 關鍵字，視覺以英文為主 */
+        .faq-hero-title .hero-cn {
+            display: block;
+            font-family: var(--font-body);
+            font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+            letter-spacing: 0.3em;
+            font-weight: 400;
+            font-style: normal;
+            color: inherit;
+            opacity: 0.7;
+            margin-bottom: 0.6rem;
+        }
     </style>
 </head>
 
@@ -636,7 +648,7 @@
 
     <!-- Hero -->
     <header class="faq-hero">
-        <h1 class="faq-hero-title">常見問題 <span>The FAQ</span></h1>
+        <h1 class="faq-hero-title"><span class="hero-cn">常見問題</span>The <span>FAQ</span></h1>
         <p class="faq-hero-subtitle">專業解答您的疑問</p>
     </header>
 

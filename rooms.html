@@ -838,6 +838,18 @@
         .fullscreen-menu:not(.open) .menu-link {
             transition-delay: 0s !important;
         }
+        /* hero 中文小標：保留 H1 關鍵字，視覺以英文為主 */
+        .rooms-hero-title .hero-cn {
+            display: block;
+            font-family: var(--font-body);
+            font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+            letter-spacing: 0.3em;
+            font-weight: 400;
+            font-style: normal;
+            color: inherit;
+            opacity: 0.7;
+            margin-bottom: 0.6rem;
+        }
     </style>
 </head>
 
@@ -883,7 +895,7 @@
     <main>
         <!-- Hero -->
         <section class="rooms-hero">
-            <h1 class="rooms-hero-title">精緻房型 <span>The Rooms</span></h1>
+            <h1 class="rooms-hero-title"><span class="hero-cn">精緻房型</span>The <span>Rooms</span></h1>
             <p class="rooms-hero-subtitle">寧靜・奢華・海島之夢</p>
         </section>
 
