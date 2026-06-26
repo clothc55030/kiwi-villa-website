@@ -1,0 +1,11 @@
+# 本機備份目錄（不進版控、不部署到 Cloudflare Pages）
+_backup_unused_files/
+
+# 作業系統雜項
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 編輯器
+.vscode/
+*.swp

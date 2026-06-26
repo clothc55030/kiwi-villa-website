@@ -4,17 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>訂房須知 Policy | Kiwi Villa 澎湖期遇度假會館</title>
+    <title>訂房須知｜澎湖期遇度假會館 Kiwi Villa</title>
     <meta name="description"
         content="澎湖期遇度假會館訂房須知：入住15:00/退房11:00、取消政策說明、禁菸規定、寵物限制、兒童加床規定、付款方式、住宿注意事項。預訂前請詳閱，確保您的權益。訂房專線：0933-636373">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.kiwi-villa.com/policy">
     <meta property="og:title" content="訂房須知 - 澎湖期遇度假會館 | 詳細住宿規定與注意事項">
     <meta property="og:description" content="詳細住宿規定與注意事項，包含入住退房時間、取消政策、住宿規定、設施服務等完整資訊。">
-    <meta property="og:image" content="https://www.kiwi-villa.com/images/logo/apple-touch-icon-152x152.png">
-    <meta property="og:image:width" content="152">
-    <meta property="og:image:height" content="152">
+    <meta property="og:image" content="https://www.kiwi-villa.com/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="澎湖期遇度假會館 - 訂房須知與住宿規定">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="澎湖期遇度假會館 Kiwi Villa">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="訂房須知｜澎湖期遇度假會館 Kiwi Villa">
+    <meta name="twitter:description" content="澎湖期遇度假會館訂房須知：入住15:00/退房11:00、取消政策說明、禁菸規定、寵物限制、兒童加床規定、付款方式、住宿注意事項。預訂前請詳閱，確保您的權益。訂房專線：0933-636373">
+    <meta name="twitter:image" content="https://www.kiwi-villa.com/assets/og-image.jpg">
+    <link rel="canonical" href="https://www.kiwi-villa.com/policy">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/logo/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/logo/apple-touch-icon-180x180.png">
+    <link rel="manifest" href="/assets/manifest.json">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,6 +128,13 @@
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
+            /* 觸控目標 ≥44px（WCAG 2.5.5） */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
+            padding: 0.5rem 0.75rem;
         }
 
         .menu-btn::after {
@@ -133,6 +151,36 @@
 
         .menu-btn:hover::after {
             transform: translateX(0);
+        }
+
+        /* 手機浮動 CTA：訂房 + LINE（僅 ≤768px 顯示） */
+        .mobile-cta-bar { display: none; }
+        @media (max-width: 768px) {
+            .mobile-cta-bar {
+                display: flex;
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 80;
+                box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.18);
+            }
+            .mobile-cta-bar a {
+                flex: 1;
+                min-height: 52px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                font-family: var(--font-body);
+                font-size: 1rem;
+                letter-spacing: 0.05em;
+                text-decoration: none;
+                color: #fff;
+            }
+            .mobile-cta-book { background: var(--color-accent); }
+            .mobile-cta-line { background: #06C755; }
+            body { padding-bottom: 52px; }
         }
 
         
@@ -598,11 +646,23 @@
             <picture>
                 <source srcset="images/logo/kiwi-villa-logo.avif" type="image/avif">
                 <source srcset="images/logo/kiwi-villa-logo.webp" type="image/webp">
-                <img src="images/logo/kiwi-villa-logo.webp" alt="Kiwi Villa Logo" class="logo-img">
+                <img width="1772" height="958" src="images/logo/kiwi-villa-logo.webp" alt="Kiwi Villa Logo" class="logo-img">
             </picture>
         </a>
         <button class="menu-btn" id="menu-toggle" aria-label="展開或關閉選單">Menu</button>
     </nav>
+
+    <noscript>
+        <nav style="background:#162431;padding:1rem 2rem;text-align:center;">
+            <a href="/" style="color:#F9F7F3;margin:0 1rem;text-decoration:none;">首頁</a>
+            <a href="/intro" style="color:#F9F7F3;margin:0 1rem;text-decoration:none;">會館介紹</a>
+            <a href="/rooms" style="color:#F9F7F3;margin:0 1rem;text-decoration:none;">房型設施</a>
+            <a href="/location" style="color:#F9F7F3;margin:0 1rem;text-decoration:none;">地理位置</a>
+            <a href="/reviews" style="color:#F9F7F3;margin:0 1rem;text-decoration:none;">客戶評價</a>
+            <a href="/faq" style="color:#F9F7F3;margin:0 1rem;text-decoration:none;">常見問題</a>
+            <a href="/policy" style="color:#F9F7F3;margin:0 1rem;text-decoration:none;">訂房須知</a>
+        </nav>
+    </noscript>
 
     <div class="fullscreen-menu" id="fullscreen-menu">
         <div class="menu-links">
@@ -857,6 +917,11 @@
             });
         });
     </script>
+    <!-- 手機浮動 CTA：訂房 + LINE（僅 ≤768px 顯示） -->
+    <div class="mobile-cta-bar">
+        <a href="https://booking.owlting.com/kiwi-villa" class="mobile-cta-book" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> 線上訂房</a>
+        <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><i class="fab fa-line"></i> LINE 預約</a>
+    </div>
 </body>
 
 </html>
