@@ -8,7 +8,8 @@
       "Bash(dir:*)",
       "Bash(ls:*)",
       "Bash(awk:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(grep -rniE 'gtag|googletagmanager|google-analytics|G-[A-Z0-9]{6,}|GTM-' --include=\"*.html\" .)"
     ],
     "deny": [],
     "ask": []
