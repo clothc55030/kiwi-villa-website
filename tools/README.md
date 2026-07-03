@@ -1,12 +1,29 @@
-# 摩西分海資料更新工具（每年一次）
+# 摩西分海資料年度更新（一年做一次）
 
-於次年官方表公布後（約 12 月）重跑：
+## 什麼時候做
+澎管處通常於**前一年 12 月左右**公布次年全年潮汐表。
+公布後（例如 2026 年 12 月更新 2027 年資料）執行一次即可。
 
-1. 抓取澎管處 12 個月表（`https://www.penghu-nsa.gov.tw/Services/Tidenew/1{年}{月}tide.htm`），
-   將各月表格文字存為 `tide-raw/11601.md` ... 後執行 `parse-penghu-nsa.py` 產出 raw JSON。
-2. 修改 `generate-tide-json.py` 內的年份與檔案路徑，執行後產出 `tide-2027.json`。
-3. 放到 `assets/`，並更新 `moses.html` 中的 fetch 路徑與 ?v= 版本號（穿透 CDN 快取）、date input 的 min/max、
-   頁尾「資料更新」日期與 sitemap lastmod。
+## 怎麼做
+1. 雙擊 `更新潮汐資料.bat`（直接按 Enter 就是更新明年）。
+2. 腳本自動完成：抓官方 12 個月表 → 解析驗證 → 計算建議抵達／回程／合海／
+   日出場／潮差分級 → 產出 `assets/tide-{年}.json` → 自動改好 `moses.html`
+   （fetch 檔名與版本號、日期範圍、來源年份）與 `sitemap.xml`。
+3. 依 `tools/highlights-{年}.txt`（腳本自動輸出）人工挑選並更新 moses.html
+   的「Highlights 精選場次」區塊（完美日出場／週末大潮場）。
+4. 本地預覽確認（`python -m http.server 8000`），git commit 併回 main 部署。
 
-參數（建議抵達提前量、回程死線、合海偏移、日出日落表）都在 generate-tide-json.py 頂部，
-可依現場觀察直接調整後重新產出。
+## 可靠性
+- 腳本內建強驗證（天數、星期逐日核對、時刻格式）；官方若改版式會**明確報錯**
+  而不是產出錯資料，把錯誤訊息貼給 Claude 即可。
+- 若該年 JSON 已存在會先比對再詢問是否覆蓋——拿 2026 跑一次就是端到端
+  自我測試（應顯示「黃金測試 PASS」）。
+
+## 參數調整
+建議抵達提前量（大/中/小潮 40/30/20 分）、回程死線（30 分）等常數
+都在 `update-tide-data.py` 頂部，依現場經驗修改後重跑即可。
+
+## 其他
+- 即時影像：moses.html 內嵌澎管處 YouTube 直播（ID: 3bMnFpVc9f0），
+  若官方更換直播網址，搜尋此 ID 全部替換即可。
+- 舊年份 `assets/tide-*.json` 可保留或刪除，不影響頁面。
