@@ -572,14 +572,14 @@
         .menu-links {
             display: flex;
             flex-direction: column;
-            gap: clamp(0.5rem, 2vh, 1.5rem);
+            gap: clamp(0.4rem, 1.5vh, 1.1rem);
             text-align: center;
         }
 
         /* SINGLE, COMPLETE .menu-link definition */
         .menu-link {
             font-family: var(--font-display);
-            font-size: clamp(1.5rem, 5vh, 3rem);
+            font-size: clamp(1.3rem, 4.2vh, 2.6rem);
             color: var(--color-bg);
             text-decoration: none;
             font-style: italic;
@@ -635,6 +635,21 @@
         .fullscreen-menu.open .menu-links a:nth-child(6) { transition-delay: 0.30s, 0.30s, 0s; }
         .fullscreen-menu.open .menu-links a:nth-child(7) { transition-delay: 0.35s, 0.35s, 0s; }
         .fullscreen-menu.open .menu-links a:nth-child(8) { transition-delay: 0.40s, 0.40s, 0s; }
+        .fullscreen-menu.open .menu-links a:nth-child(9) { transition-delay: 0.45s, 0.45s, 0s; }
+
+        /* 訂房 CTA：與導覽項目視覺區隔 */
+        .menu-links a:last-child {
+            margin-top: clamp(0.6rem, 2.2vh, 1.6rem);
+            font-size: clamp(1.05rem, 2.8vh, 1.5rem);
+            font-style: normal;
+            letter-spacing: 0.18em;
+            border: 1px solid rgba(249, 247, 243, 0.5);
+            padding: 0.55rem 2rem;
+        }
+
+        .menu-links a:last-child:hover {
+            background: rgba(249, 247, 243, 0.12);
+        }
 
         /* On close: all items exit simultaneously, no delay */
         .fullscreen-menu:not(.open) .menu-link {
