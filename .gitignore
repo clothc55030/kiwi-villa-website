@@ -9,3 +9,6 @@ desktop.ini
 # 編輯器
 .vscode/
 *.swp
+
+# Python 快取（tools/ 更新腳本）
+__pycache__/
