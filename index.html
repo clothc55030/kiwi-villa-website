@@ -294,12 +294,16 @@
             padding-left: var(--spacing-sm);
         }
 
-        /* 滾動提示 */
+        /* 滾動提示（置中於 hero 底部）
+           注意：不能用 left:50% + translateX(-50%) 置中，
+           fadeUp 動畫（both 填充）會覆蓋 transform 導致水平偏移失效 */
         .scroll-indicator {
             position: absolute;
             bottom: var(--spacing-md);
-            right: var(--spacing-lg);
-            /* 原本 left:50% 置中會壓在右欄詩句上，改放右下角空白區 */
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: fit-content;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -339,6 +343,25 @@
 
             100% {
                 transform: translateY(100%);
+            }
+        }
+
+        /* 矮視窗（筆電）：hero 內容上移＋指示器縮小，避免置中的指示器與詩句重疊 */
+        @media (max-height: 880px) {
+            .hero-content {
+                padding-top: var(--spacing-lg);
+            }
+
+            .hero-poem {
+                margin-top: var(--spacing-md);
+            }
+
+            .scroll-indicator {
+                bottom: var(--spacing-sm);
+            }
+
+            .scroll-line {
+                height: 40px;
             }
         }
 
