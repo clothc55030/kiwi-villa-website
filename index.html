@@ -666,6 +666,11 @@
             .footer-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* 單欄版面（≤992px）隱藏 scroll 指示器，避免擋住詩句文字 */
+            .scroll-indicator {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
@@ -677,11 +682,6 @@
                 padding: var(--spacing-md);
                 background: rgba(249, 247, 243, 0.8);
                 backdrop-filter: blur(10px);
-            }
-
-            /* 手機版隱藏 scroll 指示器，避免擋住詩句文字 */
-            .scroll-indicator {
-                display: none;
             }
         }
 
@@ -1103,6 +1103,3 @@
         <a href="https://booking.owlting.com/kiwi-villa" class="mobile-cta-book" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> 線上訂房</a>
         <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><i class="fab fa-line"></i> LINE 預約</a>
     </div>
-</body>
-
-</html>
