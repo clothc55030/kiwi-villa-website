@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>奎壁山摩西分海時間查詢｜建議抵達・最晚回程｜澎湖期遇度假會館</title>
+    <title>奎壁山摩西分海時間・2026 潮汐表查詢｜建議抵達時間｜澎湖期遇度假會館</title>
     <meta name="description"
-        content="2026 全年奎壁山摩西分海查詢：不只官方通行時段，直接告訴你建議抵達時間、最晚回程時刻、合海觀賞時機與當日潮差等級。日出場、合海這些內行玩法，一頁看懂。">
+        content="2026 奎壁山摩西分海潮汐表＋時間查詢：不只官方通行時段，直接給你建議抵達時間、最晚回程、合海時刻與潮差分級。全年僅 5 場的完美日出場日期、週末大潮場清單，一頁看懂。">
     <meta name="author" content="澎湖期遇度假會館">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.kiwi-villa.com/moses">
-    <meta property="og:title" content="奎壁山摩西分海時間查詢｜建議抵達・最晚回程">
+    <meta property="og:title" content="奎壁山摩西分海時間・2026 潮汐表｜建議抵達一眼看懂">
     <meta property="og:description" content="不只官方通行時段：建議抵達時間、最晚回程死線、合海觀賞時機、當日潮差等級，2026 全年一鍵查詢。">
     <meta property="og:image" content="https://www.kiwi-villa.com/assets/og-image.jpg">
     <meta property="og:image:width" content="1200">
@@ -19,7 +19,7 @@
     <meta property="og:locale" content="zh_TW">
     <meta property="og:site_name" content="澎湖期遇度假會館 Kiwi Villa">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="奎壁山摩西分海時間查詢｜建議抵達・最晚回程">
+    <meta name="twitter:title" content="奎壁山摩西分海時間・2026 潮汐表｜建議抵達一眼看懂">
     <meta name="twitter:description" content="2026 全年摩西分海查詢：建議抵達時間、最晚回程、合海時刻、潮差等級。看懂分海，一次就看到最美的瞬間。">
     <meta name="twitter:image" content="https://www.kiwi-villa.com/assets/og-image.jpg">
     <link rel="canonical" href="https://www.kiwi-villa.com/moses">
@@ -801,6 +801,37 @@
         .timeline .t-label { font-size: 0.95rem; color: var(--color-text); }
         .timeline .t-desc { display: block; font-size: 0.84rem; color: var(--color-text-light); margin-top: 0.25rem; line-height: 1.7; }
 
+        .hl-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .hl-card {
+            background: var(--color-surface);
+            padding: 1.8rem 1.6rem;
+        }
+
+        .hl-card h3 { font-size: 1.15rem; font-weight: 500; margin-bottom: 0.6rem; }
+
+        .hl-card h3 span {
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            color: var(--color-sea);
+            border: 1px solid currentColor;
+            padding: 0.14rem 0.5rem;
+            margin-left: 0.6rem;
+            vertical-align: 2px;
+            white-space: nowrap;
+        }
+
+        .hl-note { font-size: 0.85rem; color: var(--color-text-light); line-height: 1.85; margin-bottom: 0.9rem; }
+        .hl-card ul { list-style: none; margin: 0; padding: 0; }
+        .hl-card li { font-size: 0.92rem; padding: 0.5rem 0; border-top: 1px dashed rgba(22, 36, 49, 0.15); line-height: 1.7; }
+        .hl-card li:first-child { border-top: none; }
+        .hl-card li strong { font-weight: 600; margin-right: 0.4rem; }
+
         .sun-note {
             font-family: var(--font-body);
             font-size: 0.9rem;
@@ -811,6 +842,80 @@
             line-height: 2;
             max-width: 460px;
         }
+
+        .live-block { margin-top: 2.2rem; max-width: 640px; }
+
+        .live-head { font-size: 0.95rem; letter-spacing: 0.15em; margin-bottom: 0.8rem; color: var(--color-text); }
+
+        .live-facade {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: var(--color-ocean);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .live-facade img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0.78;
+            transition: opacity 0.3s ease, transform 0.5s ease;
+        }
+
+        .live-facade:hover img { opacity: 0.92; transform: scale(1.02); }
+
+        .live-tag {
+            position: absolute;
+            top: 0.8rem;
+            left: 0.8rem;
+            background: rgba(22, 36, 49, 0.85);
+            color: var(--color-bg);
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            padding: 0.3rem 0.7rem;
+        }
+
+        .live-tag::before {
+            content: '';
+            display: inline-block;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: #E5484D;
+            margin-right: 0.45rem;
+            vertical-align: 1px;
+            animation: livePulse 1.6s infinite;
+        }
+
+        @keyframes livePulse { 50% { opacity: 0.35; } }
+
+        .live-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            background: rgba(249, 247, 243, 0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .live-play::after {
+            content: '';
+            border-left: 18px solid var(--color-ocean);
+            border-top: 11px solid transparent;
+            border-bottom: 11px solid transparent;
+            margin-left: 4px;
+        }
+
+        .live-facade:hover .live-play { background: #fff; }
+        .live-facade iframe { width: 100%; height: 100%; border: 0; position: absolute; inset: 0; }
+        .live-src { font-size: 0.75rem; color: var(--color-text-light); margin-top: 0.6rem; line-height: 1.8; }
 
         .tide-closed {
             color: var(--color-text-light);
@@ -926,7 +1031,7 @@
         }
 
         @media (max-width: 992px) {
-            .three-grid, .notice-grid, .tide-sessions.two-col { grid-template-columns: 1fr; }
+            .three-grid, .notice-grid, .tide-sessions.two-col, .hl-grid { grid-template-columns: 1fr; }
         }
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}
@@ -981,7 +1086,7 @@
 
     <!-- Hero -->
     <header class="page-hero">
-        <h1 class="page-hero-title"><span class="hero-cn">摩西分海</span>Tide <span>Miracle</span></h1>
+        <h1 class="page-hero-title"><span class="hero-cn">奎壁山摩西分海</span>Tide <span>Miracle</span></h1>
         <p class="page-hero-subtitle">奎壁山・赤嶼｜退潮限定的海中步道</p>
         <div class="sea-divider" aria-hidden="true">
             <svg viewBox="0 0 1200 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -1023,6 +1128,15 @@
                     <p class="tide-fallback">互動查詢需要 JavaScript。您也可以直接查閱 <a href="https://www.penghu-nsa.gov.tw/Services/Tidenew" target="_blank" rel="noopener">澎管處官方潮汐預報表</a>，並於「參考安全通行時段」開始前約 30 分鐘抵達。</p>
                 </noscript>
             </div>
+            <div class="live-block reveal-up">
+                <div class="live-head">出發前，看一眼現場</div>
+                <div class="live-facade" id="live-facade" role="button" tabindex="0" aria-label="播放北寮奎壁山摩西分海即時影像">
+                    <img src="https://i.ytimg.com/vi/3bMnFpVc9f0/hqdefault.jpg" alt="北寮奎壁山摩西分海即時影像預覽" loading="lazy" width="480" height="360">
+                    <span class="live-tag">LIVE・北寮即時影像</span>
+                    <span class="live-play" aria-hidden="true"></span>
+                </div>
+                <p class="live-src">影像來源：<a href="https://www.youtube.com/watch?v=3bMnFpVc9f0" target="_blank" rel="noopener">澎湖國家風景區管理處 YouTube 直播</a>。步道露出程度、人潮與天氣一目瞭然；點擊畫面即可播放。</p>
+            </div>
         </section>
 
         <!-- 三個時間點 -->
@@ -1047,6 +1161,44 @@
                     <div class="num">03</div>
                     <h3>留下來，看海關門<span>MERGE</span></h3>
                     <p>大多數人走完步道就離開了。其實通行結束後約半小時，海水會當著你的面把整條路收回去——「合海」。站上岸邊高處看，比分海更震撼。查詢器會標出當日合海估計時刻（天黑前才顯示）。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2026 精選場次 -->
+        <section class="moses-section">
+            <div class="reveal-up">
+                <div class="section-label">2026 Highlights</div>
+                <h2>2026 年值得特別安排的場次</h2>
+                <p class="lead">從全年 435 個通行場次裡，我們挑出兩種最值得排進行程的日子——上方查詢器輸入日期可看完整時間軸。</p>
+            </div>
+            <div class="hl-grid">
+                <div class="hl-card reveal-up">
+                    <h3>完美日出場<span>全年僅 5 場</span></h3>
+                    <p class="hl-note">開門時分海尚未開始、日出正好同框：先看海讓路，再看太陽從赤嶼後方升起。2026 年只有這五天，攝影迷請直接請假。</p>
+                    <ul>
+                        <li><strong>4/22（三）</strong>日出 05:34・05:30 前抵達</li>
+                        <li><strong>5/7（四）</strong>日出 05:23・05:30 前抵達</li>
+                        <li><strong>5/21（四）</strong>日出 05:17・05:30 前抵達</li>
+                        <li><strong>6/5（五）</strong>日出 05:13・05:30 前抵達</li>
+                        <li><strong>7/5（日）</strong>日出 05:19・05:30 前抵達（唯一假日場）</li>
+                    </ul>
+                </div>
+                <div class="hl-card reveal-up">
+                    <h3>週末大潮場<span>親子首選</span></h3>
+                    <p class="hl-note">大潮日退得最低、步道最寬，又落在週末白天——從完整分海一路玩到合海，時間最從容。</p>
+                    <ul>
+                        <li><strong>1/3（六）</strong>14:30–17:30・13:50 前抵達</li>
+                        <li><strong>1/18（日）</strong>15:00–17:30・14:20 前抵達</li>
+                        <li><strong>3/21（六）</strong>16:00–17:30・15:20 前抵達</li>
+                        <li><strong>4/19（日）</strong>15:30–18:30・14:50 前抵達</li>
+                        <li><strong>5/16（六）</strong>13:30–17:30・12:50 前抵達</li>
+                        <li><strong>8/1（六）</strong>16:00–18:30・15:20 前抵達</li>
+                        <li><strong>8/15（六）</strong>16:00–18:30・15:20 前抵達</li>
+                        <li><strong>8/29（六）</strong>15:00–18:30・14:20 前抵達</li>
+                        <li><strong>9/12（六）</strong>15:00–17:30・14:20 前抵達</li>
+                        <li><strong>9/26（六）</strong>14:00–17:30・13:20 前抵達</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -1127,7 +1279,7 @@
             </div>
         </section>
 
-        <p class="source-note">通行時段資料來源：澎湖國家風景區管理處「115 年北寮赤嶼陸連島海域乾滿潮潮汐預報表」（原始資料：交通部中央氣象署澎湖馬公潮汐預報）。建議抵達、最晚回程、合海時刻為本站依潮汐原理計算之參考值；潮差分級採月相估算。實際開放與通行請一律以現場旗幟、廣播及工作人員指示為準。資料更新：2026-07。</p>
+        <p class="source-note">本頁由期遇度假會館（澎湖馬公・西衛）長期維護，結合官方公告與在地日常觀察。通行時段資料來源：澎湖國家風景區管理處「115 年北寮赤嶼陸連島海域乾滿潮潮汐預報表」（原始資料：交通部中央氣象署澎湖馬公潮汐預報）。建議抵達、最晚回程、合海時刻為本站依潮汐原理計算之參考值；潮差分級採月相估算。實際開放與通行請一律以現場旗幟、廣播及工作人員指示為準。資料更新：2026-07。</p>
     </main>
 
     <footer>
@@ -1214,6 +1366,24 @@
                     nav.style.mixBlendMode = 'normal';
                 }
             });
+
+            // ===== 即時影像 facade（點擊才載入 YouTube, 避免拖慢頁面） =====
+            const facade = document.getElementById('live-facade');
+            if (facade) {
+                const playLive = function () {
+                    if (facade.querySelector('iframe')) return;
+                    const ifr = document.createElement('iframe');
+                    ifr.src = 'https://www.youtube-nocookie.com/embed/3bMnFpVc9f0?autoplay=1&rel=0';
+                    ifr.title = '摩西分海即時影像-北寮奎壁山（澎管處）';
+                    ifr.allow = 'autoplay; encrypted-media; picture-in-picture';
+                    ifr.setAttribute('allowfullscreen', '');
+                    facade.appendChild(ifr);
+                };
+                facade.addEventListener('click', playLive);
+                facade.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playLive(); }
+                });
+            }
 
             // ===== 摩西分海查詢 =====
             const TAG_TXT = { dawn: '清晨場', morning: '上午場', noon: '中午場', afternoon: '下午場', evening: '傍晚場' };
@@ -1365,6 +1535,8 @@
         "geo": { "@type": "GeoCoordinates", "latitude": 23.5986, "longitude": 119.622 },
         "isAccessibleForFree": true,
         "publicAccess": true,
+        "image": "https://www.kiwi-villa.com/assets/og-image.jpg",
+        "hasMap": "https://www.google.com/maps/dir/?api=1&destination=%E5%A5%8E%E5%A3%81%E5%B1%B1%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92",
         "url": "https://www.kiwi-villa.com/moses",
         "subjectOf": { "@type": "WebPage", "url": "https://www.kiwi-villa.com/moses" }
     }
@@ -1381,6 +1553,20 @@
             { "@type": "Question", "name": "錯過分海怎麼辦？", "acceptedAnswer": { "@type": "Answer", "text": "可留到通行時段結束後約半小時看合海——海水從兩側合攏收回步道；或隔天再來，潮汐每天約往後推 50 分鐘。" } },
             { "@type": "Question", "name": "從期遇度假會館到奎壁山要多久？", "acceptedAnswer": { "@type": "Answer", "text": "沿 203 縣道車程約 18 分鐘（約 12 公里），清晨日出場與傍晚合海都能輕鬆來回。" } }
         ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "2026 奎壁山摩西分海通行時段與建議時刻資料集",
+        "description": "澎湖奎壁山赤嶼陸連島步道 2026 全年每日安全通行時段、建議抵達時間、最晚回程、合海估計時刻、潮差分級與日出場標注，依澎湖國家風景區管理處公告加值計算。",
+        "url": "https://www.kiwi-villa.com/moses",
+        "temporalCoverage": "2026-01-01/2026-12-31",
+        "spatialCoverage": { "@type": "Place", "geo": { "@type": "GeoCoordinates", "latitude": 23.5986, "longitude": 119.622 } },
+        "distribution": { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://www.kiwi-villa.com/assets/tide-2026.json" },
+        "isBasedOn": "https://www.penghu-nsa.gov.tw/Services/Tidenew",
+        "creator": { "@id": "https://www.kiwi-villa.com/#lodging" }
     }
     </script>
     <script type="application/ld+json">

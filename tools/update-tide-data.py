@@ -314,6 +314,23 @@ def main():
     print(f'\n✓ 已產出 assets/tide-{year}.json（{os.path.getsize(out_path):,} bytes）')
     print(f'  場次 {stats["sessions"]}／夜間不開放 {stats["closed"]}／日出場 {stats["sunrise"]}')
 
+    # 精選場次清單（貼進 moses.html「2026 Highlights」區塊用）
+    hl_path = os.path.join(ROOT, 'tools', f'highlights-{year}.txt')
+    with open(hl_path, 'w', encoding='utf-8') as f:
+        f.write(f'=== {year} 完美日出場（full+sun, 開門前分海未開始且日出同框）===\n')
+        for k in sorted(days):
+            for ss in days[k]['s']:
+                if ss.get('sun') and ss.get('show') == 'full':
+                    f.write(f'{k}（{days[k]["w"]}） 日出 {ss["sr"]}・{ss["arr"]} 前抵達\n')
+        f.write(f'\n=== {year} 週末大潮完整分海（白天場, 親子首選）===\n')
+        for k in sorted(days):
+            d0 = days[k]
+            for ss in d0['s']:
+                if d0['lv'] == 'big' and d0['w'] in '六日' and ss.get('show') == 'full' \
+                   and ss.get('tag') in ('morning', 'noon', 'afternoon'):
+                    f.write(f'{k}（{d0["w"]}） {ss["o"]}–{ss["c"]}・{ss["arr"]} 前抵達\n')
+    print(f'✓ 精選場次清單已輸出 tools/highlights-{year}.txt（請人工挑選並更新 moses.html 的 Highlights 區塊）')
+
     update_site(year, version)
     print(f'✓ 已更新 moses.html（fetch 版本 {version}、日期範圍、來源年份）與 sitemap.xml')
     print('\n=== 完成！請用 git 提交變更並合併回 main 部署 ===')
