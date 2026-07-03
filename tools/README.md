@@ -24,6 +24,6 @@
 都在 `update-tide-data.py` 頂部，依現場經驗修改後重跑即可。
 
 ## 其他
-- 即時影像：moses.html 內嵌澎管處 YouTube 直播（ID: 3bMnFpVc9f0），
+- 即時影像：moses.html 內嵌澎管處 YouTube 直播（ID: zgPJbQzlQmw），
   若官方更換直播網址，搜尋此 ID 全部替換即可。
 - 舊年份 `assets/tide-*.json` 可保留或刪除，不影響頁面。
