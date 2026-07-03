@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preload" as="image" href="/images/hero/main-hall-environment-new.webp" type="image/webp">
+    <link rel="preload" as="image" href="/images/hero/main-hall-environment-new.webp" imagesrcset="/images/hero/main-hall-environment-828.webp 828w, /images/hero/main-hall-environment-new.webp 1920w" imagesizes="100vw" type="image/webp">
     <link rel="preload" as="style"
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -509,7 +509,7 @@
         /* 滿版圖像與詩句區塊 */
         .quote-section {
             height: 80vh;
-            background-image: url('images/hero/main-hall-environment-optimized.jpg');
+            background-image: url('images/hero/main-hall-environment-new.webp');
             /* 使用既有圖片 */
             background-size: cover;
             background-position: center;
@@ -812,6 +812,14 @@
 
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}</style></noscript>
+    <!-- Google Analytics 4（請將 G-XXXXXXXXXX 替換為你的評估 ID） -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
 </head>
 
 <body>
@@ -820,11 +828,7 @@
 
     <nav>
         <a href="/" class="logo" aria-label="返回 Kiwi Villa 首頁">
-            <picture>
-                <source srcset="images/logo/kiwi-villa-logo.avif" type="image/avif">
-                <source srcset="images/logo/kiwi-villa-logo.webp" type="image/webp">
-                <img width="1772" height="958" src="images/logo/kiwi-villa-logo.webp" alt="Kiwi Villa Logo" class="logo-img">
-            </picture>
+            <img width="333" height="180" src="images/logo/kiwi-villa-logo-nav.webp" alt="Kiwi Villa Logo" class="logo-img">
         </a>
         <button class="menu-btn" id="menu-toggle" aria-label="展開或關閉選單">Menu</button>
     </nav>
@@ -858,7 +862,7 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-image-wrapper">
-                <img width="1920" height="1280" src="images/hero/main-hall-environment-new.webp" alt="澎湖期遇度假會館" class="hero-image" fetchpriority="high"
+                <img width="1920" height="1280" src="images/hero/main-hall-environment-new.webp" srcset="images/hero/main-hall-environment-828.webp 828w, images/hero/main-hall-environment-new.webp 1920w" sizes="100vw" alt="澎湖期遇度假會館" class="hero-image" fetchpriority="high"
                     onerror="this.src=\'images/hero/main-hall-environment-optimized.webp\'">
             </div>
             <div class="hero-content">
@@ -1070,16 +1074,6 @@
         "checkoutTime": "11:00",
         "numberOfRooms": 9,
         "petsAllowed": false,
-        "starRating": {
-            "@type": "Rating",
-            "ratingValue": "5.0"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "bestRating": "5",
-            "ratingCount": "100"
-        },
         "amenityFeature": [
             {"@type": "LocationFeatureSpecification", "name": "電梯", "value": true},
             {"@type": "LocationFeatureSpecification", "name": "免費早餐", "value": true},
