@@ -690,6 +690,8 @@
         }
 
         #tide-date {
+            cursor: pointer;
+            caret-color: transparent;
             font-family: var(--font-body);
             font-size: 0.95rem;
             padding: 0.6rem 0.9rem;
@@ -1013,6 +1015,7 @@
             <div class="tool-controls reveal-up">
                 <button class="quick-btn" type="button" data-quick="0">今天</button>
                 <button class="quick-btn" type="button" data-quick="1">明天</button>
+                <button class="quick-btn" type="button" data-quick="2">後天</button>
                 <input type="date" id="tide-date" min="2026-01-01" max="2026-12-31" aria-label="選擇查詢日期">
             </div>
             <div id="tide-result" aria-live="polite">
@@ -1305,6 +1308,14 @@
                     TIDE = data;
                     quickBtns.forEach(function (b) {
                         b.addEventListener('click', function () { pickOffset(Number(b.dataset.quick)); });
+                    });
+                    tideDate.addEventListener('click', function () {
+                        if (typeof tideDate.showPicker === 'function') {
+                            try { tideDate.showPicker(); } catch (e) { /* 部分瀏覽器不支援, 維持原生行為 */ }
+                        }
+                    });
+                    tideDate.addEventListener('keydown', function (e) {
+                        if (e.key !== 'Tab' && e.key !== 'Escape') e.preventDefault();
                     });
                     tideDate.addEventListener('change', function () {
                         setActiveQuick(-1);
