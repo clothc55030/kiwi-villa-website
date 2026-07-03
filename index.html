@@ -227,6 +227,18 @@
             animation: slowZoom 20s ease-out forwards;
         }
 
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @keyframes slowZoom {
             to {
                 transform: scale(1);
@@ -286,8 +298,8 @@
         .scroll-indicator {
             position: absolute;
             bottom: var(--spacing-md);
-            left: 50%;
-            transform: translateX(-50%);
+            right: var(--spacing-lg);
+            /* 原本 left:50% 置中會壓在右欄詩句上，改放右下角空白區 */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1100,9 +1112,4 @@
     </script>
     <!-- 手機浮動 CTA：訂房 + LINE（僅 ≤768px 顯示） -->
     <div class="mobile-cta-bar">
-        <a href="https://booking.owlting.com/kiwi-villa" class="mobile-cta-book" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> 線上訂房</a>
-        <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><i class="fab fa-line"></i> LINE 預約</a>
-    </div>
-</body>
-
-</html>
+        <a 
