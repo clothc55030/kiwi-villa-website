@@ -1403,7 +1403,7 @@
             let TIDE = null;
 
             const pad = n => String(n).padStart(2, '0');
-            const hmAdd = (hm, mins) => { const t = Math.max(0, parseInt(hm.slice(0, 2)) * 60 + parseInt(hm.slice(3)) + mins); return pad(Math.floor(t / 60)) + ':' + pad(t % 60); };
+            const hmAdd = (hm, mins) => { let t = parseInt(hm.slice(0, 2)) * 60 + parseInt(hm.slice(3)) + mins; t = ((t % 1440) + 1440) % 1440; return pad(Math.floor(t / 60)) + ':' + pad(t % 60); };
             const isoOf = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
 
             function renderDay(iso) {
@@ -1465,9 +1465,9 @@
             function pickOffset(offset) {
                 const t = new Date();
                 t.setDate(t.getDate() + offset);
-                let iso = isoOf(t);
-                if (!iso.startsWith('2026')) iso = '2026-01-01';
-                tideDate.value = iso;
+                const iso = isoOf(t);
+                // 超出資料年份時不改寫日期，交由 renderDay 顯示「請查官方表」提示
+                tideDate.value = iso.startsWith('2026') ? iso : '';
                 setActiveQuick(offset);
                 renderDay(iso);
             }

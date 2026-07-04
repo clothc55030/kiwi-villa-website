@@ -165,7 +165,7 @@ def sun_times(d):
 
 def hm_add(hm, minutes):
     h, m = map(int, hm.split(':'))
-    t = max(0, min(h * 60 + m + minutes, 23 * 60 + 59))
+    t = ((h * 60 + m + minutes) % 1440 + 1440) % 1440  # 跨午夜取模
     return f'{t // 60:02d}:{t % 60:02d}'
 
 def to_min(hm):
