@@ -484,13 +484,15 @@
 
         .room-specs {
             display: flex;
-            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            gap: var(--spacing-sm) var(--spacing-md);
             margin-bottom: var(--spacing-md);
             font-size: 0.85rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             padding-bottom: var(--spacing-sm);
+            white-space: nowrap;
         }
 
         .room-desc {
@@ -932,6 +934,7 @@
         <section class="rooms-hero">
             <h1 class="rooms-hero-title"><span class="hero-cn">精緻房型</span>The <span>Rooms</span></h1>
             <p class="rooms-hero-subtitle">寧靜・奢華・海島之夢</p>
+            <p class="rooms-hero-subtitle" style="font-size:0.85rem;opacity:0.7;margin-top:0.6rem;">以下為平日每晚起價，實際房價與空房狀況以線上訂房系統為準</p>
         </section>
 
         <section class="room-collection">
@@ -974,6 +977,7 @@
                     <h2 class="room-name">豪華家庭房<br>附浴缸</h2>
                     <h3 class="room-name-en">Deluxe Family Room</h3>
                     <div class="room-specs">
+                        <span style="color:var(--color-accent);font-weight:600;">平日 NT$4,800 起／晚</span>
                         <span>18坪 (60㎡)</span>
                         <span>4人入住</span>
                         <span>獨立浴缸</span>
@@ -1027,6 +1031,7 @@
                     <h2 class="room-name">高級四人房<br>附陽台</h2>
                     <h3 class="room-name-en">Superior Quad Room</h3>
                     <div class="room-specs">
+                        <span style="color:var(--color-accent);font-weight:600;">平日 NT$4,800 起／晚</span>
                         <span>13坪 (44㎡)</span>
                         <span>4人入住</span>
                         <span>極佳採光</span>
@@ -1082,6 +1087,7 @@
                     <h2 class="room-name">奢華四人房<br>附陽台</h2>
                     <h3 class="room-name-en">Deluxe Quad Room</h3>
                     <div class="room-specs">
+                        <span style="color:var(--color-accent);font-weight:600;">平日 NT$4,800 起／晚</span>
                         <span>16坪 (54㎡)</span>
                         <span>4人入住</span>
                         <span>雙私人陽台</span>
@@ -1136,6 +1142,7 @@
                     <h2 class="room-name">高級雙床房<br>附陽台</h2>
                     <h3 class="room-name-en">Premium Twin Room</h3>
                     <div class="room-specs">
+                        <span style="color:var(--color-accent);font-weight:600;">平日 NT$2,500 起／晚</span>
                         <span>10坪 (33㎡)</span>
                         <span>2人入住</span>
                         <span>雙床配置</span>
@@ -1188,6 +1195,7 @@
                     <h2 class="room-name">高級三人房<br>附陽台</h2>
                     <h3 class="room-name-en">Premium Triple Room</h3>
                     <div class="room-specs">
+                        <span style="color:var(--color-accent);font-weight:600;">平日 NT$3,900 起／晚</span>
                         <span>11坪 (36㎡)</span>
                         <span>3人入住</span>
                         <span>靈活配置</span>
@@ -1276,6 +1284,7 @@
                     <h2 class="room-name">高級雙人房<br>附陽台</h2>
                     <h3 class="room-name-en">Premium Double Room</h3>
                     <div class="room-specs">
+                        <span style="color:var(--color-accent);font-weight:600;">平日 NT$2,500 起／晚</span>
                         <span>9坪 (29㎡)</span>
                         <span>2人入住</span>
                         <span>私人陽台</span>
@@ -1294,6 +1303,29 @@
                 </div>
             </article>
 
+        </section>
+
+        <!-- 包棟・Whole Villa -->
+        <section class="whole-villa" id="whole-villa" style="background: var(--color-surface); padding: var(--spacing-xl, 6rem) var(--spacing-lg, 2rem);">
+            <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+                <p style="font-family: var(--font-display); letter-spacing: 0.18em; color: var(--color-accent); text-transform: uppercase; margin-bottom: 0.6rem;">Whole Villa</p>
+                <h2 style="font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 400; margin-bottom: 1.3rem; color: var(--color-text);">整棟包下・最多 25 人的島嶼假期</h2>
+                <p style="font-weight: 300; line-height: 1.9; color: #555; max-width: 720px; margin: 0 auto 2rem;">
+                    適合家族旅遊、公司員旅與同學會。全館 9 間客房、6 種房型，可容納最多 25 人（包棟最少 15 人成行）。主人自住館內、親自接待，並非專營包棟民宿——因此包棟日期與細節請先透過 LINE 與我們確認。
+                </p>
+                <ul style="list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.9rem 1.5rem; max-width: 760px; margin: 0 auto 2.5rem; text-align: left; font-weight: 300; font-size: 0.95rem;">
+                    <li style="padding-left: 1.5em; position: relative;"><span style="position:absolute; left:0; color: var(--color-accent);">✦</span> 頂樓戲水池（3m × 6m）</li>
+                    <li style="padding-left: 1.5em; position: relative;"><span style="position:absolute; left:0; color: var(--color-accent);">✦</span> 100 吋投影影視空間</li>
+                    <li style="padding-left: 1.5em; position: relative;"><span style="position:absolute; left:0; color: var(--color-accent);">✦</span> 一樓公共交誼廳</li>
+                    <li style="padding-left: 1.5em; position: relative;"><span style="position:absolute; left:0; color: var(--color-accent);">✦</span> 豪華電梯直達各樓層</li>
+                    <li style="padding-left: 1.5em; position: relative;"><span style="position:absolute; left:0; color: var(--color-accent);">✦</span> 企業級 WiFi（1G 頻寬）</li>
+                    <li style="padding-left: 1.5em; position: relative;"><span style="position:absolute; left:0; color: var(--color-accent);">✦</span> 全館附私人陽台與落地窗</li>
+                </ul>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://page.line.me/ucz4004x" target="_blank" rel="noopener" class="btn-book" style="background: var(--color-accent); border-color: var(--color-accent); color: var(--color-bg);">LINE 諮詢包棟</a>
+                    <a href="https://booking.owlting.com/kiwi-villa" target="_blank" rel="noopener" class="btn-book">線上訂房</a>
+                </div>
+            </div>
         </section>
     </main>
 
