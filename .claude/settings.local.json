@@ -16,7 +16,12 @@
       "Bash(python3 -)",
       "Bash(python -)",
       "Bash(export PYTHONIOENCODING=utf-8)",
-      "Bash(grep -nE \"NT\\\\$|[0-9],?[0-9]00 ?元|\\\\\\\\\\\\$[0-9]\" rooms.html)"
+      "Bash(grep -nE \"NT\\\\$|[0-9],?[0-9]00 ?元|\\\\\\\\\\\\$[0-9]\" rooms.html)",
+      "WebFetch(domain:www.kiwi-villa.com)",
+      "Bash(rm -f .git/*.lock)",
+      "Bash(git commit *)",
+      "Bash(git ls-remote *)",
+      "Bash(git push *)"
     ],
     "deny": [],
     "ask": []
