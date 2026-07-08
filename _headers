@@ -3,17 +3,14 @@
 
 /*
   # 內容安全政策 - 防止 XSS 攻擊
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://static.elfsight.com https://*.elfsightcdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com https://static.elfsight.com https://*.elfsightcdn.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://*.elfsightcdn.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://cloudflareinsights.com https://*.elfsight.com https://*.elfsightcdn.com; frame-src 'self' https://www.google.com https://maps.google.com https://www.google.com/maps/ https://*.elfsight.com https://*.elfsightcdn.com https://www.youtube-nocookie.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://static.elfsight.com https://*.elfsightcdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://static.elfsight.com https://*.elfsightcdn.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://*.elfsightcdn.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://cloudflareinsights.com https://*.elfsight.com https://*.elfsightcdn.com; frame-src 'self' https://www.google.com https://maps.google.com https://www.google.com/maps/ https://*.elfsight.com https://*.elfsightcdn.com https://www.youtube-nocookie.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
   
   # 防止點擊劫持
   X-Frame-Options: DENY
   
   # 防止 MIME 類型嗅探
   X-Content-Type-Options: nosniff
-  
-  # 啟用瀏覽器 XSS 過濾器
-  X-XSS-Protection: 1; mode=block
-  
+
   # 強制使用 HTTPS
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   
@@ -22,6 +19,9 @@
   
   # 限制瀏覽器功能
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+  # HTML 與乾淨網址（無副檔名）的快取；靜態資源於下方以 immutable 覆蓋
+  Cache-Control: public, max-age=3600, must-revalidate
 
 # 靜態資源的快取設定
 /css/*

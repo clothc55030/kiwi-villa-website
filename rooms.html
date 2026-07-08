@@ -937,6 +937,11 @@
             <p class="rooms-hero-subtitle" style="font-size:0.85rem;opacity:0.7;margin-top:0.6rem;">以下為平日每晚起價，實際房價與空房狀況以線上訂房系統為準</p>
         </section>
 
+        <div class="breadcrumb-nav" role="navigation" aria-label="breadcrumb" style="max-width:1200px;margin:0 auto;padding:0 1.5rem;font-size:0.85rem;letter-spacing:0.05em;text-align:left;">
+            <a href="/" style="color:var(--color-accent,#8E704B);text-decoration:none;">首頁</a>
+            <span style="opacity:0.45;margin:0 0.5em;">›</span>
+            <span style="opacity:0.65;">房型設施</span>
+        </div>
         <section class="room-collection">
 
             <!-- 房型 1: 豪華家庭房 (201) -->
@@ -1343,7 +1348,7 @@
             </div>
             <div class="footer-links">
                 <h4>Contact</h4>
-                <a href="https://www.google.com/maps/search/?api=1&query=澎湖期遇度假會館" target="_blank">澎湖縣馬公市西衛里347號</a>
+                <a href="https://www.google.com/maps/place/?q=place_id:ChIJp82ruCFbbDQRm-ZmRMmpVyE" target="_blank">澎湖縣馬公市西衛里347號</a>
                 <a href="tel:0933636373">0933-636-373</a>
             </div>
         </div>
@@ -1574,7 +1579,10 @@
                 "itemOffered": {
                     "@type": "HotelRoom",
                     "name": "豪華家庭房附浴缸",
-                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 4}
+                    "image": "https://www.kiwi-villa.com/images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp",
+                    "bed": {"@type": "BedDetails", "typeOfBed": "King", "numberOfBeds": 2},
+                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 4},
+                    "containedInPlace": {"@id": "https://www.kiwi-villa.com/#lodging"}
                 }
             },
             {
@@ -1588,7 +1596,10 @@
                 "itemOffered": {
                     "@type": "HotelRoom",
                     "name": "高級四人房附陽台",
-                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 4}
+                    "image": "https://www.kiwi-villa.com/images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp",
+                    "bed": {"@type": "BedDetails", "typeOfBed": "King", "numberOfBeds": 2},
+                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 4},
+                    "containedInPlace": {"@id": "https://www.kiwi-villa.com/#lodging"}
                 }
             },
             {
@@ -1602,7 +1613,10 @@
                 "itemOffered": {
                     "@type": "HotelRoom",
                     "name": "奢華四人房附陽台",
-                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 4}
+                    "image": "https://www.kiwi-villa.com/images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp",
+                    "bed": {"@type": "BedDetails", "typeOfBed": "King", "numberOfBeds": 2},
+                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 4},
+                    "containedInPlace": {"@id": "https://www.kiwi-villa.com/#lodging"}
                 }
             },
             {
@@ -1616,8 +1630,10 @@
                 "itemOffered": {
                     "@type": "HotelRoom",
                     "name": "高級雙床房附陽台",
+                    "image": "https://www.kiwi-villa.com/images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp",
                     "bed": {"@type": "BedDetails", "typeOfBed": "Twin", "numberOfBeds": 2},
-                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 2}
+                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 2},
+                    "containedInPlace": {"@id": "https://www.kiwi-villa.com/#lodging"}
                 }
             },
             {
@@ -1631,7 +1647,10 @@
                 "itemOffered": {
                     "@type": "HotelRoom",
                     "name": "高級三人房附陽台",
-                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 3}
+                    "image": "https://www.kiwi-villa.com/images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp",
+                    "bed": [{"@type": "BedDetails", "typeOfBed": "Double", "numberOfBeds": 1}, {"@type": "BedDetails", "typeOfBed": "Single", "numberOfBeds": 1}],
+                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 3},
+                    "containedInPlace": {"@id": "https://www.kiwi-villa.com/#lodging"}
                 }
             },
             {
@@ -1645,7 +1664,10 @@
                 "itemOffered": {
                     "@type": "HotelRoom",
                     "name": "高級雙人房附陽台",
-                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 2}
+                    "image": "https://www.kiwi-villa.com/images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp",
+                    "bed": {"@type": "BedDetails", "typeOfBed": "King", "numberOfBeds": 1},
+                    "occupancy": {"@type": "QuantitativeValue", "maxValue": 2},
+                    "containedInPlace": {"@id": "https://www.kiwi-villa.com/#lodging"}
                 }
             }
         ]
