@@ -9,7 +9,14 @@
       "Bash(ls:*)",
       "Bash(awk:*)",
       "Bash(findstr:*)",
-      "Bash(grep -rniE 'gtag|googletagmanager|google-analytics|G-[A-Z0-9]{6,}|GTM-' --include=\"*.html\" .)"
+      "Bash(grep -rniE 'gtag|googletagmanager|google-analytics|G-[A-Z0-9]{6,}|GTM-' --include=\"*.html\" .)",
+      "Bash(awk '/<script type=\"application\\\\/ld\\\\+json\">/{s=NR} /<\\\\/script>/{if\\(s\\)print s\"-\"NR; s=0}' reviews.html)",
+      "Bash(awk '/<script type=\"application\\\\/ld\\\\+json\">/{s=NR} /<\\\\/script>/{if\\(s\\)print s\"-\"NR; s=0}' policy.html)",
+      "Bash(python -c ' *)",
+      "Bash(python3 -)",
+      "Bash(python -)",
+      "Bash(export PYTHONIOENCODING=utf-8)",
+      "Bash(grep -nE \"NT\\\\$|[0-9],?[0-9]00 ?元|\\\\\\\\\\\\$[0-9]\" rooms.html)"
     ],
     "deny": [],
     "ask": []

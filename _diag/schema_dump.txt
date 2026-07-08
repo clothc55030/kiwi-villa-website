@@ -1,0 +1,615 @@
+======================================================================
+faq.html seg1
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "為什麼我們房價比周圍的都貴？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "我們的建造成本、早餐成本、備品成本、布草成本都比別人高。建材用料實在，裝潢設計細節豐滿，早餐品質優異，床單被單皆採用100支天絲棉製品，極致的親膚感。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "民宿有海景嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "民宿每一間都沒有海景，但是都有落地窗跟獨立陽台。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "民宿可以包棟嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "我們並非專營包棟民宿，主人都是自住裡面的，請加LINE詢問包棟規定。全館9間客房一共可入住25位，適合家族旅遊、同學會、公司員工旅遊，不適合15位以下的包棟。包棟可共享頂樓戲水池、100吋投影影視空間與一樓公共交誼廳。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "民宿可以烤肉、打麻將嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "我們不提供麻將桌與麻將，桌面為大理石材質，為避免損毀，恕不可在桌上打麻將。即使包棟也不能烤肉，但可以請外燴業者上門服務。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "民宿有提供什麼設施嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "住宿設施包括舒服的大床、TOTO衛浴設備及免治馬桶。館內設施有電梯、公共空間、100吋大螢幕影視設備、頂樓戲水池（3m×6m）。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "民宿提供的早餐是什麼樣的？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "一人一份中式早餐，用餐時間為8:30-10:00。若需配合出海行程提前用餐，請提前一天21:00前通知，會準備可外帶的早餐。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "民宿可以代訂機票、船票、包套行程嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "機票建議自行到華信、立榮官網訂票，團體有配合旅行社可協助。行程在完成訂房後提供詳細咨詢。船票有配合旅行社代訂，請加LINE咨詢。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "有什麼特別優惠嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "以匯訂金方式訂房者，聯繫訂房小編會給您額外優惠（僅限匯款前告知）。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "澎湖適合開汽車還是騎機車呢？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "機車費用較低、一群人出遊可以不需要集體行動。汽車比較涼快不被曬，除了花火節市區外其餘景點都很好停車。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "入住與退房時間是幾點？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "入住時間為下午15:00後，退房時間為上午11:00前。提早抵達可先寄放行李，退房後也能寄存行李。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "有停車位嗎？需要停車費嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "本館提供免費停車，不需額外費用。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "可以攜帶寵物入住嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "為維護所有住客的住宿品質，本館恕不接受寵物入住，敬請見諒。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "從澎湖機場或碼頭怎麼到民宿？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "距澎湖機場約8.5公里、車程約12分鐘；距馬公南海遊客中心（碼頭）約3.5公里、車程約9分鐘。導航搜尋「期遇度假會館」即可抵達。"
+   }
+  }
+ ]
+}
+======================================================================
+faq.html seg2
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "首頁",
+   "item": "https://www.kiwi-villa.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "常見問題",
+   "item": "https://www.kiwi-villa.com/faq"
+  }
+ ]
+}
+======================================================================
+index.html seg1
+{
+ "@context": "https://schema.org",
+ "@type": "LodgingBusiness",
+ "@id": "https://www.kiwi-villa.com/#lodging",
+ "name": "澎湖期遇度假會館 Kiwi Villa",
+ "alternateName": "期遇度假會館 KIWI VILLA",
+ "description": "座落於三面環海半島，融合歐洲巴洛克古典建築美學。提供豪華家庭房、四人房、雙人房等多種房型。",
+ "url": "https://www.kiwi-villa.com",
+ "telephone": "+886-933-636-373",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "西衛里347號",
+  "addressLocality": "馬公市",
+  "addressRegion": "澎湖縣",
+  "postalCode": "880",
+  "addressCountry": "TW"
+ },
+ "geo": {
+  "@type": "GeoCoordinates",
+  "latitude": 23.5868758,
+  "longitude": 119.5818157
+ },
+ "image": "https://www.kiwi-villa.com/assets/og-image.webp",
+ "priceRange": "$$",
+ "checkinTime": "15:00",
+ "checkoutTime": "11:00",
+ "numberOfRooms": 9,
+ "petsAllowed": false,
+ "amenityFeature": [
+  {
+   "@type": "LocationFeatureSpecification",
+   "name": "電梯",
+   "value": true
+  },
+  {
+   "@type": "LocationFeatureSpecification",
+   "name": "免費早餐",
+   "value": true
+  },
+  {
+   "@type": "LocationFeatureSpecification",
+   "name": "私人陽台",
+   "value": true
+  },
+  {
+   "@type": "LocationFeatureSpecification",
+   "name": "戲水池",
+   "value": true
+  },
+  {
+   "@type": "LocationFeatureSpecification",
+   "name": "免費WiFi",
+   "value": true
+  }
+ ],
+ "sameAs": [
+  "https://www.instagram.com/kiwi_villa/",
+  "https://www.facebook.com/kiwivilla.home/",
+  "https://page.line.me/ucz4004x",
+  "https://booking.owlting.com/kiwi-villa",
+  "https://www.google.com/maps/place/?q=place_id:ChIJp82ruCFbbDQRm-ZmRMmpVyE"
+ ]
+}
+======================================================================
+index.html seg2
+{
+ "@context": "https://schema.org",
+ "@type": "WebSite",
+ "name": "澎湖期遇度假會館 Kiwi Villa",
+ "url": "https://www.kiwi-villa.com"
+}
+======================================================================
+intro.html seg1
+{
+ "@context": "https://schema.org",
+ "@type": "LodgingBusiness",
+ "@id": "https://www.kiwi-villa.com/#lodging",
+ "name": "澎湖期遇度假會館 Kiwi Villa",
+ "url": "https://www.kiwi-villa.com",
+ "telephone": "+886-933-636-373",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "西衛里347號",
+  "addressLocality": "馬公市",
+  "addressRegion": "澎湖縣",
+  "postalCode": "880",
+  "addressCountry": "TW"
+ }
+}
+======================================================================
+intro.html seg2
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "首頁",
+   "item": "https://www.kiwi-villa.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "會館介紹",
+   "item": "https://www.kiwi-villa.com/intro"
+  }
+ ]
+}
+======================================================================
+location.html seg1
+{
+ "@context": "https://schema.org",
+ "@type": "LodgingBusiness",
+ "@id": "https://www.kiwi-villa.com/#lodging",
+ "name": "澎湖期遇度假會館 Kiwi Villa",
+ "url": "https://www.kiwi-villa.com",
+ "telephone": "+886-933-636-373",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "西衛里347號",
+  "addressLocality": "馬公市",
+  "addressRegion": "澎湖縣",
+  "postalCode": "880",
+  "addressCountry": "TW"
+ },
+ "geo": {
+  "@type": "GeoCoordinates",
+  "latitude": 23.5868758,
+  "longitude": 119.5818157
+ },
+ "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJp82ruCFbbDQRm-ZmRMmpVyE"
+}
+======================================================================
+location.html seg2
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "首頁",
+   "item": "https://www.kiwi-villa.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "地理位置",
+   "item": "https://www.kiwi-villa.com/location"
+  }
+ ]
+}
+======================================================================
+moses.html seg1
+{
+ "@context": "https://schema.org",
+ "@type": "TouristAttraction",
+ "@id": "https://www.kiwi-villa.com/moses#attraction",
+ "name": "奎壁山摩西分海（奎壁山地質公園）",
+ "alternateName": "北寮赤嶼陸連島步道",
+ "description": "退潮時海面讓出一條約 300 公尺的 S 型礫石步道，連接奎壁山與赤嶼，被稱為台版摩西分海。每日依潮汐開放通行，大潮日分海過程最壯觀。",
+ "address": {
+  "@type": "PostalAddress",
+  "addressLocality": "湖西鄉",
+  "addressRegion": "澎湖縣",
+  "addressCountry": "TW"
+ },
+ "geo": {
+  "@type": "GeoCoordinates",
+  "latitude": 23.5986,
+  "longitude": 119.622
+ },
+ "isAccessibleForFree": true,
+ "publicAccess": true,
+ "image": "https://www.kiwi-villa.com/assets/og-image.jpg",
+ "hasMap": "https://www.google.com/maps/dir/?api=1&destination=%E5%A5%8E%E5%A3%81%E5%B1%B1%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92",
+ "url": "https://www.kiwi-villa.com/moses",
+ "subjectOf": {
+  "@type": "WebPage",
+  "url": "https://www.kiwi-villa.com/moses"
+ }
+}
+======================================================================
+moses.html seg2
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "摩西分海每天都看得到嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "幾乎每天都有通行時段，但不是每場都有分海過程可看：部分日子園區開門時步道已完全露出。本頁查詢器會逐場標注可看完整分海、可看分海尾聲或步道已露出。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "要提早多久到現場？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "想看完整分海過程：大潮日提前約 40 分鐘、中潮 30 分鐘、小潮 20 分鐘，含停車與走到岸邊的時間；旺季人潮多建議再寬裕些。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "大潮日和小潮日差在哪？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "大潮日（農曆初一、十五前後）退得快又低、分海過程約 10–15 分鐘、步道寬；小潮日過程和緩約 20–30 分鐘、步道較窄。拍照選大潮日最戲劇性。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "什麼是日出場？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "4–9 月特定日清晨 06:00 提早開放，部分日子分海時段落在日出前後。奎壁山面朝正東，太陽從赤嶼後方海面升起，想連日出一起看，建議日出前 15 分鐘先到岸上觀景台，開門後再進場。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "錯過分海怎麼辦？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "可留到通行時段結束後約半小時看合海——海水從兩側合攏收回步道；或隔天再來，潮汐每天約往後推 50 分鐘。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "從期遇度假會館到奎壁山要多久？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "沿 203 縣道車程約 18 分鐘（約 12 公里），清晨日出場與傍晚合海都能輕鬆來回。"
+   }
+  }
+ ]
+}
+======================================================================
+moses.html seg3
+{
+ "@context": "https://schema.org",
+ "@type": "Dataset",
+ "name": "2026 奎壁山摩西分海通行時段與建議時刻資料集",
+ "description": "澎湖奎壁山赤嶼陸連島步道 2026 全年每日安全通行時段、建議抵達時間、最晚回程、合海估計時刻、潮差分級與日出場標注，依澎湖國家風景區管理處公告加值計算。",
+ "url": "https://www.kiwi-villa.com/moses",
+ "temporalCoverage": "2026-01-01/2026-12-31",
+ "spatialCoverage": {
+  "@type": "Place",
+  "geo": {
+   "@type": "GeoCoordinates",
+   "latitude": 23.5986,
+   "longitude": 119.622
+  }
+ },
+ "distribution": {
+  "@type": "DataDownload",
+  "encodingFormat": "application/json",
+  "contentUrl": "https://www.kiwi-villa.com/assets/tide-2026.json"
+ },
+ "isBasedOn": "https://www.penghu-nsa.gov.tw/Services/Tidenew",
+ "creator": {
+  "@id": "https://www.kiwi-villa.com/#lodging"
+ }
+}
+======================================================================
+moses.html seg4
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "首頁",
+   "item": "https://www.kiwi-villa.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "奎壁山摩西分海時間查詢",
+   "item": "https://www.kiwi-villa.com/moses"
+  }
+ ]
+}
+======================================================================
+policy.html seg1
+{
+ "@context": "https://schema.org",
+ "@type": "LodgingBusiness",
+ "@id": "https://www.kiwi-villa.com/#lodging",
+ "checkinTime": "15:00",
+ "checkoutTime": "11:00"
+}
+======================================================================
+policy.html seg2
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "首頁",
+   "item": "https://www.kiwi-villa.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "訂房須知",
+   "item": "https://www.kiwi-villa.com/policy"
+  }
+ ]
+}
+======================================================================
+reviews.html seg1
+{
+ "@context": "https://schema.org",
+ "@type": "LodgingBusiness",
+ "@id": "https://www.kiwi-villa.com/#lodging"
+}
+======================================================================
+reviews.html seg2
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "首頁",
+   "item": "https://www.kiwi-villa.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "客戶評價",
+   "item": "https://www.kiwi-villa.com/reviews"
+  }
+ ]
+}
+======================================================================
+rooms.html seg1
+{
+ "@context": "https://schema.org",
+ "@type": "LodgingBusiness",
+ "@id": "https://www.kiwi-villa.com/#lodging",
+ "name": "澎湖期遇度假會館 Kiwi Villa",
+ "url": "https://www.kiwi-villa.com",
+ "telephone": "+886-933-636-373",
+ "makesOffer": [
+  {
+   "@type": "Offer",
+   "name": "豪華家庭房附浴缸",
+   "description": "4人房，含獨立浴缸與私人陽台",
+   "price": "4800",
+   "priceCurrency": "TWD",
+   "availability": "https://schema.org/InStock",
+   "url": "https://booking.owlting.com/kiwi-villa",
+   "itemOffered": {
+    "@type": "HotelRoom",
+    "name": "豪華家庭房附浴缸",
+    "occupancy": {
+     "@type": "QuantitativeValue",
+     "maxValue": 4
+    }
+   }
+  },
+  {
+   "@type": "Offer",
+   "name": "高級四人房附陽台",
+   "description": "4人房，附私人陽台",
+   "price": "4800",
+   "priceCurrency": "TWD",
+   "availability": "https://schema.org/InStock",
+   "url": "https://booking.owlting.com/kiwi-villa",
+   "itemOffered": {
+    "@type": "HotelRoom",
+    "name": "高級四人房附陽台",
+    "occupancy": {
+     "@type": "QuantitativeValue",
+     "maxValue": 4
+    }
+   }
+  },
+  {
+   "@type": "Offer",
+   "name": "奢華四人房附陽台",
+   "description": "4人房，奢華裝潢附私人陽台",
+   "price": "4800",
+   "priceCurrency": "TWD",
+   "availability": "https://schema.org/InStock",
+   "url": "https://booking.owlting.com/kiwi-villa",
+   "itemOffered": {
+    "@type": "HotelRoom",
+    "name": "奢華四人房附陽台",
+    "occupancy": {
+     "@type": "QuantitativeValue",
+     "maxValue": 4
+    }
+   }
+  },
+  {
+   "@type": "Offer",
+   "name": "高級雙床房附陽台",
+   "description": "2人房（雙床），附私人陽台",
+   "price": "2500",
+   "priceCurrency": "TWD",
+   "availability": "https://schema.org/InStock",
+   "url": "https://booking.owlting.com/kiwi-villa",
+   "itemOffered": {
+    "@type": "HotelRoom",
+    "name": "高級雙床房附陽台",
+    "bed": {
+     "@type": "BedDetails",
+     "typeOfBed": "Twin",
+     "numberOfBeds": 2
+    },
+    "occupancy": {
+     "@type": "QuantitativeValue",
+     "maxValue": 2
+    }
+   }
+  },
+  {
+   "@type": "Offer",
+   "name": "高級三人房附陽台",
+   "description": "3人房，附私人陽台",
+   "price": "3900",
+   "priceCurrency": "TWD",
+   "availability": "https://schema.org/InStock",
+   "url": "https://booking.owlting.com/kiwi-villa",
+   "itemOffered": {
+    "@type": "HotelRoom",
+    "name": "高級三人房附陽台",
+    "occupancy": {
+     "@type": "QuantitativeValue",
+     "maxValue": 3
+    }
+   }
+  },
+  {
+   "@type": "Offer",
+   "name": "高級雙人房附陽台",
+   "description": "2人房，附私人陽台",
+   "price": "2500",
+   "priceCurrency": "TWD",
+   "availability": "https://schema.org/InStock",
+   "url": "https://booking.owlting.com/kiwi-villa",
+   "itemOffered": {
+    "@type": "HotelRoom",
+    "name": "高級雙人房附陽台",
+    "occupancy": {
+     "@type": "QuantitativeValue",
+     "maxValue": 2
+    }
+   }
+  }
+ ]
+}
+======================================================================
+rooms.html seg2
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "首頁",
+   "item": "https://www.kiwi-villa.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "房型設施",
+   "item": "https://www.kiwi-villa.com/rooms"
+  }
+ ]
+}

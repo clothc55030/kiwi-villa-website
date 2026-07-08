@@ -1,0 +1,91 @@
+========================================================
+ Windows resource/disk read-only diagnostic report
+ Time    : 2026-07-05 15:48:38
+ Computer: RICKYZENBOOK   User: wang2
+ Elevated: NO (some items skipped)
+========================================================
+
+[1] DISK SPACE
+  C:  total 952.3 GB  used 523.9 GB (55%)  free 428.4 GB
+
+[2] ACTIVE TRACE / RECORDING SESSIONS  (key section)
+  -- WPR status --
+     
+     Microsoft Windows Performance Recorder Version 10.0.26100 (CoreSystem)
+     Copyright (c) 2024 Microsoft Corporation. All rights reserved.
+     
+     WPR is not recording
+  -- netsh trace status --
+     ?桀?瘝??脰?銝剔?餈質馱撌乩??挾??
+     
+  -- logman -ets (event trace sessions) --
+     
+     資料收集器集合工具                      類型                          狀態
+     -------------------------------------------------------------------------------
+     
+     命令已經成功完成。
+  -- logman (data collector sets) --
+     
+     資料收集器集合工具                      類型                          狀態
+     -------------------------------------------------------------------------------
+     
+     命令已經成功完成。
+
+[3] BIG FILES IN COMMON LEAK LOCATIONS (>200MB)
+       0.25 GB  C:\Windows\Logs\CBS\CbsPersist_20260630193006.log
+
+[4] FIXED SYSTEM LARGE FILES
+
+[5] COMMON HEAVY FOLDER SIZES
+       0.00 GB  C:\Windows\Temp
+       0.00 GB  C:\PerfLogs
+       0.00 GB  C:\ProgramData\Microsoft\Windows\WER
+       0.00 GB  C:\Windows\SoftwareDistribution\Download
+       3.04 GB  C:\Windows\Installer
+       0.11 GB  C:\Users\wang2\AppData\Local\Temp
+
+[6] TOP PROCESSES BY MEMORY (top 12)
+      1,300 MB  Memory Compression           (PID 3664)
+      1,251 MB  claude                       (PID 14888)
+      1,130 MB  vmmem                        (PID 2236)
+        549 MB  claude                       (PID 4820)
+        482 MB  explorer                     (PID 11344)
+        411 MB  claude                       (PID 16128)
+        379 MB  claude                       (PID 516)
+        339 MB  chrome                       (PID 19700)
+        318 MB  chrome                       (PID 18388)
+        312 MB  MsMpEng                      (PID 5376)
+        228 MB  dwm                          (PID 2040)
+        215 MB  chrome                       (PID 19500)
+
+[6b] TOP PROCESSES BY CPU-SECONDS (top 12)
+        7,627 s  claude                       (PID 16128)
+        7,513 s  claude                       (PID 14888)
+        7,323 s  claude                       (PID 4820)
+        5,445 s  chrome                       (PID 19700)
+        2,484 s  explorer                     (PID 11344)
+        1,027 s  ipf_helper                   (PID 10320)
+          906 s  python                       (PID 10568)
+          593 s  chrome                       (PID 19500)
+          528 s  chrome                       (PID 18988)
+          503 s  msedgewebview2               (PID 13140)
+          501 s  SearchHost                   (PID 11876)
+          407 s  SDXHelper                    (PID 2852)
+
+[7] SCHEDULED TASKS CURRENTLY RUNNING
+  \RtkAudUService64_BG
+  \Microsoft\Windows\Multimedia\SystemSoundsService
+  \Microsoft\Windows\Wininet\CacheTask
+
+[7b] SCHEDULED TASKS WHOSE ACTION MENTIONS trace/wpr/logman/netsh/perfmon
+  \Microsoft\Office\Office Performance Monitor  ->  C:\Program Files\Microsoft Office\root\VFS\ProgramFilesCommonX64\Microsoft Shared\Office16\operfmon.exe 
+
+[8] VOLUME SHADOW COPY (VSS) USAGE
+  (needs admin, skipped)
+
+[8b] RECYCLE BIN SIZE
+       0.82 GB
+
+========================================================
+ End of diagnostic. Read-only: nothing was deleted or changed.
+========================================================
