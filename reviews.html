@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" class="no-js">
 
 <head>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>住客評價 Google 5.0 星｜澎湖期遇度假會館 Kiwi Villa</title>
@@ -394,6 +395,11 @@
         }
 
         /* 動畫類別 */
+        .no-js .reveal-up {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+        }
         .reveal-up {
             opacity: 0;
             transform: translateY(40px);
@@ -785,6 +791,13 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Scroll reveal animation
             const reveals = document.querySelectorAll('.reveal-up');
+
+            // 3秒超時安全兜底：防止滾動事件或 Observer 異常時內容隱形
+            setTimeout(function() {
+                document.querySelectorAll('.reveal-up:not(.active)').forEach(function(el) {
+                    el.classList.add('active');
+                });
+            }, 3000);
 
             const revealOnScroll = () => {
                 const windowHeight = window.innerHeight;

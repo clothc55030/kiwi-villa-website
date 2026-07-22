@@ -21,7 +21,15 @@
       "Bash(rm -f .git/*.lock)",
       "Bash(git commit *)",
       "Bash(git ls-remote *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(python -c \"import json; d=json.load\\(open\\('assets/tide-2026.json',encoding='utf-8'\\)\\); import sys; print\\(json.dumps\\(d['days'].get\\('2026-07-09'\\), ensure_ascii=False, indent=2\\)\\)\")",
+      "WebSearch",
+      "WebFetch(domain:www.topenghu.com.tw)",
+      "WebFetch(domain:bobowin.blog)",
+      "WebFetch(domain:data.gov.tw)",
+      "WebFetch(domain:oceanapi.cwa.gov.tw)",
+      "WebFetch(domain:opendata.cwa.gov.tw)",
+      "WebFetch(domain:isohe.ihmt.gov.tw)"
     ],
     "deny": [],
     "ask": []
