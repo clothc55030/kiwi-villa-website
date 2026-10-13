@@ -16,6 +16,7 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PUB = os.path.join(ROOT, 'public') if os.path.exists(os.path.join(ROOT, 'public')) else ROOT
 URL_TPLS = [
     "https://www.penghu-nsa.gov.tw/Services/Tidenew/{roc}{mm:02d}tide.htm",
     "https://www.penghu-nsa.gov.tw/TravelGuide/Tidenew/{roc}{mm:02d}tide.htm",
@@ -218,7 +219,7 @@ def enrich(all_days, year):
 
 # ============ 4. 網站檔案自動更新 ============
 def update_site(year, version):
-    mp = os.path.join(ROOT, 'moses.html')
+    mp = os.path.join(PUB, 'moses.html')
     s = open(mp, encoding='utf-8').read()
     orig = s
     s = re.sub(r"/assets/tide-\d{4}\.json\?v=[0-9a-z]+", f"/assets/tide-{year}.json?v={version}", s)
@@ -229,7 +230,7 @@ def update_site(year, version):
     s = re.sub(r'資料更新：\d{4}-\d{2}', f'資料更新：{today.year}-{today.month:02d}', s)
     n_changed = sum(1 for a, b in [(orig, s)] if a != b)
     open(mp, 'w', encoding='utf-8').write(s)
-    sp = os.path.join(ROOT, 'sitemap.xml')
+    sp = os.path.join(PUB, 'sitemap.xml')
     x = open(sp, encoding='utf-8').read()
     x2 = re.sub(r'(<loc>https://www\.kiwi-villa\.com/moses</loc>\s*<lastmod>)\d{4}-\d{2}-\d{2}',
                 lambda m: m.group(1) + today.isoformat(), x)
@@ -287,7 +288,7 @@ def main():
     print('\n✓ 驗證通過（天數 / 星期 / 時刻格式）')
 
     days, stats = enrich(all_days, year)
-    out_path = os.path.join(ROOT, 'assets', f'tide-{year}.json')
+    out_path = os.path.join(PUB, 'assets', f'tide-{year}.json')
 
     if os.path.exists(out_path):
         diffs = compare_existing(days, out_path)

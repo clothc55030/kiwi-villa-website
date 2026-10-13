@@ -24,7 +24,7 @@ if sys.platform == "win32":
 
 def verify_site():
     workspace_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    html_files = sorted(glob.glob(os.path.join(workspace_dir, "*.html")))
+    html_files = sorted(glob.glob(os.path.join(workspace_dir, "public", "*.html"))) or sorted(glob.glob(os.path.join(workspace_dir, "*.html")))
     
     if not html_files:
         print("❌ 未找到任何 HTML 檔案！")

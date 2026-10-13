@@ -49,20 +49,20 @@
 
 ```
 /
-├── index.html / intro.html / rooms.html / location.html
-├── reviews.html / faq.html / policy.html        # 7 個主要內容頁（CSS/JS 內聯）
-├── 404.html                                      # 錯誤頁（舊藍灰設計，引用 css/core.min.css）
-├── css/core.min.css                              # 僅 404 使用
-├── js/                                           # 目前為空
-├── images/
-│   ├── hero/         # 主視覺（已清理未用變體）
-│   ├── rooms/<房型子目錄>/penghu-kiwi-villa-*.webp   # 房型相簿（實際使用）
-│   ├── intro/ facilities/ location/ logo/ ...
-├── assets/manifest.json, og-image.jpg/.webp
-├── _headers          # 安全標頭 + 快取（CSP 含 unsafe-inline/eval）
-├── _redirects        # 房號短網址 + .html→無後綴 301
-├── robots.txt / sitemap.xml / CNAME
-└── .claude/launch.json   # 本地預覽設定（python http.server :8000）
+├── public/                                       # 網站部署目錄（Cloudflare Pages 指向此處）
+│   ├── index.html / intro.html / rooms.html / location.html
+│   ├── reviews.html / faq.html / policy.html / moses.html  # 8 個主要內容頁
+│   ├── 404.html                                  # 錯誤頁（引用 css/core.min.css）
+│   ├── css/core.min.css                          # 僅 404 使用
+│   ├── js/                                       # 目前為空
+│   ├── images/                                   # 圖片目錄
+│   ├── assets/                                   # manifest.json, og-*.jpg, tide-*.json
+│   ├── _headers                                  # 安全標頭 + 快取
+│   ├── _redirects                                # 房號短網址 + .html→無後綴 301
+│   └── robots.txt / sitemap.xml / CNAME / llms.txt
+├── tools/                                        # 內部維護腳本（不發布至線上）
+├── .claude/launch.json                           # 本地預覽設定（python -m http.server 8000 --directory public）
+└── CLAUDE.md                                     # 專案規範（不發布至線上）
 ```
 
 ## 技術重點
@@ -77,26 +77,13 @@
 
 ```bash
 # 本地預覽（專案根目錄）
-python -m http.server 8000
+python -m http.server 8000 --directory public
 # 或透過 .claude/launch.json 的 "static" 設定啟動預覽
 ```
 
 ```bash
 # 提交前完整性驗證：每頁結尾須為 </body></html>，每段 JSON-LD 須可解析
-python3 - <<'PY'
-import re, json, glob
-ok = True
-for fp in sorted(glob.glob("*.html")):
-    h = open(fp, encoding="utf-8").read()
-    end = h.rstrip().endswith("</html>")
-    errs = []
-    for i, b in enumerate(re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S)):
-        try: json.loads(b)
-        except Exception as e: errs.append(f"seg{i+1}:{e}")
-    if not end or errs:
-        ok = False; print(f"✗ {fp}  </html>={end}  {errs}")
-print("ALL OK" if ok else "有問題，勿提交")
-PY
+python tools/verify_site_integrity.py
 ```
 
 無 package.json / 無建置；改 HTML 後直接 commit 即可。

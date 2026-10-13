@@ -72,6 +72,6 @@ def patch_html(filepath):
         print(f"ℹ️ [{filename}] 無需更新或已包含防禦機制")
 
 if __name__ == "__main__":
-    html_files = sorted(glob.glob("*.html"))
+    html_files = sorted(glob.glob("public/*.html")) or sorted(glob.glob("*.html"))
     for fp in html_files:
         patch_html(fp)

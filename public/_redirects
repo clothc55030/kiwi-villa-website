@@ -32,6 +32,3 @@
 /faq.html      /faq      301
 /policy.html   /policy   301
 /moses.html    /moses    301
-
-# 404 處理
-/*  /404.html  404 
