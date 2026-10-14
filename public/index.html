@@ -350,11 +350,11 @@
         }
 
         .hero-badges {
-            margin-top: var(--spacing-md);
+            margin-top: 1.5rem;
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem 0.65rem;
-            max-width: 440px;
+            max-width: 560px;
             animation: fadeUp 1s 0.8s both cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -367,12 +367,13 @@
             font-size: 0.82rem;
             font-family: var(--font-body);
             color: var(--color-text);
-            background: rgba(249, 247, 243, 0.85);
+            background: rgba(249, 247, 243, 0.9);
             border: 1px solid rgba(142, 112, 75, 0.35);
             backdrop-filter: blur(8px);
             letter-spacing: 0.04em;
             font-weight: 400;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            white-space: nowrap;
         }
 
         .hero-badge i {
@@ -380,15 +381,13 @@
             font-size: 0.78rem;
         }
 
-        /* 滾動提示（置中於 hero 底部）
-           注意：不能用 left:50% + translateX(-50%) 置中，
-           fadeUp 動畫（both 填充）會覆蓋 transform 導致水平偏移失效 */
+        /* 滾動提示（定位於右下方，徹底避開左側文案與標籤） */
         .scroll-indicator {
             position: absolute;
             bottom: var(--spacing-md);
-            left: 0;
-            right: 0;
-            margin: 0 auto;
+            right: clamp(2rem, 5vw, 4rem);
+            left: auto;
+            margin: 0;
             width: fit-content;
             display: flex;
             flex-direction: column;
@@ -432,22 +431,43 @@
             }
         }
 
-        /* 矮視窗（筆電）：hero 內容上移＋指示器縮小，避免置中的指示器與詩句重疊 */
+        /* 矮視窗（筆電）：hero 內容縮減過度間距，保持呼吸感與視覺平衡 */
         @media (max-height: 880px) {
             .hero-content {
-                padding-top: var(--spacing-lg);
+                padding-top: var(--spacing-md);
+                padding-bottom: var(--spacing-md);
+            }
+
+            .hero-subtitle {
+                margin-bottom: 0.75rem;
+            }
+
+            .hero-title {
+                font-size: clamp(3.2rem, 6.5vw, 6rem);
             }
 
             .hero-poem {
-                margin-top: var(--spacing-md);
+                margin-top: 1rem;
+                font-size: 1rem;
+                line-height: 1.75;
+            }
+
+            .hero-badges {
+                margin-top: 0.85rem;
             }
 
             .scroll-indicator {
-                bottom: var(--spacing-sm);
+                bottom: 1.25rem;
             }
 
             .scroll-line {
-                height: 40px;
+                height: 35px;
+            }
+        }
+
+        @media (max-height: 720px) {
+            .scroll-indicator {
+                display: none;
             }
         }
 
@@ -808,6 +828,20 @@
                 padding: var(--spacing-md);
                 background: rgba(249, 247, 243, 0.8);
                 backdrop-filter: blur(10px);
+            }
+
+            .hero-badges {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+                max-width: 100%;
+                margin-top: 1rem;
+            }
+
+            .hero-badge {
+                justify-content: center;
+                padding: 0.45rem 0.5rem;
+                font-size: 0.78rem;
             }
         }
 
