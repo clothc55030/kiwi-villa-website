@@ -139,6 +139,60 @@
             transition: filter 0.5s ease;
         }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+        }
+
+        .nav-direct-link {
+            color: inherit;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            transition: color 0.3s ease, opacity 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .nav-direct-link:hover {
+            color: var(--color-accent);
+            opacity: 1;
+        }
+
+        .nav-book-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid currentColor;
+            border-radius: 4px;
+            padding: 0.42rem 1.15rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-book-btn:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-direct-link,
+            .nav-book-btn {
+                display: none !important;
+            }
+        }
+
+        body.menu-open .nav-direct-link,
+        body.menu-open .nav-book-btn {
+            display: none !important;
+        }
+
         .menu-btn {
             background: none;
             border: none;
@@ -293,6 +347,37 @@
             animation: fadeUp 1s 0.6s both cubic-bezier(0.16, 1, 0.3, 1);
             border-left: 1px solid var(--color-accent);
             padding-left: var(--spacing-sm);
+        }
+
+        .hero-badges {
+            margin-top: var(--spacing-md);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.65rem;
+            max-width: 440px;
+            animation: fadeUp 1s 0.8s both cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.38rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: rgba(249, 247, 243, 0.85);
+            border: 1px solid rgba(142, 112, 75, 0.35);
+            backdrop-filter: blur(8px);
+            letter-spacing: 0.04em;
+            font-weight: 400;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .hero-badge i {
+            color: var(--color-accent);
+            font-size: 0.78rem;
         }
 
         /* 滾動提示（置中於 hero 底部）
@@ -886,7 +971,11 @@
         <a href="/" class="logo" aria-label="返回 Kiwi Villa 首頁">
             <img width="333" height="180" src="images/logo/kiwi-villa-logo-nav.webp" alt="Kiwi Villa Logo" class="logo-img">
         </a>
-        <button class="menu-btn" id="menu-toggle" aria-label="展開或關閉選單">Menu</button>
+        <div class="nav-actions">
+            <a href="/rooms" class="nav-direct-link">房型設施</a>
+            <a href="https://booking.owlting.com/kiwi-villa" target="_blank" rel="noopener" class="nav-book-btn">線上訂房</a>
+            <button class="menu-btn" id="menu-toggle" aria-label="展開或關閉選單">Menu</button>
+        </div>
     </nav>
 
     <noscript>
@@ -935,6 +1024,12 @@
                     <br>
                     <p>這一次，來一段屬於你的期遇之旅——</p>
                     <p>沉浸在陽光、海洋、微風與星光交織的海島生活裡。</p>
+                </div>
+                <div class="hero-badges">
+                    <span class="hero-badge"><i class="fas fa-landmark"></i> 歐風巴洛克</span>
+                    <span class="hero-badge"><i class="fas fa-elevator"></i> 全棟豪華電梯</span>
+                    <span class="hero-badge"><i class="fas fa-bed"></i> 100支天絲名床</span>
+                    <span class="hero-badge"><i class="fas fa-utensils"></i> 澎湖手作早餐</span>
                 </div>
             </div>
             <a href="#intro-section" class="scroll-indicator">

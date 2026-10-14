@@ -122,6 +122,60 @@
             transition: filter 0.5s ease;
         }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+        }
+
+        .nav-direct-link {
+            color: inherit;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            transition: color 0.3s ease, opacity 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .nav-direct-link:hover {
+            color: var(--color-accent);
+            opacity: 1;
+        }
+
+        .nav-book-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid currentColor;
+            border-radius: 4px;
+            padding: 0.42rem 1.15rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-book-btn:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-direct-link,
+            .nav-book-btn {
+                display: none !important;
+            }
+        }
+
+        body.menu-open .nav-direct-link,
+        body.menu-open .nav-book-btn {
+            display: none !important;
+        }
+
         .menu-btn {
             background: none;
             border: none;
@@ -644,7 +698,11 @@
         <a href="/" class="logo" aria-label="返回 Kiwi Villa 首頁">
             <img width="333" height="180" src="images/logo/kiwi-villa-logo-nav.webp" alt="Kiwi Villa Logo" class="logo-img">
         </a>
-        <button class="menu-btn" id="menu-toggle" aria-label="展開或關閉選單">Menu</button>
+        <div class="nav-actions">
+            <a href="/rooms" class="nav-direct-link">房型設施</a>
+            <a href="https://booking.owlting.com/kiwi-villa" target="_blank" rel="noopener" class="nav-book-btn">線上訂房</a>
+            <button class="menu-btn" id="menu-toggle" aria-label="展開或關閉選單">Menu</button>
+        </div>
     </nav>
 
     <noscript>
@@ -699,15 +757,16 @@
                     <div class="faq-answer">
                         <div class="faq-answer-inner">
                             <div class="faq-answer-content">
-                                <p><strong>簡單來說：</strong>我們的建造成本、早餐成本、備品成本、布草成本都比別人高，也可以自信的說比別人好！</p>
+                                <p><strong>簡單來說：</strong>我們的建造成本、早餐食材、備品布草與硬體規格皆遠高於一般民宿，我們很有信心為您提供值得這份定價、甚至超越預期的頂級渡假體驗！</p>
                                 <p><strong>詳細來講：</strong></p>
                                 <ul>
-                                    <li><strong>建材用料：</strong>民宿本身主體結構、建材、油漆用料這些看不到的東西，都用料實在。</li>
-                                    <li><strong>裝潢設計：</strong>雖然不像網美民宿如此浮誇，但是整體風格一致，細節豐滿。</li>
-                                    <li><strong>早餐品質：</strong>請參考各大平台旅客們的評價。</li>
-                                    <li><strong>床組用品：</strong>床單被單皆採用 100 支天絲棉製品，極致的親膚感。</li>
+                                    <li><strong>建材用料：</strong>全棟建築結構、雙層氣密窗、安全工法與無毒油漆，在看不見的細節處皆講求真材實料。</li>
+                                    <li><strong>空間美學：</strong>捨棄浮誇的網美裝潢，回歸純粹耐看的歐洲古典美學，空間開闊、採光通透、細節豐滿。</li>
+                                    <li><strong>手作早餐：</strong>每日清晨由女主人親手現做澎湖特色風味早餐（如海鮮麵線），廣受各大平台住客一致盛讚。</li>
+                                    <li><strong>極致寢具：</strong>全館選用專屬名床與 100 支天絲棉製品，提供極致親膚感與深層好眠。</li>
+                                    <li><strong>貼心設施：</strong>全棟配備豪華電梯，長輩、幼童與重型行李輕鬆直達各樓層。</li>
                                 </ul>
-                                <p>我們明碼標價，若是價格不合適，真的不勉強訂房！</p>
+                                <p>我們堅持透明誠信、明碼標價，不以削價犧牲服務與生活品質，只為將最純粹、舒心的美好渡假時光，留給懂得享受生活細節的期遇旅人。</p>
                             </div>
                         </div>
                     </div>
@@ -1040,7 +1099,7 @@
                 "name": "為什麼我們房價比周圍的都貴？",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "我們的建造成本、早餐成本、備品成本、布草成本都比別人高。建材用料實在，裝潢設計細節豐滿，早餐品質優異，床單被單皆採用100支天絲棉製品，極致的親膚感。"
+                    "text": "我們的建造成本、早餐食材、備品布草與硬體規格皆講求真材實料。全館配備歐洲古典建築美學、全棟電梯、手作澎湖特色早餐與100支天絲棉寢具。我們堅持不打價格戰、不降低品質，只為提供極致舒適的度假體驗。"
                 }
             },
             {
