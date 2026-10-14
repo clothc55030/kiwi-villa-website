@@ -381,56 +381,6 @@
             font-size: 0.78rem;
         }
 
-        /* 滾動提示（定位於右下方，徹底避開左側文案與標籤） */
-        .scroll-indicator {
-            position: absolute;
-            bottom: var(--spacing-md);
-            right: clamp(2rem, 5vw, 4rem);
-            left: auto;
-            margin: 0;
-            width: fit-content;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            color: var(--color-text);
-            text-decoration: none;
-            cursor: pointer;
-            animation: fadeUp 1s 0.8s both cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 20;
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 60px;
-            background: var(--color-text);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .scroll-line::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--color-bg);
-            animation: scrollDown 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes scrollDown {
-            0% {
-                transform: translateY(-100%);
-            }
-
-            100% {
-                transform: translateY(100%);
-            }
-        }
-
         /* 矮視窗（筆電）：hero 內容縮減過度間距，保持呼吸感與視覺平衡 */
         @media (max-height: 880px) {
             .hero-content {
@@ -454,20 +404,6 @@
 
             .hero-badges {
                 margin-top: 0.85rem;
-            }
-
-            .scroll-indicator {
-                bottom: 1.25rem;
-            }
-
-            .scroll-line {
-                height: 35px;
-            }
-        }
-
-        @media (max-height: 720px) {
-            .scroll-indicator {
-                display: none;
             }
         }
 
@@ -812,11 +748,6 @@
             .footer-grid {
                 grid-template-columns: 1fr;
             }
-
-            /* 單欄版面（≤992px）隱藏 scroll 指示器，避免擋住詩句文字 */
-            .scroll-indicator {
-                display: none;
-            }
         }
 
         @media (max-width: 768px) {
@@ -1066,10 +997,6 @@
                     <span class="hero-badge"><i class="fas fa-utensils"></i> 澎湖手作早餐</span>
                 </div>
             </div>
-            <a href="#intro-section" class="scroll-indicator">
-                <span>SCROLL</span>
-                <div class="scroll-line"></div>
-            </a>
         </section>
 
         <!-- Intro Section -->
