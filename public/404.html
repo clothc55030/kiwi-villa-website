@@ -1,341 +1,278 @@
 <!DOCTYPE html>
-<html lang="zh-TW" class="no-js">
+<html lang="zh-TW">
 <head>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
     <script>
-        // 處理房型短網址跳轉 (例如: /205 -> /rooms#room-205)
-        const path = window.location.pathname;
-        const roomMatch = path.match(/^\/(201|203|205|301|302|303|305|306|307)\/?$/);
-        if (roomMatch) {
-            // 同房型區塊：302→301、306/307→305
-            const roomMap = { '302': '301', '306': '305', '307': '305' };
-            const roomNumber = roomMap[roomMatch[1]] || roomMatch[1]; 
-            window.location.replace('/rooms#room-' + roomNumber);
-        }
+        // 房型短網址備援（正常由 _redirects 處理，例如 /205 -> /rooms#room-205）
+        (function () {
+            var m = window.location.pathname.match(/^\/(201|203|205|301|302|303|305|306|307)\/?$/);
+            if (m) {
+                var map = { '302': '301', '306': '305', '307': '305' };
+                window.location.replace('/rooms#room-' + (map[m[1]] || m[1]));
+            }
+        })();
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>找不到頁面 - 澎湖期遇度假會館</title>
-    <meta name="description" content="很抱歉，您要找的頁面不存在。請返回澎湖期遇度假會館首頁繼續您的期遇之旅。">
+    <title>找不到頁面｜澎湖期遇度假會館 Kiwi Villa</title>
+    <meta name="description" content="很抱歉，您要找的頁面不存在。請回到澎湖期遇度假會館首頁，或從下方連結繼續您的期遇之旅。">
     <meta name="robots" content="noindex, nofollow">
-    
-    <!-- Favicon -->
+
+    <!-- Favicon（一律用絕對路徑：404 可能出現在任何層級的網址） -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/logo/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/logo/apple-touch-icon-180x180.png">
     <link rel="manifest" href="/assets/manifest.json">
-    
-    <!-- Fonts -->
+
+    <!-- 字體（與其他頁相同） -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"></noscript>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/core.min.css">
-    
-    <!-- 404 Specific Styles -->
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap"></noscript>
+
     <style>
-        /* 404 Page Specific Styles */
-        .error-page {
+        /* 中文字型沒有斜體字面：不讓瀏覽器把中文硬斜切變形；英文照常使用 Cormorant Garamond 的真斜體 */
+        html {
+            font-synthesis: weight;
+        }
+
+        :root {
+            --color-bg: #F9F7F3;
+            --color-surface: #EFECE4;
+            --color-text: #1A1A1A;
+            --color-text-light: #5C5C5C;
+            --color-accent: #8E704B;
+            --color-ocean: #162431;
+            --font-display: 'Cormorant Garamond', 'LXGW WenKai TC', serif;
+            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
             min-height: 100vh;
+            min-height: 100svh;
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .top {
+            padding: 1.5rem 6%;
+        }
+
+        .top img {
+            display: block;
+            width: auto;
+            height: 45px;
+        }
+
+        main {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #7c9bb5 0%, #9bb0c4 100%);
-            position: relative;
-            overflow: hidden;
+            padding: 2rem 6% 4rem;
         }
-        
-        .error-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('images/hero/main-hall-environment-optimized.webp') center/cover;
-            opacity: 0.1;
-            z-index: 1;
-        }
-        
-        .error-container {
+
+        .error-box {
+            width: 100%;
+            max-width: 640px;
             text-align: center;
-            padding: 2rem;
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 2;
         }
-        
-        .error-number {
-            font-size: 8rem;
-            font-weight: 700;
-            color: #7c9bb5;
+
+        .error-code {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(5.5rem, 18vw, 9rem);
             line-height: 1;
-            margin-bottom: 1rem;
-            font-family: 'Playfair Display', serif;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            color: var(--color-accent);
+            letter-spacing: 0.04em;
         }
-        
-        .error-title {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #4a453f;
-            margin-bottom: 1rem;
-            font-family: 'Playfair Display', serif;
+
+        .error-label {
+            margin-top: 0.6rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--color-accent);
         }
-        
-        .error-subtitle {
-            font-size: 1.5rem;
-            color: #7c9bb5;
-            margin-bottom: 2rem;
-            font-weight: 500;
+
+        h1 {
+            margin-top: 1.8rem;
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            line-height: 1.3;
         }
-        
-        .error-description {
-            font-size: 1.1rem;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 2rem;
+
+        .nowrap {
+            white-space: nowrap;
         }
-        
+
+        .error-desc {
+            margin: 1rem auto 0;
+            max-width: 30em;
+            color: var(--color-text-light);
+        }
+
         .error-actions {
+            margin-top: 2.4rem;
             display: flex;
-            gap: 1rem;
-            justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            justify-content: center;
+            gap: 0.8rem;
         }
-        
-        .error-btn {
+
+        .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        
-        .error-btn-primary {
-            background: #7c9bb5;
-            color: white;
-        }
-        
-        .error-btn-primary:hover {
-            background: #6a8ba3;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(124, 155, 181, 0.3);
-        }
-        
-        .error-btn-secondary {
-            background: transparent;
-            color: #7c9bb5;
-            border-color: #7c9bb5;
-        }
-        
-        .error-btn-secondary:hover {
-            background: #7c9bb5;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .error-navigation {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e5e5e5;
-        }
-        
-        .error-nav-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #4a453f;
-            margin-bottom: 1rem;
-        }
-        
-        .error-nav-links {
-            display: flex;
             justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .error-nav-link {
-            color: #7c9bb5;
+            min-height: 48px;
+            padding: 0.7rem 1.8rem;
+            border: 1px solid var(--color-text);
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        
-        .error-nav-link:hover {
-            background: #f8f9fa;
-            color: #6a8ba3;
+
+        .btn-primary {
+            background: var(--color-text);
+            color: var(--color-bg);
         }
-        
-        .error-decoration {
-            position: absolute;
-            opacity: 0.1;
-            z-index: 0;
+
+        .btn-primary:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
         }
-        
-        .decoration-1 {
-            top: 10%;
-            left: 10%;
-            font-size: 3rem;
-            color: #7c9bb5;
-            transform: rotate(-15deg);
+
+        .btn-ghost:hover {
+            background: var(--color-text);
+            color: var(--color-bg);
         }
-        
-        .decoration-2 {
-            top: 20%;
-            right: 15%;
-            font-size: 2rem;
-            color: #9bb0c4;
-            transform: rotate(25deg);
+
+        .error-links {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(26, 26, 26, 0.12);
         }
-        
-        .decoration-3 {
-            bottom: 15%;
-            left: 15%;
-            font-size: 2.5rem;
-            color: #b8c7d6;
-            transform: rotate(-25deg);
+
+        .error-links p {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--color-accent);
         }
-        
-        .decoration-4 {
-            bottom: 10%;
-            right: 10%;
-            font-size: 2rem;
-            color: #a8b8c8;
-            transform: rotate(15deg);
+
+        .error-links ul {
+            list-style: none;
+            margin-top: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.2rem 1.4rem;
         }
-        
-        @media (max-width: 768px) {
-            .error-number {
-                font-size: 5rem;
+
+        .error-links a {
+            display: inline-block;
+            padding: 0.5rem 0.2rem;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .error-links a:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        footer {
+            padding: 1.5rem 6%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                width: 100%;
             }
-            
-            .error-title {
-                font-size: 2rem;
-            }
-            
-            .error-subtitle {
-                font-size: 1.3rem;
-            }
-            
-            .error-container {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-            
-            .error-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .error-nav-links {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-        }
-    
-        .no-js .reveal-up {
-            opacity: 1 !important;
-            transform: none !important;
-            visibility: visible !important;
         }
     </style>
-    <!-- Google Analytics 4-->
+
+    <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RM6FLC5GW1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-RM6FLC5GW1');
+        // 記錄 404，方便在 GA 找出壞掉的連結
+        gtag('event', 'page_not_found', {
+            'page_location': window.location.href,
+            'page_referrer': document.referrer
+        });
     </script>
 </head>
 <body>
-    <!-- 404 Error Page -->
-    <div class="error-page">
-        <!-- Decorative Elements -->
-        <div class="error-decoration decoration-1">
-            <i class="fas fa-compass"></i>
-        </div>
-        <div class="error-decoration decoration-2">
-            <i class="fas fa-anchor"></i>
-        </div>
-        <div class="error-decoration decoration-3">
-            <i class="fas fa-ship"></i>
-        </div>
-        <div class="error-decoration decoration-4">
-            <i class="fas fa-lighthouse"></i>
-        </div>
-        
-        <div class="error-container">
-            <div class="error-number">404</div>
-            <h1 class="error-title">迷航了？</h1>
-            <p class="error-subtitle">頁面不在這裡</p>
-            <p class="error-description">
-                很抱歉，您要找的頁面似乎已經飄向了遠方的海洋。<br>
-                但別擔心，讓我們幫您找到回家的路，繼續您的期遇之旅。
-            </p>
-            
+    <header class="top">
+        <a href="/" aria-label="回到 Kiwi Villa 首頁">
+            <img width="333" height="180" src="/images/logo/kiwi-villa-logo-nav.webp" alt="Kiwi Villa 期遇度假會館">
+        </a>
+    </header>
+
+    <main>
+        <div class="error-box">
+            <div class="error-code">404</div>
+            <div class="error-label">Page Not Found</div>
+            <h1>迷航了？<span class="nowrap">這一頁不在這裡</span></h1>
+            <p class="error-desc">您要找的頁面可能已經改名或搬家了。沒關係，從這裡回到期遇，繼續規劃您的澎湖之旅。</p>
+
             <div class="error-actions">
-                <a href="/" class="error-btn error-btn-primary">
-                    <i class="fas fa-home"></i>
-                    回到首頁
-                </a>
-                <a href="/rooms" class="error-btn error-btn-secondary">
-                    <i class="fas fa-bed"></i>
-                    查看房型
-                </a>
+                <a href="/" class="btn btn-primary">回到首頁</a>
+                <a href="/rooms" class="btn btn-ghost">看看房型</a>
+                <a href="https://booking.owlting.com/kiwi-villa" class="btn btn-ghost" target="_blank" rel="noopener">線上訂房</a>
             </div>
-            
-            <div class="error-navigation">
-                <h3 class="error-nav-title">您可能想要：</h3>
-                <div class="error-nav-links">
-                    <a href="/intro" class="error-nav-link">細說期遇</a>
-                    <a href="/location" class="error-nav-link">地理資訊</a>
-                    <a href="/reviews" class="error-nav-link">客戶評價</a>
-                    <a href="/faq" class="error-nav-link">常見問題</a>
-                    <a href="/moses" class="error-nav-link">摩西分海</a>
-                    <a href="https://booking.owlting.com/kiwi-villa" class="error-nav-link" target="_blank">線上訂房</a>
-                </div>
+
+            <div class="error-links">
+                <p>Explore</p>
+                <ul>
+                    <li><a href="/intro">細說期遇</a></li>
+                    <li><a href="/location">地理資訊</a></li>
+                    <li><a href="/reviews">客戶評價</a></li>
+                    <li><a href="/faq">常見問題</a></li>
+                    <li><a href="/policy">訂房須知</a></li>
+                    <li><a href="/moses">摩西分海</a></li>
+                    <li><a href="https://page.line.me/ucz4004x" target="_blank" rel="noopener">LINE 問我們</a></li>
+                </ul>
             </div>
         </div>
-    </div>
-    
-    <!-- Scripts -->
-    <script>
-        // 記錄404錯誤以便分析
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'page_not_found', {
-                'page_location': window.location.href,
-                'page_referrer': document.referrer
-            });
-        }
-        
-                // 如果用戶是從搜尋引擎來的，5秒後自動重定向到首頁
-        if (document.referrer && (document.referrer.includes('google') || document.referrer.includes('bing') || document.referrer.includes('yahoo'))) {
-            setTimeout(() => {
-                if (confirm('頁面不存在，是否要返回首頁？')) {
-                    window.location.href = '/';
-                }
-            }, 5000);
-        }
-    </script>
+    </main>
+
+    <footer>
+        <a href="/">&copy; Kiwi Villa 澎湖期遇度假會館</a>・<a href="tel:0933636373">0933-636-373</a>
+    </footer>
 </body>
-</html> 
+</html>

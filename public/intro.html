@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>會館介紹｜澎湖期遇度假會館 Kiwi Villa｜歐洲巴洛克建築美學</title>
     <meta name="description"
-        content="澎湖期遇度假會館設計理念揭秘：歐洲巴洛克建築美學、國際品牌床墊、TOTO全套衛浴、大金冷氣、電動窗簾、定制家具。從建材到備品都堅持高品質，打造超越期待的住宿體驗。">
+        content="澎湖期遇度假會館設計理念揭秘：歐洲巴洛克建築美學、國際品牌床墊、TOTO全套衛浴、大金冷氣、電動窗簾、訂製家具。從建材到備品都堅持高品質，打造超越期待的住宿體驗。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.kiwi-villa.com/intro">
     <meta property="og:title" content="會館介紹｜澎湖期遇度假會館 Kiwi Villa">
@@ -20,7 +20,7 @@
     <meta property="og:site_name" content="澎湖期遇度假會館 Kiwi Villa">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="會館介紹｜澎湖期遇度假會館 Kiwi Villa">
-    <meta name="twitter:description" content="澎湖期遇度假會館設計理念揭秘：歐洲巴洛克建築美學、國際品牌床墊、TOTO全套衛浴、大金冷氣、電動窗簾、定制家具。從建材到備品都堅持高品質，打造超越期待的住宿體驗。">
+    <meta name="twitter:description" content="澎湖期遇度假會館設計理念揭秘：歐洲巴洛克建築美學、國際品牌床墊、TOTO全套衛浴、大金冷氣、電動窗簾、訂製家具。從建材到備品都堅持高品質，打造超越期待的住宿體驗。">
     <meta name="twitter:image" content="https://www.kiwi-villa.com/assets/og-intro.jpg">
     <link rel="canonical" href="https://www.kiwi-villa.com/intro">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -39,6 +39,10 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
+        /* 中文字型沒有斜體字面：不讓瀏覽器把中文硬斜切變形；英文照常使用 Cormorant Garamond 的真斜體 */
+        html {
+            font-synthesis: weight;
+        }
         :root {
             --color-bg: #F9F7F3;
             --color-surface: #EFECE4;
@@ -534,7 +538,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-columns: 1fr 1.4fr 1fr 1.6fr;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-xl);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -554,6 +558,18 @@
             margin-bottom: var(--spacing-sm);
             font-style: italic;
             color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 頁尾「Explore」網站導覽：8 個頁面排兩欄 */
+        .footer-pages {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            column-gap: 2rem;
+            align-content: start;
+        }
+
+        .footer-pages h4 {
+            grid-column: 1 / -1;
         }
 
         .footer-links a {
@@ -880,14 +896,14 @@
                     同時選擇毗鄰市區靠近大海的核心地區，塑造民宿新風向。期遇度假會館在內部動線設計理念上注重：<strong>舒適、優質、寬敞、典雅</strong>，不追求過多客房，確保住宿品質。
                 </p>
                 <p>
-                    會館尤其注重營造旅客入住時的方便性，不僅實際考慮到旅客的切身需要，還提供多元互動休閒開放空間。為了將不屬於海島的典雅歐風，民宿特別請著名設計師親自操刀，大廳的燈塔以及一大片的海洋沙灘壁畫，再奢華中一點也不違和。
+                    會館尤其注重營造旅客入住時的方便性，不僅實際考慮到旅客的切身需要，還提供多元互動休閒開放空間。為了將不屬於海島的典雅歐風，民宿特別請著名設計師親自操刀，大廳的燈塔以及一大片的海洋沙灘壁畫，在奢華中一點也不違和。
                 </p>
             </div>
         </section>
 
         <!-- Gallery Section -->
         <section class="gallery-section reveal-up">
-            <h2 class="gallery-header">期遇環境</h2>
+            <h2 class="gallery-header gallery-title">期遇環境</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
                     <img width="1600" height="1067" src="images/intro/lobby.webp" alt="澎湖期遇度假會館挑高大廳交誼空間" class="gallery-img" loading="lazy">
@@ -909,19 +925,19 @@
                 <div class="feature-content">
                     <h3 class="feature-title">奢享床組</h3>
                     <p class="feature-desc">
-                        民宿特別定制國際品質加密加粗獨立袋裝彈簧護背床墊加大雙人床（1.8m×2.0m）規格，盡享舒適。配套定制風格各異奢華床頭背板，讓每間房各有特色，令人享受其中！
+                        民宿特別訂製國際品質加密加粗獨立袋裝彈簧護背床墊加大雙人床（1.8m×2.0m）規格，盡享舒適。搭配訂製、風格各異的奢華床頭背板，讓每間房各有特色，令人享受其中！
                     </p>
                 </div>
             </div>
 
             <div class="feature-block reveal-up">
                 <div class="feature-img-wrap">
-                    <img width="1163" height="1080" src="images/intro/furniture.webp" alt="精品定制家具" class="feature-img" loading="lazy">
+                    <img width="1163" height="1080" src="images/intro/furniture.webp" alt="精品訂製家具" class="feature-img" loading="lazy">
                 </div>
                 <div class="feature-content">
-                    <h3 class="feature-title">精品定制家具</h3>
+                    <h3 class="feature-title">精品訂製家具</h3>
                     <p class="feature-desc">
-                        客房及大廳中的家具，皆從知名大廠中根據室內面積定制，優質工藝切割大理石配優質玫瑰金配件，運用皮革及實木之混搭，彰顯品質。
+                        客房及大廳中的家具，皆從知名大廠中根據室內面積訂製，優質工藝切割大理石配優質玫瑰金配件，運用皮革及實木之混搭，彰顯品質。
                     </p>
                 </div>
             </div>
@@ -958,7 +974,7 @@
                 <div class="equip-item">
                     <div class="equip-icon"><i class="fas fa-tint"></i></div>
                     <h3 class="equip-title">全屋淨水軟水系統</h3>
-                    <p class="equip-desc">採用五星級飯店等級使用的全屋軟水的淨水方案，搭配全館RO逆滲透飲水，層層防護保證旅客飲水及用水的質量。</p>
+                    <p class="equip-desc">採用五星級飯店等級使用的全屋軟水的淨水方案，搭配全館RO逆滲透飲水，層層防護保證旅客飲水及用水的品質。</p>
                 </div>
                 <div class="equip-item">
                     <div class="equip-icon"><i class="fas fa-snowflake"></i></div>
@@ -968,7 +984,7 @@
                 <div class="equip-item">
                     <div class="equip-icon"><i class="fas fa-bath"></i></div>
                     <h3 class="equip-title">TOTO精品全套衛浴</h3>
-                    <p class="equip-desc">全館使用TOTO優質淋浴龍頭、洗臉臺、浴缸設備，並全配有高配多功能免治馬桶，舒適品質感受的到。</p>
+                    <p class="equip-desc">全館使用TOTO優質淋浴龍頭、洗臉臺、浴缸設備，並全配有高配多功能免治馬桶，舒適品質感受得到。</p>
                 </div>
                 <div class="equip-item">
                     <div class="equip-icon"><i class="fas fa-spa"></i></div>
@@ -978,12 +994,12 @@
                 <div class="equip-item">
                     <div class="equip-icon"><i class="fas fa-wind"></i></div>
                     <h3 class="equip-title">dōTERRA香氛系統</h3>
-                    <p class="equip-desc">從步入酒店的那一刻，第一時間感受到清新的香氣，從呼吸的細節感受到民宿主人對品質的極致把控。</p>
+                    <p class="equip-desc">從步入會館的那一刻，第一時間感受到清新的香氣，從呼吸的細節感受到民宿主人對品質的嚴格把關。</p>
                 </div>
                 <div class="equip-item">
                     <div class="equip-icon"><i class="fas fa-wifi"></i></div>
-                    <h3 class="equip-title">企業級高速網絡</h3>
-                    <p class="equip-desc">配置帶寬1G，並採用美國Ubiquiti Networks公司商用產品，保證民宿內全方位的網絡流暢體驗。</p>
+                    <h3 class="equip-title">企業級高速網路</h3>
+                    <p class="equip-desc">配置頻寬 1G，並採用美國Ubiquiti Networks公司商用產品，保證民宿內全方位的網路流暢體驗。</p>
                 </div>
             </div>
         </section>
@@ -1000,6 +1016,17 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+            </div>
+            <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
+                <h4>Explore</h4>
+                <a href="/">首頁</a>
+                <a href="/intro">細說期遇</a>
+                <a href="/rooms">房型設施</a>
+                <a href="/location">地理資訊</a>
+                <a href="/reviews">客戶評價</a>
+                <a href="/faq">常見問題</a>
+                <a href="/policy">訂房須知</a>
+                <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
                 <h4>Social</h4>

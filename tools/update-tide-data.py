@@ -287,7 +287,8 @@ def highlight_items(days):
         tag = ''
         if d['w'] in WEEKEND:
             tag = '（唯一假日場）' if n_weekend_sun == 1 else '（假日場）'
-        sun_li.append(f'<li>{label(k, d)}日出 {s["sr"]}・{s["arr"]} 前抵達{tag}</li>')
+        # 日出多半早於開門前的建議抵達時間：先寫看日出要幾點到岸邊（日出前 15 分），再寫幾點回閘門口（與查詢器時間軸一致）
+        sun_li.append(f'<li>{label(k, d)}日出 {s["sr"]}・{hm_add(s["sr"], -15)} 前到岸邊、{s["arr"]} 回閘門口{tag}</li>')
     wk_li = [f'<li>{label(k, d)}{s["o"]}–{s["c"]}・{s["arr"]} 前抵達</li>' for k, d, s in wk]
     return sun_li, wk_li
 

@@ -37,3 +37,13 @@
 /faq.html      /faq      301
 /policy.html   /policy   301
 /moses.html    /moses    301
+# 2025-06 改版前的舊網址
+/about              /intro    301
+/about/             /intro    301
+/about.html         /intro    301
+/qa                 /faq      301
+/qa/                /faq      301
+/qa.html            /faq      301
+/testimonials       /reviews  301
+/testimonials/      /reviews  301
+/testimonials.html  /reviews  301

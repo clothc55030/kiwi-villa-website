@@ -20,7 +20,7 @@
 
 > 本專案**沒有模組化的 CSS/JS 檔**。所有樣式與腳本幾乎都**內聯**在每個 HTML 內。
 
-- **CSS**：每頁一個大型內聯 `<style>` 區塊。`css/` 只有 `core.min.css`（21KB，舊藍灰設計），**僅 `404.html` 引用**，其餘頁面不用。
+- **CSS**：每頁一個大型內聯 `<style>` 區塊（含 404）。沒有外部 CSS 檔（舊的 `css/core.min.css` 已於 2026-10 隨 404 改版刪除）。
 - **JS**：每頁尾端一個內聯 `<script>`（捲動進場、nav 滾動變色、全螢幕選單）。`rooms.html` 另含 slider/lightbox、`faq.html` 另含手風琴。`js/` 目錄目前為空。
   - 曾嘗試把共用 JS 抽到外部 `js/site.js`，但因下述「reveal 陷阱」在某些預覽環境造成內文消失而**已還原**。要再抽外部 JS，必須先加「JS 失效時內文仍可見」的 fallback。
 - **各頁 `:root` 設計 token 已分岔**（顏色、間距尺度不一致），且 nav/footer/JSON-LD/footer 連結等在各頁各複製一份。**任何全站性樣式/結構修改通常要同步改 7-8 個 HTML**。
@@ -52,8 +52,7 @@
 ├── public/                                       # 網站部署目錄（Cloudflare Pages 指向此處）
 │   ├── index.html / intro.html / rooms.html / location.html
 │   ├── reviews.html / faq.html / policy.html / moses.html  # 8 個主要內容頁
-│   ├── 404.html                                  # 錯誤頁（引用 css/core.min.css）
-│   ├── css/core.min.css                          # 僅 404 使用
+│   ├── 404.html                                  # 錯誤頁（2026-10 改新版設計，內聯樣式，資源一律絕對路徑）
 │   ├── js/                                       # 目前為空
 │   ├── images/                                   # 圖片目錄
 │   ├── assets/                                   # manifest.json, og-*.jpg, tide-*.json
@@ -69,10 +68,16 @@
 
 - **圖片**：優先 WebP/AVIF，`<img loading="lazy">` 原生懶載入（**非** IntersectionObserver）。多數 `<img>` 已補 `width/height` 防 CLS。
 - **首頁照片**（2026-10 更換）：放在 `images/home/`，原檔在 Ricky 電腦的 `Desktop\民宿照片`（2018 年攝，全 sRGB）。目前用：外观 304A0840（hero／og，裁掉右側鄰房）、半島微風用 Ricky 以 Gemini 依顶楼 304A0706 生成的注水版（原照泳池是空的；檔名加 -water，避免舊圖被瀏覽器長期快取）、外观 304A0849（立體美學）、201精选 304A0169（專屬寧靜）、夜景 304A0933（名句區背景，裁掉右側怪手）。
-- **社群分享圖（og:image）**：首頁用 `assets/og-home.jpg`（外觀照 1200×630）；首頁 JSON-LD 的 `image` 用 `images/home/penghu-kiwi-villa-exterior-1920.webp` 與 og-home.jpg。舊的 `assets/og-image.jpg/.webp` 已無頁面引用。2026-07 起可為各頁做**專屬** og 圖，命名慣例 `assets/og-<slug>.jpg`（如 `og-rooms.jpg`），沿用 hero 視覺（米底＋中文小標＋「The ___」Cormorant Garamond 大字＋副標）以 PIL 腳本批次生成。**格式守則**：`og:image`／`twitter:image` 一律用 **JPEG/PNG，不要用 WebP**（LINE 等社群爬蟲對 webp 預覽支援不穩，會導致縮圖不顯示）；webp 只用於網頁內 `<img>` 與 JSON-LD `image`。文字為主的分享圖，PNG 邊緣最利，用 JPEG 則需 `quality≥95 + subsampling=0`。
-- **字體**：Google Fonts（多數頁 Cormorant Garamond + LXGW WenKai TC + Inter + Noto Sans TC；rooms 用 Playfair Display）、`display=swap`、有 preconnect。Font Awesome 自 cdnjs 以非阻塞方式載入（`media="print" onload`，含 `<noscript>` 後備）。
+- **社群分享圖（og:image）**：首頁用 `assets/og-home.jpg`（外觀照 1200×630）；首頁 JSON-LD 的 `image` 用 `images/home/penghu-kiwi-villa-exterior-1920.webp` 與 og-home.jpg。舊的 `assets/og-image.jpg/.webp` 已於 2026-10 刪除。2026-07 起可為各頁做**專屬** og 圖，命名慣例 `assets/og-<slug>.jpg`（如 `og-rooms.jpg`），沿用 hero 視覺（米底＋中文小標＋「The ___」Cormorant Garamond 大字＋副標）以 PIL 腳本批次生成。**格式守則**：`og:image`／`twitter:image` 一律用 **JPEG/PNG，不要用 WebP**（LINE 等社群爬蟲對 webp 預覽支援不穩，會導致縮圖不顯示）；webp 只用於網頁內 `<img>` 與 JSON-LD `image`。文字為主的分享圖，PNG 邊緣最利，用 JPEG 則需 `quality≥95 + subsampling=0`。
+- **字體**：Google Fonts（全站 Cormorant Garamond + LXGW WenKai TC + Noto Sans TC，房型頁以外另有 Inter；房型頁原本的 Playfair Display 已於 2026-10 換成霞鶩文楷）、`display=swap`、有 preconnect。Font Awesome 自 cdnjs 以非阻塞方式載入（`media="print" onload`，含 `<noscript>` 後備）。
 - **SEO**：每頁獨特 title/description、Open Graph、canonical（無後綴）；結構化資料以首頁 `LodgingBusiness`（`@id` = `https://www.kiwi-villa.com/#lodging`）為單一主實體，其餘頁以 `@id` 參照。FAQ 頁有 `FAQPage`。
 - **手機**：底部固定浮動 CTA（線上訂房 + LINE）；觸控目標 ≥44px。
+- **快取（`_headers`）**：Cloudflare Pages 會把「多條規則都命中的同名標頭」用逗號串起來，所以 `Cache-Control` **不放在 `/*`**，每個網頁路徑各一條、靜態資源 `/images/*`、`/assets/*`、`/js/*` 一年 immutable。**新增頁面時要在 `_headers` 補該路徑的 Cache-Control**。`*.pages.dev` 網址一律 `X-Robots-Tag: noindex`。
+- **中文不斜體**：每頁 `<style>` 開頭有 `html { font-synthesis: weight; }`，讓 `font-style: italic` 只作用在有真斜體的英文（Cormorant Garamond），中文維持正體。新頁面要一起加。
+- **房型頁**：英文房名以訂房系統（OwlNest）為準（高級＝Superior、豪華＝Deluxe、奢華＝Luxury，並帶 with Balcony／with Bathtub）。輪播只渲染「目前＋前後各一張」（`.slide.active`／`.slide.is-near`，其餘 `display:none` 不下載）；手機可左右滑、燈箱可左右滑與下滑關閉。新增照片時 alt 照實描述照片內容。中文標題用霞鶩文楷（與其他頁一致）。
+- **頁尾**：8 頁都有「Explore」網站導覽（8 個頁面連結）。新增頁面時 8 個 footer 與全螢幕選單都要加。
+- **Google 評價數**：頁面與 llms.txt 只寫約略數字（例如「近 200 則」），每年 12 月更新潮汐資料時順便檢查（見 `tools/README.md`）。結構化資料不放評分（自家評論不具星等資格）。
+- **刻意保留但未引用的檔案**：`images/location/penghu-map.webp`（插畫地圖，之後可用在 /location）、`images/logo/kiwi-villa-logo.png`（品牌主 Logo，外部可能引用）。
 
 ## 常用命令
 
@@ -102,9 +107,8 @@ python tools/verify_site_integrity.py
 ## 已知技術債（待處理，非阻斷）
 
 - 各頁內聯 CSS/JS 重複、`:root` token 分岔（治本需抽共用檔＋統一 token，會有視覺變化，需逐頁審）。
-- `404.html` 仍是舊藍灰設計、引用 `css/core.min.css`（與其餘頁設計不一致）。
 - CSP 的 `unsafe-eval` 待部署後實測 Elfsight 是否真的需要，再決定能否移除。
 
 ---
 
-*最後更新：2026-07（新增「🚨 檔案截斷陷阱」與提交前完整性驗證；補 og:image 分頁化命名與格式守則；補 git 提交/推送注意事項）*
+*最後更新：2026-10（404 改版、刪除未引用檔案、快取標頭規則、中文不斜體、房型頁輪播與英文房名、頁尾網站導覽）*

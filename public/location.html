@@ -39,6 +39,10 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
+        /* 中文字型沒有斜體字面：不讓瀏覽器把中文硬斜切變形；英文照常使用 Cormorant Garamond 的真斜體 */
+        html {
+            font-synthesis: weight;
+        }
         :root {
             --color-bg: #F9F7F3;
             --color-surface: #EFECE4;
@@ -445,7 +449,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-columns: 1fr 1.4fr 1fr 1.6fr;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-xl);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -465,6 +469,18 @@
             margin-bottom: var(--spacing-sm);
             font-style: italic;
             color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 頁尾「Explore」網站導覽：8 個頁面排兩欄 */
+        .footer-pages {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            column-gap: 2rem;
+            align-content: start;
+        }
+
+        .footer-pages h4 {
+            grid-column: 1 / -1;
         }
 
         .footer-links a {
@@ -889,6 +905,17 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+            </div>
+            <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
+                <h4>Explore</h4>
+                <a href="/">首頁</a>
+                <a href="/intro">細說期遇</a>
+                <a href="/rooms">房型設施</a>
+                <a href="/location">地理資訊</a>
+                <a href="/reviews">客戶評價</a>
+                <a href="/faq">常見問題</a>
+                <a href="/policy">訂房須知</a>
+                <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
                 <h4>Social</h4>

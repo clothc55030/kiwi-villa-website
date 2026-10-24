@@ -40,6 +40,10 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
+        /* 中文字型沒有斜體字面：不讓瀏覽器把中文硬斜切變形；英文照常使用 Cormorant Garamond 的真斜體 */
+        html {
+            font-synthesis: weight;
+        }
         :root {
             --color-bg: #F9F7F3;
             --color-surface: #EFECE4;
@@ -347,6 +351,11 @@
             transition-delay: 0.1s;
         }
 
+        .faq-answer-content a {
+            color: var(--color-accent);
+            text-underline-offset: 3px;
+        }
+
         .faq-answer-content {
             padding-bottom: var(--spacing-md);
             font-size: 1.05rem;
@@ -428,7 +437,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-columns: 1fr 1.4fr 1fr 1.6fr;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-xl);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -448,6 +457,18 @@
             margin-bottom: var(--spacing-sm);
             font-style: italic;
             color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 頁尾「Explore」網站導覽：8 個頁面排兩欄 */
+        .footer-pages {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            column-gap: 2rem;
+            align-content: start;
+        }
+
+        .footer-pages h4 {
+            grid-column: 1 / -1;
         }
 
         .footer-links a {
@@ -802,6 +823,7 @@
                                     <li>不適合 15 位以下的包棟。</li>
                                     <li>包棟可共享頂樓戲水池、100 吋投影影視空間與一樓公共交誼廳。</li>
                                 </ul>
+                                <p>各房型與包棟說明請見<a href="/rooms#whole-villa">房型設施</a>。</p>
                             </div>
                         </div>
                     </div>
@@ -833,7 +855,8 @@
                         <div class="faq-answer-inner">
                             <div class="faq-answer-content">
                                 <p><strong>住宿設施：</strong>舒服的大床、好睡的棉被、全採用 TOTO 的衛浴設備及免治馬桶。</p>
-                                <p><strong>館內設施：</strong>電梯（方便攜帶行李）、一樓舒適的公共空間、100 吋大熒幕影視設備、頂樓戲水池（3m × 6m）。</p>
+                                <p><strong>館內設施：</strong>電梯（方便攜帶行李）、一樓舒適的公共空間、100 吋大螢幕影視設備、頂樓戲水池（3m × 6m）。</p>
+                                <p>完整設備規格請見<a href="/intro">細說期遇</a>。</p>
                             </div>
                         </div>
                     </div>
@@ -880,8 +903,8 @@
                         <div class="faq-answer-inner">
                             <div class="faq-answer-content">
                                 <p><strong>機票：</strong>人數不多建議自行到華信、立榮官網訂票。團體則有配合的旅行社可協助。</p>
-                                <p><strong>行程：</strong>完成訂房後提供詳細咨詢，幫您介紹並規劃，滿意再幫您下訂。</p>
-                                <p><strong>船票：</strong>有配合旅行社代訂，請加 LINE 咨詢。</p>
+                                <p><strong>行程：</strong>完成訂房後提供詳細諮詢，幫您介紹並規劃，滿意再幫您下訂。</p>
+                                <p><strong>船票：</strong>有配合旅行社代訂，請加 LINE 諮詢。</p>
                             </div>
                         </div>
                     </div>
@@ -927,7 +950,7 @@
                     <div class="faq-answer">
                         <div class="faq-answer-inner">
                             <div class="faq-answer-content">
-                                <p>入住時間為下午 <strong>15:00</strong> 後，退房時間為上午 <strong>11:00</strong> 前。提早抵達可先寄放行李，退房後也能寄存行李，方便您安排當天行程。</p>
+                                <p>入住時間為下午 <strong>15:00</strong> 後，退房時間為上午 <strong>11:00</strong> 前。提早抵達可先寄放行李，退房後也能寄存行李，方便您安排當天行程。其他入住規定請見<a href="/policy">訂房須知</a>。</p>
                             </div>
                         </div>
                     </div>
@@ -957,7 +980,7 @@
                     <div class="faq-answer">
                         <div class="faq-answer-inner">
                             <div class="faq-answer-content">
-                                <p>為維護所有住客的住宿品質，本館恕不接受寵物入住，敬請見諒。</p>
+                                <p>為維護所有住客的住宿品質，本館恕不接受寵物入住，敬請見諒。完整住宿規定請見<a href="/policy">訂房須知</a>。</p>
                             </div>
                         </div>
                     </div>
@@ -972,7 +995,7 @@
                     <div class="faq-answer">
                         <div class="faq-answer-inner">
                             <div class="faq-answer-content">
-                                <p>距澎湖機場約 8.5 公里、車程約 12 分鐘；距馬公南海遊客中心（碼頭）約 3.5 公里、車程約 9 分鐘。建議租機車或開車前往，導航搜尋「期遇度假會館」即可抵達。</p>
+                                <p>距澎湖機場約 8.5 公里、車程約 12 分鐘；距馬公南海遊客中心（碼頭）約 3.5 公里、車程約 9 分鐘。建議租機車或開車前往，導航搜尋「期遇度假會館」即可抵達。地圖與周邊資訊請見<a href="/location">地理資訊</a>。</p>
                             </div>
                         </div>
                     </div>
@@ -996,6 +1019,17 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+            </div>
+            <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
+                <h4>Explore</h4>
+                <a href="/">首頁</a>
+                <a href="/intro">細說期遇</a>
+                <a href="/rooms">房型設施</a>
+                <a href="/location">地理資訊</a>
+                <a href="/reviews">客戶評價</a>
+                <a href="/faq">常見問題</a>
+                <a href="/policy">訂房須知</a>
+                <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
                 <h4>Social</h4>
@@ -1170,7 +1204,7 @@
                 "name": "民宿可以代訂機票、船票、包套行程嗎？",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "機票建議自行到華信、立榮官網訂票，團體有配合旅行社可協助。行程在完成訂房後提供詳細咨詢。船票有配合旅行社代訂，請加LINE咨詢。"
+                    "text": "機票建議自行到華信、立榮官網訂票，團體有配合旅行社可協助。行程在完成訂房後提供詳細諮詢。船票有配合旅行社代訂，請加LINE諮詢。"
                 }
             },
             {

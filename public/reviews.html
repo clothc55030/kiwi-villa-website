@@ -43,6 +43,10 @@
     <script src="https://static.elfsight.com/platform/platform.js" async></script>
 
     <style>
+        /* 中文字型沒有斜體字面：不讓瀏覽器把中文硬斜切變形；英文照常使用 Cormorant Garamond 的真斜體 */
+        html {
+            font-synthesis: weight;
+        }
         :root {
             --color-bg: #F9F7F3;
             --color-surface: #EFECE4;
@@ -363,6 +367,14 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            /* 先預留 Google 評論小工具的高度（實測桌機約 700px、手機約 450px），避免載入時下方內容被往下推 */
+            min-height: 690px;
+        }
+
+        @media (max-width: 768px) {
+            .widget-container {
+                min-height: 440px;
+            }
         }
 
         /* CTA */
@@ -404,7 +416,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-columns: 1fr 1.4fr 1fr 1.6fr;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-xl);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -424,6 +436,18 @@
             margin-bottom: var(--spacing-sm);
             font-style: italic;
             color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 頁尾「Explore」網站導覽：8 個頁面排兩欄 */
+        .footer-pages {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            column-gap: 2rem;
+            align-content: start;
+        }
+
+        .footer-pages h4 {
+            grid-column: 1 / -1;
         }
 
         .footer-links a {
@@ -766,7 +790,7 @@
         <section class="highlights-section reveal-up" style="max-width:1100px;margin:0 auto;padding:0 1.5rem var(--spacing-lg);">
             <div style="text-align:center;margin-bottom:var(--spacing-md);">
                 <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;color:var(--color-text);letter-spacing:0.02em;">住客怎麼說</h2>
-                <p style="color:var(--color-text-light);font-weight:300;margin-top:0.4rem;">摘自 Google 評價（5.0★ · 累計 189 則）</p>
+                <p style="color:var(--color-text-light);font-weight:300;margin-top:0.4rem;">摘自 Google 評價（5.0★ · 近 200 則）</p>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;">
                 <blockquote style="flex:1 1 280px;max-width:340px;margin:0;background:var(--color-surface);border-radius:14px;padding:1.6rem 1.4rem;">
@@ -800,6 +824,7 @@
                     <span style="color:var(--color-text-light);font-size:0.8rem;letter-spacing:0.05em;">★★★★★　— Mindy Lin · 連住三晚 · 2026.06</span>
                 </blockquote>
             </div>
+            <p style="text-align:center;margin-top:var(--spacing-md);color:var(--color-text-light);font-weight:300;">想看看住客口中的房間？<a href="/rooms" style="color:var(--color-accent);text-underline-offset:3px;">房型設施</a>・<a href="/faq" style="color:var(--color-accent);text-underline-offset:3px;">常見問題</a></p>
         </section>
 
         <!-- Elfsight Widget Section -->
@@ -826,6 +851,17 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+            </div>
+            <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
+                <h4>Explore</h4>
+                <a href="/">首頁</a>
+                <a href="/intro">細說期遇</a>
+                <a href="/rooms">房型設施</a>
+                <a href="/location">地理資訊</a>
+                <a href="/reviews">客戶評價</a>
+                <a href="/faq">常見問題</a>
+                <a href="/policy">訂房須知</a>
+                <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
                 <h4>Social</h4>

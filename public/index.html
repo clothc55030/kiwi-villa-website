@@ -40,6 +40,10 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
+        /* 中文字型沒有斜體字面：不讓瀏覽器把中文硬斜切變形；英文照常使用 Cormorant Garamond 的真斜體 */
+        html {
+            font-synthesis: weight;
+        }
         :root {
             /* 奢華質感的色彩計畫 */
             --color-bg: #F9F7F3;
@@ -179,6 +183,14 @@
             background: var(--color-accent);
             border-color: var(--color-accent);
             color: #fff;
+        }
+
+        /* 桌機版 hero 右半是米色底：頂端的「房型設施／線上訂房／Menu」改深色，否則白字看不見。
+           Logo 疊在照片上，維持白色；捲動後與選單開啟時的顏色照舊。 */
+        @media (min-width: 993px) {
+            body:not(.menu-open) .nav-actions {
+                color: var(--color-text);
+            }
         }
 
         @media (max-width: 768px) {
@@ -635,6 +647,11 @@
             padding: var(--spacing-lg);
         }
 
+        /* 詞組不拆行（例如「海島生活」「不期而遇」）：窄螢幕時整組換到下一行 */
+        .nowrap {
+            white-space: nowrap;
+        }
+
         .quote-text {
             font-family: var(--font-display);
             font-size: clamp(2rem, 4vw, 4rem);
@@ -673,7 +690,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-columns: 1fr 1.4fr 1fr 1.6fr;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-xl);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -693,6 +710,18 @@
             margin-bottom: var(--spacing-sm);
             font-style: italic;
             color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 頁尾「Explore」網站導覽：8 個頁面排兩欄 */
+        .footer-pages {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            column-gap: 2rem;
+            align-content: start;
+        }
+
+        .footer-pages h4 {
+            grid-column: 1 / -1;
         }
 
         .footer-links a {
@@ -781,10 +810,22 @@
                 font-size: 4rem;
             }
 
+            /* 左右內距原本跟著 --spacing-xl（72px），390px 寬的手機只剩約 180px 給詩句 */
+            .hero-content {
+                padding-left: 6%;
+                padding-right: 6%;
+            }
+
             .hero-poem {
-                padding: var(--spacing-md);
+                padding: 1.25rem 1.4rem;
+                font-size: 1rem;
                 background: rgba(249, 247, 243, 0.8);
                 backdrop-filter: blur(10px);
+            }
+
+            .quote-content {
+                padding-left: 6%;
+                padding-right: 6%;
             }
 
             .hero-badges {
@@ -1006,7 +1047,7 @@
                     alt="澎湖期遇度假會館 歐風巴洛克建築外觀，一樓是連續拱廊" class="hero-image" fetchpriority="high">
             </div>
             <div class="hero-content">
-                <div class="hero-subtitle">澎湖精品住宿 | Penghu Boutique Hotel</div>
+                <div class="hero-subtitle">澎湖精品住宿 | <span class="nowrap">Penghu Boutique Hotel</span></div>
                 <h1 class="hero-title">
                     期遇<br>
                     <span class="italic">Villa</span>
@@ -1016,7 +1057,7 @@
                     <p>也是，在途中遇見另一個自己。</p>
                     <br>
                     <p>這一次，來一段屬於你的期遇之旅——</p>
-                    <p>沉浸在陽光、海洋、微風與星光交織的海島生活裡。</p>
+                    <p>沉浸在陽光、海洋、微風與星光交織的<span class="nowrap">海島生活裡。</span></p>
                 </div>
                 <div class="hero-badges">
                     <span class="hero-badge"><i class="fas fa-landmark"></i> 歐風巴洛克</span>
@@ -1093,7 +1134,7 @@
         <!-- Quote/CTA Section -->
         <section class="quote-section">
             <div class="quote-content reveal-up">
-                <h2 class="quote-text">當夜幕低垂、繁星點點<br>靜靜地走進期遇——<br>那是一場與美好不期而遇的開始</h2>
+                <h2 class="quote-text">當夜幕低垂、繁星點點<br>靜靜地走進期遇——<br>那是一場與美好<span class="nowrap">不期而遇的開始</span></h2>
                 <a href="https://booking.owlting.com/kiwi-villa" class="cta-button" target="_blank">預約您的期遇之旅</a>
             </div>
         </section>
@@ -1104,6 +1145,17 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+            </div>
+            <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
+                <h4>Explore</h4>
+                <a href="/">首頁</a>
+                <a href="/intro">細說期遇</a>
+                <a href="/rooms">房型設施</a>
+                <a href="/location">地理資訊</a>
+                <a href="/reviews">客戶評價</a>
+                <a href="/faq">常見問題</a>
+                <a href="/policy">訂房須知</a>
+                <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
                 <h4>Social</h4>

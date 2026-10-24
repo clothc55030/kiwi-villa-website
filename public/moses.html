@@ -40,6 +40,10 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
+        /* 中文字型沒有斜體字面：不讓瀏覽器把中文硬斜切變形；英文照常使用 Cormorant Garamond 的真斜體 */
+        html {
+            font-synthesis: weight;
+        }
         :root {
             --color-bg: #F9F7F3;
             --color-surface: #EFECE4;
@@ -428,7 +432,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-columns: 1fr 1.4fr 1fr 1.6fr;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-xl);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -448,6 +452,18 @@
             margin-bottom: var(--spacing-sm);
             font-style: italic;
             color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 頁尾「Explore」網站導覽：8 個頁面排兩欄 */
+        .footer-pages {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            column-gap: 2rem;
+            align-content: start;
+        }
+
+        .footer-pages h4 {
+            grid-column: 1 / -1;
         }
 
         .footer-links a {
@@ -1185,7 +1201,7 @@
             <div class="reveal-up">
                 <div class="section-label">Tide Finder</div>
                 <h2>你哪天去？</h2>
-                <p class="lead">選日期，直接看「幾點到、最晚幾點走」——不用自己解讀潮汐表。資料涵蓋 <span id="tide-years">2026</span> 全年。</p>
+                <p class="lead">選日期，直接看「幾點到、最晚幾點走」——不用自己解讀潮汐表。資料涵蓋 <span id="tide-years">2026</span> 全年；下一年度約每年 12 月澎管處公布後更新，想先排行程可以 <a href="https://page.line.me/ucz4004x" target="_blank" rel="noopener">LINE 問我們</a>。</p>
             </div>
             <div class="tool-controls reveal-up">
                 <button class="quick-btn" type="button" data-quick="0">今天</button>
@@ -1247,11 +1263,11 @@
                     <h3>完美日出場<span>全年僅 5 場</span></h3>
                     <p class="hl-note">開門時分海尚未開始、日出正好同框：先看海讓路，再看太陽從赤嶼後方升起。2026 年只有這五天，攝影迷請直接請假。</p>
                     <ul id="hl-sun">
-                        <li><strong>4/22（三）</strong>日出 05:34・05:30 前抵達</li>
-                        <li><strong>5/7（四）</strong>日出 05:23・05:30 前抵達</li>
-                        <li><strong>5/21（四）</strong>日出 05:17・05:30 前抵達</li>
-                        <li><strong>6/5（五）</strong>日出 05:13・05:30 前抵達</li>
-                        <li><strong>7/5（日）</strong>日出 05:19・05:30 前抵達（唯一假日場）</li>
+                        <li><strong>4/22（三）</strong>日出 05:34・05:19 前到岸邊、05:30 回閘門口</li>
+                        <li><strong>5/7（四）</strong>日出 05:23・05:08 前到岸邊、05:30 回閘門口</li>
+                        <li><strong>5/21（四）</strong>日出 05:17・05:02 前到岸邊、05:30 回閘門口</li>
+                        <li><strong>6/5（五）</strong>日出 05:13・04:58 前到岸邊、05:30 回閘門口</li>
+                        <li><strong>7/5（日）</strong>日出 05:19・05:04 前到岸邊、05:30 回閘門口（唯一假日場）</li>
                     </ul>
                 </div>
                 <div class="hl-card reveal-up">
@@ -1359,6 +1375,17 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+            </div>
+            <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
+                <h4>Explore</h4>
+                <a href="/">首頁</a>
+                <a href="/intro">細說期遇</a>
+                <a href="/rooms">房型設施</a>
+                <a href="/location">地理資訊</a>
+                <a href="/reviews">客戶評價</a>
+                <a href="/faq">常見問題</a>
+                <a href="/policy">訂房須知</a>
+                <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
                 <h4>Social</h4>
@@ -1492,7 +1519,7 @@
                 if (!TIDE) return;
                 const day = TIDE.days[iso];
                 if (!day) {
-                    tideResult.innerHTML = '<div class="tide-card"><p class="tide-fallback">本頁目前提供 ' + TIDE_LABEL + ' 年全年資料；其他日期請查閱 <a href="https://www.penghu-nsa.gov.tw/Services/Tidenew" target="_blank" rel="noopener">澎管處官方潮汐表</a>。</p></div>';
+                    tideResult.innerHTML = '<div class="tide-card"><p class="tide-fallback">本頁目前提供 ' + TIDE_LABEL + ' 年全年資料；下一年度的潮汐表約每年 12 月由澎管處公布，公布後本頁會更新。其他日期請查閱 <a href="https://www.penghu-nsa.gov.tw/Services/Tidenew" target="_blank" rel="noopener">澎管處官方潮汐表</a>，或 <a href="https://page.line.me/ucz4004x" target="_blank" rel="noopener">LINE 問我們</a>。</p></div>';
                     return;
                 }
                 const [y, m, d] = iso.split('-');
@@ -1586,7 +1613,7 @@
                 fill('hl-sun', sun, 6, function (x) {
                     let tag = '';
                     if (isWeekend(x[1].w)) tag = weekendSun[x[0].slice(0, 4)] === 1 ? '（唯一假日場）' : '（假日場）';
-                    return '<li>' + label(x[0], x[1]) + '日出 ' + x[2].sr + '・' + x[2].arr + ' 前抵達' + tag + '</li>';
+                    return '<li>' + label(x[0], x[1]) + '日出 ' + x[2].sr + '・' + hmAdd(x[2].sr, -15) + ' 前到岸邊、' + x[2].arr + ' 回閘門口' + tag + '</li>';
                 }, stale ? staleMsg : '今年的完美日出場已經結束（只出現在 4–9 月的清晨）；明年場次會在澎管處公布新潮汐表後更新（約每年 12 月）。');
                 fill('hl-wk', wk, 8, function (x) {
                     return '<li>' + label(x[0], x[1]) + x[2].o + '–' + x[2].c + '・' + x[2].arr + ' 前抵達</li>';
@@ -1626,9 +1653,6 @@
                         if (typeof tideDate.showPicker === 'function') {
                             try { tideDate.showPicker(); } catch (e) { /* 部分瀏覽器不支援, 維持原生行為 */ }
                         }
-                    });
-                    tideDate.addEventListener('keydown', function (e) {
-                        if (e.key !== 'Tab' && e.key !== 'Escape') e.preventDefault();
                     });
                     tideDate.addEventListener('change', function () {
                         setActiveQuick(-1);

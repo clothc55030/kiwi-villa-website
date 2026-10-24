@@ -14,6 +14,9 @@
 3. 改完會自我檢查：頁面上若還殘留舊年份、結構化資料壞掉或檔案被截斷，
    **不會寫入**並列出是哪幾行——把訊息貼給 Claude 即可。
 4. 本地預覽確認（`python -m http.server 8000 --directory public`），git commit 併回 main 部署。
+5. **順便更新 Google 評價數**（腳本不會改）：`reviews.html`「住客怎麼說」下方那行與
+   `llms.txt` 的「Google 評價」都寫約略數字（例如「近 200 則」「200+ 則」），
+   對照評價頁 Google 小工具顯示的即時數字，需要時調整一次即可；評分若不再是 5.0 也要一起改。
 
 > 精選場次不用再手動挑：規則寫在 `update-tide-data.py` 的 `mark_highlights()`，
 > 靜態清單（給搜尋引擎與 AI 讀）和頁面上的 JS（只顯示今天以後的場次）用的是同一份標記。

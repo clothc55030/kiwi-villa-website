@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>房型與價格｜澎湖期遇度假會館 Kiwi Villa｜2-4人歐風陽台套房</title>
     <meta name="description"
-        content="澎湖期遇度假會館6種精緻房型：豪華家庭房$4800起(18坪(60㎡)含TOTO浴缸+陽台)、高級四人房$4800起、奢華四人房$4800起、高級雙床房$2500起、高級三人房$3900起、高級雙人房$2500起。國際品牌床墊、定制家具、電動窗簾、大金冷氣。線上預訂享優惠！">
+        content="澎湖期遇度假會館6種精緻房型：豪華家庭房$4800起(18坪(60㎡)含TOTO浴缸+陽台)、高級四人房$4800起、奢華四人房$4800起、高級雙床房$2500起、高級三人房$3900起、高級雙人房$2500起。國際品牌床墊、訂製家具、電動窗簾、大金冷氣。線上預訂享優惠！">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.kiwi-villa.com/rooms">
     <meta property="og:title" content="房型與價格｜澎湖期遇度假會館 Kiwi Villa">
-    <meta property="og:description" content="澎湖期遇度假會館房型設施，提供多種房型選擇，滿足不同旅客需求。國際品質護背床墊、定制家具、隔音鋁門窗、電動窗簾，品質住宿體驗。">
+    <meta property="og:description" content="澎湖期遇度假會館房型設施，提供多種房型選擇，滿足不同旅客需求。國際品質護背床墊、訂製家具、隔音鋁門窗、電動窗簾，品質住宿體驗。">
     <meta property="og:image" content="https://www.kiwi-villa.com/assets/og-rooms.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -20,7 +20,7 @@
     <meta property="og:site_name" content="澎湖期遇度假會館 Kiwi Villa">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="房型與價格｜澎湖期遇度假會館 Kiwi Villa">
-    <meta name="twitter:description" content="澎湖期遇度假會館房型設施，提供多種房型選擇，滿足不同旅客需求。國際品質護背床墊、定制家具、隔音鋁門窗、電動窗簾，品質住宿體驗。">
+    <meta name="twitter:description" content="澎湖期遇度假會館房型設施，提供多種房型選擇，滿足不同旅客需求。國際品質護背床墊、訂製家具、隔音鋁門窗、電動窗簾，品質住宿體驗。">
     <meta name="twitter:image" content="https://www.kiwi-villa.com/assets/og-rooms.jpg">
     <link rel="canonical" href="https://www.kiwi-villa.com/rooms">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -33,13 +33,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
         onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"></noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
+        /* 中文字型沒有斜體字面：不讓瀏覽器把中文硬斜切變形；英文照常使用 Cormorant Garamond 的真斜體 */
+        html {
+            font-synthesis: weight;
+        }
         :root {
             /* 奢華質感的色彩計畫 */
             --color-bg: #F9F7F3;
@@ -54,7 +58,7 @@
             /* 深海藍 */
 
             /* 字體設定 */
-            --font-display: 'Cormorant Garamond', 'Playfair Display', serif;
+            --font-display: 'Cormorant Garamond', 'LXGW WenKai TC', serif;
             --font-body: 'Noto Sans TC', sans-serif;
 
             /* 空間間距 */
@@ -353,6 +357,17 @@
             transform: scale(1);
         }
 
+        /* 只渲染「目前這張＋前後各一張」：其他張 display:none，lazy 圖片在輪到之前不會下載
+           （原本 71 張疊在同一格，捲到底會一次全部下載）。沒有 JS 時只顯示第一張，跟以前一樣。 */
+        .slide {
+            display: none;
+        }
+
+        .slide.active,
+        .slide.is-near {
+            display: block;
+        }
+
         .room-showcase:hover .slide.active {
             transform: scale(1.05);
         }
@@ -462,6 +477,11 @@
 
         .room-slider {
             cursor: zoom-in;
+            touch-action: pan-y;
+        }
+
+        .lightbox-overlay {
+            touch-action: pan-y;
         }
 
         .slider-controls {
@@ -469,12 +489,12 @@
             bottom: var(--spacing-md);
             right: var(--spacing-md);
             display: flex;
-            gap: 20px;
+            gap: 4px;
             z-index: 10;
             align-items: center;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(5px);
-            padding: 8px 16px;
+            padding: 0 6px;
             border-radius: 30px;
         }
 
@@ -491,6 +511,12 @@
             cursor: pointer;
             opacity: 0.7;
             transition: opacity 0.3s, transform 0.3s;
+            /* 觸控目標 ≥44px（原本只有約 10×19px） */
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .slider-btn:hover {
@@ -524,6 +550,7 @@
         .room-name {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 400;
             line-height: 1.1;
             margin-bottom: var(--spacing-sm);
             color: var(--color-text);
@@ -622,7 +649,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-columns: 1fr 1.4fr 1fr 1.6fr;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-xl);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -642,6 +669,18 @@
             margin-bottom: var(--spacing-sm);
             font-style: italic;
             color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 頁尾「Explore」網站導覽：8 個頁面排兩欄 */
+        .footer-pages {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            column-gap: 2rem;
+            align-content: start;
+        }
+
+        .footer-pages h4 {
+            grid-column: 1 / -1;
         }
 
         .footer-links a {
@@ -1012,25 +1051,25 @@
             <article class="room-showcase reveal-up" id="room-201">
                 <div class="room-image-wrap">
                     <div class="room-slider">
-                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp" alt="澎湖期遇豪華家庭房 - 寬敞客廳全景"
+                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp" alt="澎湖期遇豪華家庭房 - 雲朵壁畫、兩張大床與兒童帳篷全景"
                             class="slide active">
-                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room2.webp" alt="澎湖期遇豪華家庭房 - TOTO豪華浴缸"
+                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room2.webp" alt="澎湖期遇豪華家庭房 - 雲朵壁畫前的 King Size 大床"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room3.webp" alt="澎湖期遇豪華家庭房 - King Size雙人床"
+                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room3.webp" alt="澎湖期遇豪華家庭房 - 兒童帳篷望向兩張大床與單人沙發"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room4.webp" alt="澎湖期遇豪華家庭房 - 私人陽台景觀"
+                        <img width="1008" height="1512" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room4.webp" alt="澎湖期遇豪華家庭房 - 房門感應鎖與拱形門廊"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room5.webp" alt="澎湖期遇豪華家庭房 - 兒童帳篷區"
+                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room5.webp" alt="澎湖期遇豪華家庭房 - 大床、電視與書桌"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room6.webp" alt="澎湖期遇豪華家庭房 - 精品家具細節"
+                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room6.webp" alt="澎湖期遇豪華家庭房 - 「萌 201」門牌"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room7.webp" alt="澎湖期遇豪華家庭房 - 100支天絲棉寢具"
+                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room7.webp" alt="澎湖期遇豪華家庭房 - 大床與窗邊沙發區"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room8.webp" alt="澎湖期遇豪華家庭房 - 衛浴空間"
+                        <img width="1008" height="1512" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room8.webp" alt="澎湖期遇豪華家庭房 - 玻璃淋浴間與洗手台"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room9.webp" alt="澎湖期遇豪華家庭房 - 採光窗景"
+                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room9.webp" alt="澎湖期遇豪華家庭房 - 私人陽台"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room10.webp" alt="澎湖期遇豪華家庭房 - 玫瑰金沙發休憩區"
+                        <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room10.webp" alt="澎湖期遇豪華家庭房 - 浴缸"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1044,7 +1083,7 @@
                 <div class="room-details">
                     <div class="room-badge">201</div>
                     <h2 class="room-name">豪華家庭房<br>附浴缸</h2>
-                    <h3 class="room-name-en">Deluxe Family Room</h3>
+                    <h3 class="room-name-en">Deluxe Family Room with Bathtub</h3>
                     <div class="room-specs">
                         <span style="color:var(--color-accent);font-weight:600;">平日 NT$4,800 起／晚</span>
                         <span>18坪 (60㎡)</span>
@@ -1057,7 +1096,7 @@
                     <ul class="room-features-list">
                         <li>兩張 KING SIZE 舒適大床</li>
                         <li>TOTO 豪華浴缸</li>
-                        <li>100支天絲棉定制床品</li>
+                        <li>100支天絲棉訂製床品</li>
                         <li>兒童專屬帳篷</li>
                         <li>私人大陽台</li>
                         <li>大金空調與涼暖風機</li>
@@ -1070,21 +1109,21 @@
             <article class="room-showcase reveal-up" id="room-203">
                 <div class="room-image-wrap">
                     <div class="room-slider">
-                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp" alt="澎湖期遇高級四人房 - 兩張KING SIZE大床全景"
+                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp" alt="澎湖期遇高級四人房 - 金色幾何吊燈與床頭"
                             class="slide active" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room2.webp" alt="澎湖期遇高級四人房 - 陽台採光"
+                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room2.webp" alt="澎湖期遇高級四人房 - 兩張大床、電視與書桌"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room3.webp" alt="澎湖期遇高級四人房 - 100支天絲棉寢具"
+                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room3.webp" alt="澎湖期遇高級四人房 - 淋浴間"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room4.webp" alt="澎湖期遇高級四人房 - 落地窗景觀"
+                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room4.webp" alt="澎湖期遇高級四人房 - 兩張拉扣床頭板大床"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room5.webp" alt="澎湖期遇高級四人房 - 衛浴設備"
+                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room5.webp" alt="澎湖期遇高級四人房 - 房間全景"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room6.webp" alt="澎湖期遇高級四人房 - 精品家具"
+                        <img width="1008" height="1512" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room6.webp" alt="澎湖期遇高級四人房 - 洗手台與毛巾架"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room7.webp" alt="澎湖期遇高級四人房 - 遮光窗簾"
+                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room7.webp" alt="澎湖期遇高級四人房 - 兩張大床與小茶几"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room8.webp" alt="澎湖期遇高級四人房 - 空間細節"
+                        <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room8.webp" alt="澎湖期遇高級四人房 - 私人陽台"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1098,7 +1137,7 @@
                 <div class="room-details">
                     <div class="room-badge">203</div>
                     <h2 class="room-name">高級四人房<br>附陽台</h2>
-                    <h3 class="room-name-en">Superior Quad Room</h3>
+                    <h3 class="room-name-en">Superior Quad Room with Balcony</h3>
                     <div class="room-specs">
                         <span style="color:var(--color-accent);font-weight:600;">平日 NT$4,800 起／晚</span>
                         <span>13坪 (44㎡)</span>
@@ -1111,7 +1150,7 @@
                     <ul class="room-features-list">
                         <li>兩張 KING SIZE 大床</li>
                         <li>私人陽台景觀</li>
-                        <li>100支天絲棉定制床品</li>
+                        <li>100支天絲棉訂製床品</li>
                         <li>全遮光遙控落地窗簾</li>
                     </ul>
                     <a href="https://booking.owlting.com/kiwi-villa" class="btn-book" target="_blank" rel="noopener">線上預訂 · Reserve</a>
@@ -1122,25 +1161,25 @@
             <article class="room-showcase reveal-up" id="room-205">
                 <div class="room-image-wrap">
                     <div class="room-slider">
-                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp" alt="澎湖期遇奢華四人房 - 寬敞空間全景"
+                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp" alt="澎湖期遇奢華四人房 - 仙人掌掛畫與大床"
                             class="slide active" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room2.webp" alt="澎湖期遇奢華四人房 - 雙私人陽台"
+                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room2.webp" alt="澎湖期遇奢華四人房 - 衛浴空間"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room3.webp" alt="澎湖期遇奢華四人房 - King Size豪華大床"
+                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room3.webp" alt="澎湖期遇奢華四人房 - 兩間臥室相通"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room4.webp" alt="澎湖期遇奢華四人房 - 質感精品家具"
+                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room4.webp" alt="澎湖期遇奢華四人房 - 粉彩壁畫臥室與藍色沙發椅"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room5.webp" alt="澎湖期遇奢華四人房 - 100支天絲棉寢具"
+                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room5.webp" alt="澎湖期遇奢華四人房 - 粉彩壁畫臥室的大床"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room6.webp" alt="澎湖期遇奢華四人房 - 衛浴設備"
+                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room6.webp" alt="澎湖期遇奢華四人房 - 私人陽台"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room7.webp" alt="澎湖期遇奢華四人房 - 靜音氣密窗"
+                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room7.webp" alt="澎湖期遇奢華四人房 - 窗邊單人椅與衣帽架"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room8.webp" alt="澎湖期遇奢華四人房 - 採光設計"
+                        <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room8.webp" alt="澎湖期遇奢華四人房 - 大床、書桌與電視"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room9.webp" alt="澎湖期遇奢華四人房 - 遮光窗簾"
+                        <img width="1008" height="1512" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room9.webp" alt="澎湖期遇奢華四人房 - 洗手台"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room10.webp" alt="澎湖期遇奢華四人房 - 空間全貌"
+                        <img width="1008" height="1512" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room10.webp" alt="澎湖期遇奢華四人房 - 床邊六角小桌與吊燈"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1154,7 +1193,7 @@
                 <div class="room-details">
                     <div class="room-badge">205</div>
                     <h2 class="room-name">奢華四人房<br>附陽台</h2>
-                    <h3 class="room-name-en">Deluxe Quad Room</h3>
+                    <h3 class="room-name-en">Luxury Quad Room with Balcony</h3>
                     <div class="room-specs">
                         <span style="color:var(--color-accent);font-weight:600;">平日 NT$4,800 起／晚</span>
                         <span>16坪 (54㎡)</span>
@@ -1168,7 +1207,7 @@
                         <li>兩張 KING SIZE 豪華大床</li>
                         <li>雙私人陽台設計</li>
                         <li>質感精品家具</li>
-                        <li>100支天絲棉定制床品</li>
+                        <li>100支天絲棉訂製床品</li>
                         <li>雙層真空靜音氣密窗</li>
                     </ul>
                     <a href="https://booking.owlting.com/kiwi-villa" class="btn-book" target="_blank" rel="noopener">線上預訂 · Reserve</a>
@@ -1179,23 +1218,23 @@
             <article class="room-showcase reveal-up" id="room-301">
                 <div class="room-image-wrap">
                     <div class="room-slider">
-                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp" alt="澎湖期遇高級雙床房 - 舒適雙床配置"
+                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp" alt="澎湖期遇高級雙床房 - 魚群壁畫與兩張單人床"
                             class="slide active" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room2.webp" alt="澎湖期遇高級雙床房 - 陽台景觀"
+                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room2.webp" alt="澎湖期遇高級雙床房 - 床頭燈與魚群壁畫"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room3.webp" alt="澎湖期遇高級雙床房 - 100支天絲棉寢具"
+                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room3.webp" alt="澎湖期遇高級雙床房 - 兩張單人床與書桌"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room4.webp" alt="澎湖期遇高級雙床房 - 衛浴設備"
+                        <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room4.webp" alt="澎湖期遇高級雙床房 - 私人陽台"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room5.webp" alt="澎湖期遇高級雙床房 - 精品家具"
+                        <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room5.webp" alt="澎湖期遇高級雙床房 - 窗邊單人沙發"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room6.webp" alt="澎湖期遇高級雙床房 - 落地窗採光"
+                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room6.webp" alt="澎湖期遇高級雙床房 - 房間全景"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room7.webp" alt="澎湖期遇高級雙床房 - 遮光窗簾"
+                        <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room7.webp" alt="澎湖期遇高級雙床房 - 玻璃淋浴間與衛浴"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room8.webp" alt="澎湖期遇高級雙床房 - 空間細節"
+                        <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room8.webp" alt="澎湖期遇高級雙床房 - 洗手台"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room9.webp" alt="澎湖期遇高級雙床房 - 房間全貌"
+                        <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room9.webp" alt="澎湖期遇高級雙床房 - 馬克杯與小點心"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1209,7 +1248,7 @@
                 <div class="room-details">
                     <div class="room-badge">301</div>
                     <h2 class="room-name">高級雙床房<br>附陽台</h2>
-                    <h3 class="room-name-en">Premium Twin Room</h3>
+                    <h3 class="room-name-en">Superior Twin Room with Balcony</h3>
                     <div class="room-specs">
                         <span style="color:var(--color-accent);font-weight:600;">平日 NT$2,500 起／晚</span>
                         <span>10坪 (33㎡)</span>
@@ -1223,7 +1262,7 @@
                         <li>兩張舒適單人床</li>
                         <li>私人大陽台</li>
                         <li>精品家具配置</li>
-                        <li>100支天絲棉定制床品</li>
+                        <li>100支天絲棉訂製床品</li>
                         <li>43吋液晶電視</li>
                     </ul>
                     <a href="https://booking.owlting.com/kiwi-villa" class="btn-book" target="_blank" rel="noopener">線上預訂 · Reserve</a>
@@ -1234,21 +1273,21 @@
             <article class="room-showcase reveal-up" id="room-303">
                 <div class="room-image-wrap">
                     <div class="room-slider">
-                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp" alt="澎湖期遇高級三人房 - 雙床與單床配置"
+                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp" alt="澎湖期遇高級三人房 - 船型單人床、雙人床與兒童帳篷"
                             class="slide active" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room2.webp" alt="澎湖期遇高級三人房 - 兒童小屋"
+                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room2.webp" alt="澎湖期遇高級三人房 - 雙人床、書桌與電視"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room3.webp" alt="澎湖期遇高級三人房 - 陽台景觀"
+                        <img width="1008" height="1512" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room3.webp" alt="澎湖期遇高級三人房 - 藍白磁磚衛浴"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room4.webp" alt="澎湖期遇高級三人房 - 100支天絲棉寢具"
+                        <img width="1008" height="1512" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room4.webp" alt="澎湖期遇高級三人房 - 木櫃與熱水壺茶具"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room5.webp" alt="澎湖期遇高級三人房 - 衛浴設備"
+                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room5.webp" alt="澎湖期遇高級三人房 - 房間全景"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room6.webp" alt="澎湖期遇高級三人房 - 精品家具"
+                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room6.webp" alt="澎湖期遇高級三人房 - 「KIWI」船型床"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room7.webp" alt="澎湖期遇高級三人房 - 採光設計"
+                        <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room7.webp" alt="澎湖期遇高級三人房 - 私人陽台"
                             class="slide" loading="lazy">
-                        <img width="1008" height="1512" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room8.webp" alt="澎湖期遇高級三人房 - 空間全貌"
+                        <img width="1008" height="1512" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room8.webp" alt="澎湖期遇高級三人房 - 藍色馬賽克洗手台"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1262,7 +1301,7 @@
                 <div class="room-details">
                     <div class="room-badge">303</div>
                     <h2 class="room-name">高級三人房<br>附陽台</h2>
-                    <h3 class="room-name-en">Premium Triple Room</h3>
+                    <h3 class="room-name-en">Superior Triple Room with Balcony</h3>
                     <div class="room-specs">
                         <span style="color:var(--color-accent);font-weight:600;">平日 NT$3,900 起／晚</span>
                         <span>11坪 (36㎡)</span>
@@ -1276,7 +1315,7 @@
                         <li>一雙床、一單床配置</li>
                         <li>私人陽台</li>
                         <li>專屬兒童小屋</li>
-                        <li>100支天絲棉定制床品</li>
+                        <li>100支天絲棉訂製床品</li>
                         <li>43吋液晶電視</li>
                     </ul>
                     <a href="https://booking.owlting.com/kiwi-villa" class="btn-book" target="_blank" rel="noopener">線上預訂 · Reserve</a>
@@ -1287,58 +1326,58 @@
             <article class="room-showcase reveal-up" id="room-305">
                 <div class="room-image-wrap">
                     <div class="room-slider">
-                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp" alt="澎湖期遇高級雙人房 - 舒適雙人床"
+                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp" alt="澎湖期遇高級雙人房 - 床頭抱枕特寫"
                             class="slide active" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room2.webp" alt="澎湖期遇高級雙人房 - 陽台景觀"
+                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room2.webp" alt="澎湖期遇高級雙人房 - 雙人床、電視與書桌"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room3.webp" alt="澎湖期遇高級雙人房 - 100支天絲棉寢具"
+                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room3.webp" alt="澎湖期遇高級雙人房 - 白紗四柱床"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room4.webp" alt="澎湖期遇高級雙人房 - 衛浴設備"
+                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room4.webp" alt="澎湖期遇高級雙人房 - 衛浴空間"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room5.webp" alt="澎湖期遇高級雙人房 - 精品家具"
+                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room5.webp" alt="澎湖期遇高級雙人房 - 大床、書桌與木質衣櫃"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room6.webp" alt="澎湖期遇高級雙人房 - 採光設計"
+                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room6.webp" alt="澎湖期遇高級雙人房 - 陽台小桌與檸檬水"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room7.webp" alt="澎湖期遇高級雙人房 - 遮光窗簾"
+                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room7.webp" alt="澎湖期遇高級雙人房 - 四柱紗帳床與書桌"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room8.webp" alt="澎湖期遇高級雙人房 - 大金空調"
+                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room8.webp" alt="澎湖期遇高級雙人房 - 紗帳與窗簾"
                             class="slide" loading="lazy">
-                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room9.webp" alt="澎湖期遇高級雙人房 - 寢具細節"
+                        <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room9.webp" alt="澎湖期遇高級雙人房 - 淺綠色床頭板與吊燈"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room10.webp"
-                            alt="澎湖期遇高級雙人房 - 房間全景" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 私人陽台" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room11.webp"
-                            alt="澎湖期遇高級雙人房 - 入口玄關" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 窗邊綠植" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room12.webp"
-                            alt="澎湖期遇高級雙人房 - 浴室設計" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 大理石紋衛浴" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room13.webp"
-                            alt="澎湖期遇高級雙人房 - TOTO免治馬桶" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 小圓桌上的點心與檸檬水" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room14.webp"
-                            alt="澎湖期遇高級雙人房 - 窗景採光" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 四柱紗帳床正面" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room15.webp"
-                            alt="澎湖期遇高級雙人房 - 床頭細節" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 帆船模型擺飾" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room16.webp"
-                            alt="澎湖期遇高級雙人房 - 電動窗簾" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 陽台造型欄杆" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room17.webp"
-                            alt="澎湖期遇高級雙人房 - 備品設施" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 淺綠色床頭板房間全景" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room18.webp"
-                            alt="澎湖期遇高級雙人房 - 空間佈局" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 洗手台" class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room19.webp"
-                            alt="澎湖期遇高級雙人房 - 床底照明" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 玻璃淋浴間與馬桶" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room20.webp"
-                            alt="澎湖期遇高級雙人房 - 裝潢細節" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 大床與藍色絨布單椅" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room21.webp"
-                            alt="澎湖期遇高級雙人房 - 陽台外景" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 衣帽架與四柱床" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room22.webp"
-                            alt="澎湖期遇高級雙人房 - 晒衣空間" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 大床、書桌與灰色單椅" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room23.webp"
-                            alt="澎湖期遇高級雙人房 - 室內全景" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 灰色床頭板大床與毛巾" class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room24.webp"
-                            alt="澎湖期遇高級雙人房 - 床組特寫" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 窗邊灰色絨布單椅" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room25.webp"
-                            alt="澎湖期遇高級雙人房 - 布草細節" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 大理石紋浴室" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room26.webp"
-                            alt="澎湖期遇高級雙人房 - 房型全貌" class="slide" loading="lazy">
+                            alt="澎湖期遇高級雙人房 - 大床正面" class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
                         <button class="slider-btn slider-prev" aria-label="上一張圖片"><i
@@ -1351,7 +1390,7 @@
                 <div class="room-details">
                     <div class="room-badge">305</div>
                     <h2 class="room-name">高級雙人房<br>附陽台</h2>
-                    <h3 class="room-name-en">Premium Double Room</h3>
+                    <h3 class="room-name-en">Superior Double Room with Balcony</h3>
                     <div class="room-specs">
                         <span style="color:var(--color-accent);font-weight:600;">平日 NT$2,500 起／晚</span>
                         <span>9坪 (29㎡)</span>
@@ -1364,7 +1403,7 @@
                     <ul class="room-features-list">
                         <li>一張 KING SIZE 大床</li>
                         <li>私人專屬陽台</li>
-                        <li>100支天絲棉定制床品</li>
+                        <li>100支天絲棉訂製床品</li>
                         <li>浪漫雙人配置</li>
                         <li>雙層真空靜音氣密窗</li>
                     </ul>
@@ -1403,6 +1442,17 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+            </div>
+            <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
+                <h4>Explore</h4>
+                <a href="/">首頁</a>
+                <a href="/intro">細說期遇</a>
+                <a href="/rooms">房型設施</a>
+                <a href="/location">地理資訊</a>
+                <a href="/reviews">客戶評價</a>
+                <a href="/faq">常見問題</a>
+                <a href="/policy">訂房須知</a>
+                <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
                 <h4>Social</h4>
@@ -1514,25 +1564,45 @@
                 const total = slides.length;
 
                 const updateSlider = () => {
+                    const nextIndex = (currentIndex + 1) % total;
+                    const prevIndex = (currentIndex - 1 + total) % total;
                     slides.forEach((slide, index) => {
-                        if (index === currentIndex) {
-                            slide.classList.add('active');
-                        } else {
-                            slide.classList.remove('active');
-                        }
+                        slide.classList.toggle('active', index === currentIndex);
+                        // 前後各一張先渲染（opacity 0），切換時已載好、淡入不會空白
+                        slide.classList.toggle('is-near', index !== currentIndex && (index === nextIndex || index === prevIndex));
                     });
                     counter.textContent = `${currentIndex + 1} / ${total}`;
                 };
 
-                btnNext.addEventListener('click', () => {
+                const goNext = () => {
                     currentIndex = (currentIndex + 1) % total;
                     updateSlider();
-                });
-
-                btnPrev.addEventListener('click', () => {
+                };
+                const goPrev = () => {
                     currentIndex = (currentIndex - 1 + total) % total;
                     updateSlider();
-                });
+                };
+
+                btnNext.addEventListener('click', goNext);
+                btnPrev.addEventListener('click', goPrev);
+
+                // 手機左右滑動切換照片（垂直滑動照常捲頁）
+                const roomSliderEl = sliderWrap.querySelector('.room-slider');
+                if (roomSliderEl) {
+                    let sx = 0, sy = 0;
+                    roomSliderEl.addEventListener('touchstart', (e) => {
+                        sx = e.touches[0].clientX;
+                        sy = e.touches[0].clientY;
+                    }, { passive: true });
+                    roomSliderEl.addEventListener('touchend', (e) => {
+                        const dx = e.changedTouches[0].clientX - sx;
+                        const dy = e.changedTouches[0].clientY - sy;
+                        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+                            roomSliderEl.dataset.swipedAt = String(Date.now());
+                            if (dx < 0) { goNext(); } else { goPrev(); }
+                        }
+                    }, { passive: true });
+                }
 
                 // Auto-init counter
                 updateSlider();
@@ -1574,6 +1644,7 @@
                 if (!roomSlider) return;
 
                 roomSlider.addEventListener('click', () => {
+                    if (Date.now() - Number(roomSlider.dataset.swipedAt || 0) < 500) return;
                     const slides = Array.from(roomSlider.querySelectorAll('.slide'));
                     currentLightboxImages = slides.map(slide => slide.src);
                     const activeSlide = roomSlider.querySelector('.slide.active');
@@ -1613,11 +1684,31 @@
             };
 
             lightboxClose.addEventListener('click', closeLightbox);
+            let lbSwipedAt = 0;
             lightbox.addEventListener('click', (e) => {
+                if (Date.now() - lbSwipedAt < 500) return;
                 if (e.target === lightbox) {
                     closeLightbox();
                 }
             });
+
+            // 燈箱手勢：左右滑切換照片、往下滑關閉
+            let lbx = 0, lby = 0;
+            lightbox.addEventListener('touchstart', (e) => {
+                lbx = e.touches[0].clientX;
+                lby = e.touches[0].clientY;
+            }, { passive: true });
+            lightbox.addEventListener('touchend', (e) => {
+                const dx = e.changedTouches[0].clientX - lbx;
+                const dy = e.changedTouches[0].clientY - lby;
+                if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+                    lbSwipedAt = Date.now();
+                    if (dx < 0) { lightboxNext.click(); } else { lightboxPrev.click(); }
+                } else if (dy > 80 && dy > Math.abs(dx) * 1.5) {
+                    lbSwipedAt = Date.now();
+                    closeLightbox();
+                }
+            }, { passive: true });
             document.addEventListener('keydown', (e) => {
                 if (!lightbox.classList.contains('active')) return;
                 if (e.key === 'Escape') {
