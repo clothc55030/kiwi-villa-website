@@ -23,6 +23,11 @@
 /306/  /rooms#room-305   301
 /307/  /rooms#room-305   301
 
+# 訂房系統（OwlNest）方案說明裡的「官網訂房須知」連結（舊頁 notice 已於 2025-06 改版時併入 policy）
+/notice        /policy   301
+/notice/       /policy   301
+/notice.html   /policy   301
+
 # 舊的 .html 重定向到無後綴版本
 /index.html    /         301
 /intro.html    /intro    301
