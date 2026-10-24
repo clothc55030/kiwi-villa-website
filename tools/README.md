@@ -7,11 +7,27 @@
 ## 怎麼做
 1. 雙擊 `更新潮汐資料.bat`（直接按 Enter 就是更新明年）。
 2. 腳本自動完成：抓官方 12 個月表 → 解析驗證 → 計算建議抵達／回程／合海／
-   日出場／潮差分級 → 產出 `assets/tide-{年}.json` → 自動改好 `moses.html`
-   （fetch 檔名與版本號、日期範圍、來源年份）與 `sitemap.xml`。
-3. 依 `tools/highlights-{年}.txt`（腳本自動輸出）人工挑選並更新 moses.html
-   的「Highlights 精選場次」區塊（完美日出場／週末大潮場）。
-4. 本地預覽確認（`python -m http.server 8000`），git commit 併回 main 部署。
+   日出場／潮差分級／精選場次 → 產出 `assets/tide-{年}.json` → 自動改好：
+   - `moses.html`：標題、描述、社群分享文字、Dataset 結構化資料、精選場次清單
+     （完美日出場、週末大潮場）、資料檔版本表、資料來源年份
+   - `llms.txt` 的摩西分海年份、`sitemap.xml` 的更新日期
+3. 改完會自我檢查：頁面上若還殘留舊年份、結構化資料壞掉或檔案被截斷，
+   **不會寫入**並列出是哪幾行——把訊息貼給 Claude 即可。
+4. 本地預覽確認（`python -m http.server 8000 --directory public`），git commit 併回 main 部署。
+
+> 精選場次不用再手動挑：規則寫在 `update-tide-data.py` 的 `mark_highlights()`，
+> 靜態清單（給搜尋引擎與 AI 讀）和頁面上的 JS（只顯示今天以後的場次）用的是同一份標記。
+
+## 跨年過渡
+- 頁面會同時載入「今年＋已公布的明年」資料，所以 12 月更新後到跨年前，
+  今年剩下的日期一樣查得到，精選場次也會接著列出明年的場次。
+- **去年的 `assets/tide-*.json` 請先保留**（版本表會留去年＋今年，更舊的會自動移除）。
+
+## 只重建頁面、不重抓資料
+```
+python update-tide-data.py 2027 --from-json
+```
+用現有的 `assets/tide-2027.json` 重新產生精選場次與頁面文字（例如調整了精選規則之後）。
 
 ## 可靠性
 - 腳本內建強驗證（天數、星期逐日核對、時刻格式）；官方若改版式會**明確報錯**
@@ -26,4 +42,3 @@
 ## 其他
 - 即時影像：moses.html 內嵌澎管處 YouTube 直播（ID: zgPJbQzlQmw），
   若官方更換直播網址，搜尋此 ID 全部替換即可。
-- 舊年份 `assets/tide-*.json` 可保留或刪除，不影響頁面。
