@@ -68,7 +68,7 @@
 ## 技術重點
 
 - **圖片**：優先 WebP/AVIF，`<img loading="lazy">` 原生懶載入（**非** IntersectionObserver）。多數 `<img>` 已補 `width/height` 防 CLS。
-- **首頁照片**（2026-10 更換）：放在 `images/home/`，原檔在 Ricky 電腦的 `Desktop\民宿照片`（2018 年攝，全 sRGB）。目前用：外观 304A0840（hero／og，裁掉右側鄰房）、顶楼 304A0706（半島微風）、外观 304A0849（立體美學）、201精选 304A0169（專屬寧靜）、夜景 304A0933（名句區背景，裁掉右側怪手）。
+- **首頁照片**（2026-10 更換）：放在 `images/home/`，原檔在 Ricky 電腦的 `Desktop\民宿照片`（2018 年攝，全 sRGB）。目前用：外观 304A0840（hero／og，裁掉右側鄰房）、半島微風用 Ricky 以 Gemini 依顶楼 304A0706 生成的注水版（原照泳池是空的；檔名加 -water，避免舊圖被瀏覽器長期快取）、外观 304A0849（立體美學）、201精选 304A0169（專屬寧靜）、夜景 304A0933（名句區背景，裁掉右側怪手）。
 - **社群分享圖（og:image）**：首頁用 `assets/og-home.jpg`（外觀照 1200×630）；首頁 JSON-LD 的 `image` 用 `images/home/penghu-kiwi-villa-exterior-1920.webp` 與 og-home.jpg。舊的 `assets/og-image.jpg/.webp` 已無頁面引用。2026-07 起可為各頁做**專屬** og 圖，命名慣例 `assets/og-<slug>.jpg`（如 `og-rooms.jpg`），沿用 hero 視覺（米底＋中文小標＋「The ___」Cormorant Garamond 大字＋副標）以 PIL 腳本批次生成。**格式守則**：`og:image`／`twitter:image` 一律用 **JPEG/PNG，不要用 WebP**（LINE 等社群爬蟲對 webp 預覽支援不穩，會導致縮圖不顯示）；webp 只用於網頁內 `<img>` 與 JSON-LD `image`。文字為主的分享圖，PNG 邊緣最利，用 JPEG 則需 `quality≥95 + subsampling=0`。
 - **字體**：Google Fonts（多數頁 Cormorant Garamond + LXGW WenKai TC + Inter + Noto Sans TC；rooms 用 Playfair Display）、`display=swap`、有 preconnect。Font Awesome 自 cdnjs 以非阻塞方式載入（`media="print" onload`，含 `<noscript>` 後備）。
 - **SEO**：每頁獨特 title/description、Open Graph、canonical（無後綴）；結構化資料以首頁 `LodgingBusiness`（`@id` = `https://www.kiwi-villa.com/#lodging`）為單一主實體，其餘頁以 `@id` 參照。FAQ 頁有 `FAQPage`。
