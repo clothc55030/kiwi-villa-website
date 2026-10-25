@@ -76,6 +76,8 @@
 - **中文不斜體**：每頁 `<style>` 開頭有 `html { font-synthesis: weight; }`，讓 `font-style: italic` 只作用在有真斜體的英文（Cormorant Garamond），中文維持正體。新頁面要一起加。
 - **房型頁**：英文房名以訂房系統（OwlNest）為準（高級＝Superior、豪華＝Deluxe、奢華＝Luxury，並帶 with Balcony／with Bathtub）。輪播只渲染「目前＋前後各一張」（`.slide.active`／`.slide.is-near`，其餘 `display:none` 不下載）；手機可左右滑、燈箱可左右滑與下滑關閉。新增照片時 alt 照實描述照片內容。中文標題用霞鶩文楷（與其他頁一致）。
 - **頁尾**：8 頁都有「Explore」網站導覽（8 個頁面連結）。新增頁面時 8 個 footer 與全螢幕選單都要加。
+- **轉換追蹤（GA4）**：每頁在 GA 設定 `<script>` 後面有一段點擊追蹤，訂房（owlting）、LINE、電話連結被點時送 `booking_click`／`line_click`／`phone_click`，參數 `link_location`（nav、menu、mobile_bar、room_card、whole_villa、footer 或所在 section）、`room`（房型卡片的房號）、`link_text`。新頁面要一起複製；按鈕位置靠 DOM 結構自動判斷，不用在連結上加屬性。
+- **LINE 直訂優惠**：手機浮動按鈕「LINE 直訂優惠」、房型頁每個預訂按鈕下方、首頁名句區、FAQ、llms.txt 都只寫「享專屬優惠」，**不寫優惠內容**（Ricky 依日期與房況調整）。
 - **Google 評價數**：頁面與 llms.txt 只寫約略數字（例如「近 200 則」），每年 12 月更新潮汐資料時順便檢查（見 `tools/README.md`）。結構化資料不放評分（自家評論不具星等資格）。
 - **刻意保留但未引用的檔案**：`images/location/penghu-map.webp`（插畫地圖，之後可用在 /location）、`images/logo/kiwi-villa-logo.png`（品牌主 Logo，外部可能引用）。
 
