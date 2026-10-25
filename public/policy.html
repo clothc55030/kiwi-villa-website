@@ -754,6 +754,33 @@
         gtag('js', new Date());
         gtag('config', 'G-RM6FLC5GW1');
     </script>
+    <script>
+        // 轉換追蹤（GA4 事件）：訂房、LINE、電話按鈕被點擊時送出
+        //   booking_click／line_click／phone_click
+        //   參數 link_location＝按鈕位置（nav、menu、mobile_bar、room_card、footer…）、room＝房型卡片的房號、link_text＝按鈕文字
+        document.addEventListener('click', function (e) {
+            var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+            if (!a || typeof gtag !== 'function') return;
+            var href = a.getAttribute('href') || '';
+            var name = /owlting\.com|owlnest/i.test(href) ? 'booking_click'
+                : /line\.me/i.test(href) ? 'line_click'
+                : /^tel:/i.test(href) ? 'phone_click' : '';
+            if (!name) return;
+            var sec = a.closest('section');
+            var where = a.closest('.mobile-cta-bar') ? 'mobile_bar'
+                : a.closest('.fullscreen-menu') ? 'menu'
+                : a.closest('nav') ? 'nav'
+                : a.closest('footer') ? 'footer'
+                : a.closest('.room-showcase') ? 'room_card'
+                : a.closest('#whole-villa') ? 'whole_villa'
+                : sec ? (sec.id || (sec.className || '').split(' ')[0] || 'section')
+                : 'page';
+            var params = { link_location: where, link_text: (a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40) };
+            var card = a.closest('.room-showcase');
+            if (card && card.id) params.room = card.id.replace('room-', '');
+            gtag('event', name, params);
+        }, true);
+    </script>
 </head>
 
 <body>
@@ -1084,7 +1111,7 @@
     <!-- 手機浮動 CTA：訂房 + LINE（僅 ≤768px 顯示） -->
     <div class="mobile-cta-bar">
         <a href="https://booking.owlting.com/kiwi-villa" class="mobile-cta-book" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> 線上訂房</a>
-        <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><i class="fab fa-line"></i> LINE 預約</a>
+        <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><i class="fab fa-line"></i> LINE 直訂優惠</a>
     </div>
 </body>
 
