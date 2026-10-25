@@ -1483,6 +1483,40 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // 房號短網址：kiwi-villa.com/205 → /rooms#room-205（_redirects）→ 直接定位到該房型。
+            // 不只靠瀏覽器原生錨點（html 設了 smooth，會從頁首慢慢捲 3,000px，手機上容易被打斷）；
+            // 也支援舊格式：2025 年的轉址是 /rooms?goto=205、/302 曾指向 #room-302，
+            // 瀏覽器會永久快取 301，以前開過短網址的手機可能還在用舊目標。
+            (function () {
+                const alias = { '302': '301', '306': '305', '307': '305' };   // 同房型共用一個區塊
+                const params = new URLSearchParams(location.search);
+                const m = location.hash.match(/^#room-(\d{3})$/);
+                let num = params.get('goto') || (m && m[1]);
+                if (!num) return;
+                num = alias[num] || num;
+                const target = document.getElementById('room-' + num);
+                if (!target) return;
+                if (params.has('goto') || location.hash !== '#room-' + num) {
+                    history.replaceState(null, '', location.pathname + '#room-' + num);
+                }
+                let userMoved = false;
+                ['wheel', 'touchstart', 'keydown'].forEach(function (ev) {
+                    window.addEventListener(ev, function () { userMoved = true; }, { once: true, passive: true });
+                });
+                const jump = function () {
+                    if (userMoved) return;
+                    const root = document.documentElement;
+                    const prev = root.style.scrollBehavior;
+                    root.style.scrollBehavior = 'auto';   // 直接跳到位，不做長距離平滑捲動
+                    target.scrollIntoView({ block: 'start' });   // 套用 scroll-margin-top，預留導覽列空間
+                    root.style.scrollBehavior = prev;
+                };
+                jump();
+                // 字型、圖片載完後版面會微動，再對準一次（使用者自己滑了就不再干涉）
+                if (document.fonts && document.fonts.ready) document.fonts.ready.then(jump);
+                window.addEventListener('load', jump, { once: true });
+            })();
+
             // Scroll reveal animation
             const reveals = document.querySelectorAll('.reveal-up');
 

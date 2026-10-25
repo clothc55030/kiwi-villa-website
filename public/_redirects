@@ -1,27 +1,28 @@
 # Cloudflare Pages 重定向規則
 # 房號直接跳轉到房間頁面
 
-# 房間號重定向 - 直接跳轉到錨點避免二次載入
-/201   /rooms#room-201   301
-/203   /rooms#room-203   301
-/205   /rooms#room-205   301
-/301   /rooms#room-301   301
-/302   /rooms#room-301   301
-/303   /rooms#room-303   301
-/305   /rooms#room-305   301
-/306   /rooms#room-305   301
-/307   /rooms#room-305   301
+# 房間號短網址（例：kiwi-villa.com/205）→ 房型頁對應區塊
+# 用 302 而非 301：瀏覽器會永久快取 301，日後改目標時舊手機會卡在舊網址（2025 年的 ?goto= 就是這樣）
+/201   /rooms#room-201   302
+/203   /rooms#room-203   302
+/205   /rooms#room-205   302
+/301   /rooms#room-301   302
+/302   /rooms#room-301   302
+/303   /rooms#room-303   302
+/305   /rooms#room-305   302
+/306   /rooms#room-305   302
+/307   /rooms#room-305   302
 
 # 確保支援帶斜線的版本
-/201/  /rooms#room-201   301
-/203/  /rooms#room-203   301
-/205/  /rooms#room-205   301
-/301/  /rooms#room-301   301
-/302/  /rooms#room-301   301
-/303/  /rooms#room-303   301
-/305/  /rooms#room-305   301
-/306/  /rooms#room-305   301
-/307/  /rooms#room-305   301
+/201/  /rooms#room-201   302
+/203/  /rooms#room-203   302
+/205/  /rooms#room-205   302
+/301/  /rooms#room-301   302
+/302/  /rooms#room-301   302
+/303/  /rooms#room-303   302
+/305/  /rooms#room-305   302
+/306/  /rooms#room-305   302
+/307/  /rooms#room-305   302
 
 # 訂房系統（OwlNest）方案說明裡的「官網訂房須知」連結（舊頁 notice 已於 2025-06 改版時併入 policy）
 /notice        /policy   301
