@@ -762,6 +762,21 @@
                 font-size: 5rem;
             }
 
+            /* 房型說明卡：左右內距原本跟著 --spacing-xl（72px），手機只剩約 200px 寬，
+               「線上預訂 · Reserve」和內文都被擠到斷行。上方保留原內距給房號大字。 */
+            .room-details,
+            .room-showcase:nth-child(even) .room-details {
+                padding: var(--spacing-xl) 1.75rem 2.5rem;
+            }
+
+            .room-details .btn-book {
+                display: block;
+                text-align: center;
+                white-space: nowrap;
+                padding: 1rem;
+                letter-spacing: 0.15em;
+            }
+
             .room-image-wrap {
                 height: 50vh;
                 height: 50svh;
