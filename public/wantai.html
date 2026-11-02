@@ -235,7 +235,41 @@
             transition: background-color 0.15s;
         }
         .item.on { background: var(--color-mark); }
-        .item-main { min-width: 0; }
+        .item-main {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: none;
+            text-align: left;
+            color: inherit;
+        }
+        button.item-main { cursor: pointer; }
+        button.item-main:active .thumb { transform: scale(0.96); }
+        .item-text { display: block; min-width: 0; }
+        .thumb {
+            flex: none;
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius);
+            background: var(--color-paper);
+            object-fit: cover;
+            transition: transform 0.15s;
+        }
+        .thumb.ph {
+            display: grid;
+            place-items: center;
+            border-color: transparent;
+            background: var(--color-surface);
+            font-family: var(--font-title);
+            font-size: 20px;
+            color: var(--color-text-light);
+        }
+        .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
         .item-name { display: block; font-size: 16.5px; font-weight: 400; line-height: 1.35; overflow-wrap: anywhere; }
         .item.on .item-name { font-weight: 500; }
         .item-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 8px; margin-top: 3px; font-size: 13px; color: var(--color-text-light); }
@@ -341,6 +375,9 @@
         .sum { margin-top: 16px; display: grid; gap: 6px; }
         .sum-row { display: flex; justify-content: space-between; font-size: 15px; color: var(--color-text-light); }
         .sum-row .v { color: var(--color-text); font-variant-numeric: tabular-nums; }
+        .sum-row.disc,
+        .sum-row.disc .v { color: var(--color-accent-ink); }
+        .sum-row small { display: block; font-size: 12px; color: var(--color-text-light); }
         .sum-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 10px; border-top: 1px solid var(--color-line); }
         .sum-total span:first-child { font-family: var(--font-title); font-size: 20px; letter-spacing: 0.2em; }
         .sum-total .v { font-size: 28px; font-weight: 500; color: var(--color-accent); font-variant-numeric: tabular-nums; }
@@ -362,7 +399,8 @@
             font-size: 16px;
             line-height: 1.4;
         }
-        .field input[type="date"] { -webkit-appearance: none; appearance: none; text-align: left; }
+        .field input[type="date"],
+        .field input[type="time"] { -webkit-appearance: none; appearance: none; text-align: left; }
         .field textarea { min-height: 84px; resize: vertical; }
         .field .hint { margin: 0; font-size: 13px; color: var(--color-text-light); }
         .field .err { margin: 0; font-size: 13.5px; font-weight: 500; color: var(--color-error); }
@@ -374,15 +412,13 @@
         .seg input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
         .seg label.sel { background: var(--color-text); color: var(--color-bg); }
         .seg label:focus-within { outline: 2px solid var(--color-ice); outline-offset: -4px; }
-        .ship { display: grid; gap: 14px; padding: 14px; border: 1px solid var(--color-line); border-radius: var(--radius); background: var(--color-paper); }
-        .ship-title { margin: 0; font-size: 14px; font-weight: 500; }
-        .meter-top { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; }
-        .meter-top .v { font-size: 13.5px; font-variant-numeric: tabular-nums; }
-        .bar { height: 6px; margin-top: 6px; border-radius: 3px; background: var(--color-line); overflow: hidden; }
-        .bar i { display: block; width: 0; height: 100%; border-radius: 3px; background: var(--color-accent); transition: width 0.25s; }
-        .meter.done .bar i { background: var(--color-ok); }
-        .meter-note { margin: 5px 0 0; font-size: 13px; color: var(--color-text-light); }
-        .meter.done .meter-note { color: var(--color-ok); font-weight: 500; }
+        .seg3 { grid-template-columns: repeat(3, 1fr); }
+        .seg3 label { font-size: 15px; letter-spacing: 0.02em; }
+        #w-method.invalid .seg { border-color: var(--color-error); }
+        .panel { display: grid; gap: 14px; padding: 14px; border: 1px solid var(--color-line); border-radius: var(--radius); background: var(--color-paper); }
+        .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .hint { margin: 0; font-size: 13px; color: var(--color-text-light); }
+        .ship-note { margin: 0; font-size: 14px; font-weight: 500; color: var(--color-accent-ink); }
         .privacy { margin: 0; font-size: 13px; color: var(--color-text-light); }
 
         /* 訂單完成 */
@@ -422,13 +458,94 @@
         }
         .done-foot { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 
+        /* 商品介紹（底部彈出） */
+        html.sheet-open { overflow: hidden; }
+        .sheet {
+            position: fixed;
+            inset: auto 0 0 0;
+            width: 100%;
+            max-width: min(560px, 100%);
+            max-height: calc(100vh - 24px);
+            max-height: calc(100dvh - 24px);
+            margin: 0 auto;
+            padding: 0;
+            border: 0;
+            border-radius: 10px 10px 0 0;
+            background: var(--color-bg);
+            color: var(--color-text);
+            box-shadow: 0 -12px 40px rgba(22, 36, 49, 0.25);
+            overflow: hidden;
+        }
+        .sheet[open] { display: flex; flex-direction: column; animation: sheet-up 0.22s ease-out; }
+        .sheet::backdrop { background: rgba(22, 36, 49, 0.45); }
+        @keyframes sheet-up { from { transform: translateY(40px); opacity: 0.4; } to { transform: none; opacity: 1; } }
+        .sheet-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+        .sheet-x {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--color-text);
+            box-shadow: 0 2px 8px rgba(22, 36, 49, 0.18);
+        }
+        .sheet-x svg { width: 20px; height: 20px; }
+        .gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; background: var(--color-paper); scrollbar-width: none; }
+        .gallery::-webkit-scrollbar { display: none; }
+        .gallery img { flex: 0 0 100%; width: 100%; height: min(86vw, 40vh, 440px); object-fit: contain; scroll-snap-align: center; }
+        .dots { display: flex; justify-content: center; gap: 6px; padding-top: 8px; }
+        .dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--color-line-strong); }
+        .dots i.on { background: var(--color-text); }
+        .sheet-body {
+            display: grid;
+            gap: 10px;
+            padding-block: 12px 18px;
+            padding-left: max(18px, env(safe-area-inset-left, 0px));
+            padding-right: max(18px, env(safe-area-inset-right, 0px));
+        }
+        .sheet-body h2 { margin: 0; font-family: var(--font-title); font-weight: 400; font-size: 24px; line-height: 1.3; letter-spacing: 0.12em; text-wrap: balance; }
+        .alias { margin: -6px 0 0; font-size: 13px; color: var(--color-text-light); }
+        .slogan { margin: 0; font-family: var(--font-title); font-size: 16px; letter-spacing: 0.08em; color: var(--color-accent-ink); }
+        .desc { margin: 0; font-size: 15px; line-height: 1.75; }
+        .spec { display: flex; flex-wrap: wrap; gap: 2px 10px; margin: 0; font-size: 14px; }
+        .spec dt { color: var(--color-text-light); }
+        .spec dd { margin: 0; }
+        .pick { margin: 8px 0 0; padding-bottom: 6px; border-bottom: 1px solid var(--color-text); font-size: 15px; font-weight: 500; }
+        .src { margin: 6px 0 0; font-size: 13px; color: var(--color-text-light); }
+        .src a { text-underline-offset: 3px; }
+        .sheet-foot {
+            flex: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-top: 10px;
+            padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+            padding-left: max(18px, env(safe-area-inset-left, 0px));
+            padding-right: max(18px, env(safe-area-inset-right, 0px));
+            border-top: 1px solid var(--color-line);
+            background: var(--color-paper);
+        }
+        .sheet-sum { font-size: 14px; color: var(--color-text-light); font-variant-numeric: tabular-nums; }
+
+        @media (max-width: 340px) {
+            .row2 { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 359px) {
             .actions { grid-template-columns: 1fr; }
             .btn { padding: 0 14px; letter-spacing: 0.04em; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            * { transition: none !important; scroll-behavior: auto !important; }
+            * { transition: none !important; scroll-behavior: auto !important; animation: none !important; }
         }
     </style>
 
@@ -448,13 +565,13 @@
             <a class="logo" href="/" aria-label="回到 Kiwi Villa 首頁"><img width="333" height="180" src="/images/logo/kiwi-villa-logo-nav.webp" alt="Kiwi Villa 期遇度假會館"></a>
             <p class="eyebrow">Souvenirs</p>
             <h1>萬泰名產代訂</h1>
-            <p class="sub">選好數量、填寫資料，產生訂單用 LINE 傳給我們，期遇幫你向萬泰食品下訂。</p>
+            <p class="sub">選好數量、填寫資料，產生訂單用 LINE 傳給我們，期遇幫你向萬泰食品下訂。點商品可以看照片和介紹。</p>
             <ol class="steps" aria-label="訂購步驟">
                 <li><b>1</b>選數量</li>
                 <li><b>2</b>填資料</li>
                 <li><b>3</b>用 LINE 傳給民宿</li>
             </ol>
-            <p class="rule">※ 宅配：常溫滿 <span class="n">$3,000</span>、冷凍滿 <span class="n">$6,000</span> 免運 ※</p>
+            <p class="rule">※ 住客優惠：冷凍商品與氣泡酒以外，全部 <span class="n" id="ruleDisc">9 折</span> ※</p>
         </div>
     </header>
 
@@ -475,8 +592,8 @@
                 <p>找不到「<span id="emptyQ"></span>」。換個關鍵字，或在下一步的備註寫下想買的東西。</p>
             </div>
             <footer class="foot">
-                <p>商品與價格依萬泰食品 115.06.28 價目表，實際以廠商確認為準。</p>
-                <p>想看商品照片：<a href="https://www.9279149.com.tw/collections/all" target="_blank" rel="noopener">萬泰食品官網 ↗</a></p>
+                <p>商品與價格依萬泰食品 115.06.28 價目表，實際以廠商確認為準；商品照片與介紹來自萬泰食品官網。</p>
+                <p>更多商品：<a href="https://www.9279149.com.tw/collections/all" target="_blank" rel="noopener">萬泰食品官網 ↗</a></p>
                 <p class="brand"><a href="/">&copy; Kiwi Villa 澎湖期遇度假會館</a>・<a href="tel:0933636373">0933-636-373</a></p>
             </footer>
         </div>
@@ -490,7 +607,9 @@
             <div class="sum" id="sumBox">
                 <div class="sum-row" id="rowAmb"><span>常溫小計</span><span class="v" id="sAmb"></span></div>
                 <div class="sum-row" id="rowFrz"><span>冷凍小計</span><span class="v" id="sFrz"></span></div>
-                <div class="sum-total"><span>合計</span><span class="v" id="sAll"></span></div>
+                <div class="sum-row"><span>原價合計</span><span class="v" id="sAll"></span></div>
+                <div class="sum-row disc" id="rowDisc"><span><span id="discLabel">住客優惠 9 折</span><small>冷凍商品與氣泡酒不打折</small></span><span class="v" id="sDisc"></span></div>
+                <div class="sum-total"><span>折後合計</span><span class="v" id="sPay"></span></div>
             </div>
 
             <form class="form" id="infoForm" novalidate>
@@ -505,39 +624,50 @@
                     <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="0912-345-678" enterkeyhint="next">
                     <p class="err" hidden></p>
                 </div>
-                <div class="field">
-                    <span class="lbl" id="l-method">取貨方式</span>
-                    <div class="seg" role="radiogroup" aria-labelledby="l-method">
-                        <label for="m-stay"><input type="radio" name="method" id="m-stay" value="stay">送到民宿</label>
-                        <label for="m-ship"><input type="radio" name="method" id="m-ship" value="ship">宅配到府</label>
-                    </div>
-                </div>
                 <div class="field" id="w-room">
                     <label for="f-room">房號（選填）</label>
                     <input id="f-room" name="room" inputmode="numeric" maxlength="12" placeholder="例如 201" enterkeyhint="next">
                 </div>
-                <div class="field" id="w-address" hidden>
-                    <label for="f-address">收件地址<span class="req">*</span></label>
-                    <textarea id="f-address" name="address" rows="2" autocomplete="street-address" maxlength="120" placeholder="縣市、區、路名、門牌"></textarea>
+                <div class="field" id="w-method">
+                    <span class="lbl" id="l-method">取貨方式<span class="req">*</span></span>
+                    <div class="seg seg3" role="radiogroup" aria-labelledby="l-method">
+                        <label for="m-air"><input type="radio" name="method" id="m-air" value="air">機場取貨</label>
+                        <label for="m-port"><input type="radio" name="method" id="m-port" value="port">碼頭取貨</label>
+                        <label for="m-ship"><input type="radio" name="method" id="m-ship" value="ship">宅配到府</label>
+                    </div>
                     <p class="err" hidden></p>
                 </div>
-                <div class="ship" id="shipBox" hidden>
-                    <p class="ship-title">宅配免運進度</p>
-                    <div class="meter" id="m-amb">
-                        <div class="meter-top"><span>常溫</span><span class="v"></span></div>
-                        <div class="bar"><i></i></div>
-                        <p class="meter-note"></p>
+                <div class="panel" id="tripBox" hidden>
+                    <div class="row2">
+                        <div class="field" id="w-tripDate">
+                            <label for="f-tripDate" id="l-tripDate">航班日期<span class="req">*</span></label>
+                            <input id="f-tripDate" name="tripDate" type="date">
+                            <p class="err" hidden></p>
+                        </div>
+                        <div class="field" id="w-tripTime">
+                            <label for="f-tripTime" id="l-tripTime">起飛時間<span class="req">*</span></label>
+                            <input id="f-tripTime" name="tripTime" type="time" step="300">
+                            <p class="err" hidden></p>
+                        </div>
                     </div>
-                    <div class="meter" id="m-frz">
-                        <div class="meter-top"><span>冷凍</span><span class="v"></span></div>
-                        <div class="bar"><i></i></div>
-                        <p class="meter-note"></p>
+                    <div class="field" id="w-tripNo">
+                        <label for="f-tripNo" id="l-tripNo">航班（選填）</label>
+                        <input id="f-tripNo" name="tripNo" maxlength="30" placeholder="例如 立榮 B7-8696" enterkeyhint="next">
                     </div>
+                    <p class="hint">我們會依你的班次時間安排取貨。</p>
                 </div>
-                <div class="field" id="w-date">
-                    <label for="f-date">希望送達日（選填）</label>
-                    <input id="f-date" name="date" type="date">
-                    <p class="hint" id="dateHint"></p>
+                <div class="panel" id="shipBox" hidden>
+                    <div class="field" id="w-address">
+                        <label for="f-address">收件地址<span class="req">*</span></label>
+                        <textarea id="f-address" name="address" rows="2" autocomplete="street-address" maxlength="120" placeholder="縣市、區、路名、門牌"></textarea>
+                        <p class="err" hidden></p>
+                    </div>
+                    <div class="field" id="w-shipDate">
+                        <label for="f-shipDate">希望送達日（選填）</label>
+                        <input id="f-shipDate" name="shipDate" type="date">
+                        <p class="hint">實際到貨日以廠商安排為準</p>
+                    </div>
+                    <p class="ship-note">運費待定：依訂購量計算，民宿確認後會告訴你。</p>
                 </div>
                 <div class="field" id="w-note">
                     <label for="f-note">備註（選填）</label>
@@ -584,6 +714,28 @@
         </div>
     </div>
 
+    <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+        <button type="button" class="sheet-x" id="sheetClose" aria-label="關閉"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="sheet-scroll" id="sheetScroll">
+            <div class="gallery" id="gallery"></div>
+            <div class="dots" id="dots" aria-hidden="true"></div>
+            <div class="sheet-body">
+                <h2 id="sheetTitle"></h2>
+                <p class="alias" id="sheetAlias" hidden></p>
+                <p class="slogan" id="sheetSlogan" hidden></p>
+                <p class="desc" id="sheetDesc" hidden></p>
+                <dl class="spec" id="sheetSpec" hidden></dl>
+                <p class="pick" id="sheetPick">選擇口味／規格</p>
+                <ul class="items" id="sheetItems"></ul>
+                <p class="src">照片與介紹來自 <a id="sheetLink" href="https://www.9279149.com.tw/collections/all" target="_blank" rel="noopener">萬泰食品官網 ↗</a></p>
+            </div>
+        </div>
+        <div class="sheet-foot">
+            <span class="sheet-sum" id="sheetSum" aria-live="polite"></span>
+            <button type="button" class="btn btn-primary" id="sheetDone">完成</button>
+        </div>
+    </dialog>
+
     <script>
 (function () {
   'use strict';
@@ -591,9 +743,10 @@
   /* ===== 設定 ===== */
   var CONFIG = {
     lineOaId: '@kiwivilla',     // 期遇 LINE 官方帳號（和官網連的 page.line.me/ucz4004x 是同一個帳號）；「用 LINE 傳給民宿」會開這個聊天室並帶入訂單文字
-    stayName: '期遇度假會館',     // 取貨方式選「送到民宿」時，訂單上寫「送到 ○○」
     priceListVersion: '115.06.28',
-    freeShip: { ambient: 3000, frozen: 6000 },
+    discountRate: 90,           // 住客優惠：90＝9 折。冷凍類與氣泡酒（標記 box12）不打折
+    vendorProductUrl: 'https://www.9279149.com.tw/products/',
+    imgBase: '/images/wantai/',
     storeKey: 'wantai-order-v1'
   };
 
@@ -616,17 +769,201 @@
     spc: '仙人掌氣泡酒|箱|720|box12\n海鹽冰花氣泡酒|箱|720|box12'
   };
 
-  var ITEMS = [], BY_ID = {}, BY_NAME = {};
+  /* ===== 商品照片與介紹（萬泰官網） =====
+     PMAP：價目表品名 → 萬泰官網商品網址的 handle（https://www.9279149.com.tw/products/<handle>）。
+           官網沒有的品項不列，點了不會跳介紹。更新工具會讀這段，請維持標準 JSON（雙引號、最後一項不加逗號）。
+     CATALOG：由 tools/update-wantai-catalog.py 依 PMAP 從萬泰官網產生（名稱、標語、簡介、規格、照片 id），請勿手改。 */
+  var PMAP = {
+    "干貝醬（大辣）": "干貝醬",
+    "干貝醬（中辣）": "干貝醬",
+    "干貝醬（小辣）": "干貝醬",
+    "小卷醬": "小卷醬",
+    "寶貝醬": "寶貝醬",
+    "純干貝醬": "純干貝醬",
+    "干貝絲XO醬": "干貝絲xo醬",
+    "飛魚卵干貝醬": "飛魚卵干貝醬",
+    "椒麻Q卷": "椒麻q卷",
+    "干貝飴": "干貝貽",
+    "昆布": "昆布",
+    "魷魚絲": "魷魚絲",
+    "炭烤魷魚絲": "魷魚絲",
+    "麻辣魷魚絲": "魷魚絲",
+    "鮪魚糖": "鮪魚糖",
+    "方卷片": "方卷片",
+    "蜜汁魷魚片": "魷魚片",
+    "碳烤魷魚片": "魷魚片",
+    "小卷燒": "小卷燒",
+    "魷魚條": "魷魚條",
+    "黃金魚酥（蔥燒）": "黃金魚酥",
+    "黃金魚酥（蜜汁）": "黃金魚酥",
+    "花生丁香魚": "杏仁丁香花生丁香",
+    "杏仁丁香魚": "杏仁丁香花生丁香",
+    "螃蟹酥": "螃蟹酥",
+    "鱈魚絲": "鱈魚夾心絲",
+    "蔥蝦": "蔥蝦",
+    "魷魚板條": "魷魚粄條",
+    "香之魚": "香之魚",
+    "鱈魚棒": "鱈魚棒",
+    "鮭魚切片": "切片",
+    "麻辣切片": "切片",
+    "海苔切片": "切片",
+    "黑胡椒切片": "切片",
+    "懷舊大豬公": "懷舊大豬公",
+    "海苔酥": "海苔酥",
+    "海蝦酥": "海蝦酥",
+    "原味花生酥": "花生酥",
+    "奶油花生酥": "花生酥",
+    "綜合花生酥（袋）": "花生酥",
+    "鹹餅大禮盒（葷）": "鹹餅",
+    "鹹餅大禮盒（素）": "鹹餅",
+    "鹹餅禮盒（葷）": "鹹餅",
+    "鹹餅禮盒（素）": "鹹餅",
+    "鹹餅條": "鹹餅",
+    "鹹餅（袋）": "鹹餅",
+    "菊花餅": "菊花餅",
+    "仙人掌牛軋餅": "仙人掌牛軋餅",
+    "仙人掌牛軋糖": "仙人掌牛軋糖",
+    "仙人掌果凍": "仙人掌果凍",
+    "狗母魚脯": "魚脯",
+    "旗魚脯": "魚脯",
+    "海底燕窩（隨身包）": "海底燕窩隨身包",
+    "海底燕窩（塊）": "海底燕窩",
+    "黃金卡卡棒": "黃金卡卡棒",
+    "掌心酥": "掌心酥",
+    "澎湖茶": "風茹茶",
+    "仙人掌雪花酥": "仙人掌雪花酥",
+    "蝦餅（原味）": "蝦餅",
+    "蝦餅（辣味）": "蝦餅",
+    "蝦餅（黑胡椒）": "蝦餅",
+    "青醬魚皮餅乾": "魚皮餅乾",
+    "麻辣魚皮餅乾": "魚皮餅乾",
+    "紅椒蝦咔哩咔哩": "卡哩卡哩",
+    "蒜頭蝦咔哩咔哩": "卡哩卡哩",
+    "黑糖爆漿": "仙人掌爆漿黑糖爆漿",
+    "仙人掌爆漿": "仙人掌爆漿黑糖爆漿",
+    "仙人掌Q餅": "仙人掌q餅",
+    "仙人掌酥": "仙人掌酥",
+    "黑糖小丸子": "黑糖小丸子",
+    "烏龜棒棒糖": "烏龜棒棒糖",
+    "阿婆花生（九層塔）": "啊婆花生",
+    "阿婆花生（蒜味）": "啊婆花生",
+    "阿婆花生（辣味）": "啊婆花生",
+    "阿婆花生（海苔）": "啊婆花生",
+    "紫菜酥": "紫菜酥",
+    "火燒蝦蛋捲": "蛋捲",
+    "狗母魚蛋捲": "蛋捲",
+    "香濃起司棒": "香濃起司棒",
+    "墨魚起司棒": "香濃起司棒",
+    "仙人掌起司棒": "香濃起司棒",
+    "海菜起司棒": "香濃起司棒",
+    "原味水滴蛋捲": "水滴蛋捲",
+    "芝麻水滴蛋捲": "水滴蛋捲",
+    "仙人掌水滴蛋捲": "水滴蛋捲",
+    "海菜花枝丸": "海菜花枝丸",
+    "花枝丸": "花枝丸",
+    "花枝排": "花枝排",
+    "飛魚卵香腸": "飛魚卵香腸",
+    "花枝漿": "花枝漿",
+    "飛魚卵花枝漿": "花枝漿",
+    "花枝蝦漿": "花枝漿",
+    "花枝蝦餅": "花枝蝦餅",
+    "澎湖野生海菜": "澎湖野生海菜",
+    "狗母魚丸": "狗母魚丸",
+    "澎湖高麗菜酸": "澎湖高麗菜酸",
+    "澎湖丁香魚": "澎湖丁香魚乾",
+    "鹽小管": "鹹小管",
+    "珠貝": "珠貝",
+    "仙人掌氣泡酒": "仙人掌氣泡酒",
+    "海鹽冰花氣泡酒": "海鹽冰花氣泡酒"
+  };
+  /* CATALOG:BEGIN（由 tools/update-wantai-catalog.py 產生，請勿手改） */
+  var CATALOG = {
+    "仙人掌q餅": {"id": 58693089, "t": "仙人掌Q餅", "s": "Q彈內餡、口感細緻", "b": "結合鬆軟派皮與Q彈內餡，口感細緻層層展現。堅持天然，採用澎湖在地新鮮仙人掌，安心品味，更是饋贈親友的貼心之選。", "spec": ["247公克±5公克/盒"], "img": [30134643, 32369817]},
+    "仙人掌果凍": {"id": 58693325, "t": "仙人掌果凍", "s": "酸甜沁涼，海島風情", "b": "嚴選澎湖仙人掌製成，酸甜清爽、滑嫩Q彈，入口沁涼解渴。低負擔的輕甜享受，展現獨特海島風味。不論炎夏消暑或餐後甜點，都能帶來愉悅滋味。", "spec": ["560公克±5公克/盒"], "img": [30135940]},
+    "仙人掌氣泡酒": {"id": 66799193, "t": "仙人掌氣泡酒", "s": "鮮紅果實化作氣泡，成為澎湖的夏日記憶", "b": "選用澎湖野生仙人掌果實釀造，甜中帶點微酸，像極了初戀的滋味，清涼又解渴。", "spec": ["330ml/罐"], "img": [34733265]},
+    "仙人掌爆漿黑糖爆漿": {"id": 58693435, "t": "仙人掌爆漿/黑糖爆漿", "s": "米香細膩、味蕾爆漿", "b": "取自澎湖天然仙人掌特殊氣味，揉合糯米香細膩的口感與老師傅的精湛手藝，一場與味蕾碰觸的驚喜口感！", "spec": ["300公克±5公克/盒"], "img": [30136323, 32369596, 32369598]},
+    "仙人掌牛軋糖": {"id": 58693232, "t": "仙人掌牛軋糖", "s": "乳香滿溢，澎湖風味", "b": "仙人掌具有豐富的植物營養素與抗氧化劑含有高量的維生素A、B1、B12、D3及核黃素有助於人體免疫功能的提升！", "spec": ["250公克±5公克/盒"], "img": [30135633, 32369788]},
+    "仙人掌牛軋餅": {"id": 58693219, "t": "仙人掌牛軋餅", "s": "香脆綿密，口口留香", "b": "仙人掌具有豐富的植物營養素與抗氧化劑含有高量的維生素A、B1、B12、D3及核黃素有助於人體免疫功能的提升！", "spec": ["200公克±5公克/盒"], "img": [30135680, 32369795]},
+    "仙人掌酥": {"id": 58693382, "t": "仙人掌酥", "s": "外酥內潤，酸甜適口", "b": "以澎湖仙人掌入餡，外層金黃酥皮香脆，內餡酸甜細緻，口感層次分明。堅持選用天然原料製作，酸甜不膩，是兼具美味與心意的精緻點心。", "spec": ["300公克±5公克/盒"], "img": [30136150, 32369655]},
+    "仙人掌雪花酥": {"id": 58693141, "t": "仙人掌雪花酥", "s": "酸甜清爽、口感豐富", "b": "嚴選澎湖仙人掌入料，酸甜清爽不膩口。口感層次豐富，既有酥脆也有軟Q，入口酥香，天然無負擔。無論自用或送禮，皆展現獨特風味與心意。", "spec": ["110公克±5公克/盒"], "img": [30135108, 32369806]},
+    "切片": {"id": 58715989, "t": "切片", "s": "鹹香涮嘴、海味層次", "b": "嚴選新鮮魚漿製成，口感鮮香Q彈，鹹香涮嘴帶有海味層次。方便即食，無論是休閒零嘴、旅遊點心，或伴手禮都十分合適，老少皆宜，一吃就愛上。", "spec": ["150公克±5公克/包"], "img": [30184220, 32368826, 32368831, 32368837]},
+    "卡哩卡哩": {"id": 58716895, "t": "卡哩卡哩", "s": "層次豐富、鹹香涮嘴", "b": "古早味零食新升級！酥脆卡哩卡哩搭配新鮮蝦味，層次豐富、鹹香涮嘴。酥麻爽脆的口感，讓人一口接一口，越吃越上癮", "spec": ["130公克±5公克/包"], "img": [30188993, 31174144]},
+    "啊婆花生": {"id": 58716161, "t": "啊婆花生", "s": "營養豐富、香脆可口", "b": "落花生又名長生果、土豆，是受大眾喜愛的乾果，不僅營養豐富、香脆可口，還可以用作榨油，其葉、皮、仁、油又有一定的營養價值", "spec": ["200公克±5公克/罐"], "img": [30184987, 32368629]},
+    "寶貝醬": {"id": 58692720, "t": "寶貝醬", "s": "天然調味、香味滿溢", "b": "採用澎湖黑尾沙丁及天然調味料製成，不僅嚼感十足，富含豐富的鈣質和蛋白質，香味滿溢。", "spec": ["450公克±5公克/罐"], "img": [30133144]},
+    "小卷燒": {"id": 58715872, "t": "小卷燒", "s": "海洋風味、香Q帶勁", "b": "鮮甜的海洋風味，烘烤後製成條狀的乾貨，除保有原來魷魚的新鮮美味，還多了一種香Q帶勁的口感！", "spec": ["90公克±5公克/包"], "img": [30183501, 32368966]},
+    "小卷醬": {"id": 58692681, "t": "小卷醬", "s": "新鮮小卷、獨特佳餚", "b": "現撈的新鮮小卷，嚼感十足、風味獨特，是下酒、佐餐、拌飯、配菜的佳餚！", "spec": ["450公克±5公克/罐"], "img": [30132974]},
+    "干貝絲xo醬": {"id": 58692754, "t": "干貝絲XO醬", "s": "新鮮干貝、天然調味", "b": "採用最新鮮干貝及天然調味料製成香氣溢滿，嚼感十足、風味獨特，是下酒、佐餐、拌飯、配菜的佳肴！", "spec": ["280公克±5公克/罐"], "img": [30133305]},
+    "干貝貽": {"id": 58696516, "t": "干貝貽", "s": "干貝鮮香、嚼感十足", "b": "以天然高級調味料製成，嚼感十足。來自澎湖最新鮮的海味，是三五好友聚會泡茶最佳佐茶點心。干貝鮮香，富嚼勁的口感，隨手包裝，隨時隨地方便享用。", "spec": ["110公克±5公克/包"], "img": [30143021, 32369396]},
+    "干貝醬": {"id": 58692655, "t": "干貝醬", "s": "嚼感十足、風味獨特", "b": "採用最新鮮干貝及天然調味料製成香氣溢滿，嚼感十足、風味獨特，是下酒、佐餐、拌飯、配菜的佳肴！", "spec": ["450公克±5公克/罐"], "img": [30132884]},
+    "懷舊大豬公": {"id": 58716064, "t": "懷舊大豬公", "s": "懷舊零嘴、彈牙涮嘴", "b": "懷舊零嘴，以新鮮魚漿原料精製，口感彈牙又涮嘴。輕輕一咬，甜蜜滋味瞬間散開，滿口幸福感油然而生，帶你重溫兒時的美好回憶。", "spec": ["180公克±5公克/包"], "img": [30184421, 32368654]},
+    "掌心酥": {"id": 58693399, "t": "掌心酥", "s": "巧酥濃醇，酸甜交融", "b": "香濃巧克力外皮，搭配澎湖仙人掌酸甜內餡，酥脆與綿潤一次滿足。微苦的可可平衡果醬清爽，口感層次豐富，不膩口更耐吃。嚴選天然食材，兼具獨特風味與送禮質感。", "spec": ["192公克±5公克/盒"], "img": [30136247, 32369649]},
+    "方卷片": {"id": 58696526, "t": "方卷片", "s": "嚼感十足、風味絕佳", "b": "採用新鮮魷魚製成，嚴格的品質管制，以天然高級調味料調味，嚼感十足，風味絕佳。是三五好友聚會泡茶最佳佐茶點心。", "spec": ["60公克±5公克/包"], "img": [30143088, 32368975]},
+    "昆布": {"id": 58696518, "t": "昆布", "s": "片片Q彈、鹹甜適中", "b": "來自澎湖的味道，淡淡香甜風味，片片Q彈、鹹甜適中，昆布是零脂肪食物，可取代高熱量零食喔！", "spec": ["180公克±5公克/包"], "img": [30143034, 32369297]},
+    "杏仁丁香花生丁香": {"id": 58715915, "t": "杏仁丁香/花生丁香", "s": "香脆可口、越吃越香", "b": "特級小魚干製作，加上香脆、可口的杏仁粒(花生)，越吃越香，讓人越吃越停不了口，是您聊天、品茗的最佳良伴！", "spec": ["90公克±5公克/包"], "img": [30183731, 32368932, 32368933]},
+    "椒麻q卷": {"id": 58692920, "t": "椒麻Q卷", "s": "獨特配方、麻辣夠味", "b": "現撈的新鮮小管，獨特配方、麻辣夠味，是下酒、佐餐、拌飯、配菜的佳餚！", "spec": ["280公克±5公克/罐"], "img": [30133693]},
+    "水滴蛋捲": {"id": 58716919, "t": "水滴蛋捲", "s": "層層酥脆、鮮香四溢", "b": "嚴選澎湖在地食材，水滴造型更顯輕盈可愛。層層酥脆、鮮香四溢，香甜交織的口感獨具特色。無論伴手送禮或自享品嚐，都是澎湖最具代表性的美味之一。", "spec": ["160公克±5公克/盒"], "img": [30189303, 32368584, 32368585, 32368586]},
+    "海底燕窩": {"id": 58635536, "t": "海底燕窩", "s": "海藻精華，膳食加分", "b": "海底燕窩取自天然珊瑚草，富含膳食纖維與多種礦物質，口感清爽滑嫩，冷熱皆宜。養生健康、清新解膩，是澎湖最具特色的天然海味選擇。", "spec": ["300公克±5公克/塊"], "img": [30035100]},
+    "海底燕窩隨身包": {"id": 58635580, "t": "海底燕窩/隨身包", "s": "海藻精華，隨時補充", "b": "海底燕窩取自天然珊瑚草，富含膳食纖維與多種礦物質，口感清爽滑嫩，冷熱皆宜。養生健康、清新解膩，是澎湖最具特色的天然海味選擇。", "spec": ["220公克±5公克/包"], "img": [30035150, 32369819]},
+    "海苔酥": {"id": 58634465, "t": "海苔酥", "s": "色彩翠綠，氣味芬芳", "b": "生長於澎湖淺海海灘，色彩翠綠，氣味芬芳，營養豐富。本廠精選上品海苔細心焙製成海苔酥，可口酥脆是每位來澎人士必須選購之名產。", "spec": ["150公克±5公克/包"], "img": [30033730, 31174205]},
+    "海菜花枝丸": {"id": 64395673, "t": "海菜花枝丸", "s": "真材實料、顆顆飽滿", "b": "採用澎湖在地野生花枝製作，加上野生海菜香氣，是家家戶戶年節必備的桌上佳餚。", "spec": ["500公克±3%公克/盒"], "img": [32948011]},
+    "海蝦酥": {"id": 58634533, "t": "海蝦酥", "s": "蝦味絕佳，營養豐富", "b": "嚴格的品質管制，保持蝦的鮮味，風味絕佳，氣味芬芳，營養豐富，老少咸宜，可口酥脆是每位來澎人士必須選購之名產。", "spec": ["150公克±5公克/包"], "img": [30033802, 31174213]},
+    "海鹽冰花氣泡酒": {"id": 66799251, "t": "海鹽冰花氣泡酒", "s": "冰花晶瑩的結晶化作氣泡，成為澎湖的夏日記憶", "b": "選用澎湖冰花製作，柔和澎湖海風雨陽光結晶，入口清爽，氣泡細緻，鹹甜適中。", "spec": ["330ml/罐"], "img": [34733515]},
+    "澎湖丁香魚乾": {"id": 64411744, "t": "澎湖丁香魚乾", "s": "在地特色海鮮、營養價值高", "b": "經過煮熟日曬而成，帶有特殊香氣，無腥味，是常見的零嘴或料理食材。", "spec": ["200公克±9公克/包"], "img": [32973831]},
+    "澎湖野生海菜": {"id": 64396306, "t": "澎湖野生海菜", "s": "在地野生，營養價值極高", "b": "退冰洗淨後，煮湯好喝又營養，打顆蛋就是一鍋餐廳等級好湯。", "spec": ["300公克±9公克/包"], "img": [33613431, 33613432, 33613433]},
+    "澎湖高麗菜酸": {"id": 64395938, "t": "澎湖高麗菜酸", "s": "傳統手藝，是家鄉味也是回憶", "b": "一代傳承一代的老手藝，炒菜、煮魚、當湯底都是非常適合的一道特色美食。", "spec": ["500公克±9公克/包"], "img": [32948033]},
+    "烏龜棒棒糖": {"id": 58716234, "t": "烏龜棒棒糖", "s": "香濃黑糖、懷舊風味", "b": "以香濃黑糖製成，甜蜜中蘊含平安祝福。創意將傳統平安龜化為棒棒糖，讓鄉親與旅客一年四季都能品嚐，寓意幸福吉祥，口感更添懷舊風味。", "spec": ["140公克±5公克/包"], "img": [30185319, 32368866]},
+    "狗母魚丸": {"id": 64395988, "t": "狗母魚丸", "s": "愛心型魚丸，不只可愛還非常可口", "b": "選用澎湖狗母魚製作，保留狗母魚特殊香氣及鮮甜，Q彈脆口，是煮湯、火鍋的好夥伴。", "spec": ["300公克±9公克/包"], "img": [32948040]},
+    "珠貝": {"id": 64414520, "t": "珠貝", "s": "佛跳牆必備、燉湯炒菜好夥伴", "b": "經過煮熟日曬而成，帶有特殊香氣，無腥味，是常見的料理食材。", "spec": ["300公克±9公克/包"], "img": [32984640]},
+    "純干貝醬": {"id": 58692730, "t": "純干貝醬", "s": "Q彈可口、鮮甜海味", "b": "家中下廚的好幫手！澎湖當地生產直送，粒粒飽滿Q彈可口，口中滿滿鮮甜海味", "spec": ["450公克±5公克/罐"], "img": [30133177]},
+    "紫菜酥": {"id": 58716923, "t": "紫菜酥", "s": "金黃酥脆、入口鮮香", "b": "嚴選澎湖海域紫菜製成，片片金黃酥脆，入口鮮香鹹香交織，海味濃郁涮嘴。口感輕盈爽脆，無論是佐茶、下酒或休閒零食，都能感受來自澎湖的獨特鮮美。", "spec": ["50公克±5公克/罐"], "img": [30189355, 32368583]},
+    "花枝丸": {"id": 64393762, "t": "花枝丸", "s": "真材實料、顆顆飽滿", "b": "採用澎湖在地野生花枝製作，是家家戶戶年節必備的桌上佳餚。", "spec": ["500公克±3%公克/盒"], "img": [32947678]},
+    "花枝排": {"id": 64394052, "t": "花枝排", "s": "真材實料、物美價廉", "b": "採用澎湖在地野生花枝製作，是家家戶戶年節必備的桌上佳餚。", "spec": ["500公克±3%公克/盒"], "img": [32947741]},
+    "花枝漿": {"id": 64394450, "t": "花枝漿", "s": "真材實料、物美價廉", "b": "選用澎湖在地野生花枝製作，每口都吃得到花枝塊，是火鍋的必備菜色。", "spec": ["150公克±10公克/條"], "img": [32947828]},
+    "花枝蝦餅": {"id": 64395761, "t": "花枝蝦餅", "s": "年節必備、送禮自用兩相宜", "b": "選用澎湖手工製作潤餅皮，搭配澎湖花枝及蝦仁，溫火油煎，大人小孩都饞得流口水。", "spec": ["240公克±9公克/片"], "img": [32948021]},
+    "花生酥": {"id": 58630690, "t": "花生酥", "s": "入口即化、風味極佳", "b": "將精選過的上品花生炒過，與溶解的麥芽糖混合後，即成花生酥，然後壓平、切塊、包裝。萬泰的花生酥風味極佳，嚐一口您就可以得到無法言喻的喜悅與滿足。", "spec": ["200公克±5公克/包"], "img": [30025845, 30025857, 32369931, 32369932]},
+    "菊花餅": {"id": 58633439, "t": "菊花餅", "s": "鹹香酥脆、澎湖傳味", "b": "傳統餅乾的氣味，炸得酥脆透徹，鹹香的口感，外觀看似一朵綻放的菊花，這就是「菊花餅」之名的由來，一種懷舊的澎湖味風味。", "spec": ["210公克±5公克/包"], "img": [30032493, 32369859]},
+    "蔥蝦": {"id": 58715948, "t": "蔥蝦", "s": "蝦甜脆嫩，蔥香迷人", "b": "蔥香調味，口感鮮甜，鹹香迷人。涮嘴爽口、層次豐富，是餐桌佳餚與下酒良伴，也是送禮自享的美味選擇。", "spec": ["80公克±5公克/包"], "img": [30183953, 32368913]},
+    "蛋捲": {"id": 58716911, "t": "蛋捲", "s": "層層酥脆、鮮香四溢", "b": "嚴選澎湖在地食材，將狗母魚(火燒蝦)鮮味香氣融入香酥蛋捲中。層層酥脆、鮮香四溢，鹹甜交織的口感獨具特色。無論伴手送禮或自享品嚐，都是澎湖最具代表性的美味之一。", "spec": ["180公克±5公克/盒"], "img": [30189195, 32368587, 32368588]},
+    "蝦餅": {"id": 58633524, "t": "蝦餅", "s": "蝦香滿口，脆感十足", "b": "澎湖嚴選鮮蝦製作，經獨家配方與高溫炸製而成，片片金黃酥脆，入口香濃鮮美，充滿大海原味。無論是下午茶零嘴、聚會點心或伴手禮，都是人氣首選。酥香爽口、越吃越涮嘴，澎湖蝦餅帶來最道地的海味享受。", "spec": ["70公克±5公克/包"], "img": [30032559, 32369854]},
+    "螃蟹酥": {"id": 58715930, "t": "螃蟹酥", "s": "新鮮海產、真材實料", "b": "本產品係採用澎湖新鮮海產，加工製作完成，為下酒、飲茶、登山郊遊的良伴，且為餽贈親友最佳伴手禮。", "spec": ["90公克±5公克/包"], "img": [30183804, 32368915]},
+    "風茹茶": {"id": 58635441, "t": "風茹茶", "s": "清香回甘，澎湖特產", "b": "澎湖有一種草叫做風茹草，是澎湖原生蔓藤宿根性草本植物，澎湖人都採收用來煮茶，喝起來像是味道濃郁的青草茶，夏天冰鎮後飲用，相當生津解渴。", "spec": ["20包"], "img": [30035034, 32369822]},
+    "飛魚卵干貝醬": {"id": 58692826, "t": "飛魚卵干貝醬", "s": "衛生可靠、伴手禮品", "b": "採用新鮮海產，經過嚴格的品質管制，加工製作完成，衛生可靠為下酒、飲茶、登山郊遊的良伴，餽贈親友最佳伴手禮品。", "spec": ["280公克±5公克/罐"], "img": [30133404]},
+    "飛魚卵香腸": {"id": 64395860, "t": "飛魚卵香腸", "s": "真材實料、中秋必備", "b": "灌滿飛魚卵的香腸不只香氣十足，口感更是一絕，滿滿的真材實料。", "spec": ["280公克±9公克/包"], "img": [32948032]},
+    "香之魚": {"id": 58715956, "t": "香之魚", "s": "古早好味、香酥微辣", "b": "令人懷念的傳統古早味點心，香香QQ的微辣口感，愈嚼愈香，愈吃愈順口，一口接著一口，讓您完全陶醉在幸福的滋味裡。", "spec": ["100公克±5公克/包"], "img": [30183988, 32368911]},
+    "香濃起司棒": {"id": 58716150, "t": "香濃起司棒", "s": "入口鹹香、讚不絕口", "b": "金黃酥脆入口鹹香，濃郁起司風味讓人欲罷不能。一口接一口，停不下來，越吃越涮嘴，真的好吃到讚不絕口！", "spec": ["120公克±5公克/罐"], "img": [30184860, 32368652]},
+    "魚皮餅乾": {"id": 58716213, "t": "魚皮餅乾", "s": "魚香四溢、片片酥香", "b": "嚴選新鮮魚皮酥炸製成，片片金黃酥脆，入口鮮香鹹香兼具，越嚼越涮嘴。獨特的海味口感，適合當作休閒零嘴或聚會點心，佐茶、下酒都對味，帶來澎湖專屬的鮮美滋味。", "spec": ["70公克±5公克/包"], "img": [30185225, 32368617]},
+    "魚脯": {"id": 58630779, "t": "魚脯", "s": "鮮香濃郁，嚼勁十足", "b": "嚴選新鮮魚肉製成，慢火烘烤鎖住鮮甜，口感厚實有嚼勁，鹹香迷人，一口咬下滿滿海味！魚脯不僅是佐茶、下酒的最佳良伴，更是伴手禮的熱銷首選，方便攜帶、風味獨特，送禮自用兩相宜。", "spec": ["200公克±5公克/包"], "img": [30026145, 32369861, 32369862]},
+    "魷魚條": {"id": 58715907, "t": "魷魚條", "s": "新鮮魷魚、澎湖海味", "b": "新鮮魷魚特製的魷魚條，來自澎湖的海味，特別適合登山、郊遊、看電視、賞電影，且為饋贈親友，最佳禮品。", "spec": ["90公克±5公克/包"], "img": [30183641, 32368936]},
+    "魷魚片": {"id": 58696522, "t": "魷魚片", "s": "口感軟嫩、滋味香甜", "b": "口感軟嫩有嚼勁，加上獨家功夫熬煮，滋味香甜、口感佳，澎湖道地特產，是下酒伴嘴的最佳選擇，一定要嚐嚐看喔！", "spec": ["90公克±5公克/包"], "img": [30143062, 32369000, 32369001]},
+    "魷魚粄條": {"id": 58715959, "t": "魷魚板條", "s": "新鮮海味、微甜鈣多", "b": "本產品採新鮮小魚加工製成上等食品，以天然高級調味料。最新鮮的海味，是三五好友聚會泡茶最佳佐茶點心。", "spec": ["100公克±5公克/包"], "img": [30184010, 32368906]},
+    "魷魚絲": {"id": 58696520, "t": "魷魚絲", "s": "新鮮魷魚、澎湖海味", "b": "新鮮魷魚特製的魷魚絲，來自澎湖的海味，特別適合登山、郊遊、看電視、賞電影，且為饋贈親友，最佳禮品。", "spec": ["90公克±5公克/包"], "img": [30143045, 32369119, 32369120]},
+    "鮪魚糖": {"id": 58696525, "t": "鮪魚糖", "s": "新鮮鮪魚、休閒零嘴", "b": "採用新鮮鮪魚肉製成，同時保留肉及骨之營養成分，是大人小孩都愛的休閒零嘴，聚會泡茶最佳佐茶點心。", "spec": ["130公克±5公克/包"], "img": [30143082, 32368977]},
+    "鱈魚夾心絲": {"id": 58715923, "t": "鱈魚夾心絲", "s": "雙層滋味、非常夠味", "b": "鱈魚絲，加入黑芝麻，製成細細的條狀，一層北海鱈魚、一層黑芝麻，雙層滋味非常夠味，有嚼勁。", "spec": ["120公克±5公克/包"], "img": [30183781, 32368916]},
+    "鱈魚棒": {"id": 58715978, "t": "鱈魚棒", "s": "新鮮鱈魚、休閒零食", "b": "嚴選新鮮魚漿製成，口感鮮香Q彈，鹹香涮嘴帶有海味層次。方便即食，無論是休閒零嘴、旅遊點心，或伴手禮都十分合適，老少皆宜，一吃就愛上。", "spec": ["55公克±5公克/包"], "img": [30184136, 32368873]},
+    "鹹小管": {"id": 64414523, "t": "鹹小管", "s": "品質嚴選、滷肉必備", "b": "經過煮熟鹽醃漬而成，經過鹽分的熟成更顯現小管的鮮甜。", "spec": ["200公克±9公克/包"], "img": [32984704]},
+    "鹹餅": {"id": 58630747, "t": "鹹餅", "s": "酥香滿口，爽脆難忘", "b": "澎湖鹹餅的美味主要是來自澎湖道地食材之間的調味(葷：蔥丁和豬油、素：芹菜和植物油)，香味中帶點胡椒嗆，咬起來酥脆，落得一攤餅屑，這就是澎湖打響知名度的在地特產─鹹餅。", "spec": ["大禮盒 : 420公克±3%/盒", "大禮盒 : 250公克±9公克/盒", "小條裝 : 100公克±9公克/盒"], "img": [30026011, 30026012, 31008013, 31008014]},
+    "黃金卡卡棒": {"id": 58716902, "t": "黃金卡卡棒", "s": "口感香酥、甜而不膩", "b": "精選新鮮食材製成，口感香酥脆，濃郁蛋香甜而不膩。不只表面焦糖色酥脆，整條都香脆可口，大人小孩都喜愛，一口接一口停不下來，澎湖熱銷新寵。", "spec": ["100公克±5公克/罐"], "img": [30189075, 32368599]},
+    "黃金魚酥": {"id": 58715892, "t": "黃金魚酥", "s": "來自澎湖、新鮮海味", "b": "本產品採新鮮小魚加工製成上等食品，以天然高級調味料。來自最新鮮的海味,是三五好友聚會泡茶最佳佐茶點心。", "spec": ["蜜汁：100公克±5公克/包", "炭烤：80公克 ±5公克/包"], "img": [30183580, 32368954, 32368955]},
+    "黑糖小丸子": {"id": 58716196, "t": "黑糖小丸子", "s": "香Q彈牙、風味濃郁", "b": "嚴選天然食材精製！香Q彈牙、風味濃郁，傳遞澎湖在地好味道。無論佐茶小憩或饋贈親友，都是最貼心的美味選擇。", "spec": ["360公克±5公克/包"], "img": [30185109, 32368626]}
+  };
+  /* CATALOG:END */
+
+  var ITEMS = [], BY_ID = {}, BY_NAME = {}, SIBS = {};
   CATS.forEach(function (c) {
     RAW[c.id].split('\n').forEach(function (line, i) {
       var p = line.split('|');
       var it = { id: c.id + '-' + i, cat: c.id, name: p[0], unit: p[1], price: Number(p[2]), frozen: !!c.frozen, chill: p[3] === 'chill', box12: p[3] === 'box12' };
+      it.nodisc = it.frozen || it.box12;
+      it.p = (PMAP[it.name] && CATALOG[PMAP[it.name]]) ? PMAP[it.name] : '';
       ITEMS.push(it); BY_ID[it.id] = it; BY_NAME[it.name] = it;
+      if (it.p) (SIBS[it.p] = SIBS[it.p] || []).push(it);
     });
   });
 
+  var METHODS = { air: '機場取貨', port: '碼頭取貨', ship: '宅配到府' };
+
   /* ===== 狀態 ===== */
-  var state = { cart: {}, info: { name: '', phone: '', method: 'stay', room: '', address: '', date: '', note: '' }, code: '' };
+  var state = { cart: {}, info: { name: '', phone: '', room: '', method: '', tripDate: '', tripTime: '', tripNo: '', address: '', shipDate: '', note: '' }, code: '' };
   function load() {
     try {
       var s = JSON.parse(localStorage.getItem(CONFIG.storeKey) || 'null');
@@ -640,7 +977,7 @@
       if (s.info && typeof s.info === 'object') {
         Object.keys(state.info).forEach(function (k) { if (typeof s.info[k] === 'string') state.info[k] = s.info[k]; });
       }
-      if (state.info.method !== 'ship') state.info.method = 'stay';
+      if (!METHODS[state.info.method]) state.info.method = '';
       if (typeof s.code === 'string') state.code = s.code;
     } catch (e) { /* 無法讀取就從空白開始 */ }
   }
@@ -660,19 +997,25 @@
   function norm(s) { return String(s).toLowerCase().replace(/[\s（）()・、]/g, ''); }
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;   // 觸控螢幕（手機、平板）
+  function discLabel() { var r = CONFIG.discountRate; return (r % 10 ? r : r / 10) + ' 折'; }
 
   function lines() {
     return ITEMS.filter(function (it) { return state.cart[it.name] > 0; })
       .map(function (it) { var q = state.cart[it.name]; return { it: it, q: q, sub: q * it.price }; });
   }
   function totals(ls) {
-    var t = { amb: 0, frz: 0, all: 0, n: ls.length };
-    ls.forEach(function (l) { if (l.it.frozen) t.frz += l.sub; else t.amb += l.sub; });
+    var t = { amb: 0, frz: 0, all: 0, base: 0, disc: 0, pay: 0, n: ls.length };
+    ls.forEach(function (l) {
+      if (l.it.frozen) t.frz += l.sub; else t.amb += l.sub;
+      if (!l.it.nodisc) t.base += l.sub;
+    });
     t.all = t.amb + t.frz;
+    t.disc = Math.round(t.base * (100 - CONFIG.discountRate) / 100);
+    t.pay = t.all - t.disc;
     return t;
   }
   function fmtDate(iso) {
-    var p = iso.split('-').map(Number);
+    var p = String(iso).split('-').map(Number);
     if (p.length !== 3 || !p[0]) return '';
     var d = new Date(p[0], p[1] - 1, p[2]);
     return pad2(p[1]) + '/' + pad2(p[2]) + '（' + '日一二三四五六'.charAt(d.getDay()) + '）';
@@ -702,18 +1045,29 @@
   /* ===== 品項列 ===== */
   var ICON_MINUS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>';
   var ICON_PLUS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>';
-  function tagsHTML(it, withFrozen) {
+  function thumbHTML(it) {
+    var c = it.p && CATALOG[it.p];
+    if (c && c.img.length) {
+      return '<img class="thumb" src="' + CONFIG.imgBase + c.id + '-' + c.img[0] + '-t.webp" width="144" height="144" alt="" loading="lazy" decoding="async">';
+    }
+    return '<span class="thumb ph" aria-hidden="true">' + esc(it.unit) + '</span>';
+  }
+  function tagsHTML(it, ctx) {
     var h = '';
-    if (withFrozen && it.frozen) h += '<span class="tag ice">冷凍</span>';
+    if (ctx === 'review' && it.frozen) h += '<span class="tag ice">冷凍</span>';
     if (it.chill) h += '<span class="tag chill">須冷藏</span>';
-    if (it.box12) h += '<span class="tag plain">一箱 12 瓶</span>';
+    if (it.box12) h += '<span class="tag plain">一箱 12 瓶</span><span class="tag plain">不打折</span>';
     return h;
   }
-  function rowHTML(it, prefix) {
-    var n = esc(it.name);
-    return '<li class="item" data-id="' + it.id + '">' +
-      '<div class="item-main"><span class="item-name">' + n + '</span>' +
-      '<span class="item-meta"><span class="price">' + money(it.price) + '</span><span class="unit">／' + it.unit + '</span>' + tagsHTML(it, prefix === 'r-') + '<span class="subt"></span></span></div>' +
+  function rowHTML(it, ctx) {
+    var n = esc(it.name), prefix = { shop: 'q-', review: 'r-', sheet: 's-' }[ctx];
+    var text = '<span class="item-text"><span class="item-name">' + n + '</span>' +
+      '<span class="item-meta"><span class="price">' + money(it.price) + '</span><span class="unit">／' + it.unit + '</span>' + tagsHTML(it, ctx) + '<span class="subt"></span></span></span>';
+    var main;
+    if (ctx === 'sheet') main = '<div class="item-main">' + text + '</div>';
+    else if (it.p) main = '<button type="button" class="item-main" data-act="open" aria-haspopup="dialog">' + thumbHTML(it) + text + '<span class="sr">，看照片和介紹</span></button>';
+    else main = '<div class="item-main">' + thumbHTML(it) + text + '</div>';
+    return '<li class="item" data-id="' + it.id + '">' + main +
       '<div class="qty">' +
       '<button type="button" class="qbtn minus" data-act="dec" aria-label="' + n + ' 減少一' + it.unit + '">' + ICON_MINUS + '</button>' +
       '<input class="qin" id="' + prefix + it.id + '" type="number" inputmode="numeric" pattern="[0-9]*" min="0" max="999" aria-label="' + n + ' 數量（' + it.unit + '）">' +
@@ -721,22 +1075,26 @@
       '</div></li>';
   }
 
-  var shopRows = {}, revRows = {}, secEls = {}, chipEls = [];
+  var shopRows = {}, revRows = {}, sheetRows = {}, secEls = {}, chipEls = [];
   var shopList = $('#shopList'), reviewList = $('#reviewList'), chipsEl = $('#chips');
+  var sheet = $('#sheet'), sheetItems = $('#sheetItems'), gallery = $('#gallery'), dotsEl = $('#dots');
+  function register(container, rows) {
+    container.querySelectorAll('.item').forEach(function (li) {
+      rows[li.dataset.id] = { li: li, input: li.querySelector('.qin'), sub: li.querySelector('.subt') };
+    });
+  }
 
   function renderShop() {
     shopList.innerHTML = CATS.map(function (c) {
       var its = ITEMS.filter(function (i) { return i.cat === c.id; });
       var note = '';
-      if (c.frozen) note = '<p class="cat-note ice">冷凍與常溫分開計算：宅配冷凍滿 ' + money(CONFIG.freeShip.frozen) + ' 免運</p>';
+      if (c.frozen) note = '<p class="cat-note ice">冷凍商品不打折</p>';
       if (c.id === 'spc') note = '<p class="cat-note warn">未滿18歲未成年請勿飲酒・飲酒過量，有害健康</p>';
       return '<section class="cat" id="cat-' + c.id + '" aria-labelledby="h-' + c.id + '">' +
         '<div class="cat-head"><h2 id="h-' + c.id + '">' + c.name + '</h2><span class="cnt">' + its.length + ' 項</span></div>' + note +
-        '<ul class="items">' + its.map(function (it) { return rowHTML(it, 'q-'); }).join('') + '</ul></section>';
+        '<ul class="items">' + its.map(function (it) { return rowHTML(it, 'shop'); }).join('') + '</ul></section>';
     }).join('');
-    shopList.querySelectorAll('.item').forEach(function (li) {
-      shopRows[li.dataset.id] = { li: li, input: li.querySelector('.qin'), sub: li.querySelector('.subt') };
-    });
+    register(shopList, shopRows);
     CATS.forEach(function (c) { secEls[c.id] = $('#cat-' + c.id); });
     chipsEl.innerHTML = CATS.map(function (c) {
       return '<button type="button" class="chip" data-cat="' + c.id + '" aria-current="false">' + c.chip + '<span class="n" hidden></span></button>';
@@ -746,7 +1104,7 @@
 
   function paintRow(it) {
     var q = state.cart[it.name] || 0;
-    [shopRows[it.id], revRows[it.id]].forEach(function (r) {
+    [shopRows[it.id], revRows[it.id], sheetRows[it.id]].forEach(function (r) {
       if (!r) return;
       var editing = document.activeElement === r.input;
       r.li.classList.toggle('on', q > 0 || editing);
@@ -772,6 +1130,7 @@
       if (!b) return;
       var it = BY_ID[b.closest('.item').dataset.id];
       if (!it) return;
+      if (b.dataset.act === 'open') { openSheet(it, b); return; }
       var q = state.cart[it.name] || 0;
       setQty(it, b.dataset.act === 'inc' ? q + 1 : q - 1, 'button');
     });
@@ -799,8 +1158,8 @@
   var dockCount = $('#dockCount'), dockTotal = $('#dockTotal'), dockBtn = $('#dockBtn');
   function paintTotals() {
     var ls = lines(), t = totals(ls);
-    dockCount.textContent = t.n ? '已選 ' + t.n + ' 項' : '還沒選商品';
-    dockTotal.textContent = money(t.all);
+    dockCount.textContent = t.n ? '已選 ' + t.n + ' 項' + (t.disc ? '・已折 ' + money(t.disc) : '') : '還沒選商品';
+    dockTotal.textContent = money(t.pay);
     dockBtn.disabled = !t.n;
     var per = {};
     ls.forEach(function (l) { per[l.it.cat] = (per[l.it.cat] || 0) + 1; });
@@ -815,24 +1174,13 @@
       $('#sAmb').textContent = money(t.amb);
       $('#sFrz').textContent = money(t.frz);
       $('#sAll').textContent = money(t.all);
+      $('#sDisc').textContent = '−' + money(t.disc);
+      $('#sPay').textContent = money(t.pay);
       var both = t.amb > 0 && t.frz > 0;
       $('#rowAmb').hidden = !both; $('#rowFrz').hidden = !both;
-      paintShip(t);
+      $('#rowDisc').hidden = !t.disc;
     }
-  }
-  function paintMeter(id, v, goal, label) {
-    var el = $(id), done = v >= goal;
-    el.classList.toggle('done', done);
-    el.querySelector('.v').textContent = money(v) + ' / ' + money(goal);
-    el.querySelector('i').style.width = Math.min(100, v / goal * 100) + '%';
-    el.querySelector('.meter-note').textContent = v === 0 ? '沒有' + label + '商品' : done ? label + '已達免運' : '再 ' + money(goal - v) + ' 免運；未達門檻運費由廠商另計';
-  }
-  function paintShip(t) {
-    var on = state.info.method === 'ship' && t.n > 0;
-    $('#shipBox').hidden = !on;
-    if (!on) return;
-    paintMeter('#m-amb', t.amb, CONFIG.freeShip.ambient, '常溫');
-    paintMeter('#m-frz', t.frz, CONFIG.freeShip.frozen, '冷凍');
+    if (sheetProduct) paintSheetSum();
   }
 
   /* ===== 確認訂單 ===== */
@@ -849,33 +1197,46 @@
     function grp(k, title, arr) {
       if (!arr.length) return '';
       return '<div class="group"><div class="group-head ' + k + '"><span>' + title + '</span><span class="gsum" id="g-' + k + '"></span></div>' +
-        '<ul class="items">' + arr.map(function (l) { return rowHTML(l.it, 'r-'); }).join('') + '</ul></div>';
+        '<ul class="items">' + arr.map(function (l) { return rowHTML(l.it, 'review'); }).join('') + '</ul></div>';
     }
-    reviewList.innerHTML = grp('amb', '常溫商品', amb) + grp('frz', '冷凍商品', frz);
-    reviewList.querySelectorAll('.item').forEach(function (li) {
-      revRows[li.dataset.id] = { li: li, input: li.querySelector('.qin'), sub: li.querySelector('.subt') };
-      paintRow(BY_ID[li.dataset.id]);
-    });
+    reviewList.innerHTML = grp('amb', '常溫商品', amb) + grp('frz', '冷凍商品・不打折', frz);
+    register(reviewList, revRows);
+    Object.keys(revRows).forEach(function (id) { paintRow(BY_ID[id]); });
   }
 
-  var F = { name: $('#f-name'), phone: $('#f-phone'), room: $('#f-room'), address: $('#f-address'), date: $('#f-date'), note: $('#f-note') };
+  var F = {};
+  ['name', 'phone', 'room', 'tripDate', 'tripTime', 'tripNo', 'address', 'shipDate', 'note'].forEach(function (k) { F[k] = $('#f-' + k); });
   var radios = Array.prototype.slice.call(document.querySelectorAll('input[name="method"]'));
+  function setLabel(sel, text) { var el = $(sel); if (el && el.firstChild) el.firstChild.nodeValue = text; }
   function paintMethod() {
-    var ship = state.info.method === 'ship';
-    radios.forEach(function (r) { r.checked = r.value === state.info.method; r.parentNode.classList.toggle('sel', r.checked); });
-    $('#w-room').hidden = ship;
-    $('#w-address').hidden = !ship;
-    $('#dateHint').textContent = ship ? '宅配到貨日以廠商安排為準' : '建議選退房前一天，方便收貨';
-    paintShip(totals(lines()));
+    var m = state.info.method, trip = m === 'air' || m === 'port', air = m === 'air';
+    radios.forEach(function (r) { r.checked = r.value === m; r.parentNode.classList.toggle('sel', r.checked); });
+    $('#tripBox').hidden = !trip;
+    $('#shipBox').hidden = m !== 'ship';
+    if (trip) {
+      setLabel('#l-tripDate', air ? '航班日期' : '船班日期');
+      setLabel('#l-tripTime', air ? '起飛時間' : '開船時間');
+      $('#l-tripNo').textContent = air ? '航班（選填）' : '船班（選填）';
+      F.tripNo.placeholder = air ? '例如 立榮 B7-8696' : '例如 臺華輪';
+    }
   }
   function bindForm() {
     Object.keys(F).forEach(function (k) {
       F[k].value = state.info[k];
-      F[k].addEventListener('input', function () { state.info[k] = F[k].value; clearErr(k); save(); });
+      var on = function () { state.info[k] = F[k].value; clearErr(k); save(); };
+      F[k].addEventListener('input', on);
+      F[k].addEventListener('change', on);
     });
-    F.date.min = todayISO();
+    F.tripDate.min = todayISO();
+    F.shipDate.min = todayISO();
     radios.forEach(function (r) {
-      r.addEventListener('change', function () { if (r.checked) { state.info.method = r.value; clearErr('address'); paintMethod(); save(); } });
+      r.addEventListener('change', function () {
+        if (!r.checked) return;
+        state.info.method = r.value;
+        ['method', 'tripDate', 'tripTime', 'address'].forEach(clearErr);
+        paintMethod();
+        save();
+      });
     });
     $('#infoForm').addEventListener('submit', function (e) { e.preventDefault(); submit(); });
     // 手機打字時先收起底部列，避免擋住輸入框；收起鍵盤後再出現（電腦不受影響）
@@ -888,13 +1249,15 @@
     w.classList.remove('invalid');
     var er = w.querySelector('.err');
     if (er) { er.hidden = true; er.textContent = ''; }
+    if (F[k]) F[k].removeAttribute('aria-invalid');
   }
   function showErr(k, msg) {
     var w = $('#w-' + k);
+    if (!w) return;
     w.classList.add('invalid');
     var er = w.querySelector('.err');
-    er.textContent = msg; er.hidden = false;
-    F[k].setAttribute('aria-invalid', 'true');
+    if (er) { er.textContent = msg; er.hidden = false; }
+    if (F[k]) F[k].setAttribute('aria-invalid', 'true');
   }
   function validate() {
     var errs = [], i = state.info;
@@ -902,47 +1265,63 @@
     var digits = i.phone.replace(/\D/g, '');
     if (!digits) errs.push(['phone', '請填寫手機或電話，方便聯絡']);
     else if (digits.length < 8) errs.push(['phone', '電話號碼好像少了幾碼，請再確認']);
-    if (i.method === 'ship' && i.address.trim().length < 5) errs.push(['address', '宅配需要完整的收件地址']);
+    if (!i.method) errs.push(['method', '請選擇取貨方式']);
+    else if (i.method === 'ship') {
+      if (i.address.trim().length < 5) errs.push(['address', '宅配需要完整的收件地址']);
+    } else {
+      var air = i.method === 'air';
+      if (!i.tripDate) errs.push(['tripDate', air ? '請選擇航班日期' : '請選擇船班日期']);
+      if (!i.tripTime) errs.push(['tripTime', air ? '請填寫起飛時間' : '請填寫開船時間']);
+    }
     return errs;
   }
 
   /* ===== 產生訂單 ===== */
   var SEP = '────────────';
-  function shipLine(t) {
-    var parts = [], short = false;
-    if (t.amb) { if (t.amb >= CONFIG.freeShip.ambient) parts.push('常溫已達免運'); else { parts.push('常溫差 ' + money(CONFIG.freeShip.ambient - t.amb) + ' 免運'); short = true; } }
-    if (t.frz) { if (t.frz >= CONFIG.freeShip.frozen) parts.push('冷凍已達免運'); else { parts.push('冷凍差 ' + money(CONFIG.freeShip.frozen - t.frz) + ' 免運'); short = true; } }
-    return '運費：' + parts.join('，') + (short ? '（未達門檻運費另計）' : '');
+  function tripText(i) {
+    var s = fmtDate(i.tripDate) + ' ' + i.tripTime;
+    if (i.tripNo.trim()) s += '　' + i.tripNo.trim();
+    return s;
   }
   function buildOrder() {
     var ls = lines(), t = totals(ls), i = state.info;
     var amb = ls.filter(function (l) { return !l.it.frozen; }), frz = ls.filter(function (l) { return l.it.frozen; });
+    var trip = i.method === 'air' || i.method === 'port', tripLabel = i.method === 'air' ? '航班' : '船班';
     var room = i.room.trim();
-    var pickup = i.method === 'ship' ? '宅配到府' : '送到' + (CONFIG.stayName || '民宿') + (room ? '（房號 ' + room + '）' : '');
-    var when = i.date ? fmtDate(i.date) : '';
-    var infoRows = [['訂購人', i.name.trim()], ['電話', i.phone.trim()], ['取貨', pickup]];
-    if (i.method === 'ship') infoRows.push(['地址', i.address.trim()]);
-    if (when) infoRows.push(['希望送達', when]);
+    var infoRows = [['訂購人', i.name.trim()], ['電話', i.phone.trim()]];
+    if (room) infoRows.push(['房號', room]);
+    infoRows.push(['取貨', METHODS[i.method]]);
+    if (trip) infoRows.push([tripLabel, tripText(i)]);
+    else {
+      infoRows.push(['地址', i.address.trim()]);
+      if (i.shipDate) infoRows.push(['希望送達', fmtDate(i.shipDate)]);
+    }
 
     var L = [];
     L.push('【萬泰名產訂單】' + state.code);
     L.push('訂購人：' + i.name.trim());
     L.push('電話：' + i.phone.trim());
-    L.push('取貨方式：' + pickup);
-    if (i.method === 'ship') L.push('收件地址：' + i.address.trim());
-    if (when) L.push('希望送達：' + when);
-    L.push(SEP);
-    function block(title, arr, sub) {
-      L.push('［' + title + '］');
-      arr.forEach(function (l) { L.push('・' + l.it.name + '　' + money(l.it.price) + ' × ' + l.q + l.it.unit + ' = ' + money(l.sub)); });
-      L.push(title + '小計 ' + money(sub));
+    if (room) L.push('房號：' + room);
+    L.push('取貨方式：' + METHODS[i.method]);
+    if (trip) L.push(tripLabel + '：' + tripText(i));
+    else {
+      L.push('收件地址：' + i.address.trim());
+      if (i.shipDate) L.push('希望送達：' + fmtDate(i.shipDate));
     }
-    if (amb.length) block('常溫', amb, t.amb);
-    if (amb.length && frz.length) L.push('');
-    if (frz.length) block('冷凍', frz, t.frz);
     L.push(SEP);
-    L.push('合計 ' + money(t.all) + '（共 ' + t.n + ' 項）');
-    var shipText = i.method === 'ship' ? shipLine(t) : '';
+    function block(title, sumLabel, arr, sub) {
+      L.push('［' + title + '］');
+      arr.forEach(function (l) { L.push('・' + l.it.name + '　' + money(l.it.price) + ' × ' + l.q + l.it.unit + ' = ' + money(l.sub) + (l.it.box12 ? '（不打折）' : '')); });
+      L.push(sumLabel + ' ' + money(sub));
+    }
+    if (amb.length) block('常溫', '常溫小計', amb, t.amb);
+    if (amb.length && frz.length) L.push('');
+    if (frz.length) block('冷凍・不打折', '冷凍小計', frz, t.frz);
+    L.push(SEP);
+    L.push('原價合計 ' + money(t.all) + '（共 ' + t.n + ' 項）');
+    if (t.disc) L.push('住客優惠 ' + discLabel() + ' −' + money(t.disc) + '（冷凍與氣泡酒不打折）');
+    L.push('折後合計 ' + money(t.pay));
+    var shipText = i.method === 'ship' ? '運費：待定（依訂購量計算，另計）' : '';
     if (shipText) L.push(shipText);
     if (i.note.trim()) L.push('備註：' + i.note.trim());
     L.push('（萬泰食品 ' + CONFIG.priceListVersion + ' 價目表）');
@@ -959,9 +1338,9 @@
     try {
       fontsReady = Promise.race([
         Promise.all([
-          document.fonts.load('400 58px "LXGW WenKai TC"', '萬泰名產訂單合計'),
-          document.fonts.load('500 34px Inter', '0123456789$,-×/:No.ABCDEFGHJKLMNPQRSTUVWXYZ'),
-          document.fonts.load('400 28px "Noto Sans TC"', o.text + '期遇度假會館代訂常溫冷凍商品小計項備註依價目表實際金額以廠商確認為準'),
+          document.fonts.load('400 58px "LXGW WenKai TC"', '萬泰名產訂單折後合計'),
+          document.fonts.load('500 34px Inter', '0123456789$,-−×/:No.ABCDEFGHJKLMNPQRSTUVWXYZ'),
+          document.fonts.load('400 28px "Noto Sans TC"', o.text + '期遇度假會館代訂常溫冷凍商品小計項備註依價目表實際金額以廠商確認為準住客優惠原價合計除外'),
           document.fonts.load('500 34px "Noto Sans TC"', o.text)
         ]),
         new Promise(function (r) { setTimeout(r, 2500); })
@@ -993,6 +1372,7 @@
         }
         return { t: txt, f: f };
       }
+      function spacing(px) { if ('letterSpacing' in ctx) ctx.letterSpacing = px; }
       function pass(draw) {
         var y;
         function T(s, x, yy, f, color, align) {
@@ -1011,10 +1391,10 @@
           ctx.fillStyle = C.accent; ctx.fillRect(0, 0, W, 12);
         }
         y = 104;
-        if (draw && 'letterSpacing' in ctx) ctx.letterSpacing = '6px';
+        if (draw) spacing('6px');
         T('萬泰名產訂單', P, y, '400 58px ' + SERIF, C.ink);
-        if (draw && 'letterSpacing' in ctx) ctx.letterSpacing = '0px';
-        T('No. ' + o.code, W - P, y - 4, '500 34px ' + MONO, C.accent, 'right');
+        if (draw) spacing('0px');
+        T('No. ' + o.code, W - P, y - 4, '500 32px ' + MONO, C.accent, 'right');
         y += 50;
         T('期遇度假會館代訂・' + o.stamp, P, y, '400 27px ' + SANS, C.muted);
         y += 34; HR(y, true); y += 64;
@@ -1028,37 +1408,45 @@
         });
         y -= 8; HR(y, true); y += 70;
 
-        function group(title, arr, sub, color) {
+        function group(title, sumLabel, arr, sub, color) {
           T(title, P, y, '500 30px ' + SANS, color);
           T(arr.length + ' 項', W - P, y, '500 26px ' + SANS, C.muted, 'right');
           y += 20; HR(y, false, color, 3); y += 58;
           arr.forEach(function (l) {
             var q = money(l.it.price) + '×' + l.q + l.it.unit, qf = '500 27px ' + MONO;
             var qw = measure(q, qf);
-            var nm = fit(l.it.name, 500, 34, 26, SANS, QX - qw - 28 - P);
+            var nm = fit(l.it.name + (l.it.box12 ? '（不打折）' : ''), 500, 34, 24, SANS, QX - qw - 28 - P);
             T(nm.t, P, y, nm.f, C.ink);
             T(q, QX, y, qf, C.muted, 'right');
             T(money(l.sub), W - P, y, '500 34px ' + MONO, C.ink, 'right');
             y += 60;
           });
           y -= 14; HR(y, false); y += 48;
-          T(title.replace('商品', '') + '小計', P, y, '500 28px ' + SANS, C.muted);
+          T(sumLabel, P, y, '400 28px ' + SANS, C.muted);
           T(money(sub), W - P, y, '500 32px ' + MONO, C.ink, 'right');
           y += 80;
         }
-        if (o.amb.length) group('常溫商品', o.amb, o.t.amb, C.ink);
-        if (o.frz.length) group('冷凍商品', o.frz, o.t.frz, C.ice);
+        if (o.amb.length) group('常溫商品', '常溫小計', o.amb, o.t.amb, C.ink);
+        if (o.frz.length) group('冷凍商品・不打折', '冷凍小計', o.frz, o.t.frz, C.ice);
 
-        y -= 22; HR(y, false, C.ink, 3); y += 74;
-        if (draw && 'letterSpacing' in ctx) ctx.letterSpacing = '8px';
-        T('合計', P, y, '400 44px ' + SERIF, C.ink);
-        if (draw && 'letterSpacing' in ctx) ctx.letterSpacing = '0px';
-        T(money(o.t.all), W - P, y + 4, '500 66px ' + MONO, C.accent, 'right');
-        y += 48;
-        T('共 ' + o.t.n + ' 項商品', P, y, '500 26px ' + SANS, C.muted);
+        y -= 22; HR(y, false, C.ink, 3); y += 58;
+        T('原價合計（共 ' + o.t.n + ' 項）', P, y, '400 28px ' + SANS, C.muted);
+        T(money(o.t.all), W - P, y, '500 32px ' + MONO, C.ink, 'right');
+        if (o.t.disc) {
+          y += 52;
+          T('住客優惠 ' + discLabel() + '（冷凍、氣泡酒除外）', P, y, '400 28px ' + SANS, C.muted);
+          T('−' + money(o.t.disc), W - P, y, '500 32px ' + MONO, C.accent, 'right');
+        }
+        y += 86;
+        if (draw) spacing('8px');
+        T('折後合計', P, y, '400 44px ' + SERIF, C.ink);
+        if (draw) spacing('0px');
+        T(money(o.t.pay), W - P, y + 4, '500 66px ' + MONO, C.accent, 'right');
         if (o.shipText) {
-          y += 50;
-          wrap(o.shipText, '500 27px ' + SANS, CW).forEach(function (ln, k) { T(ln, P, y + k * 40, '500 27px ' + SANS, C.ink); y += k ? 40 : 0; });
+          y += 56;
+          var sl = wrap(o.shipText, '500 27px ' + SANS, CW);
+          sl.forEach(function (ln, k) { T(ln, P, y + k * 40, '500 27px ' + SANS, C.ink); });
+          y += (sl.length - 1) * 40;
         }
         if (o.note) {
           y += 64;
@@ -1069,7 +1457,7 @@
           y += (nl.length - 1) * 46;
         }
         y += 48; HR(y, true); y += 48;
-        T('依萬泰食品 ' + CONFIG.priceListVersion + ' 價目表・實際金額以廠商確認為準', P, y, '500 24px ' + SANS, C.muted);
+        T('依萬泰食品 ' + CONFIG.priceListVersion + ' 價目表・實際金額以廠商確認為準', P, y, '400 24px ' + SANS, C.muted);
         return y + 56;
       }
       var H = Math.ceil(pass(false));
@@ -1087,14 +1475,14 @@
       : 'https://line.me/R/share?text=' + t;
   }
   function submit() {
-    Object.keys(F).forEach(function (k) { clearErr(k); F[k].removeAttribute('aria-invalid'); });
+    ['name', 'phone', 'method', 'tripDate', 'tripTime', 'address'].forEach(clearErr);
     if (!lines().length) return;
     var errs = validate();
     if (errs.length) {
       errs.forEach(function (e) { showErr(e[0], e[1]); });
-      var first = F[errs[0][0]];
-      first.closest('.field').scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
-      try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); }
+      var k = errs[0][0], target = k === 'method' ? radios[0] : F[k];
+      ($('#w-' + k) || target).scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+      try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); }
       return;
     }
     if (!state.code) state.code = makeCode();
@@ -1107,7 +1495,7 @@
     imgCap.textContent = '正在產生訂單圖片…';
     show('done');
     save();
-    track('souvenir_order', { value: o.t.all, currency: 'TWD', item_count: o.t.n, delivery: state.info.method });
+    track('souvenir_order', { value: o.t.pay, currency: 'TWD', item_count: o.t.n, discount: o.t.disc, delivery: state.info.method });
     drawReceipt(o).then(function (url) {
       orderImg.src = url;
       imgCap.textContent = '長按圖片可以儲存，也可以直接截圖傳送。';
@@ -1138,8 +1526,75 @@
       else fallback();
     } catch (e) { fallback(); }
   });
-
   lineLink.addEventListener('click', function () { track('souvenir_send', { method: 'line' }); });
+
+  /* ===== 商品介紹（底部彈出） ===== */
+  var sheetProduct = '', lastOpener = null, sheetHist = false;
+  function paintSheetSum() {
+    var n = 0, sum = 0;
+    (SIBS[sheetProduct] || []).forEach(function (s) { var q = state.cart[s.name] || 0; n += q; sum += q * s.price; });
+    $('#sheetSum').textContent = n ? '已選 ' + n + ' 件・' + money(sum) : '還沒選';
+  }
+  function openSheet(it, opener) {
+    var c = CATALOG[it.p];
+    if (!c) return;
+    sheetProduct = it.p;
+    lastOpener = opener || null;
+    var sibs = SIBS[it.p] || [it], single = sibs.length === 1;
+    gallery.innerHTML = c.img.map(function (pid, k) {
+      return '<img src="' + CONFIG.imgBase + c.id + '-' + pid + '.webp" width="500" height="500" alt="' + esc(c.t) + ' 商品照片 ' + (k + 1) + '"' + (k ? ' loading="lazy"' : '') + ' decoding="async">';
+    }).join('');
+    gallery.hidden = !c.img.length;
+    dotsEl.innerHTML = c.img.map(function (_, k) { return '<i' + (k ? '' : ' class="on"') + '></i>'; }).join('');
+    dotsEl.hidden = c.img.length < 2;
+    $('#sheetTitle').textContent = single ? sibs[0].name : c.t;
+    var alias = single && norm(c.t) !== norm(sibs[0].name) ? '萬泰官網品名：' + c.t : '';
+    $('#sheetAlias').textContent = alias; $('#sheetAlias').hidden = !alias;
+    $('#sheetSlogan').textContent = c.s; $('#sheetSlogan').hidden = !c.s;
+    $('#sheetDesc').textContent = c.b; $('#sheetDesc').hidden = !c.b;
+    $('#sheetSpec').innerHTML = c.spec.length ? '<dt>規格</dt>' + c.spec.map(function (s) { return '<dd>' + esc(s) + '</dd>'; }).join('') : '';
+    $('#sheetSpec').hidden = !c.spec.length;
+    $('#sheetPick').textContent = single ? '數量' : '選擇口味／規格（' + sibs.length + ' 種）';
+    sheetItems.innerHTML = sibs.map(function (s) { return rowHTML(s, 'sheet'); }).join('');
+    sheetRows = {};
+    register(sheetItems, sheetRows);
+    sibs.forEach(paintRow);
+    $('#sheetLink').href = CONFIG.vendorProductUrl + encodeURIComponent(it.p);
+    paintSheetSum();
+    if (typeof sheet.showModal === 'function') {
+      try { sheet.showModal(); } catch (e) { sheet.setAttribute('open', ''); }
+    } else sheet.setAttribute('open', '');
+    document.documentElement.classList.add('sheet-open');
+    $('#sheetScroll').scrollTop = 0;
+    gallery.scrollLeft = 0;
+    try { history.pushState({ wantaiSheet: 1 }, ''); sheetHist = true; } catch (e) { sheetHist = false; }
+    track('souvenir_view_item', { item_name: c.t });
+  }
+  function closeSheet() {
+    if (!sheet.hasAttribute('open')) return;
+    if (typeof sheet.close === 'function') sheet.close();
+    else { sheet.removeAttribute('open'); onSheetClosed(); }
+  }
+  function onSheetClosed() {
+    document.documentElement.classList.remove('sheet-open');
+    sheetRows = {};
+    sheetProduct = '';
+    if (sheetHist) { sheetHist = false; try { history.back(); } catch (e) {} }
+    if (lastOpener && document.contains(lastOpener)) { try { lastOpener.focus({ preventScroll: true }); } catch (e) {} }
+    lastOpener = null;
+  }
+  function bindSheet() {
+    sheet.addEventListener('close', onSheetClosed);
+    sheet.addEventListener('click', function (e) { if (e.target === sheet) closeSheet(); });   // 點遮罩關閉
+    $('#sheetClose').addEventListener('click', closeSheet);
+    $('#sheetDone').addEventListener('click', closeSheet);
+    // 手機的「返回」先關掉介紹，不要直接離開頁面
+    window.addEventListener('popstate', function () { if (sheet.hasAttribute('open')) { sheetHist = false; closeSheet(); } });
+    gallery.addEventListener('scroll', function () {
+      var w = gallery.clientWidth || 1, k = Math.round(gallery.scrollLeft / w);
+      Array.prototype.forEach.call(dotsEl.children, function (d, i) { d.classList.toggle('on', i === k); });
+    }, { passive: true });
+  }
 
   /* ===== 畫面切換 ===== */
   var view = 'shop', shopY = 0;
@@ -1175,8 +1630,8 @@
     }
     resetArmed = 0;
     resetBtn.textContent = '清空，重新訂購';
-    state.cart = {}; state.code = ''; state.info.note = ''; state.info.date = '';
-    F.note.value = ''; F.date.value = '';
+    state.cart = {}; state.code = '';
+    ['note', 'tripDate', 'tripTime', 'tripNo', 'shipDate'].forEach(function (k) { state.info[k] = ''; F[k].value = ''; });
     ITEMS.forEach(paintRow);
     $('#search').value = ''; applySearch();
     shopY = 0;
@@ -1250,8 +1705,12 @@
   renderShop();
   bindList(shopList);
   bindList(reviewList);
+  bindList(sheetItems);
   bindForm();
+  bindSheet();
   if (CONFIG.lineOaId) lineLink.textContent = '用 LINE 傳給民宿';
+  $('#ruleDisc').textContent = discLabel();
+  $('#discLabel').textContent = '住客優惠 ' + discLabel();
   ITEMS.forEach(paintRow);
   paintMethod();
   paintTotals();

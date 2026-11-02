@@ -45,3 +45,17 @@ python update-tide-data.py 2027 --from-json
 ## 其他
 - 即時影像：moses.html 內嵌澎管處 YouTube 直播（ID: zgPJbQzlQmw），
   若官方更換直播網址，搜尋此 ID 全部替換即可。
+
+---
+
+# 萬泰名產代訂頁：更新商品照片與介紹
+
+萬泰官網換照片、改介紹，或價目表新增了官網也有的商品時執行（價格不受影響，價格只看頁面裡的價目表 `RAW`）。
+
+1. 新增品項時，先在 `public/wantai.html` 的 `PMAP` 加一行 `"價目表品名": "萬泰商品網址最後一段"`，
+   例如 `https://www.9279149.com.tw/products/干貝醬` → `"干貝醬（大辣）": "干貝醬"`（維持標準 JSON，最後一項不加逗號）。
+2. 在專案根目錄執行 `python tools/update-wantai-catalog.py`（需要 Pillow：`pip install pillow`）。
+3. 腳本逐一抓萬泰商品資料（每次間隔約 1 秒），照片轉成 WebP 放到 `public/images/wantai/`，改寫 wantai.html 的 CATALOG 區塊，
+   並刪掉不再用到的舊照片。任何一個商品抓失敗就整批不寫入，把訊息貼給 Claude 即可。
+4. 本地預覽確認（`python -m http.server 8000 --directory public`），git commit 併回 main 部署。
+

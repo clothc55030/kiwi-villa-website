@@ -55,7 +55,7 @@
 │   ├── 404.html                                  # 錯誤頁（2026-10 改新版設計，內聯樣式，資源一律絕對路徑）
 │   ├── wantai.html                               # 萬泰名產代訂（住客工具頁 /wantai，noindex，不在導覽與 sitemap）
 │   ├── js/                                       # 目前為空
-│   ├── images/                                   # 圖片目錄
+│   ├── images/                                   # 圖片目錄（images/wantai/ 為萬泰商品照片，由 tools/update-wantai-catalog.py 產生）
 │   ├── assets/                                   # manifest.json, og-*.jpg, tide-*.json
 │   ├── _headers                                  # 安全標頭 + 快取
 │   ├── _redirects                                # 房號短網址 + .html→無後綴 301
@@ -86,11 +86,14 @@
 
 住客掃房內 QR 桌卡（或收到 LINE 連結）打開，勾選萬泰食品的名產數量、填姓名電話與取貨方式，頁面產生訂單圖片＋文字，用 LINE 傳到官方帳號，Ricky 再轉給萬泰。
 
+- **取貨方式**：機場取貨／碼頭取貨（必填班次日期與時間，班次號碼選填）或宅配到府（必填地址；運費待定，依訂購量由 Ricky 告知）。沒有「送到民宿」，也不顯示萬泰的免運門檻。
+- **住客優惠**：`CONFIG.discountRate`（90＝9 折）。冷凍類與標記 `box12` 的氣泡酒不打折；品項列照原價，確認頁、訂單圖片與文字最後列「原價合計／住客優惠／折後合計」。
+- **商品照片與介紹**：點有縮圖的品項會開底部視窗（萬泰官網的照片、標語、簡介、規格），同系列口味在視窗裡直接選數量；手機返回鍵只會關視窗。`PMAP` 是「價目表品名 → 萬泰官網商品 handle」（必須維持標準 JSON），`CATALOG` 由 `tools/update-wantai-catalog.py` 產生、勿手改；照片在 `images/wantai/<商品id>-<照片id>.webp` 與 `-t.webp`（縮圖），檔名含照片 id，換照片就換檔名。官網沒有的品項不列進 PMAP（目前 23 項），列表顯示單位字樣的色塊。澎湖茶→風茹茶、鱈魚絲→鱈魚夾心絲是推定對應。
 - **純前端**：住客填的資料只存在他自己瀏覽器的 localStorage（`wantai-order-v1`），不上傳；訂單圖片用 canvas 在手機上畫。
 - **工具頁，不是內容頁**：`noindex`、不放 sitemap、不加進 8 頁的 footer／全螢幕選單，也沒有手機浮動 CTA（底部是訂單合計列）。視覺沿用官網 token 與字體（米底、霞鶩文楷、Inter／Noto Sans TC）。
-- **改價**：價目表在頁尾腳本的 `RAW`（每行「品名|單位|單價|標記」，chill＝須冷藏、box12＝一箱12瓶）。改完同步更新 `CONFIG.priceListVersion` 與頁尾的價目表日期；免運門檻在 `CONFIG.freeShip`。
+- **改價**：價目表在頁尾腳本的 `RAW`（每行「品名|單位|單價|標記」，chill＝須冷藏、box12＝一箱12瓶）。改完同步更新 `CONFIG.priceListVersion` 與頁尾的價目表日期。新增的品項若萬泰官網也有，記得在 `PMAP` 加對應再跑更新工具。
 - **LINE**：`CONFIG.lineOaId = '@kiwivilla'`（與官網連的 page.line.me/ucz4004x 為同一帳號），按鈕用 `line.me/R/oaMessage/` 開聊天室並帶入訂單文字。
-- **GA4**：不套用其他頁的 `line_click` 等點擊追蹤（名產訂單不是訂房詢問），改送 `souvenir_order`（value＝合計、item_count、delivery）與 `souvenir_send`（method＝line／copy）。
+- **GA4**：不套用其他頁的 `line_click` 等點擊追蹤（名產訂單不是訂房詢問），改送 `souvenir_view_item`（item_name＝看了哪個商品的介紹）、`souvenir_order`（value＝折後合計、discount、item_count、delivery＝air／port／ship）與 `souvenir_send`（method＝line／copy）。
 - QR 桌卡指向 `https://www.kiwi-villa.com/wantai`，改網址就要重印。
 
 ## 常用命令
@@ -125,4 +128,4 @@ python tools/verify_site_integrity.py
 
 ---
 
-*最後更新：2026-11（新增萬泰名產代訂頁 /wantai）；2026-10（404 改版、刪除未引用檔案、快取標頭規則、中文不斜體、房型頁輪播與英文房名、頁尾網站導覽）*
+*最後更新：2026-11（萬泰名產代訂頁 /wantai：商品照片與介紹、機場／碼頭取貨、住客 9 折）；2026-10（404 改版、刪除未引用檔案、快取標頭規則、中文不斜體、房型頁輪播與英文房名、頁尾網站導覽）*
