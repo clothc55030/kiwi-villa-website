@@ -53,6 +53,7 @@
 │   ├── index.html / intro.html / rooms.html / location.html
 │   ├── reviews.html / faq.html / policy.html / moses.html  # 8 個主要內容頁
 │   ├── 404.html                                  # 錯誤頁（2026-10 改新版設計，內聯樣式，資源一律絕對路徑）
+│   ├── wantai.html                               # 萬泰名產代訂（住客工具頁 /wantai，noindex，不在導覽與 sitemap）
 │   ├── js/                                       # 目前為空
 │   ├── images/                                   # 圖片目錄
 │   ├── assets/                                   # manifest.json, og-*.jpg, tide-*.json
@@ -80,6 +81,17 @@
 - **LINE 直訂優惠**：手機浮動按鈕「LINE 直訂優惠」、房型頁每個預訂按鈕下方、首頁名句區、FAQ、llms.txt 都只寫「享專屬優惠」，**不寫優惠內容**（Ricky 依日期與房況調整）。
 - **Google 評價數**：頁面與 llms.txt 只寫約略數字（例如「近 200 則」），每年 12 月更新潮汐資料時順便檢查（見 `tools/README.md`）。結構化資料不放評分（自家評論不具星等資格）。
 - **刻意保留但未引用的檔案**：`images/location/penghu-map.webp`（插畫地圖，之後可用在 /location）、`images/logo/kiwi-villa-logo.png`（品牌主 Logo，外部可能引用）。
+
+## 萬泰名產代訂頁（/wantai）
+
+住客掃房內 QR 桌卡（或收到 LINE 連結）打開，勾選萬泰食品的名產數量、填姓名電話與取貨方式，頁面產生訂單圖片＋文字，用 LINE 傳到官方帳號，Ricky 再轉給萬泰。
+
+- **純前端**：住客填的資料只存在他自己瀏覽器的 localStorage（`wantai-order-v1`），不上傳；訂單圖片用 canvas 在手機上畫。
+- **工具頁，不是內容頁**：`noindex`、不放 sitemap、不加進 8 頁的 footer／全螢幕選單，也沒有手機浮動 CTA（底部是訂單合計列）。視覺沿用官網 token 與字體（米底、霞鶩文楷、Inter／Noto Sans TC）。
+- **改價**：價目表在頁尾腳本的 `RAW`（每行「品名|單位|單價|標記」，chill＝須冷藏、box12＝一箱12瓶）。改完同步更新 `CONFIG.priceListVersion` 與頁尾的價目表日期；免運門檻在 `CONFIG.freeShip`。
+- **LINE**：`CONFIG.lineOaId = '@kiwivilla'`（與官網連的 page.line.me/ucz4004x 為同一帳號），按鈕用 `line.me/R/oaMessage/` 開聊天室並帶入訂單文字。
+- **GA4**：不套用其他頁的 `line_click` 等點擊追蹤（名產訂單不是訂房詢問），改送 `souvenir_order`（value＝合計、item_count、delivery）與 `souvenir_send`（method＝line／copy）。
+- QR 桌卡指向 `https://www.kiwi-villa.com/wantai`，改網址就要重印。
 
 ## 常用命令
 
@@ -113,4 +125,4 @@ python tools/verify_site_integrity.py
 
 ---
 
-*最後更新：2026-10（404 改版、刪除未引用檔案、快取標頭規則、中文不斜體、房型頁輪播與英文房名、頁尾網站導覽）*
+*最後更新：2026-11（新增萬泰名產代訂頁 /wantai）；2026-10（404 改版、刪除未引用檔案、快取標頭規則、中文不斜體、房型頁輪播與英文房名、頁尾網站導覽）*

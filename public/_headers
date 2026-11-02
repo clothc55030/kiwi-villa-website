@@ -50,6 +50,10 @@
 /moses
   Cache-Control: public, max-age=3600, must-revalidate
 
+# 住客工具頁（萬泰名產代訂，noindex）
+/wantai
+  Cache-Control: public, max-age=3600, must-revalidate
+
 # 靜態資源：一年 immutable（內容有變就換檔名或加版本參數）
 /js/*
   Cache-Control: public, max-age=31536000, immutable
