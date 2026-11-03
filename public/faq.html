@@ -300,6 +300,11 @@
             margin-bottom: var(--spacing-sm);
         }
 
+        /* 詞組不拆行：窄螢幕時整組換到下一行（例如「早餐是什麼樣的？」） */
+        .nowrap {
+            white-space: nowrap;
+        }
+
         .faq-question {
             width: 100%;
             text-align: left;
@@ -955,13 +960,13 @@
                 <!-- Q6 -->
                 <div class="faq-item reveal-up">
                     <button class="faq-question">
-                        <span>民宿提供的早餐是什麼樣的？</span>
+                        <span>有含早餐嗎？<span class="nowrap">早餐是什麼樣的？</span></span>
                         <i class="fas fa-chevron-down faq-icon"></i>
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer-inner">
                             <div class="faq-answer-content">
-                                <p><strong>早餐規格：</strong>一人一份中式早餐。用餐時間為 8:30-10:00。</p>
+                                <p><strong>依住宿方案而定：</strong>含早方案每人一份中式早餐，用餐時間為 8:30-10:00；不含早餐的方案不提供早餐，訂房時請留意方案名稱。</p>
                                 <p><strong>特殊需求：</strong>若是要配合出海行程提前用餐，請提前一天 21:00 前通知，我們會為您提早準備可外帶的早餐。</p>
                             </div>
                         </div>
@@ -1275,10 +1280,10 @@
             },
             {
                 "@type": "Question",
-                "name": "民宿提供的早餐是什麼樣的？",
+                "name": "有含早餐嗎？早餐是什麼樣的？",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "一人一份中式早餐，用餐時間為8:30-10:00。若需配合出海行程提前用餐，請提前一天21:00前通知，會準備可外帶的早餐。"
+                    "text": "依住宿方案而定：含早方案每人一份中式早餐，用餐時間為8:30-10:00；不含早餐的方案不提供早餐，訂房時請留意方案名稱。若需配合出海行程提前用餐，請提前一天21:00前通知，會準備可外帶的早餐。"
                 }
             },
             {
