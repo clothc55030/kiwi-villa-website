@@ -665,6 +665,24 @@
             }
         }
 
+        /* 桌機 hero 右欄也可能放不下一行（約 993～1110 寬，例如 iPad 橫拿 1024），所以再用右欄的實際寬度判斷：
+           小標一行約需 412px，右欄內容寬窄於 440px 時同樣拿掉「|」、英文改第二行。
+           不支援 container query 的舊瀏覽器只會套用上面的手機規則 */
+        .hero-content {
+            container-type: inline-size;
+        }
+
+        @container (max-width: 440px) {
+            .hero-sep {
+                display: none;
+            }
+
+            .hero-subtitle .nowrap {
+                display: block;
+                margin-top: 0.35em;
+            }
+        }
+
         .quote-text {
             font-family: var(--font-display);
             font-size: clamp(2rem, 4vw, 4rem);

@@ -283,6 +283,13 @@
             animation: fadeUp 1.2s 0.2s both cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* 寬度 359px 以下的小手機：字距縮一點，「全館附設陽台與豪華電梯的」才放得進一行，不會拆成「電／梯」 */
+        @media (max-width: 359px) {
+            .intro-hero-subtitle {
+                letter-spacing: 0.2em;
+            }
+        }
+
         /* 詞組不拆行（例如「馬公市」）：窄螢幕時整組換到下一行 */
         .nowrap {
             white-space: nowrap;
