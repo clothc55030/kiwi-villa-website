@@ -581,11 +581,20 @@
             left: 0;
             width: 100vw;
             height: 100vh;
+            height: 100dvh;   /* 手機瀏覽器工具列展開時，只佔看得到的範圍 */
             background: var(--color-ocean);
             z-index: 90;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;   /* 置中改由 .menu-links 的 margin: auto，放不下時才能從頂端捲動 */
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            /* 從導覽列下方開始排（--menu-top＝導覽列實際高度，開選單時由 JS 設定） */
+            padding: var(--menu-top) 0 20px;
+            box-sizing: border-box;
+            --menu-top: 88px;
+            /* 扣掉導覽列、下方留白與固定部分（內距、框線）後的高度；字級與間距照它等比例縮放 */
+            --menu-fit: calc(100vh - var(--menu-top) - 142px);
             align-items: center;
             /* Use visibility instead of pointer-events for better perf */
             visibility: hidden;
@@ -604,14 +613,15 @@
         .menu-links {
             display: flex;
             flex-direction: column;
-            gap: clamp(0.4rem, 1.5vh, 1.1rem);
+            gap: clamp(0.25rem, calc(var(--menu-fit) * 0.02), 1.1rem);
+            margin: auto 0;   /* 放得下時上下置中；放不下時從頂端開始、可捲動 */
             text-align: center;
         }
 
         /* SINGLE, COMPLETE .menu-link definition */
         .menu-link {
             font-family: var(--font-display);
-            font-size: clamp(1.3rem, 4.2vh, 2.6rem);
+            font-size: clamp(1.15rem, calc(var(--menu-fit) * 0.056), 2.6rem);
             color: var(--color-bg);
             text-decoration: none;
             font-style: italic;
@@ -671,8 +681,8 @@
 
         /* 訂房 CTA：與導覽項目視覺區隔 */
         .menu-links a:last-child {
-            margin-top: clamp(0.6rem, 2.2vh, 1.6rem);
-            font-size: clamp(1.05rem, 2.8vh, 1.5rem);
+            margin-top: clamp(0.5rem, calc(var(--menu-fit) * 0.0295), 1.6rem);
+            font-size: clamp(1rem, calc(var(--menu-fit) * 0.0375), 1.5rem);
             font-style: normal;
             letter-spacing: 0.18em;
             border: 1px solid rgba(249, 247, 243, 0.5);
@@ -686,6 +696,44 @@
         /* On close: all items exit simultaneously, no delay */
         .fullscreen-menu:not(.open) .menu-link {
             transition-delay: 0s !important;
+        }
+
+        /* 選單開著時鎖住背後頁面（保留捲動位置；scrollbar-gutter 讓導覽列不會因捲軸消失而左右跳） */
+        html.menu-open {
+            overflow: hidden;
+            scrollbar-gutter: stable;
+        }
+
+        @supports (height: 100dvh) {
+            .fullscreen-menu {
+                --menu-fit: calc(100dvh - var(--menu-top) - 142px);
+            }
+        }
+
+        /* 手機橫拿、很矮的視窗：改兩欄，9 項不用捲動就看得到 */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .menu-links {
+                display: grid;
+                grid-template-columns: repeat(2, auto);
+                justify-content: center;
+                column-gap: 2rem;
+                row-gap: 0.25rem;
+            }
+
+            .menu-link {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.15rem;
+                padding: 0.2rem 1rem;
+            }
+
+            .menu-links a:last-child {
+                grid-column: 1 / -1;
+                justify-self: center;
+                margin-top: 0.6rem;
+                font-size: 1rem;
+            }
         }
 
         /* hero 中文小標：保留 H1 關鍵字，視覺以英文為主 */
@@ -1127,21 +1175,28 @@
             const menuToggle = document.getElementById('menu-toggle');
             const fullscreenMenu = document.getElementById('fullscreen-menu');
 
-            menuToggle.addEventListener('click', () => {
-                const isOpen = fullscreenMenu.classList.contains('open');
-                if (isOpen) {
-                    fullscreenMenu.classList.remove('open');
-                    document.body.classList.remove('menu-open');
-                    menuToggle.textContent = 'Menu';
-                    if (window.scrollY <= 50) {
-                        nav.style.mixBlendMode = 'normal';
-                    }
-                } else {
-                    fullscreenMenu.classList.add('open');
-                    document.body.classList.add('menu-open');
-                    menuToggle.textContent = 'Close';
+            // 全螢幕選單：從導覽列下方開始排（--menu-top＝導覽列實際高度）、開著時鎖住背後頁面、Esc 可關閉
+            const setMenuTop = () => fullscreenMenu.style.setProperty('--menu-top', Math.round(nav.getBoundingClientRect().bottom) + 'px');
+            const setMenu = (open) => {
+                fullscreenMenu.classList.toggle('open', open);
+                document.body.classList.toggle('menu-open', open);
+                document.documentElement.classList.toggle('menu-open', open);
+                if (open) setMenuTop();
+                menuToggle.textContent = open ? 'Close' : 'Menu';
+                if (open || window.scrollY <= 50) {
                     nav.style.mixBlendMode = 'normal';
                 }
+            };
+
+            menuToggle.addEventListener('click', () => setMenu(!fullscreenMenu.classList.contains('open')));
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && fullscreenMenu.classList.contains('open')) {
+                    setMenu(false);
+                    menuToggle.focus();
+                }
+            });
+            window.addEventListener('resize', () => {
+                if (fullscreenMenu.classList.contains('open')) setMenuTop();
             });
 
             // FAQ Accordion Logic
