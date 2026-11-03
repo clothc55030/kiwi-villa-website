@@ -379,6 +379,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
+            height: 100dvh;   /* 手機瀏覽器工具列展開時，燈箱只佔看得到的範圍（不會有一截藏在工具列後面） */
             background: rgba(10, 15, 20, 0.97);
             z-index: 99999;
             display: flex;
@@ -405,14 +406,6 @@
 
         .lightbox-overlay.active .lightbox-img {
             transform: scale(1);
-        }
-
-        /* 桌機：大圖會撐到接近滿版，上下各留 80px，避免蓋到右上關閉鈕與底部「1 / 10」計數
-           （JS 的 lbSizes 直接讀這裡算出的 max-width／max-height，不用兩邊同步改數字） */
-        @media (min-width: 769px) {
-            .lightbox-img {
-                max-height: calc(100vh - 160px);
-            }
         }
 
         /* 切換時的純 CSS 快速淡入（不延遲、GPU 合成、不卡） */
@@ -481,6 +474,78 @@
             font-size: 1rem;
             letter-spacing: 0.2em;
             opacity: 0.8;
+        }
+
+        /* 燈箱版面：關閉鈕與「1 / 10」計數一律放在照片外面，不壓到照片（三種畫面各一組，互不重疊）
+           JS 的 lbSizes 直接讀這裡算出的 max-width／max-height，改數字不用同步改 JS */
+        /* 1) 桌機、平板（寬 ≥769 且高 ≥600）：沿用大關閉鈕與底部置中計數，照片上下各留 80px */
+        @media (min-width: 769px) and (min-height: 600px) {
+            .lightbox-img {
+                max-height: calc(100vh - 160px);
+                max-height: calc(100dvh - 160px);
+            }
+        }
+
+        /* 2) 手機直拿：關閉鈕、計數貼近上下邊緣，照片上下各留 56px */
+        @media (orientation: portrait) and (max-width: 768px) {
+            .lightbox-img {
+                max-height: calc(100vh - 112px);
+                max-height: calc(100dvh - 112px);
+            }
+
+            .lightbox-close {
+                top: 6px;
+                right: 6px;
+                width: 44px;
+                height: 44px;
+                padding: 0;
+                font-size: 2.25rem;
+                line-height: 44px;
+            }
+
+            .lightbox-counter {
+                bottom: 16px;
+            }
+        }
+
+        /* 3) 手機橫拿、很矮的視窗：照片高度用滿，關閉鈕與計數移到右上、右下角，左右各留 88px 給箭頭與角落按鈕 */
+        @media (orientation: landscape) and (max-width: 768px), (orientation: landscape) and (max-height: 599px) {
+            .lightbox-img {
+                max-width: calc(100vw - 176px);
+                max-height: calc(100vh - 24px);
+                max-height: calc(100dvh - 24px);
+            }
+
+            .lightbox-close {
+                top: 6px;
+                right: 6px;
+                width: 44px;
+                height: 44px;
+                padding: 0;
+                font-size: 2.25rem;
+                line-height: 44px;
+            }
+
+            .lightbox-counter {
+                left: auto;
+                right: 10px;
+                bottom: 12px;
+                transform: none;
+                letter-spacing: 0.1em;
+            }
+
+            .lightbox-btn {
+                font-size: 1.5rem;
+                padding: 10px;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
         }
 
         .room-slider {
