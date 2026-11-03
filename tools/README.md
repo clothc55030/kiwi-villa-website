@@ -79,3 +79,20 @@ python update-tide-data.py 2027 --from-json
 
 - **換照片要換新檔名**：`/images/*` 在瀏覽器快取一年，同一個檔名換內容，回訪的人會一直看到舊圖。腳本遇到已存在的檔名會直接停下。
 - 腳本只縮圖，不裁切、不調色；手機拍的 Display P3 照片會先轉成 sRGB。
+
+
+---
+
+# 位置頁：澎湖地圖（/location「期遇在哪裡？」）
+
+地圖是 `public/location.html` 裡的一段 inline SVG（`<!-- MAP:BEGIN -->` 到 `<!-- MAP:END -->`），由 `tools/make-location-map.py` 產生，**不要手改那一段**。海岸線來自內政部 1:1 萬村里界（npm 套件 taiwan-atlas 2021.9.20 重新發布的 TopoJSON，腳本第一次跑會自動下載）。
+
+1. 在專案根目錄執行（需要 shapely：`pip install shapely`）：
+   ```
+   python tools/make-location-map.py
+   ```
+   想先看效果不改網頁：`python tools/make-location-map.py --preview map.html`，用瀏覽器開 map.html。
+2. 要改標示點、文字或車程：改腳本上方的 `KIWI`、`POIS`、`TOWN_LABELS`（點用經緯度，文字位置用 SVG 單位的位移；地圖寬 1000 單位，1 單位約 25 公尺）。
+3. 要改顏色、字級：改 `location.html` 的 `.pm-*` 樣式（`MAP-CSS:BEGIN`／`MAP-CSS:END` 之間）。SVG 裡的 px 是地圖單位，會跟著地圖縮放，所以手機（600px 以下）另外放大字級。
+4. 改完一定要在手機（360～430 寬）和桌機各看一次：海面上的地名、時間不能壓到陸地，鄉市名要在陸地上；西嶼太窄放不下字，所以標在島西側的海面。
+5. 跑 `python tools/verify_site_integrity.py`，本地預覽確認後 git commit 併回 main 部署。
