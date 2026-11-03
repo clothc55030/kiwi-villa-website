@@ -392,7 +392,6 @@
         }
 
         /* 位置地圖：自家繪製的澎湖地圖（inline SVG，由 tools/make-location-map.py 依內政部村里界產生）＋導航按鈕。
-           地圖下方的「地圖資料：內政部國土測繪中心…」是政府資料開放授權條款要求的顯名，不能拿掉。
            不嵌入 Google 地圖：嵌入的地圖會在期遇旁邊標出其他民宿。
            SVG 裡的 px 是地圖座標（地圖寬 1000），會跟著地圖縮放；手機上地圖變小，所以字級另外放大 */
         /* MAP-CSS:BEGIN */
@@ -438,25 +437,6 @@
         .pm-north path { fill: #F9F7F3; opacity: 0.6; }
         .pm-north text, .pm-scale text { font-family: 'Cormorant Garamond', serif; font-size: 22px; fill: #F9F7F3; opacity: 0.6; }
         .pm-scale path { fill: none; stroke: #F9F7F3; stroke-width: 2; opacity: 0.5; }
-        /* 資料來源顯名（授權要求）：放在地圖右下方，跟比例尺一樣淡 */
-        .pm-credit {
-            padding: 0.35rem 0.75rem 0;
-            text-align: right;
-            font-family: var(--font-body);
-            font-size: 0.72rem;
-            line-height: 1.8;
-            letter-spacing: 0.04em;
-            color: rgba(249, 247, 243, 0.5);
-        }
-        .pm-credit span { display: inline-block; }
-        .pm-credit a {
-            color: inherit;
-            text-decoration: underline;
-            text-decoration-color: rgba(249, 247, 243, 0.3);
-            text-underline-offset: 3px;
-        }
-        .pm-credit a:hover,
-        .pm-credit a:focus-visible { color: #F9F7F3; }
 
         /* 手機上地圖寬約 370px（縮成 0.37 倍），字級放大才看得清楚；鄉市英文名拿掉，免得太擠 */
         @media (max-width: 600px) {
@@ -1057,7 +1037,7 @@
 <text class="pm-town pm-town-sea" x="95" y="390" text-anchor="middle">西嶼<tspan class="pm-town-en" x="95" dy="1.2em">Xiyu</tspan></text>
 <text class="pm-town" x="546" y="184" text-anchor="middle">白沙<tspan class="pm-town-en" x="546" dy="1.2em">Baisha</tspan></text>
 <text class="pm-town" x="842" y="546" text-anchor="middle">湖西<tspan class="pm-town-en" x="842" dy="1.2em">Huxi</tspan></text>
-<text class="pm-town" x="540" y="779" text-anchor="middle">馬公<tspan class="pm-town-en" x="540" dy="1.2em">Magong</tspan></text>
+<text class="pm-town" x="528" y="608" text-anchor="middle">馬公<tspan class="pm-town-en" x="528" dy="1.2em">Magong</tspan></text>
 <path class="pm-route" d="M495.3 485.1Q498.9 538.9 458.0 574.2"/>
 <path class="pm-route" d="M495.3 485.1Q567.7 580.1 685.7 598.9"/>
 <path class="pm-route" d="M495.3 485.1Q669.1 402.9 858.3 437.0"/>
@@ -1086,7 +1066,6 @@
 <g class="pm-north" transform="translate(950 52)"><path d="M0 -24L8 8L0 2L-8 8Z"/><text y="34" text-anchor="middle">N</text></g>
 <g class="pm-scale" transform="translate(36 817)"><path d="M0 0H78.4M0 -6V0M78.4 -6V0"/><text x="39.2" y="-14" text-anchor="middle">2 km</text></g>
 </svg>
-<figcaption class="pm-credit"><span>地圖資料：<a href="https://data.gov.tw/dataset/7438" target="_blank" rel="noopener">內政部國土測繪中心 2021 村里界圖</a>，</span><span>依<a href="https://data.gov.tw/license" target="_blank" rel="noopener">政府資料開放授權條款</a>釋出</span></figcaption>
 <!-- MAP:END -->
             </figure>
 

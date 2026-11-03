@@ -2,7 +2,6 @@
 
 海岸線用內政部 1:1 萬村里界（taiwan-atlas 套件重新發布的 TopoJSON，源自政府資料開放平臺「村里界圖」），
 畫馬公、湖西、白沙、西嶼四個鄉市＋周邊小島；配色、字體由 location.html 的 .pm-* 樣式控制。
-地圖下方的「地圖資料：內政部國土測繪中心 2021 村里界圖…」是政府資料開放授權條款要求的顯名，不能拿掉。
 
 2026-11-03 疊 Google 地圖核對過：海岸線大致吻合，只有北寮東岸（湖西風車一帶）Google 多畫了約 300～500 公尺的陸地。
 國土測繪中心的通用電子地圖與航照都跟村里界一致（海岸是一條斜直的沙灘，外面是淺海礁岩），
@@ -31,10 +30,6 @@ DATA_FILE = os.path.join(tempfile.gettempdir(), "taiwan-atlas-2021.9.20-villages
 LON0, LON1, LAT0, LAT1 = 119.458, 119.708, 23.503, 23.698
 W = 1000
 TOWNS = ["西嶼鄉", "白沙鄉", "馬公市", "湖西鄉"]
-# 資料來源顯名（政府資料開放授權條款第 3 條要求：提供機關、年份、資料名稱＋授權條款），放在地圖正下方
-CREDIT = ('<figcaption class="pm-credit"><span>地圖資料：<a href="https://data.gov.tw/dataset/7438" target="_blank" rel="noopener">'
-          '內政部國土測繪中心 2021 村里界圖</a>，</span><span>依<a href="https://data.gov.tw/license" target="_blank" rel="noopener">'
-          '政府資料開放授權條款</a>釋出</span></figcaption>')   # 兩個 span：手機上只在逗號後換行
 
 KIWI = {"lon": 119.5818157, "lat": 23.5868758,             # Google 商家官方 Pin（與 JSON-LD 相同）
         "name": "期遇度假會館", "en": "Kiwi Villa", "dx": 22, "dy": -104}
@@ -53,7 +48,7 @@ TOWN_LABELS = [  # 鄉市名的位置（經緯度，文字中心）；sea=True �
     {"zh": "西嶼", "en": "Xiyu", "lon": 119.4818, "lat": 23.6087, "sea": True},   # 西嶼太窄放不下字，標在島西側海面
     {"zh": "白沙", "en": "Baisha", "lon": 119.5945, "lat": 23.6559},   # 再往南「白」字會壓到港子西邊的海灣
     {"zh": "湖西", "en": "Huxi", "lon": 119.6685, "lat": 23.5730},
-    {"zh": "馬公", "en": "Magong", "lon": 119.5930, "lat": 23.5195},   # 澎南半島；再往西會壓到嵵裡的海灣
+    {"zh": "馬公", "en": "Magong", "lon": 119.5900, "lat": 23.5587},   # 市區碼頭東南邊；以前標在南邊的澎南半島，看起來像馬公在那裡
 ]
 
 KX = math.cos(math.radians((LAT0 + LAT1) / 2))
@@ -242,7 +237,6 @@ def build(data=None):
     o.append(f'<g class="pm-scale" transform="translate(36 {H - 34})"><path d="M0 0H{km2:.1f}M0 -6V0M{km2:.1f} -6V0"/>'
              f'<text x="{km2 / 2:.1f}" y="-14" text-anchor="middle">2 km</text></g>')
     o.append('</svg>')
-    o.append(CREDIT)
     return "\n".join(o)
 
 
