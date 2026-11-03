@@ -6,6 +6,7 @@
 1. 所有 HTML 檔案閉合完整性 (</body></html>)
 2. 所有 JSON-LD 結構化資料合法性 (json.loads)
 3. og:image / twitter:image 副檔名守則 (不可使用 webp)
+4. <img> 的 src / srcset 指到的本機圖檔都存在
 """
 
 import sys
@@ -13,6 +14,7 @@ import os
 import glob
 import re
 import json
+from urllib.parse import unquote
 
 # 避免 Windows 主控台 cp950 編碼輸出問題
 if sys.platform == "win32":
@@ -59,6 +61,22 @@ def verify_site():
         for img_url in og_images:
             if img_url.lower().endswith(".webp"):
                 errors.append(f"社群分享圖不可使用 WebP 格式 ({img_url})")
+
+        # 4. 檢查 <img> 的 src / srcset 指到的本機圖檔都存在（例如房型照的 -1600／-2400 大圖）
+        missing = []
+        for tag in re.findall(r'<img\b[^>]*>', content, re.I):
+            urls = re.findall(r'\ssrc=["\']([^"\']+)["\']', tag, re.I)
+            for srcset in re.findall(r'\ssrcset=["\']([^"\']+)["\']', tag, re.I):
+                urls += [c.split()[0] for c in srcset.split(',') if c.strip()]
+            for url in urls:
+                # 外部網址、data: 內嵌圖、JS 樣板字串裡的變數不檢查
+                if re.match(r'(?:[a-z][a-z0-9+.-]*:|//)', url, re.I) or '${' in url or '{{' in url:
+                    continue
+                path = unquote(url.split('#')[0].split('?')[0])
+                if not os.path.isfile(os.path.join(os.path.dirname(filepath), path.lstrip('/'))) and path not in missing:
+                    missing.append(path)
+        for path in missing:
+            errors.append(f"圖片檔不存在 ({path})")
 
         # 輸出結果
         if errors:

@@ -59,3 +59,23 @@ python update-tide-data.py 2027 --from-json
    並刪掉不再用到的舊照片。任何一個商品抓失敗就整批不寫入，把訊息貼給 Claude 即可。
 4. 本地預覽確認（`python -m http.server 8000 --directory public`），git commit 併回 main 部署。
 
+
+---
+
+# 房型頁：新增或更換房型照片
+
+房型頁每張照片有三種寬度（1008／1600／2400），瀏覽器依螢幕自己挑：舊筆電用 1008，手機和一般桌機多半用 1600，MacBook、iPad 這類 2x 螢幕用 2400。
+
+1. 從 `Desktop\民宿照片\<房號>\<房號>精选` 挑原檔。
+2. 在專案根目錄執行（需要 Pillow：`pip install pillow`）：
+   ```
+   python tools/room-photo.py "<原檔路徑>" <房型資料夾> <新檔名>
+   ```
+   房型資料夾：`luxuryFamily`（201）、`premiumQuad`（203）、`deluxeQuad`（205）、`premiumTwin`（301／302）、
+   `premiumTriple`（303）、`premiumDouble`（305／306／307）。
+   新檔名沿用 `penghu-kiwi-villa-<房型>-room<編號>`，編號接在該房型現有最後一號後面。
+3. 把腳本印出的 `<img>` 貼進 `public/rooms.html` 該房型的 `<div class="room-slider">` 裡，alt 照實描述照片內容。
+4. 跑 `python tools/verify_site_integrity.py`（會檢查三種寬度的檔案都在），本地預覽確認後 git commit 併回 main 部署。
+
+- **換照片要換新檔名**：`/images/*` 在瀏覽器快取一年，同一個檔名換內容，回訪的人會一直看到舊圖。腳本遇到已存在的檔名會直接停下。
+- 腳本只縮圖，不裁切、不調色；手機拍的 Display P3 照片會先轉成 sRGB。

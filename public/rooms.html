@@ -407,6 +407,14 @@
             transform: scale(1);
         }
 
+        /* 桌機：大圖會撐到接近滿版，上下各留 80px，避免蓋到右上關閉鈕與底部「1 / 10」計數
+           （JS 的 lbSizes 直接讀這裡算出的 max-width／max-height，不用兩邊同步改數字） */
+        @media (min-width: 769px) {
+            .lightbox-img {
+                max-height: calc(100vh - 160px);
+            }
+        }
+
         /* 切換時的純 CSS 快速淡入（不延遲、GPU 合成、不卡） */
         @keyframes lbImgFade {
             from { opacity: 0; }
@@ -1116,24 +1124,44 @@
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp" alt="澎湖期遇豪華家庭房 - 雲朵壁畫、兩張大床與兒童帳篷全景"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide active">
                         <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room2.webp" alt="澎湖期遇豪華家庭房 - 雲朵壁畫前的 King Size 大床"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room2.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room2-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room2-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room3.webp" alt="澎湖期遇豪華家庭房 - 兒童帳篷望向兩張大床與單人沙發"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room3.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room3-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room3-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room4.webp" alt="澎湖期遇豪華家庭房 - 房門感應鎖與拱形門廊"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room4.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room4-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room4-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, min(60vw, 960px), 60vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room5.webp" alt="澎湖期遇豪華家庭房 - 大床、電視與書桌"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room5.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room5-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room5-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room6.webp" alt="澎湖期遇豪華家庭房 - 「萌 201」門牌"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room6.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room6-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room6-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room7.webp" alt="澎湖期遇豪華家庭房 - 大床與窗邊沙發區"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room7.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room7-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room7-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room8.webp" alt="澎湖期遇豪華家庭房 - 玻璃淋浴間與洗手台"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room8.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room8-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room8-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, min(60vw, 960px), 60vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room9.webp" alt="澎湖期遇豪華家庭房 - 私人陽台"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room9.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room9-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room9-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room10.webp" alt="澎湖期遇豪華家庭房 - 浴缸"
+                            srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room10.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room10-1600.webp 1600w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room10-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1175,20 +1203,36 @@
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp" alt="澎湖期遇高級四人房 - 金色幾何吊燈與床頭"
+                            srcset="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp 1008w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1-1600.webp 1600w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide active" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room2.webp" alt="澎湖期遇高級四人房 - 兩張大床、電視與書桌"
+                            srcset="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room2.webp 1008w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room2-1600.webp 1600w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room2-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room3.webp" alt="澎湖期遇高級四人房 - 淋浴間"
+                            srcset="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room3.webp 1008w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room3-1600.webp 1600w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room3-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room4.webp" alt="澎湖期遇高級四人房 - 兩張拉扣床頭板大床"
+                            srcset="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room4.webp 1008w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room4-1600.webp 1600w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room4-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room5.webp" alt="澎湖期遇高級四人房 - 房間全景"
+                            srcset="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room5.webp 1008w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room5-1600.webp 1600w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room5-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room6.webp" alt="澎湖期遇高級四人房 - 洗手台與毛巾架"
+                            srcset="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room6.webp 1008w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room6-1600.webp 1600w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room6-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, max(min(40vw, 640px), 53vh), 40vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room7.webp" alt="澎湖期遇高級四人房 - 兩張大床與小茶几"
+                            srcset="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room7.webp 1008w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room7-1600.webp 1600w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room7-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room8.webp" alt="澎湖期遇高級四人房 - 私人陽台"
+                            srcset="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room8.webp 1008w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room8-1600.webp 1600w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room8-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1228,24 +1272,44 @@
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp" alt="澎湖期遇奢華四人房 - 仙人掌掛畫與大床"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide active" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room2.webp" alt="澎湖期遇奢華四人房 - 衛浴空間"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room2.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room2-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room2-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room3.webp" alt="澎湖期遇奢華四人房 - 兩間臥室相通"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room3.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room3-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room3-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room4.webp" alt="澎湖期遇奢華四人房 - 粉彩壁畫臥室與藍色沙發椅"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room4.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room4-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room4-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room5.webp" alt="澎湖期遇奢華四人房 - 粉彩壁畫臥室的大床"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room5.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room5-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room5-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room6.webp" alt="澎湖期遇奢華四人房 - 私人陽台"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room6.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room6-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room6-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room7.webp" alt="澎湖期遇奢華四人房 - 窗邊單人椅與衣帽架"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room7.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room7-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room7-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room8.webp" alt="澎湖期遇奢華四人房 - 大床、書桌與電視"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room8.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room8-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room8-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room9.webp" alt="澎湖期遇奢華四人房 - 洗手台"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room9.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room9-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room9-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, min(60vw, 960px), 60vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room10.webp" alt="澎湖期遇奢華四人房 - 床邊六角小桌與吊燈"
+                            srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room10.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room10-1600.webp 1600w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room10-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, min(60vw, 960px), 60vw"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1286,22 +1350,40 @@
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp" alt="澎湖期遇高級雙床房 - 魚群壁畫與兩張單人床"
+                            srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1-1600.webp 1600w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide active" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room2.webp" alt="澎湖期遇高級雙床房 - 床頭燈與魚群壁畫"
+                            srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room2.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room2-1600.webp 1600w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room2-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room3.webp" alt="澎湖期遇高級雙床房 - 兩張單人床與書桌"
+                            srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room3.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room3-1600.webp 1600w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room3-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room4.webp" alt="澎湖期遇高級雙床房 - 私人陽台"
+                            srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room4.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room4-1600.webp 1600w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room4-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, max(min(40vw, 640px), 53vh), 40vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room5.webp" alt="澎湖期遇高級雙床房 - 窗邊單人沙發"
+                            srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room5.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room5-1600.webp 1600w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room5-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, max(min(40vw, 640px), 53vh), 40vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room6.webp" alt="澎湖期遇高級雙床房 - 房間全景"
+                            srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room6.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room6-1600.webp 1600w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room6-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room7.webp" alt="澎湖期遇高級雙床房 - 玻璃淋浴間與衛浴"
+                            srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room7.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room7-1600.webp 1600w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room7-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, max(min(40vw, 640px), 53vh), 40vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room8.webp" alt="澎湖期遇高級雙床房 - 洗手台"
+                            srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room8.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room8-1600.webp 1600w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room8-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, max(min(40vw, 640px), 53vh), 40vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room9.webp" alt="澎湖期遇高級雙床房 - 馬克杯與小點心"
+                            srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room9.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room9-1600.webp 1600w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room9-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1342,20 +1424,36 @@
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp" alt="澎湖期遇高級三人房 - 船型單人床、雙人床與兒童帳篷"
+                            srcset="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp 1008w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1-1600.webp 1600w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide active" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room2.webp" alt="澎湖期遇高級三人房 - 雙人床、書桌與電視"
+                            srcset="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room2.webp 1008w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room2-1600.webp 1600w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room2-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room3.webp" alt="澎湖期遇高級三人房 - 藍白磁磚衛浴"
+                            srcset="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room3.webp 1008w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room3-1600.webp 1600w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room3-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, min(60vw, 960px), 60vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room4.webp" alt="澎湖期遇高級三人房 - 木櫃與熱水壺茶具"
+                            srcset="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room4.webp 1008w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room4-1600.webp 1600w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room4-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, min(60vw, 960px), 60vw"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room5.webp" alt="澎湖期遇高級三人房 - 房間全景"
+                            srcset="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room5.webp 1008w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room5-1600.webp 1600w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room5-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room6.webp" alt="澎湖期遇高級三人房 - 「KIWI」船型床"
+                            srcset="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room6.webp 1008w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room6-1600.webp 1600w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room6-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room7.webp" alt="澎湖期遇高級三人房 - 私人陽台"
+                            srcset="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room7.webp 1008w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room7-1600.webp 1600w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room7-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room8.webp" alt="澎湖期遇高級三人房 - 藍色馬賽克洗手台"
+                            srcset="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room8.webp 1008w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room8-1600.webp 1600w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room8-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, min(60vw, 960px), 60vw"
                             class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1396,56 +1494,108 @@
                 <div class="room-image-wrap">
                     <div class="room-slider">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp" alt="澎湖期遇高級雙人房 - 床頭抱枕特寫"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide active" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room2.webp" alt="澎湖期遇高級雙人房 - 雙人床、電視與書桌"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room2.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room2-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room2-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room3.webp" alt="澎湖期遇高級雙人房 - 白紗四柱床"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room3.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room3-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room3-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room4.webp" alt="澎湖期遇高級雙人房 - 衛浴空間"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room4.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room4-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room4-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room5.webp" alt="澎湖期遇高級雙人房 - 大床、書桌與木質衣櫃"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room5.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room5-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room5-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room6.webp" alt="澎湖期遇高級雙人房 - 陽台小桌與檸檬水"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room6.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room6-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room6-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room7.webp" alt="澎湖期遇高級雙人房 - 四柱紗帳床與書桌"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room7.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room7-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room7-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room8.webp" alt="澎湖期遇高級雙人房 - 紗帳與窗簾"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room8.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room8-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room8-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room9.webp" alt="澎湖期遇高級雙人房 - 淺綠色床頭板與吊燈"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room9.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room9-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room9-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room10.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room10.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room10-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room10-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, max(min(40vw, 640px), 53vh), 40vw"
                             alt="澎湖期遇高級雙人房 - 私人陽台" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room11.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room11.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room11-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room11-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 窗邊綠植" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room12.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room12.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room12-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room12-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 大理石紋衛浴" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room13.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room13.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room13-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room13-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 小圓桌上的點心與檸檬水" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room14.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room14.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room14-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room14-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 四柱紗帳床正面" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room15.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room15.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room15-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room15-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 帆船模型擺飾" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room16.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room16.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room16-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room16-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 陽台造型欄杆" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room17.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room17.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room17-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room17-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 淺綠色床頭板房間全景" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room18.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room18.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room18-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room18-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 洗手台" class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room19.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room19.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room19-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room19-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, max(min(40vw, 640px), 53vh), 40vw"
                             alt="澎湖期遇高級雙人房 - 玻璃淋浴間與馬桶" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room20.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room20.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room20-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room20-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 大床與藍色絨布單椅" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room21.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room21.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room21-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room21-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 衣帽架與四柱床" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room22.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room22.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room22-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room22-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 大床、書桌與灰色單椅" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room23.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room23.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room23-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room23-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 灰色床頭板大床與毛巾" class="slide" loading="lazy">
                         <img width="1008" height="1512" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room24.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room24.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room24-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room24-2400.webp 2400w"
+                            sizes="(max-width: 1024px) 100vw, max(min(40vw, 640px), 53vh), 40vw"
                             alt="澎湖期遇高級雙人房 - 窗邊灰色絨布單椅" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room25.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room25.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room25-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room25-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 大理石紋浴室" class="slide" loading="lazy">
                         <img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room26.webp"
+                            srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room26.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room26-1600.webp 1600w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room26-2400.webp 2400w"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) max(100vw, 90vh), (max-width: 1024px) 100vw, max(min(60vw, 960px), 120vh), 120vh"
                             alt="澎湖期遇高級雙人房 - 大床正面" class="slide" loading="lazy">
                     </div>
                     <div class="slider-controls">
@@ -1720,20 +1870,33 @@
             const lightboxNext = document.getElementById('lightbox-next');
             const lightboxCounter = document.getElementById('lightbox-counter');
 
-            let currentLightboxImages = [];
+            let currentLightboxImages = [];   // 每張：{ src, srcset, ratio(寬/高) }
             let currentLightboxIndex = 0;
 
-            // 預載指定索引的鄰圖（背景解碼快取，讓下次切換瞬間完成）
+            // 燈箱大圖：sizes 給「實際顯示寬度」（塞進 CSS 的 max-width × max-height、依直橫比例），
+            // 瀏覽器依螢幕密度從 srcset 挑 1008／1600／2400，圖也會放大到燈箱框（不再固定 1008×672）。
+            const lbSizes = (item) => {
+                const cs = getComputedStyle(lightboxImg);
+                const maxW = parseFloat(cs.maxWidth) || window.innerWidth * 0.9;
+                const maxH = parseFloat(cs.maxHeight) || window.innerHeight * 0.9;
+                return Math.round(Math.min(maxW, maxH * item.ratio)) + 'px';
+            };
+            const setLightboxSource = (img, item) => {
+                img.sizes = lbSizes(item);
+                img.srcset = item.srcset;
+                img.src = item.src;
+            };
+
+            // 預載指定索引的鄰圖（背景解碼快取，讓下次切換瞬間完成）；用同樣的 srcset/sizes，才會預載到燈箱實際要用的那個尺寸
             const preloadLightbox = (i) => {
                 if (!currentLightboxImages.length) return;
                 const k = (i + currentLightboxImages.length) % currentLightboxImages.length;
-                const im = new Image();
-                im.src = currentLightboxImages[k];
+                setLightboxSource(new Image(), currentLightboxImages[k]);
             };
             const updateLightboxImage = () => {
                 if (currentLightboxImages.length === 0) return;
-                // 鄰圖已預先載入快取，直接換 src 即可瞬間完成、不卡頓（同步、不依賴 decode）
-                lightboxImg.src = currentLightboxImages[currentLightboxIndex];
+                // 鄰圖已預先載入快取，直接換圖即可瞬間完成、不卡頓（同步、不依賴 decode）
+                setLightboxSource(lightboxImg, currentLightboxImages[currentLightboxIndex]);
                 lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
                 // 重啟純 CSS 快速淡入動畫（移除→強制 reflow→重加，無 setTimeout 延遲）
                 lightboxImg.classList.remove('lb-fade');
@@ -1750,13 +1913,17 @@
                 roomSlider.addEventListener('click', () => {
                     if (Date.now() - Number(roomSlider.dataset.swipedAt || 0) < 500) return;
                     const slides = Array.from(roomSlider.querySelectorAll('.slide'));
-                    currentLightboxImages = slides.map(slide => slide.src);
+                    currentLightboxImages = slides.map(slide => ({
+                        src: slide.src,
+                        srcset: slide.getAttribute('srcset') || '',
+                        ratio: Number(slide.getAttribute('width')) / Number(slide.getAttribute('height')) || 1.5
+                    }));
                     const activeSlide = roomSlider.querySelector('.slide.active');
                     currentLightboxIndex = slides.indexOf(activeSlide);
                     
                     if (currentLightboxIndex !== -1) {
                         lightboxImg.style.opacity = '1'; // Reset opacity
-                        lightboxImg.src = currentLightboxImages[currentLightboxIndex];
+                        setLightboxSource(lightboxImg, currentLightboxImages[currentLightboxIndex]);
                         lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
                         lightbox.classList.add('active');
                         document.body.style.overflow = 'hidden';
@@ -1786,6 +1953,12 @@
                 lightbox.classList.remove('active');
                 document.body.style.overflow = '';
             };
+
+            // 燈箱開著時轉手機方向或縮放視窗：重算顯示寬度（必要時改讀更大的圖）
+            window.addEventListener('resize', () => {
+                if (!lightbox.classList.contains('active') || !currentLightboxImages.length) return;
+                lightboxImg.sizes = lbSizes(currentLightboxImages[currentLightboxIndex]);
+            });
 
             lightboxClose.addEventListener('click', closeLightbox);
             let lbSwipedAt = 0;
