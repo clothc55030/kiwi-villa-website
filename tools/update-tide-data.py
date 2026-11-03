@@ -135,7 +135,7 @@ def validate(all_days, year):
 SYNODIC = 29.530588853
 EPOCH = datetime.datetime(2000, 1, 6, 18, 14)
 TIDE_AGE = 1.5
-LAT, LON, TZ = 23.5987, 119.6222, 8
+LAT, LON, TZ = 23.5979, 119.6726, 8   # 奎壁山摩西分海（2026-11 用 Google 地圖核對；原本經度誤植成 119.6222，差約 5 公里，日出日落約差 12 秒）
 ARRIVE_LEAD = {'big': 40, 'mid': 30, 'small': 20}
 RETURN_BEFORE = 30
 

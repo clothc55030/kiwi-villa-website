@@ -1,7 +1,12 @@
 """產生 /location「期遇在哪裡？」的澎湖地圖（inline SVG），寫進 public/location.html 的 MAP:BEGIN／MAP:END 之間。
 
-海岸線用內政部 1:1 萬村里界（taiwan-atlas 套件重新發布的 TopoJSON），
+海岸線用內政部 1:1 萬村里界（taiwan-atlas 套件重新發布的 TopoJSON，源自政府資料開放平臺「村里界圖」），
 畫馬公、湖西、白沙、西嶼四個鄉市＋周邊小島；配色、字體由 location.html 的 .pm-* 樣式控制。
+地圖下方的「地圖資料：內政部國土測繪中心 2021 村里界圖…」是政府資料開放授權條款要求的顯名，不能拿掉。
+
+2026-11-03 疊 Google 地圖核對過：海岸線大致吻合，只有北寮東岸（湖西風車一帶）Google 多畫了約 300～500 公尺的陸地。
+國土測繪中心的通用電子地圖與航照都跟村里界一致（海岸是一條斜直的沙灘，外面是淺海礁岩），
+Google 應該是把退潮才露出的潮間帶也畫成陸地，所以不要照 Google 改；OpenStreetMap 在這一段也跟村里界一樣。
 
 用法（專案根目錄）：
     pip install shapely
@@ -26,25 +31,29 @@ DATA_FILE = os.path.join(tempfile.gettempdir(), "taiwan-atlas-2021.9.20-villages
 LON0, LON1, LAT0, LAT1 = 119.458, 119.708, 23.503, 23.698
 W = 1000
 TOWNS = ["西嶼鄉", "白沙鄉", "馬公市", "湖西鄉"]
+# 資料來源顯名（政府資料開放授權條款第 3 條要求：提供機關、年份、資料名稱＋授權條款），放在地圖正下方
+CREDIT = ('<figcaption class="pm-credit"><span>地圖資料：<a href="https://data.gov.tw/dataset/7438" target="_blank" rel="noopener">'
+          '內政部國土測繪中心 2021 村里界圖</a>，</span><span>依<a href="https://data.gov.tw/license" target="_blank" rel="noopener">'
+          '政府資料開放授權條款</a>釋出</span></figcaption>')   # 兩個 span：手機上只在逗號後換行
 
 KIWI = {"lon": 119.5818157, "lat": 23.5868758,             # Google 商家官方 Pin（與 JSON-LD 相同）
         "name": "期遇度假會館", "en": "Kiwi Villa", "dx": 22, "dy": -104}
-POIS = [
-    # 馬公港岸邊（中央里／啟明里一帶）；市區與南海碼頭都約 9 分鐘
-    {"id": "port", "lon": 119.5668, "lat": 23.5646, "name": "馬公市區・碼頭", "time": "車程約 9 分鐘",
-     "dx": -146, "dy": 86, "anchor": "end", "curve": -0.25},
-    # 澎湖機場：Wikipedia 機場基準點 23°34′00″N 119°37′48″E
-    {"id": "air", "lon": 119.6300, "lat": 23.5667, "name": "澎湖機場", "time": "車程約 12 分鐘",
-     "dx": 16, "dy": 126, "anchor": "start", "curve": 0.2},
-    # 奎壁山（摩西分海）：湖西鄉北寮村北端
-    {"id": "moses", "lon": 119.6731, "lat": 23.6003, "name": "奎壁山摩西分海", "time": "車程約 18 分鐘",
-     "dx": -14, "dy": -100, "anchor": "middle", "curve": -0.16},
+POIS = [  # 座標皆為 Google 地圖上該地點的位置（2026-11-03 核對）
+    # 南海遊客中心（馬公港南海碼頭，新營路 25 號）；市區與碼頭都約 9 分鐘
+    {"id": "port", "lon": 119.5725091, "lat": 23.5664648, "name": "馬公市區・碼頭", "time": "車程約 9 分鐘",
+     "dx": -169, "dy": 94, "anchor": "end", "curve": -0.25},
+    # 澎湖機場（航廈）
+    {"id": "air", "lon": 119.6294323, "lat": 23.5607993, "name": "澎湖機場", "time": "車程約 12 分鐘",
+     "dx": 18, "dy": 100, "anchor": "start", "curve": 0.2},
+    # 奎壁山摩西分海（湖西鄉北寮村；步道從奎壁山 23.597237, 119.6719483 走到赤嶼 23.5986111, 119.6752778）
+    {"id": "moses", "lon": 119.672563, "lat": 23.5978987, "name": "奎壁山摩西分海", "time": "車程約 18 分鐘",
+     "dx": -12, "dy": -111, "anchor": "middle", "curve": -0.16},
 ]
 TOWN_LABELS = [  # 鄉市名的位置（經緯度，文字中心）；sea=True 表示標在海面上
     {"zh": "西嶼", "en": "Xiyu", "lon": 119.4818, "lat": 23.6087, "sea": True},   # 西嶼太窄放不下字，標在島西側海面
-    {"zh": "白沙", "en": "Baisha", "lon": 119.5940, "lat": 23.6518},
-    {"zh": "湖西", "en": "Huxi", "lon": 119.6700, "lat": 23.5730},
-    {"zh": "馬公", "en": "Magong", "lon": 119.5905, "lat": 23.5200},
+    {"zh": "白沙", "en": "Baisha", "lon": 119.5945, "lat": 23.6559},   # 再往南「白」字會壓到港子西邊的海灣
+    {"zh": "湖西", "en": "Huxi", "lon": 119.6685, "lat": 23.5730},
+    {"zh": "馬公", "en": "Magong", "lon": 119.5930, "lat": 23.5195},   # 澎南半島；再往西會壓到嵵裡的海灣
 ]
 
 KX = math.cos(math.radians((LAT0 + LAT1) / 2))
@@ -233,6 +242,7 @@ def build(data=None):
     o.append(f'<g class="pm-scale" transform="translate(36 {H - 34})"><path d="M0 0H{km2:.1f}M0 -6V0M{km2:.1f} -6V0"/>'
              f'<text x="{km2 / 2:.1f}" y="-14" text-anchor="middle">2 km</text></g>')
     o.append('</svg>')
+    o.append(CREDIT)
     return "\n".join(o)
 
 

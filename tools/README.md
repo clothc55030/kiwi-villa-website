@@ -85,7 +85,9 @@ python update-tide-data.py 2027 --from-json
 
 # 位置頁：澎湖地圖（/location「期遇在哪裡？」）
 
-地圖是 `public/location.html` 裡的一段 inline SVG（`<!-- MAP:BEGIN -->` 到 `<!-- MAP:END -->`），由 `tools/make-location-map.py` 產生，**不要手改那一段**。海岸線來自內政部 1:1 萬村里界（npm 套件 taiwan-atlas 2021.9.20 重新發布的 TopoJSON，腳本第一次跑會自動下載）。
+地圖是 `public/location.html` 裡的一段 inline SVG（`<!-- MAP:BEGIN -->` 到 `<!-- MAP:END -->`），由 `tools/make-location-map.py` 產生，**不要手改那一段**。海岸線來自內政部 1:1 萬村里界（npm 套件 taiwan-atlas 2021.9.20 重新發布的 TopoJSON，源自政府資料開放平臺「村里界圖」，腳本第一次跑會自動下載）。地圖下方那行「地圖資料：內政部國土測繪中心 2021 村里界圖，依政府資料開放授權條款釋出」是授權要求的顯名，由腳本的 `CREDIT` 一起產生，不能拿掉。
+
+標示點的座標都是 Google 地圖上該地點的位置（2026-11-03 核對）。海岸線疊 Google 地圖也核對過：大致吻合，只有北寮東岸（湖西風車一帶）Google 多畫了一片陸地；國土測繪中心的通用電子地圖和航照都跟村里界一樣（斜直的沙灘，外面是淺海礁岩），是 Google 把潮間帶也畫成陸地，所以那一段不用改。
 
 1. 在專案根目錄執行（需要 shapely：`pip install shapely`）：
    ```

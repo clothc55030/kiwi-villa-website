@@ -1357,7 +1357,7 @@
                     <ul id="hl-sun">
                         <li><strong>4/22（三）</strong>日出 05:34・05:19 前到岸邊、05:30 回閘門口</li>
                         <li><strong>5/7（四）</strong>日出 05:23・05:08 前到岸邊、05:30 回閘門口</li>
-                        <li><strong>5/21（四）</strong>日出 05:17・05:02 前到岸邊、05:30 回閘門口</li>
+                        <li><strong>5/21（四）</strong>日出 05:16・05:01 前到岸邊、05:30 回閘門口</li>
                         <li><strong>6/5（五）</strong>日出 05:13・04:58 前到岸邊、05:30 回閘門口</li>
                         <li><strong>7/5（日）</strong>日出 05:19・05:04 前到岸邊、05:30 回閘門口（唯一假日場）</li>
                     </ul>
@@ -1608,7 +1608,7 @@
             let TIDE = null;
             let TIDE_LABEL = '';
             // 潮汐資料檔 {年份: 版本}，由 tools/update-tide-data.py 自動維護（12 月更新明年資料時會保留今年，跨年那幾週兩年都查得到）
-            const TIDE_FILES = {"2026": "37d7ea17aa"};
+            const TIDE_FILES = {"2026": "4bc5eff3fb"};
 
             const pad = n => String(n).padStart(2, '0');
             const hmAdd = (hm, mins) => { let t = parseInt(hm.slice(0, 2)) * 60 + parseInt(hm.slice(3)) + mins; t = ((t % 1440) + 1440) % 1440; return pad(Math.floor(t / 60)) + ':' + pad(t % 60); };
@@ -1799,7 +1799,7 @@
             "addressRegion": "澎湖縣",
             "addressCountry": "TW"
         },
-        "geo": { "@type": "GeoCoordinates", "latitude": 23.5986, "longitude": 119.622 },
+        "geo": { "@type": "GeoCoordinates", "latitude": 23.5979, "longitude": 119.6726 },
         "isAccessibleForFree": true,
         "publicAccess": true,
         "image": "https://www.kiwi-villa.com/assets/og-moses.jpg",
@@ -1830,7 +1830,7 @@
         "description": "澎湖奎壁山赤嶼陸連島步道 2026 全年每日安全通行時段、建議抵達時間、最晚回程、合海估計時刻、潮差分級與日出場標注，依澎湖國家風景區管理處公告加值計算。",
         "url": "https://www.kiwi-villa.com/moses",
         "temporalCoverage": "2026-01-01/2026-12-31",
-        "spatialCoverage": { "@type": "Place", "geo": { "@type": "GeoCoordinates", "latitude": 23.5986, "longitude": 119.622 } },
+        "spatialCoverage": { "@type": "Place", "geo": { "@type": "GeoCoordinates", "latitude": 23.5979, "longitude": 119.6726 } },
         "distribution": { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://www.kiwi-villa.com/assets/tide-2026.json" },
         "isBasedOn": "https://www.penghu-nsa.gov.tw/Services/Tidenew",
         "license": "https://creativecommons.org/licenses/by/4.0/",
