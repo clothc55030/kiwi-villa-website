@@ -391,23 +391,59 @@
             color: var(--color-accent);
         }
 
-        .map-container {
+        /* 位置地圖：用自家插畫地圖＋導航按鈕。不嵌入 Google 地圖：嵌入的地圖會在期遇旁邊標出其他民宿 */
+        .map-figure {
+            width: min(760px, calc(100% - 2.5rem));
+            margin: 0 auto;
+            padding: clamp(1rem, 3vw, 2rem);
+            background: var(--color-bg);
+        }
+
+        .map-figure img {
+            display: block;
             width: 100%;
-            height: 60vh;
-            filter: grayscale(100%) invert(90%) contrast(80%);
-            /* 高質感深色地圖濾鏡 */
-            transition: filter 0.5s ease;
+            height: auto;
+            mix-blend-mode: multiply;
+            /* 圖檔是白底，疊在米色卡片上不留白框 */
         }
 
-        .map-container:hover {
-            filter: grayscale(0%) invert(0%) contrast(100%);
+        /* 詞組不拆行：窄螢幕時整組換到下一行（例如「市區約 9 分鐘」） */
+        .nowrap {
+            white-space: nowrap;
         }
 
-        /* 觸控裝置無 hover：直接顯示正常彩色地圖（手機尋路用） */
-        @media (hover: none) {
-            .map-container {
-                filter: none;
-            }
+        .map-figure figcaption {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--color-text-light);
+        }
+
+        .map-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: var(--spacing-md);
+            padding: 0 1.25rem;
+        }
+
+        .map-nav {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            min-height: 48px;
+            padding: 0.8rem 2.2rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            background: var(--color-accent);
+            color: #fff;
+            transition: background 0.3s ease;
+        }
+
+        .map-nav:hover {
+            background: #7a5f3f;
         }
 
         /* CTA */
@@ -951,20 +987,21 @@
             </div>
         </section>
 
-        <!-- Google Map -->
+        <!-- 位置地圖：自家插畫地圖＋Google 地圖導航按鈕（2026-11 拿掉 Google 地圖嵌入：嵌入會在期遇旁邊標出其他民宿） -->
         <section class="map-section reveal-up">
             <div class="map-header">
                 <h2 class="map-title">期遇在哪裡？</h2>
                 <p class="map-address"><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps/place/?q=place_id:ChIJp82ruCFbbDQRm-ZmRMmpVyE" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">澎湖縣馬公市西衛里347號</a></p>
             </div>
 
-            <!-- 使用 CSS 濾鏡將地圖轉換為符合品牌的深色系 -->
-            <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.486593466615!2d119.5818157!3d23.586875799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346c5b21b8abcda7%3A0x2157a9c94466e69b!2z5pyf6YGH5bqm5YGH5pyD6aSoS2l3aSBWaWxsYQ!5e0!3m2!1szh-TW!2stw!4v1782569118831!5m2!1szh-TW!2stw"
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade" title="期遇度假會館位置地圖">
-                </iframe>
+            <figure class="map-figure">
+                <img src="/images/location/penghu-map.webp" width="1200" height="971" loading="lazy" decoding="async"
+                    alt="澎湖本島分區插畫地圖：市區、湖西、白沙、西嶼、南邊，期遇度假會館標在馬公市區北側">
+                <figcaption><span class="nowrap">機場約 12 分鐘</span>・<span class="nowrap">碼頭約 9 分鐘</span>・<span class="nowrap">市區約 9 分鐘</span>・<span class="nowrap">奎壁山約 18 分鐘（車程）</span></figcaption>
+            </figure>
+
+            <div class="map-actions">
+                <a class="map-nav" href="https://www.google.com/maps/dir/?api=1&amp;destination=%E6%9C%9F%E9%81%87%E5%BA%A6%E5%81%87%E6%9C%83%E9%A4%A8&amp;destination_place_id=ChIJp82ruCFbbDQRm-ZmRMmpVyE" target="_blank" rel="noopener"><i class="fas fa-location-arrow" aria-hidden="true"></i>Google 地圖導航</a>
             </div>
         </section>
 
