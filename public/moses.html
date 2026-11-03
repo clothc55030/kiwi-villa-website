@@ -284,6 +284,23 @@
             animation: fadeUp 1.2s 0.2s both cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* 詞組不拆行（例如「海中步道」「場次」）：窄螢幕時整組換到下一行 */
+        .nowrap {
+            white-space: nowrap;
+        }
+
+        /* 手機上副標換成兩行時拿掉「｜」，免得它掉在第一行行尾 */
+        @media (max-width: 520px) {
+            .page-hero-subtitle .hero-sep {
+                display: none;
+            }
+
+            .page-hero-subtitle .nowrap {
+                display: block;
+                margin-top: 0.35em;
+            }
+        }
+
         /* FAQ 列表區塊 */
         .faq-section {
             padding: var(--spacing-xxl) 10%;
@@ -1243,7 +1260,7 @@
     <!-- Hero -->
     <header class="page-hero">
         <h1 class="page-hero-title"><span class="hero-cn">奎壁山摩西分海</span>Tide <span>Miracle</span></h1>
-        <p class="page-hero-subtitle">奎壁山・赤嶼｜退潮限定的海中步道</p>
+        <p class="page-hero-subtitle">奎壁山・赤嶼<span class="hero-sep" aria-hidden="true">｜</span><span class="nowrap">退潮限定的海中步道</span></p>
         <div class="sea-divider" aria-hidden="true">
             <svg viewBox="0 0 1200 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -1330,7 +1347,7 @@
         <section class="moses-section">
             <div class="reveal-up">
                 <div class="section-label">Highlights</div>
-                <h2 id="hl-title">2026 年值得特別安排的場次</h2>
+                <h2 id="hl-title">2026 年值得<span class="nowrap">特別安排的場次</span></h2>
                 <p class="lead">從全年 435 個通行場次裡，我們挑出兩種最值得排進行程的日子——上方查詢器輸入日期可看完整時間軸。</p>
             </div>
             <div class="hl-grid">
@@ -1701,7 +1718,7 @@
                     return '<li>' + label(x[0], x[1]) + x[2].o + '–' + x[2].c + '・' + x[2].arr + ' 前抵達</li>';
                 }, stale ? staleMsg : '今年剩下的週末已經沒有大潮完整分海場；明年場次會在澎管處公布新潮汐表後更新（約每年 12 月）。');
                 const title = document.getElementById('hl-title');
-                if (title) title.textContent = '接下來值得特別安排的場次';
+                if (title) title.innerHTML = '接下來值得<span class="nowrap">特別安排的場次</span>';
             }
 
             // 載入今年（以及已公布的明年）資料；舊年份檔案只在今年資料還沒上線時當備援

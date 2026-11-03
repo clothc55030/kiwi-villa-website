@@ -283,6 +283,11 @@
             animation: fadeUp 1.2s 0.2s both cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* 詞組不拆行（例如「馬公市」）：窄螢幕時整組換到下一行 */
+        .nowrap {
+            white-space: nowrap;
+        }
+
         .intro-hero-desc {
             max-width: 600px;
             margin-top: var(--spacing-lg);
@@ -951,7 +956,7 @@
     <!-- Hero -->
     <header class="intro-hero">
         <h1 class="intro-hero-title"><span class="hero-cn">會館介紹</span>The <span>Villa</span></h1>
-        <p class="intro-hero-subtitle">全館附設陽台與豪華電梯的馬公市質感民宿</p>
+        <p class="intro-hero-subtitle">全館附設陽台與豪華電梯的<span class="nowrap">馬公市質感民宿</span></p>
         <p class="intro-hero-desc">
             主人自住館內、親自接待——我們不追求客房數量，<br>只把每位旅客當成回家的家人，明碼標價，以品質與細節款待您在澎湖的每一晚。
         </p>

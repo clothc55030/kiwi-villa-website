@@ -81,19 +81,23 @@
 - **全螢幕選單**（2026-11 修正，8 頁各一份、內容相同，**改要 8 頁同步**）：選單從導覽列下方開始排——開選單時 JS（`setMenu`／`setMenuTop`）把導覽列實際高度寫進 `--menu-top`；字級、間距、訂房鈕都照 `--menu-fit`（＝可用高度扣掉導覽列、下方留白與固定部分 142px）等比例縮放，所以桌機大螢幕看起來跟以前一樣、矮螢幕自動縮小（最小 1.15rem，觸控區 ≥44px）；真的放不下才捲動（`.menu-links { margin: auto 0 }` 置中，放不下時從頂端開始）。手機橫拿或高 ≤500px 改兩欄。開著時 `html.menu-open` 鎖住背後頁面（`scrollbar-gutter: stable` 讓導覽列不跳動）；Esc 可關閉；高度用 `100dvh`。以前的問題：首頁項目擠在導覽列那排點不到、手機橫拿「首頁／立即訂房」跑出畫面、開選單時背後頁面會被捲走。
 - **轉換追蹤（GA4）**：每頁在 GA 設定 `<script>` 後面有一段點擊追蹤，訂房（owlting）、LINE、電話連結被點時送 `booking_click`／`line_click`／`phone_click`，參數 `link_location`（nav、menu、mobile_bar、room_card、whole_villa、footer 或所在 section）、`room`（房型卡片的房號）、`link_text`。新頁面要一起複製；按鈕位置靠 DOM 結構自動判斷，不用在連結上加屬性。
 - **LINE 直訂優惠**：手機浮動按鈕「LINE 直訂優惠」、房型頁每個預訂按鈕下方、首頁名句區、FAQ、llms.txt 都只寫「享專屬優惠」，**不寫優惠內容**（Ricky 依日期與房況調整）。
-- **Google 評價數**：頁面與 llms.txt 只寫約略數字（例如「近 200 則」），每年 12 月更新潮汐資料時順便檢查（見 `tools/README.md`）。結構化資料不放評分（自家評論不具星等資格）。
-- **刻意保留但未引用的檔案**：`images/location/penghu-map.webp`（插畫地圖，之後可用在 /location）、`images/logo/kiwi-villa-logo.png`（品牌主 Logo，外部可能引用）。
+- **Google 評價數**：頁面與 llms.txt 只寫約略數字（例如「200 則以上」），每年 12 月更新潮汐資料時順便檢查（見 `tools/README.md`）。結構化資料不放評分（自家評論不具星等資格）。
+- **首頁 hero 標題**：桌機 `.hero-title { margin-left: calc(-1 * var(--spacing-xl) - 0.4em) }`，先抵掉 `.hero-content` 的左內距，再固定往照片壓 0.4 個字寬（1024～2560 寬都壓進 27～51px）。改 hero 左內距或標題字級時一起看；以前寫 `-20%`，1366 寬會離照片 16px、1536 寬剛好貼邊，看起來像排歪。
+- **小標斷行**：中文詞組用 `.nowrap` 包起來（首頁、介紹頁、摩西頁都有這個 class）。中英或兩段並列的小標，分隔符號包在 `.hero-sep`，窄於 520px 時隱藏、後半段改成獨立一行（首頁「澎湖精品住宿｜Penghu Boutique Hotel」、摩西頁「奎壁山・赤嶼｜退潮限定的海中步道」），避免「|」掉在行尾。
+- **位置頁地圖**：用自家插畫地圖 `images/location/penghu-map.webp`（白底圖用 `mix-blend-mode: multiply` 疊在米色卡片上）＋「Google 地圖導航」按鈕（`maps/dir/?api=1&destination=…&destination_place_id=ChIJp82ruCFbbDQRm-ZmRMmpVyE`）。**不要再嵌入 Google 地圖**：嵌入的地圖會在期遇旁邊標出其他民宿（含名稱有「海景」的），桌機濾鏡也會讓期遇的圖釘變灰。
+- **刻意保留但未引用的檔案**：`images/logo/kiwi-villa-logo.png`（品牌主 Logo，外部可能引用）。
 
 ## 萬泰名產代訂頁（/wantai）
 
 住客掃房內 QR 桌卡（或收到 LINE 連結）打開，勾選萬泰食品的名產數量、填姓名電話與取貨方式，頁面產生訂單圖片＋文字，用 LINE 傳到官方帳號，Ricky 再轉給萬泰。
 
 - **取貨方式**：機場取貨／碼頭取貨（必填班次日期與時間，班次號碼選填）或宅配到府（必填地址；運費待定，依訂購量由 Ricky 告知）。沒有「送到民宿」，也不顯示萬泰的免運門檻。
-- **住客優惠**：`CONFIG.discountRate`（90＝9 折）。冷凍類與標記 `box12` 的氣泡酒不打折；品項列照原價，確認頁、訂單圖片與文字最後列「原價合計／住客優惠／折後合計」。
+- **住客優惠**：`CONFIG.discountRate`（90＝9 折）。冷凍類不打折（標記 `box12` 的品項也不打折，目前沒有）；品項列照原價，確認頁、訂單圖片與文字最後列「原價合計／住客優惠／折後合計」。
+- **不列酒類**：菸酒管理法第 30 條第 1 項不准用郵購、電子購物或其他無法辨識購買者年齡的方式賣酒（第 55 條罰 1–5 萬、按次處罰），這頁沒有年齡確認又能宅配，所以 2026-11 拿掉仙人掌氣泡酒、海鹽冰花氣泡酒（RAW、PMAP、CATALOG、照片一起刪）。價目表以後出現酒類也不要加進來；住客想買可以當面處理。
 - **商品照片與介紹**：點有縮圖的品項會開底部視窗（萬泰官網的照片、標語、簡介、規格），同系列口味在視窗裡直接選數量；手機返回鍵只會關視窗。`PMAP` 是「價目表品名 → 萬泰官網商品 handle」（必須維持標準 JSON），`CATALOG` 由 `tools/update-wantai-catalog.py` 產生、勿手改；照片在 `images/wantai/<商品id>-<照片id>.webp` 與 `-t.webp`（縮圖），檔名含照片 id，換照片就換檔名。官網沒有的品項不列進 PMAP（目前 23 項），列表顯示單位字樣的色塊。澎湖茶→風茹茶、鱈魚絲→鱈魚夾心絲是推定對應。
 - **純前端**：住客填的資料只存在他自己瀏覽器的 localStorage（`wantai-order-v1`），不上傳；訂單圖片用 canvas 在手機上畫。
 - **工具頁，不是內容頁**：`noindex`、不放 sitemap、不加進 8 頁的 footer／全螢幕選單，也沒有手機浮動 CTA（底部是訂單合計列）。視覺沿用官網 token 與字體（米底、霞鶩文楷、Inter／Noto Sans TC）。
-- **改價**：價目表在頁尾腳本的 `RAW`（每行「品名|單位|單價|標記」，chill＝須冷藏、box12＝一箱12瓶）。改完同步更新 `CONFIG.priceListVersion` 與頁尾的價目表日期。新增的品項若萬泰官網也有，記得在 `PMAP` 加對應再跑更新工具。
+- **改價**：價目表在頁尾腳本的 `RAW`（每行「品名|單位|單價|標記」，chill＝須冷藏、box12＝一箱12瓶且不打折）。改完同步更新 `CONFIG.priceListVersion` 與頁尾的價目表日期。新增的品項若萬泰官網也有，記得在 `PMAP` 加對應再跑更新工具。
 - **LINE**：`CONFIG.lineOaId = '@kiwivilla'`（與官網連的 page.line.me/ucz4004x 為同一帳號），按鈕用 `line.me/R/oaMessage/` 開聊天室並帶入訂單文字。
 - **GA4**：不套用其他頁的 `line_click` 等點擊追蹤（名產訂單不是訂房詢問），改送 `souvenir_view_item`（item_name＝看了哪個商品的介紹）、`souvenir_order`（value＝折後合計、discount、item_count、delivery＝air／port／ship）與 `souvenir_send`（method＝line／copy）。
 - QR 桌卡指向 `https://www.kiwi-villa.com/wantai`，改網址就要重印。
@@ -130,4 +134,4 @@ python tools/verify_site_integrity.py
 
 ---
 
-*最後更新：2026-11（全螢幕選單修正：導覽列下方排版、手機橫拿兩欄、鎖背後頁面、Esc；首頁特色區塊手機橫拿不再超出寬度；房型燈箱關閉鈕／計數不壓照片；房型照 1008／1600／2400 三種寬度＋srcset、燈箱讀大圖、`tools/room-photo.py`、完整性驗證加查圖檔存在；萬泰名產代訂頁 /wantai：商品照片與介紹、機場／碼頭取貨、住客 9 折）；2026-10（404 改版、刪除未引用檔案、快取標頭規則、中文不斜體、房型頁輪播與英文房名、頁尾網站導覽）*
+*最後更新：2026-11-03 下午（萬泰頁拿掉氣泡酒；FAQ 早餐依方案；位置頁改插畫地圖＋導航鈕；首頁標題固定壓進照片；手機小標斷行；萬泰頁載入不跳；評價數「200 則以上」）；2026-11（全螢幕選單修正：導覽列下方排版、手機橫拿兩欄、鎖背後頁面、Esc；首頁特色區塊手機橫拿不再超出寬度；房型燈箱關閉鈕／計數不壓照片；房型照 1008／1600／2400 三種寬度＋srcset、燈箱讀大圖、`tools/room-photo.py`、完整性驗證加查圖檔存在；萬泰名產代訂頁 /wantai：商品照片與介紹、機場／碼頭取貨、住客 9 折）；2026-10（404 改版、刪除未引用檔案、快取標頭規則、中文不斜體、房型頁輪播與英文房名、頁尾網站導覽）*

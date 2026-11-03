@@ -348,8 +348,9 @@
             font-size: clamp(4rem, 8vw, 8rem);
             font-weight: 300;
             line-height: 1;
-            margin-left: -20%;
-            /* 故意打破網格，與圖片重疊 */
+            margin-left: calc(-1 * var(--spacing-xl) - 0.4em);
+            /* 故意打破網格，與圖片重疊：抵掉左內距後再往照片壓 0.4 個字寬，各種螢幕寬度壓進的比例都一樣
+               （原本 -20% 會隨寬度變：1366 寬離照片 16px、1536 寬剛好貼邊、2560 寬壓進 128px） */
             color: var(--color-text);
             animation: fadeUp 1s 0.4s both cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
@@ -650,6 +651,18 @@
         /* 詞組不拆行（例如「海島生活」「不期而遇」）：窄螢幕時整組換到下一行 */
         .nowrap {
             white-space: nowrap;
+        }
+
+        /* 首頁小標：手機上英文會換到第二行，這時拿掉「|」，免得它掉在第一行行尾 */
+        @media (max-width: 520px) {
+            .hero-sep {
+                display: none;
+            }
+
+            .hero-subtitle .nowrap {
+                display: block;
+                margin-top: 0.35em;
+            }
         }
 
         .quote-text {
@@ -1142,7 +1155,7 @@
                     alt="澎湖期遇度假會館 歐風巴洛克建築外觀，一樓是連續拱廊" class="hero-image" fetchpriority="high">
             </div>
             <div class="hero-content">
-                <div class="hero-subtitle">澎湖精品住宿 | <span class="nowrap">Penghu Boutique Hotel</span></div>
+                <div class="hero-subtitle">澎湖精品住宿<span class="hero-sep" aria-hidden="true"> | </span><span class="nowrap">Penghu Boutique Hotel</span></div>
                 <h1 class="hero-title">
                     期遇<br>
                     <span class="italic">Villa</span>
