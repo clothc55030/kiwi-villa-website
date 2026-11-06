@@ -802,6 +802,17 @@
             align-items: center;
             min-height: 44px;
         }
+
+        /* 手機：hero 只佔約半個畫面（原本 90vh，第一屏只有標題），內容在第一屏就看得到；
+           用 svh：iPhone Safari 工具列還在的時候也不會超過看得到的範圍 */
+        @media (max-width: 768px) {
+            .faq-hero {
+                height: auto;
+                min-height: 48vh;
+                min-height: 48svh;
+                padding: 6.5rem 6% 2.5rem;
+            }
+        }
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}</style></noscript>
     <!-- Google Analytics 4-->

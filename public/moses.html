@@ -1224,6 +1224,39 @@
             align-items: center;
             min-height: 44px;
         }
+
+        /* 查詢結果下方：這天住期遇 → 帶好日期的訂房頁 */
+        .tide-book {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            margin-top: 1.1rem;
+            padding: 0.6rem 1.25rem;
+            border-radius: 4px;
+            background: var(--color-accent);
+            color: #fff;
+            font-size: 0.95rem;
+            letter-spacing: 0.06em;
+            line-height: 1.5;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .tide-book:hover {
+            background: var(--color-accent-text);
+            color: #fff;
+        }
+
+        /* 手機：hero 只佔約半個畫面（原本 90vh，第一屏只有標題），內容在第一屏就看得到；
+           用 svh：iPhone Safari 工具列還在的時候也不會超過看得到的範圍 */
+        @media (max-width: 768px) {
+            .page-hero {
+                height: auto;
+                min-height: 48vh;
+                min-height: 48svh;
+                padding: 6.5rem 6% 2.5rem;
+            }
+        }
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}
 </style></noscript>
@@ -1723,6 +1756,21 @@
                     html += '</ul></div>';
                 });
                 html += '</div>';
+                // 這天住期遇：清晨、上午場建議前一晚入住（訂房系統的日期最早只能是台灣的今天）
+                const twToday = new Date(Date.now() + 8 * 36e5).toISOString().slice(0, 10);
+                if (iso >= twToday) {
+                    const shift = function (v, k) { const t = new Date(v + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + k); return t.toISOString().slice(0, 10); };
+                    const first = day.s.find(function (x) { return !x.closed; });
+                    const early = !!first && (first.tag === 'dawn' || first.tag === 'morning');
+                    let ci = early ? shift(iso, -1) : iso;
+                    if (ci < twToday) ci = twToday;
+                    const url = 'https://booking.owlting.com/kiwi-villa?start=' + ci + '&end=' + shift(ci, 1) + '&adult=2';
+                    const md = Number(ci.slice(5, 7)) + '/' + Number(ci.slice(8, 10));
+                    html += '<a class="tide-book" href="' + url + '" target="_blank" rel="noopener">'
+                        + (ci < iso ? '前一晚住期遇，清晨出發不趕：查 ' + md + ' 入住的空房' : '這天住期遇：查 ' + md + ' 入住的空房') + ' →</a>';
+                    const ctaBook = document.querySelector('.moses-cta .cta-book');
+                    if (ctaBook) ctaBook.href = url;
+                }
                 html += '<p class="tide-meta">以上時刻為依潮汐原理計算之參考值，實際開放以現場旗幟與廣播為準。</p></div>';
                 tideResult.innerHTML = html;
             }
