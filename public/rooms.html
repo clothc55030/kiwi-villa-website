@@ -1392,9 +1392,15 @@
             padding-top: var(--spacing-xl);
         }
 
-        /* 從房型一覽點過來時，房型標題不要被固定的導覽列蓋住 */
+        /* 從房型一覽點過來時，房型標題不要被固定的導覽列蓋住；目標房型直接顯示（不等捲動淡入，位置才不會差 40px） */
         .room-showcase {
             scroll-margin-top: 90px;
+        }
+
+        .room-showcase.reveal-up:target {
+            opacity: 1;
+            transform: none;
+            transition: none;
         }
 
         @media (max-width: 480px) {

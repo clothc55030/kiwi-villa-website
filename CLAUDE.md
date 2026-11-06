@@ -14,7 +14,7 @@
 ### ⚠️ 架構限制（嚴格遵守）
 - ❌ 不得加入任何後端功能（Node.js, PHP, Python 伺服器等）、伺服器端資料庫、需伺服器處理的表單或 API
 - ❌ **不使用任何建置系統**（無 npm/webpack/打包）；直接編輯 HTML 即上線
-- ✅ 僅前端技術；可用第三方前端服務（Google Fonts、Font Awesome、Elfsight 評論牆等）
+- ✅ 僅前端技術；可用第三方前端服務（Google Fonts、Elfsight 評論牆等）。Font Awesome 已於 2026-11 拿掉，圖示改內嵌 SVG（見「技術重點」的字體與圖示）
 
 ## 真實架構（重要：與舊版文件不同，請以此為準）
 
@@ -24,7 +24,7 @@
 - **JS**：每頁尾端一個內聯 `<script>`（捲動進場、nav 滾動變色、全螢幕選單）。`rooms.html` 另含 slider/lightbox、`faq.html` 另含手風琴。`js/` 目錄目前為空。
   - 曾嘗試把共用 JS 抽到外部 `js/site.js`，但因下述「reveal 陷阱」在某些預覽環境造成內文消失而**已還原**。要再抽外部 JS，必須先加「JS 失效時內文仍可見」的 fallback。
 - **各頁 `:root` 設計 token 已分岔**（顏色、間距尺度不一致），且 nav/footer/JSON-LD/footer 連結等在各頁各複製一份。**任何全站性樣式/結構修改通常要同步改 7-8 個 HTML**。
-- **CSP**（`_headers`）實際含 `'unsafe-inline'` 與 `'unsafe-eval'`（因全站內聯 + Elfsight 第三方腳本需要），並非嚴格 CSP。
+- **CSP**（`_headers`）含 `'unsafe-inline'`（全站內聯），並非嚴格 CSP。`'unsafe-eval'` 已於 2026-11 拿掉（11/07 實測評價頁 Elfsight 不需要）；`frame-src` 只放行 Elfsight 與 YouTube（位置頁不嵌 Google 地圖）。新增第三方服務時記得補 CSP。
 
 ### 🚨 reveal 陷阱（修改前必讀）
 全站內文都包在 `.reveal-up`（CSS 預設 `opacity:0`，靠內聯 JS 在捲動時加 `.active` 才淡入）。
@@ -70,18 +70,31 @@
 - **圖片**：優先 WebP/AVIF，`<img loading="lazy">` 原生懶載入（**非** IntersectionObserver）。多數 `<img>` 已補 `width/height` 防 CLS。
 - **首頁照片**（2026-10 更換）：放在 `images/home/`，原檔在 Ricky 電腦的 `Desktop\民宿照片`（2018 年攝，全 sRGB）。目前用：外观 304A0840（hero／og，裁掉右側鄰房）、半島微風用 Ricky 以 Gemini 依顶楼 304A0706 生成的注水版（原照泳池是空的；檔名加 -water，避免舊圖被瀏覽器長期快取）、外观 304A0849（立體美學）、201精选 304A0169（專屬寧靜）、夜景 304A0933（名句區背景，裁掉右側怪手）。
 - **社群分享圖（og:image）**：首頁用 `assets/og-home.jpg`（外觀照 1200×630）；首頁 JSON-LD 的 `image` 用 `images/home/penghu-kiwi-villa-exterior-1920.webp` 與 og-home.jpg。舊的 `assets/og-image.jpg/.webp` 已於 2026-10 刪除。2026-07 起可為各頁做**專屬** og 圖，命名慣例 `assets/og-<slug>.jpg`（如 `og-rooms.jpg`），沿用 hero 視覺（米底＋中文小標＋「The ___」Cormorant Garamond 大字＋副標）以 PIL 腳本批次生成。**格式守則**：`og:image`／`twitter:image` 一律用 **JPEG/PNG，不要用 WebP**（LINE 等社群爬蟲對 webp 預覽支援不穩，會導致縮圖不顯示）；webp 只用於網頁內 `<img>` 與 JSON-LD `image`。文字為主的分享圖，PNG 邊緣最利，用 JPEG 則需 `quality≥95 + subsampling=0`。
-- **字體**：Google Fonts（全站 Cormorant Garamond + LXGW WenKai TC + Noto Sans TC，房型頁以外另有 Inter；房型頁原本的 Playfair Display 已於 2026-10 換成霞鶩文楷）、`display=swap`、有 preconnect。Font Awesome 自 cdnjs 以非阻塞方式載入（`media="print" onload`，含 `<noscript>` 後備）。
+- **字體**（2026-11 起，Ricky 看過對照頁後同意）：Google Fonts 只載 Cormorant Garamond（英文大標）、Inter（英文內文，房型頁沒有）與**霞鶩文楷 400**（中文標題；原本的 300 拿掉，用 300 的大標會稍微變粗）。**中文內文用各裝置內建字**：`--font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans CJK TC', 'Microsoft JhengHei', sans-serif`（iPhone／Mac 蘋方、Windows 微軟正黑體、Android 依品牌；房型頁同一串但沒有 Inter）。原本的 Noto Sans TC 佔每頁 1MB 以上，已拿掉，**不要加回**。`display=swap`、有 preconnect。
+- **圖示**：內嵌 SVG（取自 Font Awesome Free 6.4.0，CC BY 4.0，每頁 `<head>` 有一行出處註解），寫法 `<svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="…"/></svg>`；大小、顏色跟著文字（`.icon` 樣式在每頁 `<style>` 開頭）。新增圖示：從 Font Awesome 6.4.0 的 `svgs/solid/<名稱>.svg` 複製 path，`width` = viewBox 寬 ÷ 512 em。**不要再用 `<i class="fas …">`**（Font Awesome 的 CSS 已拿掉，不會顯示；完整性檢查會擋）。
 - **SEO**：每頁獨特 title/description、Open Graph、canonical（無後綴）；結構化資料以首頁 `LodgingBusiness`（`@id` = `https://www.kiwi-villa.com/#lodging`）為單一主實體，其餘頁以 `@id` 參照。FAQ 頁有 `FAQPage`。
-- **手機**：底部固定浮動 CTA（線上訂房 + LINE）；觸控目標 ≥44px。
-- **快取（`_headers`）**：Cloudflare Pages 會把「多條規則都命中的同名標頭」用逗號串起來，所以 `Cache-Control` **不放在 `/*`**，每個網頁路徑各一條、靜態資源 `/images/*`、`/assets/*`、`/js/*` 一年 immutable。**新增頁面時要在 `_headers` 補該路徑的 Cache-Control**。`*.pages.dev` 網址一律 `X-Robots-Tag: noindex`。
+- **手機**：底部固定浮動 CTA（線上訂房 + LINE，`role="navigation" aria-label="快速訂房"`）；觸控目標 ≥44px（頁尾連結、麵包屑、文字連結在 2026-11 補到 44px）。
+- **手機內頁 hero**（2026-11）：7 個內頁的 hero 桌機維持 90vh；手機（≤768px）改 `height: auto; min-height: 48svh`，第一屏就看得到內容（原本第一屏只有標題、麵包屑還被浮動列蓋住一半）。規則在各頁 `<style>` 最後面。
+- **訂房連結與查空房**（2026-11）：OwlNest 訂房頁接受 `?start=YYYY-MM-DD&end=YYYY-MM-DD&adult=N`（另有 child、infant；早於今天會被改回今天；**沒有指定房型的參數**；`lang` 只開 zh_TW）。
+  - 所有訂房連結都帶 `?adult=2`；房型卡依房型帶人數（201／203／205＝4、303＝3、301／305＝2）。JSON-LD 裡的訂房網址不帶參數。
+  - 「查空房」元件 `.avail`（入住、退房、人數 1–4、查空房鈕）在首頁 hero 下方（`#avail-home`）與房型頁 hero。按鈕是 `<a>`，JS 隨輸入改 `href`（不用 `<form>`：CSP 有 `form-action 'self'`）；最早只能選台灣的今天，預設今天入住、隔天退房。CSS 與 JS 在 index、rooms 各一份（JS 在手機浮動 CTA 前面）。
+  - 摩西分海頁：查詢結果下方有「這天住期遇：查 ○/○ 入住的空房」；第一個開放場次是清晨或上午場時改成「前一晚住期遇」（入住日 = 前一天，最早今天）。頁尾「查看房型與空房」也跟著換成查詢的那天。邏輯在 `renderDay()`。
+- **房型價格出現在 4 個地方**：房型頁每張房型卡（`平日 NT$… 起／晚`）、房型頁上方「房型一覽」表、首頁「The Rooms」房型卡、`llms.txt`。改價格要 4 處一起改（完整性檢查會比對，不一致就失敗）。
+- **首頁區塊**（2026-11 加）：hero → 查空房 → 介紹 → The Experience → The Rooms（6 種房型照片、人數坪數、起價，點了到房型頁對應房型）→ The Reviews（Google 5.0・200 則以上＋兩則短評，文字與評價頁「住客怎麼說」相同）→ The Location（市區 9、碼頭 9、機場 12、摩西分海 18 分鐘＋交通、摩西查詢兩張卡）→ 名句與訂房。h1 包含小標「澎湖精品住宿｜Penghu Boutique Hotel」與「期遇 Villa」（外觀不變）。hero 徽章：早餐寫「手作早餐（含早方案）」、另有「Google 5.0・200 則以上評價」；桌機 hero 右欄上下內距改 6rem，否則 1440×900 會比一個畫面高 16px。
+- **房型頁「房型一覽」**：人數｜坪數｜平日起價，房名連到 `#room-…`。房型卡 `scroll-margin-top: 90px`，`:target` 時不等淡入（否則落點差 40px）。
+- **快取（`_headers`）**：Cloudflare Pages 會把「多條規則都命中的同名標頭」用逗號串起來，所以 `Cache-Control` **不放在 `/*`**，每個網頁路徑各一條、靜態資源 `/images/*`、`/assets/*`、`/js/*` 一年 immutable。**新增頁面時要在 `_headers` 補該路徑的 Cache-Control**（完整性檢查會擋）。`*.pages.dev` 網址一律 `X-Robots-Tag: noindex`。HSTS 實際由 Cloudflare 區域設定送出（180 天、includeSubDomains、preload），`_headers` 寫成一樣；要改一年得改 Cloudflare 的設定。
 - **中文不斜體**：每頁 `<style>` 開頭有 `html { font-synthesis: weight; }`，讓 `font-style: italic` 只作用在有真斜體的英文（Cormorant Garamond），中文維持正體。新頁面要一起加。
 - **房型頁**：英文房名以訂房系統（OwlNest）為準（高級＝Superior、豪華＝Deluxe、奢華＝Luxury，並帶 with Balcony／with Bathtub）。輪播只渲染「目前＋前後各一張」（`.slide.active`／`.slide.is-near`，其餘 `display:none` 不下載）；手機可左右滑、燈箱可左右滑與下滑關閉。新增照片時 alt 照實描述照片內容。中文標題用霞鶩文楷（與其他頁一致）。
 - **房型照三種寬度**（2026-11，原本只有 1008 寬，在 2x 螢幕與手機被放大約 2 倍而發糊）：`<檔名>.webp`（1008，`src` 預設）、`-1600.webp`、`-2400.webp`，全部由精选原檔（`Desktop\民宿照片\<房號>\<房號>精选`）直接縮（Lanczos、WebP q80；壓完每像素超過 0.8 bit 的紋理重照片用 q74），不裁切、不調色。`<img>` 用 `srcset` + `sizes` 讓瀏覽器依螢幕挑。`sizes` 寫的是照片框經 `object-fit: cover` 後**實際被畫出來的寬度**：橫式一律同一組（桌機框高 80vh → 120vh；手機刻意寫 100vw，讓手機拿 1600 而不是 2400）；直式分「單數房型（照片在 6fr 欄）」與「雙數房型（4fr 欄）」兩組 → **調整房型順序、照片框寬高時，`sizes` 要跟著改**（`tools/room-photo.py` 內有同一份）。燈箱用同一份 srcset，JS（`lbSizes`）依燈箱框的 CSS `max-width／max-height` 算 sizes 並預載相鄰照片的同一尺寸。**燈箱版面分三組 media（條件互不重疊），關閉鈕與「1 / 10」計數一律不壓到照片**：桌機／平板（寬 ≥769 且高 ≥600）照片上下各留 80px；手機直拿上下各留 56px、關閉鈕與計數貼近上下邊緣；手機橫拿或矮視窗照片高度用滿、左右各留 88px，關閉鈕與計數移到右上／右下角。燈箱高度用 `100dvh`（手機瀏覽器工具列展開時不會有一截藏在後面）。改這幾組數字只要改 CSS，JS 會自動讀。新增／換照片用 `python tools/room-photo.py`（見 `tools/README.md`），換照片一定換新檔名（/images 一年快取）。JSON-LD 的 `image` 仍指 1008 版。
 - **頁尾**：8 頁都有「Explore」網站導覽（8 個頁面連結）。新增頁面時 8 個 footer 與全螢幕選單都要加。
 - **全螢幕選單**（2026-11 修正，8 頁各一份、內容相同，**改要 8 頁同步**）：選單從導覽列下方開始排——開選單時 JS（`setMenu`／`setMenuTop`）把導覽列實際高度寫進 `--menu-top`；字級、間距、訂房鈕都照 `--menu-fit`（＝可用高度扣掉導覽列、下方留白與固定部分 142px）等比例縮放，所以桌機大螢幕看起來跟以前一樣、矮螢幕自動縮小（最小 1.15rem，觸控區 ≥44px）；真的放不下才捲動（`.menu-links { margin: auto 0 }` 置中，放不下時從頂端開始）。手機橫拿或高 ≤500px 改兩欄。開著時 `html.menu-open` 鎖住背後頁面（`scrollbar-gutter: stable` 讓導覽列不跳動）；Esc 可關閉；高度用 `100dvh`。以前的問題：首頁項目擠在導覽列那排點不到、手機橫拿「首頁／立即訂房」跑出畫面、開選單時背後頁面會被捲走。
-- **轉換追蹤（GA4）**：每頁在 GA 設定 `<script>` 後面有一段點擊追蹤，訂房（owlting）、LINE、電話連結被點時送 `booking_click`／`line_click`／`phone_click`，參數 `link_location`（nav、menu、mobile_bar、room_card、whole_villa、footer 或所在 section）、`room`（房型卡片的房號）、`link_text`。新頁面要一起複製；按鈕位置靠 DOM 結構自動判斷，不用在連結上加屬性。
+- **轉換追蹤（GA4）**：每頁在 GA 設定 `<script>` 後面有一段點擊追蹤，訂房（owlting）、LINE、電話連結被點時送 `booking_click`／`line_click`／`phone_click`，參數 `link_location`（nav、menu、mobile_bar、avail＝查空房、room_card、whole_villa、footer 或所在 section）、`room`（房型卡片的房號）、`link_text`；`booking_click` 另外從連結網址帶出 `checkin`、`checkout`、`adult`（2026-11 起）。新頁面要一起複製；按鈕位置靠 DOM 結構自動判斷，不用在連結上加屬性。
+  - 官網 GA4 看不到成交：OwlNest 訂房頁的追蹤碼要請奧丁丁客服加（Ricky 進不去後台這項設定），加好後再設 GA4 跨網域（kiwi-villa.com、owlting.com、booking-owlnest.com）。
 - **LINE 直訂優惠**：手機浮動按鈕「LINE 直訂優惠」、房型頁每個預訂按鈕下方、首頁名句區、FAQ、llms.txt 都只寫「享專屬優惠」，**不寫優惠內容**（Ricky 依日期與房況調整）。
-- **Google 評價數**：頁面與 llms.txt 只寫約略數字（例如「200 則以上」），每年 12 月更新潮汐資料時順便檢查（見 `tools/README.md`）。結構化資料不放評分（自家評論不具星等資格）。
+- **Google 評價數**：頁面與 llms.txt 只寫約略數字（例如「200 則以上」、評價頁數字卡「200+」），出現在評價頁、首頁 hero 徽章與 The Reviews、llms.txt；每年 12 月更新潮汐資料時順便檢查（見 `tools/README.md`）。結構化資料不放評分（自家評論不具星等資格）。
+- **FAQ**（2026-11 依旅客最常問的順序排）：早餐 → 入住退房（最晚 20:00，更晚請提前聯繫）→ 接送與租車（沒有接送機；配合車行提供機場／碼頭↔車行免費接駁、租機車載不了行李可免費送到民宿；需要租車可 LINE 聯繫）→ 機場碼頭怎麼來 → 停車 → … → 最後「我們的房價是怎麼訂的？」（原本第一題「為什麼我們房價比周圍的都貴？」，改名移到最後）。頁面與 `FAQPage` 結構化資料同順序、同內容。戲水池開放 10:00–22:00（FAQ 設施題、房型頁包棟區、llms.txt）。以上說法是 Ricky 2026-11-07 給的。
+- **llms.txt** 是給 AI 助理的官方事實表：頂端有「最後更新」日期、訂房連結的參數寫法、接送、最晚入住、戲水池時間，最後有英文摘要。服務或價格有變，先改官網與 llms.txt，再改 OwlNest、Google 商家檔案、OTA。
+- **無障礙**（2026-11）：小字用 `--color-accent-text: #806340`（米白底 5.2:1；原色 `#8E704B` 只有 4.3:1，大標維持原色）；摩西頁 `--color-sea` 由 `#57808F` 加深為 `#466B78`。Menu 鈕 `aria-label` 為「Menu 選單」／「Close 關閉選單」並同步 `aria-expanded`；頁尾標題用 h2；FAQ 手風琴有 `aria-expanded`；房型燈箱是 `role="dialog"`。每頁 `<style>` 有 `prefers-reduced-motion`（關掉淡入、動畫、平滑捲動，內容直接顯示）。LINE 綠底白字對比只有 2.3:1，是品牌色，刻意保留。
 - **首頁 hero 標題**：桌機 `.hero-title { margin-left: calc(-1 * var(--spacing-xl) - 0.4em) }`，先抵掉 `.hero-content` 的左內距，再固定往照片壓 0.4 個字寬（1024～2560 寬都壓進 27～51px）。改 hero 左內距或標題字級時一起看；以前寫 `-20%`，1366 寬會離照片 16px、1536 寬剛好貼邊，看起來像排歪。
 - **小標斷行**：中文詞組用 `.nowrap` 包起來（首頁、介紹頁、摩西頁都有這個 class）。中英或兩段並列的小標，分隔符號包在 `.hero-sep`，窄於 520px 時隱藏、後半段改成獨立一行（首頁「澎湖精品住宿｜Penghu Boutique Hotel」、摩西頁「奎壁山・赤嶼｜退潮限定的海中步道」），避免「|」掉在行尾。首頁 hero 在桌機版右欄也可能放不下一行（約 993～1110 寬，例如 iPad 橫拿 1024），所以另用 container query：`.hero-content` 設 `container-type: inline-size`，右欄內容寬窄於 440px（小標一行約需 412px）時一樣拿掉「|」；改小標字級、字距或 hero 內距時，這個門檻要重新量。介紹頁副標在 359px 以下的小手機把字距縮成 0.2em，否則會拆成「電／梯」。
 - **位置頁地圖**（2026-11 重畫）：「期遇在哪裡？」是 inline SVG 澎湖地圖（深藍海面＋沙色陸地＋淡淡的海圖等深線，配色字體與官網一致），標期遇、馬公市區・碼頭 9 分、澎湖機場 12 分、奎壁山摩西分海 18 分，下面接「Google 地圖導航」按鈕（`maps/dir/?api=1&destination=…&destination_place_id=ChIJp82ruCFbbDQRm-ZmRMmpVyE`）。SVG 由 `tools/make-location-map.py` 依內政部村里界產生、寫在 `location.html` 的 `MAP:BEGIN／END` 之間（**勿手改**），樣式在 `MAP-CSS:BEGIN／END`；步驟見 `tools/README.md`。文字是真的文字（用網站字體、搜尋引擎讀得到），海面上的字用底色描邊（`paint-order: stroke`），手機另外放大字級。原本的插畫地圖 `penghu-map.webp` Ricky 覺得不好看，已刪除。**不要再嵌入 Google 地圖**：嵌入的地圖會在期遇旁邊標出其他民宿（含名稱有「海景」的），桌機濾鏡也會讓期遇的圖釘變灰。
@@ -114,9 +127,13 @@ python -m http.server 8000 --directory public
 ```
 
 ```bash
-# 提交前完整性驗證：每頁結尾須為 </body></html>，每段 JSON-LD 須可解析，<img> 的 src／srcset 圖檔都要存在
+# 提交前完整性驗證：每頁結尾須為 </body></html>，每段 JSON-LD 須可解析，<img> 的 src／srcset 圖檔都要存在，
+# 沒有 Font Awesome 標籤；全站：8 頁共用區塊（選單、頁尾、浮動列、點擊追蹤）一致、每頁有 Cache-Control、
+# 站內連結與錨點都對得到、sitemap lastmod 不落後（需要完整 git 歷史）、房型價格 4 處一致
 python tools/verify_site_integrity.py
 ```
+
+GitHub Actions（`.github/workflows/verify.yml`）在 push／PR 到 main 時跑同一支檢查，checkout 用 `fetch-depth: 0` 才能比對 sitemap 日期。**改了哪一頁，就把 `sitemap.xml` 那頁的 `<lastmod>` 改成當天**，否則檢查會失敗。
 
 無 package.json / 無建置；改 HTML 後直接 commit 即可。
 
@@ -133,8 +150,9 @@ python tools/verify_site_integrity.py
 ## 已知技術債（待處理，非阻斷）
 
 - 各頁內聯 CSS/JS 重複、`:root` token 分岔（治本需抽共用檔＋統一 token，會有視覺變化，需逐頁審）。
-- CSP 的 `unsafe-eval` 待部署後實測 Elfsight 是否真的需要，再決定能否移除。
+- 首頁與房型頁 `--color-text: #1A1A1A`、間距 2／4／8／12rem；其他 6 頁 `#162431`、間距 2.5／5／10／15rem（頁尾背景跟著 `--color-text`，首頁與房型頁的頁尾比較黑）。要統一得先選一套，再逐頁對照截圖改。
+- 評價頁 Elfsight 小工具本身有幾處對比不足與無標籤按鈕（第三方，改不到）。
 
 ---
 
-*最後更新：2026-11-04（位置頁地圖拿掉下方資料來源小字、「馬公」改標在市區旁）；2026-11-03 深夜（摩西頁奎壁山座標更正、2026 潮汐資料日出時間重算；位置頁地圖三個點改用 Google 地圖座標、海岸線核對、加資料來源顯名、鄉市名微調不壓海）；2026-11-03 晚上（位置頁地圖改成自家繪製的 inline SVG，`tools/make-location-map.py`）；2026-11-03 傍晚（首頁小標在桌機窄寬度也不讓「|」掉在行尾；介紹頁副標小手機不拆「電梯」；FAQ 早餐改「請留意方案說明」）；2026-11-03 下午（萬泰頁拿掉氣泡酒；FAQ 早餐依方案；位置頁改插畫地圖＋導航鈕；首頁標題固定壓進照片；手機小標斷行；萬泰頁載入不跳；評價數「200 則以上」）；2026-11（全螢幕選單修正：導覽列下方排版、手機橫拿兩欄、鎖背後頁面、Esc；首頁特色區塊手機橫拿不再超出寬度；房型燈箱關閉鈕／計數不壓照片；房型照 1008／1600／2400 三種寬度＋srcset、燈箱讀大圖、`tools/room-photo.py`、完整性驗證加查圖檔存在；萬泰名產代訂頁 /wantai：商品照片與介紹、機場／碼頭取貨、住客 9 折）；2026-10（404 改版、刪除未引用檔案、快取標頭規則、中文不斜體、房型頁輪播與英文房名、頁尾網站導覽）*
+*最後更新：2026-11-07（字型改系統字＋霞鶩文楷 400、Font Awesome 改內嵌 SVG；訂房連結帶人數、查空房、摩西查詢結果接訂房；首頁加房型與價格／評價／位置區塊；房型一覽；手機內頁 hero 半屏；FAQ 依常問順序並補接送、最晚入住、戲水池時間；無障礙與對比；CSP 拿掉 unsafe-eval；完整性檢查加全站檢查）；2026-11-04（位置頁地圖拿掉下方資料來源小字、「馬公」改標在市區旁）；2026-11-03 深夜（摩西頁奎壁山座標更正、2026 潮汐資料日出時間重算；位置頁地圖三個點改用 Google 地圖座標、海岸線核對、加資料來源顯名、鄉市名微調不壓海）；2026-11-03 晚上（位置頁地圖改成自家繪製的 inline SVG，`tools/make-location-map.py`）；2026-11-03 傍晚（首頁小標在桌機窄寬度也不讓「|」掉在行尾；介紹頁副標小手機不拆「電梯」；FAQ 早餐改「請留意方案說明」）；2026-11-03 下午（萬泰頁拿掉氣泡酒；FAQ 早餐依方案；位置頁改插畫地圖＋導航鈕；首頁標題固定壓進照片；手機小標斷行；萬泰頁載入不跳；評價數「200 則以上」）；2026-11（全螢幕選單修正：導覽列下方排版、手機橫拿兩欄、鎖背後頁面、Esc；首頁特色區塊手機橫拿不再超出寬度；房型燈箱關閉鈕／計數不壓照片；房型照 1008／1600／2400 三種寬度＋srcset、燈箱讀大圖、`tools/room-photo.py`、完整性驗證加查圖檔存在；萬泰名產代訂頁 /wantai：商品照片與介紹、機場／碼頭取貨、住客 9 折）；2026-10（404 改版、刪除未引用檔案、快取標頭規則、中文不斜體、房型頁輪播與英文房名、頁尾網站導覽）*
