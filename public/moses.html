@@ -772,7 +772,7 @@
     
         /* ===== 摩西分海頁特有樣式 ===== */
         :root {
-            --color-sea: #57808F;
+            --color-sea: #466B78; /* 原 #57808F，加深一點讓小字與按鈕對比到 4.5:1 以上 */
             --color-sea-light: #E4EDF0;
         }
 
@@ -1257,6 +1257,12 @@
                 padding: 6.5rem 6% 2.5rem;
             }
         }
+
+        /* 對比：古銅金小字（潮差標籤）用加深的古銅金 */
+        .badge-mid,
+        .badge-sp {
+            color: var(--color-accent-text);
+        }
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}
 </style></noscript>
@@ -1376,7 +1382,7 @@
 
     <main>
         <div class="breadcrumb-nav" role="navigation" aria-label="breadcrumb" style="max-width:1200px;margin:0 auto;padding:1.4rem 1.5rem 0;font-size:0.85rem;letter-spacing:0.05em;text-align:left;">
-            <a href="/" style="color:var(--color-accent,#8E704B);text-decoration:none;">首頁</a>
+            <a href="/" style="color:var(--color-accent-text,#806340);text-decoration:none;">首頁</a>
             <span style="opacity:0.45;margin:0 0.5em;">›</span>
             <span style="opacity:0.65;">奎壁山摩西分海時間查詢</span>
         </div>
