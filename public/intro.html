@@ -57,6 +57,7 @@
             --color-text: #162431;
             --color-text-light: #5A6B7C;
             --color-accent: #8E704B;
+            --color-accent-text: #806340; /* 小字用：米白底對比 5.2:1（原色 4.3:1，不到 4.5:1） */
             --color-ocean: #162431;
 
             --font-display: 'Cormorant Garamond', 'LXGW WenKai TC', serif;
@@ -572,7 +573,7 @@
             color: var(--color-accent);
         }
 
-        .footer-links h4 {
+        .footer-links h2 {
             font-family: var(--font-display);
             font-size: 1.2rem;
             margin-bottom: var(--spacing-sm);
@@ -588,7 +589,7 @@
             align-content: start;
         }
 
-        .footer-pages h4 {
+        .footer-pages h2 {
             grid-column: 1 / -1;
         }
 
@@ -887,6 +888,46 @@
             opacity: 0.7;
             margin-bottom: 0.6rem;
         }
+
+        /* 系統設定「減少動態效果」的人：關掉進場淡入、動畫與平滑捲動，內容直接顯示 */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-delay: 0s !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                transition-delay: 0s !important;
+            }
+
+            .reveal-up {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* 觸控區至少約 44px 高：頁尾連結（原本 23px）、麵包屑的「首頁」、導覽列文字連結 */
+        .footer-links a {
+            padding: 0.65rem 0;
+            margin-bottom: 0;
+        }
+
+        .breadcrumb-nav a {
+            display: inline-block;
+            padding: 0.75rem 0.3rem;
+            margin: -0.75rem -0.3rem;
+        }
+
+        .nav-direct-link {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}</style></noscript>
     <!-- Google Analytics 4-->
@@ -914,6 +955,7 @@
                 : a.closest('.fullscreen-menu') ? 'menu'
                 : a.closest('nav') ? 'nav'
                 : a.closest('footer') ? 'footer'
+                : a.closest('.avail') ? 'avail'
                 : a.closest('.room-showcase') ? 'room_card'
                 : a.closest('#whole-villa') ? 'whole_villa'
                 : sec ? (sec.id || (sec.className || '').split(' ')[0] || 'section')
@@ -921,6 +963,15 @@
             var params = { link_location: where, link_text: (a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40) };
             var card = a.closest('.room-showcase');
             if (card && card.id) params.room = card.id.replace('room-', '');
+            // 訂房連結帶的入住日、退房日、人數（查空房、摩西分海查詢結果）
+            if (name === 'booking_click') {
+                (href.split('?')[1] || '').split('#')[0].split('&').forEach(function (kv) {
+                    var p = kv.split('=');
+                    if (p[0] === 'start') params.checkin = p[1];
+                    else if (p[0] === 'end') params.checkout = p[1];
+                    else if (p[0] === 'adult' && Number(p[1])) params.adult = Number(p[1]);
+                });
+            }
             gtag('event', name, params);
         }, true);
     </script>
@@ -935,8 +986,8 @@
         </a>
         <div class="nav-actions">
             <a href="/rooms" class="nav-direct-link">房型設施</a>
-            <a href="https://booking.owlting.com/kiwi-villa" target="_blank" rel="noopener" class="nav-book-btn">線上訂房</a>
-            <button class="menu-btn" id="menu-toggle" aria-label="展開或關閉選單">Menu</button>
+            <a href="https://booking.owlting.com/kiwi-villa?adult=2" target="_blank" rel="noopener" class="nav-book-btn">線上訂房</a>
+            <button class="menu-btn" id="menu-toggle" aria-label="Menu 選單" aria-expanded="false" aria-controls="fullscreen-menu">Menu</button>
         </div>
     </nav>
 
@@ -963,7 +1014,7 @@
             <a href="/faq" class="menu-link">常見問題 FAQ</a>
             <a href="/policy" class="menu-link">訂房須知 Policy</a>
             <a href="/moses" class="menu-link">摩西分海 Moses</a>
-            <a href="https://booking.owlting.com/kiwi-villa" class="menu-link"
+            <a href="https://booking.owlting.com/kiwi-villa?adult=2" class="menu-link"
                 target="_blank">立即訂房 Book Now</a>
         </div>
     </div>
@@ -1113,7 +1164,7 @@
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
             </div>
             <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
-                <h4>Explore</h4>
+                <h2>Explore</h2>
                 <a href="/">首頁</a>
                 <a href="/intro">細說期遇</a>
                 <a href="/rooms">房型設施</a>
@@ -1124,13 +1175,13 @@
                 <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
-                <h4>Social</h4>
+                <h2>Social</h2>
                 <a href="https://www.instagram.com/kiwi_villa/" target="_blank">Instagram</a>
                 <a href="https://www.facebook.com/kiwivilla.home/" target="_blank">Facebook</a>
                 <a href="https://page.line.me/ucz4004x" target="_blank">LINE 官方帳號</a>
             </div>
             <div class="footer-links">
-                <h4>Contact</h4>
+                <h2>Contact</h2>
                 <a href="https://www.google.com/maps/place/?q=place_id:ChIJp82ruCFbbDQRm-ZmRMmpVyE" target="_blank">澎湖縣馬公市西衛里347號</a>
                 <a href="tel:0933636373">0933-636-373</a>
             </div>
@@ -1200,6 +1251,8 @@
                 document.documentElement.classList.toggle('menu-open', open);
                 if (open) setMenuTop();
                 menuToggle.textContent = open ? 'Close' : 'Menu';
+                menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                menuToggle.setAttribute('aria-label', open ? 'Close 關閉選單' : 'Menu 選單');
                 if (open || window.scrollY <= 50) {
                     nav.style.mixBlendMode = 'normal';
                 }
@@ -1246,8 +1299,8 @@
     }
     </script>
     <!-- 手機浮動 CTA：訂房 + LINE（僅 ≤768px 顯示） -->
-    <div class="mobile-cta-bar">
-        <a href="https://booking.owlting.com/kiwi-villa" class="mobile-cta-book" target="_blank" rel="noopener"><svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zM329 305c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-95 95-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L329 305z"/></svg> 線上訂房</a>
+    <div class="mobile-cta-bar" role="navigation" aria-label="快速訂房">
+        <a href="https://booking.owlting.com/kiwi-villa?adult=2" class="mobile-cta-book" target="_blank" rel="noopener"><svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zM329 305c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-95 95-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L329 305z"/></svg> 線上訂房</a>
         <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><svg class="icon" width="1em" height="1em" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M311 196.8v81.3c0 2.1-1.6 3.7-3.7 3.7h-13c-1.3 0-2.4-.7-3-1.5l-37.3-50.3v48.2c0 2.1-1.6 3.7-3.7 3.7h-13c-2.1 0-3.7-1.6-3.7-3.7V196.9c0-2.1 1.6-3.7 3.7-3.7h12.9c1.1 0 2.4 .6 3 1.6l37.3 50.3V196.9c0-2.1 1.6-3.7 3.7-3.7h13c2.1-.1 3.8 1.6 3.8 3.5zm-93.7-3.7h-13c-2.1 0-3.7 1.6-3.7 3.7v81.3c0 2.1 1.6 3.7 3.7 3.7h13c2.1 0 3.7-1.6 3.7-3.7V196.8c0-1.9-1.6-3.7-3.7-3.7zm-31.4 68.1H150.3V196.8c0-2.1-1.6-3.7-3.7-3.7h-13c-2.1 0-3.7 1.6-3.7 3.7v81.3c0 1 .3 1.8 1 2.5c.7 .6 1.5 1 2.5 1h52.2c2.1 0 3.7-1.6 3.7-3.7v-13c0-1.9-1.6-3.7-3.5-3.7zm193.7-68.1H327.3c-1.9 0-3.7 1.6-3.7 3.7v81.3c0 1.9 1.6 3.7 3.7 3.7h52.2c2.1 0 3.7-1.6 3.7-3.7V265c0-2.1-1.6-3.7-3.7-3.7H344V247.7h35.5c2.1 0 3.7-1.6 3.7-3.7V230.9c0-2.1-1.6-3.7-3.7-3.7H344V213.5h35.5c2.1 0 3.7-1.6 3.7-3.7v-13c-.1-1.9-1.7-3.7-3.7-3.7zM512 93.4V419.4c-.1 51.2-42.1 92.7-93.4 92.6H92.6C41.4 511.9-.1 469.8 0 418.6V92.6C.1 41.4 42.2-.1 93.4 0H419.4c51.2 .1 92.7 42.1 92.6 93.4zM441.6 233.5c0-83.4-83.7-151.3-186.4-151.3s-186.4 67.9-186.4 151.3c0 74.7 66.3 137.4 155.9 149.3c21.8 4.7 19.3 12.7 14.4 42.1c-.8 4.7-3.8 18.4 16.1 10.1s107.3-63.2 146.5-108.2c27-29.7 39.9-59.8 39.9-93.1z"/></svg> LINE 直訂優惠</a>
     </div>
 </body>
