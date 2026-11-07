@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>房型與價格｜澎湖期遇度假會館 Kiwi Villa｜2-4人歐風陽台套房</title>
     <meta name="description"
-        content="澎湖期遇度假會館6種精緻房型：豪華家庭房$4800起(18坪(60㎡)含TOTO浴缸+陽台)、高級四人房$4800起、奢華四人房$4800起、高級雙床房$2500起、高級三人房$3900起、高級雙人房$2500起。國際品牌床墊、訂製家具、電動窗簾、大金冷氣。線上預訂享優惠！">
+        content="澎湖期遇度假會館6種精緻房型（淡季平日起價）：豪華家庭房$4800起(18坪(60㎡)含TOTO浴缸+陽台)、高級四人房$4800起、奢華四人房$4800起、高級雙床房$2500起、高級三人房$3900起、高級雙人房$2500起。國際品牌床墊、訂製家具、電動窗簾、大金冷氣。線上預訂享優惠！">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.kiwi-villa.com/rooms">
     <meta property="og:title" content="房型與價格｜澎湖期遇度假會館 Kiwi Villa">
@@ -656,6 +656,19 @@
             text-transform: uppercase;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             padding-bottom: var(--spacing-sm);
+            white-space: nowrap;
+        }
+
+        /* 雙人房／雙床房的「淡季平日、旺季」兩個價格：桌機排一行，窄螢幕上下兩行並靠在一起（2026-11） */
+        .room-price-pair {
+            display: inline-flex;
+            flex-wrap: wrap;
+            column-gap: var(--spacing-md);
+            row-gap: 0.35rem;
+        }
+
+        /* 詞組不拆行：窄螢幕時整組換到下一行 */
+        .nowrap {
             white-space: nowrap;
         }
 
@@ -1559,7 +1572,7 @@
         <section class="rooms-hero">
             <h1 class="rooms-hero-title"><span class="hero-cn">精緻房型</span>The <span>Rooms</span></h1>
             <p class="rooms-hero-subtitle">寧靜・奢華・海島之夢</p>
-            <p class="rooms-hero-subtitle" style="font-size:0.85rem;opacity:0.7;margin-top:0.6rem;">以下為平日每晚起價，實際房價與空房狀況以線上訂房系統為準</p>
+            <p class="rooms-hero-subtitle" style="font-size:0.85rem;opacity:0.7;margin-top:0.6rem;letter-spacing:0.2em;"><span class="nowrap">以下為淡季平日每晚起價，</span><span class="nowrap">旺季與連假依日期調整；</span><span class="nowrap">選好日期按「查空房」</span><span class="nowrap">就看得到當天房價</span></p>
             <div class="rooms-avail">
                 <div class="avail">
                     <div class="avail-field">
@@ -1589,12 +1602,12 @@
             <span style="opacity:0.45;margin:0 0.5em;">›</span>
             <span style="opacity:0.65;">房型設施</span>
         </div>
-        <!-- 房型一覽（2026-11）：人數、坪數、平日起價，點房名跳到該房型 -->
+        <!-- 房型一覽（2026-11）：人數、坪數、淡季平日起價，點房名跳到該房型 -->
         <section class="room-index" aria-labelledby="room-index-title">
-            <h2 class="room-index-title" id="room-index-title">房型一覽<span>平日每晚起價</span></h2>
+            <h2 class="room-index-title" id="room-index-title">房型一覽<span>淡季平日每晚起價</span></h2>
             <table class="room-index-table">
                 <thead>
-                    <tr><th scope="col">房型</th><th scope="col">人數</th><th scope="col">坪數</th><th scope="col">平日起價</th></tr>
+                    <tr><th scope="col">房型</th><th scope="col">人數</th><th scope="col">坪數</th><th scope="col">淡季平日起價</th></tr>
                 </thead>
                 <tbody>
                     <tr><th scope="row"><a href="#room-201">豪華家庭房<small>附浴缸</small></a></th><td>4 人</td><td>18 坪</td><td>NT$4,800</td></tr>
@@ -1665,7 +1678,7 @@
                     <h2 class="room-name">豪華家庭房<br>附浴缸</h2>
                     <h3 class="room-name-en">Deluxe Family Room with Bathtub</h3>
                     <div class="room-specs">
-                        <span style="color:var(--color-accent-text);font-weight:600;">平日 NT$4,800 起／晚</span>
+                        <span style="color:var(--color-accent-text);font-weight:600;">淡季平日 NT$4,800 起／晚</span>
                         <span>18坪 (60㎡)</span>
                         <span>4人入住</span>
                         <span>獨立浴缸</span>
@@ -1734,7 +1747,7 @@
                     <h2 class="room-name">高級四人房<br>附陽台</h2>
                     <h3 class="room-name-en">Superior Quad Room with Balcony</h3>
                     <div class="room-specs">
-                        <span style="color:var(--color-accent-text);font-weight:600;">平日 NT$4,800 起／晚</span>
+                        <span style="color:var(--color-accent-text);font-weight:600;">淡季平日 NT$4,800 起／晚</span>
                         <span>13坪 (44㎡)</span>
                         <span>4人入住</span>
                         <span>極佳採光</span>
@@ -1809,7 +1822,7 @@
                     <h2 class="room-name">奢華四人房<br>附陽台</h2>
                     <h3 class="room-name-en">Luxury Quad Room with Balcony</h3>
                     <div class="room-specs">
-                        <span style="color:var(--color-accent-text);font-weight:600;">平日 NT$4,800 起／晚</span>
+                        <span style="color:var(--color-accent-text);font-weight:600;">淡季平日 NT$4,800 起／晚</span>
                         <span>16坪 (54㎡)</span>
                         <span>4人入住</span>
                         <span>雙私人陽台</span>
@@ -1881,7 +1894,7 @@
                     <h2 class="room-name">高級雙床房<br>附陽台</h2>
                     <h3 class="room-name-en">Superior Twin Room with Balcony</h3>
                     <div class="room-specs">
-                        <span style="color:var(--color-accent-text);font-weight:600;">平日 NT$2,500 起／晚</span>
+                        <span class="room-price-pair" style="color:var(--color-accent-text);font-weight:600;"><span>淡季平日 NT$2,500 起／晚</span><span>旺季 NT$3,300 起／晚</span></span>
                         <span>10坪 (33㎡)</span>
                         <span>2人入住</span>
                         <span>雙床配置</span>
@@ -1949,7 +1962,7 @@
                     <h2 class="room-name">高級三人房<br>附陽台</h2>
                     <h3 class="room-name-en">Superior Triple Room with Balcony</h3>
                     <div class="room-specs">
-                        <span style="color:var(--color-accent-text);font-weight:600;">平日 NT$3,900 起／晚</span>
+                        <span style="color:var(--color-accent-text);font-weight:600;">淡季平日 NT$3,900 起／晚</span>
                         <span>11坪 (36㎡)</span>
                         <span>3人入住</span>
                         <span>靈活配置</span>
@@ -2089,7 +2102,7 @@
                     <h2 class="room-name">高級雙人房<br>附陽台</h2>
                     <h3 class="room-name-en">Superior Double Room with Balcony</h3>
                     <div class="room-specs">
-                        <span style="color:var(--color-accent-text);font-weight:600;">平日 NT$2,500 起／晚</span>
+                        <span class="room-price-pair" style="color:var(--color-accent-text);font-weight:600;"><span>淡季平日 NT$2,500 起／晚</span><span>旺季 NT$3,300 起／晚</span></span>
                         <span>9坪 (29㎡)</span>
                         <span>2人入住</span>
                         <span>私人陽台</span>

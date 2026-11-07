@@ -19,13 +19,13 @@
 - GPS 座標：23.5868758, 119.5818157
 - 語言：繁體中文（zh-TW）
 
-## 房型與價格（每晚起價，新台幣 TWD）
-- 豪華家庭房附浴缸：可住 4 人，含獨立浴缸與私人陽台，NT$4,800 起
-- 高級四人房附陽台：可住 4 人，附私人陽台，NT$4,800 起
-- 奢華四人房附陽台：可住 4 人，奢華裝潢附私人陽台，NT$4,800 起
-- 高級三人房附陽台：可住 3 人，附私人陽台，NT$3,900 起
-- 高級雙床房附陽台：可住 2 人（兩張單床），附私人陽台，NT$2,500 起
-- 高級雙人房附陽台：可住 2 人（一張大床），附私人陽台，NT$2,500 起
+## 房型與價格（淡季平日每晚起價，新台幣 TWD；旺季與連假依日期調整，實際房價以線上訂房頁為準）
+- 豪華家庭房附浴缸：可住 4 人，含獨立浴缸與私人陽台，淡季平日 NT$4,800 起
+- 高級四人房附陽台：可住 4 人，附私人陽台，淡季平日 NT$4,800 起
+- 奢華四人房附陽台：可住 4 人，奢華裝潢附私人陽台，淡季平日 NT$4,800 起
+- 高級三人房附陽台：可住 3 人，附私人陽台，淡季平日 NT$3,900 起
+- 高級雙床房附陽台：可住 2 人（兩張單床），附私人陽台，淡季平日 NT$2,500 起、旺季 NT$3,300 起
+- 高級雙人房附陽台：可住 2 人（一張大床），附私人陽台，淡季平日 NT$2,500 起、旺季 NT$3,300 起
 
 ## 館內公共設施
 - 豪華電梯
@@ -95,6 +95,6 @@
 ## English summary
 - Kiwi Villa (期遇度假會館) is a boutique guesthouse in Xiwei, Magong City, Penghu, Taiwan, on a peninsula surrounded by sea on three sides, about an 8-minute walk from the sea. About 9 minutes by car or scooter to downtown Magong and the ferry pier, 12 minutes to Penghu Airport, and 18 minutes to the Kuibishan "Moses Parting the Sea" tidal walkway.
 - 9 rooms in 6 types, sleeping 2–4 guests; every room has floor-to-ceiling windows and a private balcony (no room has a sea view). Rooms have a fridge, kettle and hair dryer. Elevator, rooftop splash pool (10:00–22:00), free parking, free Wi-Fi. No laundry service or baby cots; receipts available on request. Whole-villa rental for 15–25 guests by arrangement via LINE.
-- Weekday rates from NT$2,500 (double or twin room) to NT$4,800 (quad or family room) per night. Breakfast (Chinese style, 8:30–10:00) is included only with breakfast plans.
+- Nightly rates: off-season weekdays from NT$2,500 (double or twin room; peak season from NT$3,300) to NT$4,800 (quad or family room). Peak-season and holiday rates vary by date; the online booking page shows the exact price. Breakfast (Chinese style, 8:30–10:00) is included only with breakfast plans.
 - Check-in 15:00–20:00 (contact us for later arrival); check-out by 11:00. No airport pickup; a partner scooter/car rental shop offers free airport/pier shuttles and free luggage delivery to the villa.
 - Registered homestay (minsu licence 澎湖縣第734號民宿, Penghu County No. 734). No smoking, no pets, no barbecues. Online booking (Chinese interface): https://booking.owlting.com/kiwi-villa?start=YYYY-MM-DD&end=YYYY-MM-DD&adult=2 . Phone +886-933-636-373; LINE https://page.line.me/ucz4004x
