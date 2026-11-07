@@ -1431,6 +1431,12 @@
                 min-height: 48svh;
                 padding: 6.5rem 6% 2.5rem;
             }
+
+            /* 英文大標不換行：字型載入前用的後備字比較寬，會先折成兩行、載入後變一行，下面的內容就跟著跳（房型頁 CLS 0.13） */
+            .rooms-hero-title {
+                font-size: min(4rem, 17vw);
+                white-space: nowrap;
+            }
         }
 
         /* 對比：LINE 小字連結用加深的古銅金；照片上的「1 / 8」計數底色加深（原本淺色照片上只有約 2.2:1） */

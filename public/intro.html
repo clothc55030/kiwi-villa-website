@@ -938,6 +938,12 @@
                 min-height: 48svh;
                 padding: 6.5rem 6% 2.5rem;
             }
+
+            /* 英文大標不換行：字型載入前用的後備字比較寬，會先折成兩行、載入後變一行，下面的內容就跟著跳（房型頁 CLS 0.13） */
+            .intro-hero-title {
+                font-size: min(4rem, 17vw);
+                white-space: nowrap;
+            }
         }
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}</style></noscript>

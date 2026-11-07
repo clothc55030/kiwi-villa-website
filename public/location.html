@@ -891,6 +891,7 @@
 
         .loc-quick li {
             padding: 0 1.6rem;
+            white-space: nowrap;
             border-left: 1px solid rgba(142, 112, 75, 0.3);
             font-size: 0.85rem;
             letter-spacing: 0.08em;
@@ -942,7 +943,7 @@
 
         @media (max-width: 480px) {
             .loc-quick li {
-                padding: 0 0.9rem;
+                padding: 0 0.75rem;
             }
 
             .loc-quick strong {
@@ -962,6 +963,12 @@
                 min-height: 48vh;
                 min-height: 48svh;
                 padding: 6.5rem 6% 2.5rem;
+            }
+
+            /* 英文大標不換行：字型載入前用的後備字比較寬，會先折成兩行、載入後變一行，下面的內容就跟著跳（房型頁 CLS 0.13） */
+            .location-hero-title {
+                font-size: min(4rem, 17vw);
+                white-space: nowrap;
             }
         }
 
