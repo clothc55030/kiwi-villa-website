@@ -1647,6 +1647,14 @@
         .link-btn::after {
             background: var(--color-accent-text);
         }
+
+        /* 頁尾的民宿登記證（民宿刊登廣告要載明登記證編號） */
+        .footer-license {
+            margin-top: 0.9rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            opacity: 0.75;
+        }
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}</style></noscript>
     <!-- Google Analytics 4-->
@@ -1835,7 +1843,7 @@
                     <div class="feature-text">
                         <div class="feature-number" aria-hidden="true">01</div>
                         <h3 class="feature-title">半島微風</h3>
-                        <p class="feature-desc">獨特的地理位置，座落於三面環海半島。步行即可擁抱蔚藍大海，感受海島無盡的魅力與平靜。</p>
+                        <p class="feature-desc">獨特的地理位置，座落於三面環海半島。步行約 8 分鐘即可擁抱蔚藍大海，感受海島無盡的魅力與平靜。</p>
                         <a href="/location" class="link-btn">探索位置 <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></a>
                     </div>
                 </div>
@@ -1959,7 +1967,7 @@
                 <li><strong>12</strong><span class="home-time-unit">分鐘</span><span class="home-time-label">澎湖機場</span></li>
                 <li><strong>18</strong><span class="home-time-unit">分鐘</span><span class="home-time-label">奎壁山摩西分海</span></li>
             </ul>
-            <p class="home-times-note">開車或騎車的約略時間</p>
+            <p class="home-times-note">開車或騎車的約略時間；走路到海邊約 8 分鐘</p>
             <div class="home-cards">
                 <a class="home-card reveal-up" href="/location">
                     <span class="home-card-k">Getting Here</span>
@@ -1989,6 +1997,7 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+                <p class="footer-license">民宿登記證　澎湖縣第734號民宿</p>
             </div>
             <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
                 <h2>Explore</h2>
@@ -2125,6 +2134,11 @@
         },
         "logo": "https://www.kiwi-villa.com/images/logo/kiwi-villa-logo.png",
         "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJp82ruCFbbDQRm-ZmRMmpVyE",
+        "identifier": {
+            "@type": "PropertyValue",
+            "propertyID": "民宿登記證",
+            "value": "澎湖縣第734號民宿"
+        },
         "image": [
             "https://www.kiwi-villa.com/images/home/penghu-kiwi-villa-exterior-1920.webp",
             "https://www.kiwi-villa.com/assets/og-home.jpg"
@@ -2141,7 +2155,12 @@
             {"@type": "LocationFeatureSpecification", "name": "戲水池", "value": true},
             {"@type": "LocationFeatureSpecification", "name": "免費WiFi", "value": true},
             {"@type": "LocationFeatureSpecification", "name": "免費停車", "value": true},
-            {"@type": "LocationFeatureSpecification", "name": "冷氣空調", "value": true}
+            {"@type": "LocationFeatureSpecification", "name": "冷氣空調", "value": true},
+            {"@type": "LocationFeatureSpecification", "name": "房內冰箱", "value": true},
+            {"@type": "LocationFeatureSpecification", "name": "熱水壺", "value": true},
+            {"@type": "LocationFeatureSpecification", "name": "吹風機", "value": true},
+            {"@type": "LocationFeatureSpecification", "name": "洗衣服務", "value": false},
+            {"@type": "LocationFeatureSpecification", "name": "嬰兒床", "value": false}
         ],
         "sameAs": [
             "https://www.instagram.com/kiwi_villa/",
