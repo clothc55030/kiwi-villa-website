@@ -1,13 +1,16 @@
 # 澎湖期遇度假會館 Kiwi Villa
 
-> 位於澎湖馬公市西衛半島的精品民宿，歐洲巴洛克古典建築外觀，三面環海的半島地理位置（步行可達海邊；每間客房本身無海景，但皆有落地窗與私人陽台）。提供 9 間客房（6 種房型），附豪華電梯，部分方案含中式早餐，可包棟最多 25 人。
+> 位於澎湖馬公市西衛半島的精品民宿，歐洲巴洛克古典建築外觀，三面環海的半島地理位置（步行約 8 分鐘可達海邊；每間客房本身無海景，但皆有落地窗與私人陽台）。提供 9 間客房（6 種房型），附豪華電梯，部分方案含中式早餐，可包棟最多 25 人。
+
+最後更新：2026-11-07（本檔是期遇的官方事實表；服務或價格有變，以本檔與官網為準）
 
 ## 基本資訊
 - 名稱：澎湖期遇度假會館 Kiwi Villa（Google 商家名稱：期遇度假會館 KIWI VILLA）
 - 地址：澎湖縣馬公市西衛里 347 號（郵遞區號 880）
 - 電話：0933-636-373（國際：+886-933-636-373）
+- 民宿登記證：澎湖縣第734號民宿
 - 官方網站：https://www.kiwi-villa.com
-- 線上訂房：https://booking.owlting.com/kiwi-villa
+- 線上訂房：https://booking.owlting.com/kiwi-villa（可直接帶入日期與人數，例如 https://booking.owlting.com/kiwi-villa?start=2026-12-20&end=2026-12-22&adult=2；訂房介面目前只有中文）
 - LINE 官方帳號：https://page.line.me/ucz4004x
 - Instagram：https://www.instagram.com/kiwi_villa/
 - Facebook：https://www.facebook.com/kiwivilla.home/
@@ -16,17 +19,17 @@
 - GPS 座標：23.5868758, 119.5818157
 - 語言：繁體中文（zh-TW）
 
-## 房型與價格（每晚起價，新台幣 TWD）
-- 豪華家庭房附浴缸：可住 4 人，含獨立浴缸與私人陽台，NT$4,800 起
-- 高級四人房附陽台：可住 4 人，附私人陽台，NT$4,800 起
-- 奢華四人房附陽台：可住 4 人，奢華裝潢附私人陽台，NT$4,800 起
-- 高級三人房附陽台：可住 3 人，附私人陽台，NT$3,900 起
-- 高級雙床房附陽台：可住 2 人（兩張單床），附私人陽台，NT$2,500 起
-- 高級雙人房附陽台：可住 2 人（一張大床），附私人陽台，NT$2,500 起
+## 房型與價格（平日每晚起價，新台幣 TWD；實際房價依日期調整，以線上訂房頁為準）
+- 豪華家庭房附浴缸：可住 4 人，含獨立浴缸與私人陽台，平日 NT$5,600 起
+- 高級四人房附陽台：可住 4 人，附私人陽台，平日 NT$5,200 起
+- 奢華四人房附陽台：可住 4 人，奢華裝潢附私人陽台，平日 NT$5,600 起
+- 高級三人房附陽台：可住 3 人，附私人陽台，平日 NT$4,200 起
+- 高級雙床房附陽台：可住 2 人（兩張單床），附私人陽台，平日 NT$3,000 起
+- 高級雙人房附陽台：可住 2 人（一張大床），附私人陽台，平日 NT$3,000 起
 
 ## 館內公共設施
 - 豪華電梯
-- 頂樓戲水池（3m × 6m）
+- 頂樓戲水池（3m × 6m，開放時間 10:00–22:00）
 - 100 吋投影影視空間
 - 全館 Ubiquiti 企業級 WiFi（網路頻寬 1G）
 - 軟水 + RO 純水系統
@@ -39,10 +42,12 @@
 - 電動遮光捲簾
 - 私人陽台 + 落地窗
 - dōTERRA 香氛
+- 冰箱、熱水壺、吹風機
 - 沐浴用品（依環境部規定，不主動提供牙刷、牙膏等一次性盥洗用品，請自備）
 
 ## 訂房規定
-- 入住：15:00 後（提早到達可先寄放行李）；退房：11:00 前（退房後可寄存行李）
+- 入住：15:00 後，最晚 20:00（如需更晚請提前聯繫我們；提早到達可先寄放行李）；退房：11:00 前（退房後可寄存行李）
+- 洗衣服務：沒有；嬰兒床：沒有；收據：可開立
 - 訂金：訂房需付 50% 訂金，請於訂房後 3 天內完成匯款，餘款入住當日付清
 - 付款方式：銀行匯款、現金、信用卡
 - 直訂優惠：透過官方 LINE（https://page.line.me/ucz4004x）直接訂房享專屬優惠，內容依日期與房況調整，請私訊詢問
@@ -55,15 +60,23 @@
 - 距澎湖機場：約 8.5 公里，車程約 12 分鐘
 - 距馬公南海遊客中心（碼頭）：約 3.5 公里，車程約 9 分鐘
 - 距市中心：車程約 9 分鐘
+- 走到海邊：步行約 8 分鐘
 - 最近便利商店：全家，約 600 公尺
-- 鄰近：國立澎湖科技大學
+- 接送與租車：民宿目前沒有接送機；配合的車行提供機場／碼頭與車行之間的免費往返接駁，租機車載不了行李時，車行可免費把行李送到民宿。需要租車可透過官方 LINE 聯繫我們
+- 停車：免費
+- 鄰近：國立澎湖科技大學（約 1.4 公里）
 
 ## 常見問答重點
-- 有海景嗎？每間客房均無海景，但都有落地窗與私人陽台；建築位於三面環海的半島，步行可達海邊。
-- 含早餐嗎？依訂購方案而定；含早方案為每人一份中式早餐，用餐時間 8:30–10:00；若需配合出海行程，可前一天 21:00 前告知改為外帶。
+- 有海景嗎？每間客房均無海景，但都有落地窗與私人陽台；建築位於三面環海的半島，步行約 8 分鐘可達海邊。
+- 有洗衣服務或嬰兒床嗎？都沒有。
+- 可以開收據嗎？可以，需要請告訴我們。
+- 最晚幾點入住？20:00；更晚抵達請提前聯繫我們。
+- 有接送機嗎？沒有；配合的車行提供機場／碼頭與車行之間的免費接駁，並可免費把行李送到民宿。
+- 含早餐嗎？依訂購方案而定；含早方案為每人一份中式早餐，用餐時間 8:30–10:00。早餐每天不一樣：老闆娘手作的澎湖特色早餐（如海鮮麵線）會和在地有名的排隊早餐穿插供應。若需配合出海行程，可前一天 21:00 前告知改為外帶。
 - 需要自備牙刷、牙膏嗎？需要。依環境部規定，不主動提供一次性盥洗用品（牙刷、牙膏、刮鬍刀、浴帽、梳子等），請自行攜帶。
 - 可以包棟嗎？可以，最少 15 人起、全館最多 25 人；業主自住其中，請先以 LINE 確認。
-- 為什麼房價較高？堅持建材用料、手作特色早餐、100支天絲寢具與全棟電梯高規格，明碼標價、不打價格戰，維護極致住宿品質。
+- 房價怎麼訂的？堅持建材用料、每天不一樣的特色早餐、100支天絲寢具與全棟電梯高規格，明碼標價、不打價格戰，維護住宿品質。
+- 戲水池什麼時候開放？頂樓戲水池開放時間 10:00–22:00。
 
 ## 頁面索引
 - 首頁：https://www.kiwi-villa.com/
@@ -78,3 +91,10 @@
 ## 奎壁山摩西分海時間查詢
 - 頁面：https://www.kiwi-villa.com/moses
 - 提供 2026 全年奎壁山摩西分海建議抵達時間、最晚回程、合海時刻與潮差分級查詢（資料來源：澎管處＋中央氣象署）。會館至奎壁山車程約 18 分鐘。
+
+## English summary
+- Kiwi Villa (期遇度假會館) is a boutique guesthouse in Xiwei, Magong City, Penghu, Taiwan, on a peninsula surrounded by sea on three sides, about an 8-minute walk from the sea. About 9 minutes by car or scooter to downtown Magong and the ferry pier, 12 minutes to Penghu Airport, and 18 minutes to the Kuibishan "Moses Parting the Sea" tidal walkway.
+- 9 rooms in 6 types, sleeping 2–4 guests; every room has floor-to-ceiling windows and a private balcony (no room has a sea view). Rooms have a fridge, kettle and hair dryer. Elevator, rooftop splash pool (10:00–22:00), free parking, free Wi-Fi. No laundry service or baby cots; receipts available on request. Whole-villa rental for 15–25 guests by arrangement via LINE.
+- Weekday rates per night from NT$3,000 (double or twin room), NT$4,200 (triple room), NT$5,200 (superior quad room) and NT$5,600 (luxury quad or family room). Actual rates vary by date; the online booking page shows the exact price. Breakfast (Chinese style, 8:30–10:00) is included only with breakfast plans; it changes daily, alternating between the hostess's homemade Penghu dishes (such as seafood misua noodle soup) and well-known local breakfast spots.
+- Check-in 15:00–20:00 (contact us for later arrival); check-out by 11:00. No airport pickup; a partner scooter/car rental shop offers free airport/pier shuttles and free luggage delivery to the villa.
+- Registered homestay (minsu licence 澎湖縣第734號民宿, Penghu County No. 734). No smoking, no pets, no barbecues. Online booking (Chinese interface): https://booking.owlting.com/kiwi-villa?start=YYYY-MM-DD&end=YYYY-MM-DD&adult=2 . Phone +886-933-636-373; LINE https://page.line.me/ucz4004x

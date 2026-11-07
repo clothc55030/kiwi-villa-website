@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>澎湖民宿推薦｜期遇度假會館 Kiwi Villa｜三面環海歐風建築</title>
-    <meta name="description" content="澎湖馬公西衛，三面環海半島上的歐風度假會館。全館 9 間客房 6 種房型、間間附私人陽台，可包棟最多 25 人，雙人房 NT$2,500 起，附免費停車、部分方案含手作早餐。線上訂房，預約您的澎湖期遇之旅。">
+    <meta name="description" content="澎湖馬公西衛，三面環海半島上的歐風度假會館。全館 9 間客房 6 種房型、間間附私人陽台，可包棟最多 25 人，雙人房平日 NT$3,000 起，附免費停車、部分方案含特色早餐。線上訂房，預約您的澎湖期遇之旅。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.kiwi-villa.com/">
     <meta property="og:title" content="澎湖期遇度假會館 - 三面環海歐風建築度假首選">
@@ -30,19 +30,27 @@
     <!-- 引入極致美學字體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preload" as="image" href="/images/home/penghu-kiwi-villa-exterior-1920.webp" imagesrcset="/images/home/penghu-kiwi-villa-exterior-828.webp 828w, /images/home/penghu-kiwi-villa-exterior-1280.webp 1280w, /images/home/penghu-kiwi-villa-exterior-1920.webp 1920w" imagesizes="(max-width: 992px) and (orientation: portrait) 50vh, (max-width: 992px) 100vw, 150vh" type="image/webp">
     <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@400&display=swap"
         onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap"></noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@400&display=swap"></noscript>
+    <!-- 圖示：內嵌 SVG，取自 Font Awesome Free 6.4.0（Icons: CC BY 4.0，https://fontawesome.com/license/free） -->
 
     <style>
         /* 中文字型沒有斜體字面：不讓瀏覽器把中文硬斜切變形；英文照常使用 Cormorant Garamond 的真斜體 */
         html {
             font-synthesis: weight;
+        }
+
+        /* 圖示：內嵌 SVG（取自 Font Awesome Free 6.4.0，CC BY 4.0），大小與顏色跟著文字，跟以前的圖示字型一樣 */
+        .icon {
+            display: inline-block;
+            height: 1em;
+            vertical-align: -0.125em;
+            fill: currentColor;
+            overflow: visible;
+            flex-shrink: 0;
         }
         :root {
             /* 奢華質感的色彩計畫 */
@@ -54,12 +62,13 @@
             /* 深邃黑 */
             --color-accent: #8E704B;
             /* 復古古銅金 */
+            --color-accent-text: #806340; /* 小字用：米白底對比 5.2:1（原色 4.3:1，不到 4.5:1） */
             --color-ocean: #162431;
             /* 深海藍 */
 
             /* 字體設定 */
             --font-display: 'Cormorant Garamond', 'LXGW WenKai TC', serif;
-            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans CJK TC', 'Microsoft JhengHei', sans-serif;
 
             /* 空間間距 */
             --spacing-xs: 0.5rem;
@@ -401,7 +410,7 @@
             white-space: nowrap;
         }
 
-        .hero-badge i {
+        .hero-badge .icon {
             color: var(--color-accent);
             font-size: 0.78rem;
         }
@@ -753,7 +762,7 @@
             color: var(--color-accent);
         }
 
-        .footer-links h4 {
+        .footer-links h2 {
             font-family: var(--font-display);
             font-size: 1.2rem;
             margin-bottom: var(--spacing-sm);
@@ -769,7 +778,7 @@
             align-content: start;
         }
 
-        .footer-pages h4 {
+        .footer-pages h2 {
             grid-column: 1 / -1;
         }
 
@@ -891,6 +900,14 @@
                 justify-content: center;
                 padding: 0.45rem 0.5rem;
                 font-size: 0.78rem;
+            }
+        }
+
+        /* 320 寬的小手機：「特色早餐（含早方案）」一行放不下（會超出畫面 1px、字被切），改在括號前換行 */
+        @media (max-width: 350px) {
+            .hero-badge {
+                white-space: normal;
+                text-align: center;
             }
         }
 
@@ -1082,6 +1099,577 @@
             }
         }
 
+
+        /* 系統設定「減少動態效果」的人：關掉進場淡入、動畫與平滑捲動，內容直接顯示 */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-delay: 0s !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                transition-delay: 0s !important;
+            }
+
+            .reveal-up {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* 觸控區至少約 44px 高：頁尾連結（原本 23px）、麵包屑的「首頁」、導覽列文字連結 */
+        .footer-links a {
+            padding: 0.65rem 0;
+            margin-bottom: 0;
+        }
+
+        .breadcrumb-nav a {
+            display: inline-block;
+            padding: 0.75rem 0.3rem;
+            margin: -0.75rem -0.3rem;
+        }
+
+        .nav-direct-link {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
+
+        /* 查空房（2026-11）：選日期與人數，直接打開帶好參數的訂房頁（OwlNest 接受 start、end、adult） */
+        .avail {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.8fr) auto;
+            gap: 0.75rem;
+            align-items: end;
+        }
+
+        .avail-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            min-width: 0;
+        }
+
+        .avail-field label {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            letter-spacing: 0.2em;
+            color: var(--color-accent-text);
+        }
+
+        .avail-field input,
+        .avail-field select {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            min-width: 0;
+            height: 48px;
+            padding: 0 0.9rem;
+            border: 1px solid rgba(142, 112, 75, 0.4);
+            border-radius: 4px;
+            background-color: #fff;
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .avail-field input::-webkit-date-and-time-value {
+            text-align: left;
+        }
+
+        .avail-field select {
+            padding-right: 2.2rem;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23806340' stroke-width='1.6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.9rem center;
+            background-size: 12px 8px;
+        }
+
+        .avail-field input:focus-visible,
+        .avail-field select:focus-visible,
+        .avail-go:focus-visible {
+            outline: 2px solid var(--color-accent-text);
+            outline-offset: 2px;
+        }
+
+        .avail-go {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            padding: 0 1.9rem;
+            border-radius: 4px;
+            background: var(--color-accent);
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            letter-spacing: 0.18em;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.3s ease;
+        }
+
+        .avail-go:hover {
+            background: var(--color-accent-text);
+        }
+
+        .avail-note {
+            margin-top: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .avail-note a {
+            color: var(--color-accent-text);
+            text-underline-offset: 3px;
+        }
+
+        @media (max-width: 640px) {
+            .avail {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            }
+
+            .avail-go {
+                width: 100%;
+            }
+        }
+
+        .avail-band {
+            background: var(--color-surface);
+            padding: 3.5rem var(--spacing-lg);
+            scroll-margin-top: 64px;
+        }
+
+        .avail-band-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr);
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .avail-kicker {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.15rem;
+            letter-spacing: 0.06em;
+            color: var(--color-accent-text);
+        }
+
+        .avail-band-title {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+            line-height: 1.3;
+            color: var(--color-text);
+        }
+
+        @media (max-width: 992px) {
+            .avail-band-inner {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 1.25rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .avail-band {
+                padding: 2.5rem 6%;
+            }
+        }
+
+        /* h1 包含小標與「期遇 Villa」，外觀與原本相同 */
+        .hero-heading {
+            margin: 0;
+            font: inherit;
+        }
+
+        .hero-heading > .hero-subtitle,
+        .hero-heading > .hero-title {
+            display: block;
+        }
+
+        /* 文字連結（探索位置等）觸控區至少 44px 高 */
+        .link-btn {
+            min-height: 44px;
+        }
+
+        .link-btn::after {
+            bottom: 6px;
+        }
+
+        /* ===== 首頁：房型與價格、住客評價、位置（2026-11） ===== */
+        .home-rooms,
+        .home-location {
+            background: var(--color-surface);
+        }
+
+        .home-rooms,
+        .home-reviews,
+        .home-location {
+            padding: var(--spacing-xl) var(--spacing-lg);
+        }
+
+        .home-head {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .home-h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.1;
+        }
+
+        .home-sub {
+            margin-top: 0.9rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            color: #555;
+        }
+
+        .home-rooms-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2.6rem 2rem;
+        }
+
+        .home-room {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .home-room-img {
+            display: block;
+            aspect-ratio: 3 / 2;
+            overflow: hidden;
+            background: #E4DFD4;
+        }
+
+        .home-room-img img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .home-room:hover .home-room-img img {
+            transform: scale(1.04);
+        }
+
+        .home-room-name {
+            margin-top: 1.1rem;
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--color-text);
+        }
+
+        .home-room-name small {
+            margin-left: 0.45em;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            color: #666;
+        }
+
+        .home-room-meta,
+        .home-room-price {
+            display: block;
+            margin-top: 0.3rem;
+        }
+
+        .home-room-meta {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: #555;
+        }
+
+        .home-room-price {
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            color: var(--color-accent-text);
+        }
+
+        .home-note {
+            margin: 2.2rem auto 0;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: #666;
+            text-align: center;
+        }
+
+        .home-note a {
+            color: var(--color-accent-text);
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+
+        .home-more {
+            margin-top: 1.2rem;
+            text-align: center;
+        }
+
+        /* 住客評價 */
+        .home-stars {
+            margin-right: 0.6em;
+            letter-spacing: 0.15em;
+            color: var(--color-accent);
+        }
+
+        .home-quotes {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .home-quote {
+            margin: 0;
+            padding: 2.2rem 2.1rem 1.9rem;
+            background: var(--color-surface);
+        }
+
+        .home-quote blockquote {
+            margin: 0;
+        }
+
+        .home-quote blockquote p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: var(--color-text);
+        }
+
+        .home-quote blockquote p::before {
+            content: "“";
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+            font-size: 3.2rem;
+            line-height: 0.7;
+            color: var(--color-accent);
+            opacity: 0.55;
+        }
+
+        .home-quote figcaption {
+            margin-top: 1.2rem;
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            color: #666;
+        }
+
+        /* 位置：四個車程 */
+        .home-times {
+            list-style: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .home-times li {
+            padding: 0.4rem 1rem;
+            border-left: 1px solid rgba(142, 112, 75, 0.3);
+            text-align: center;
+        }
+
+        .home-times li:first-child {
+            border-left: 0;
+        }
+
+        .home-times strong {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 5vw, 3.6rem);
+            font-weight: 300;
+            line-height: 1;
+            color: var(--color-text);
+        }
+
+        .home-time-unit {
+            margin-left: 0.3em;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .home-time-label {
+            display: block;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.12em;
+            color: var(--color-text);
+        }
+
+        .home-times-note {
+            margin-top: 1.3rem;
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: #666;
+            text-align: center;
+        }
+
+        .home-cards {
+            max-width: 1000px;
+            margin: var(--spacing-lg) auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .home-card {
+            display: block;
+            padding: 1.8rem 2rem;
+            border: 1px solid rgba(142, 112, 75, 0.22);
+            background: var(--color-bg);
+            color: var(--color-text);
+            text-decoration: none;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .home-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        .home-card-k {
+            display: block;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--color-accent-text);
+        }
+
+        .home-card strong {
+            display: block;
+            margin-top: 0.3rem;
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            font-weight: 400;
+        }
+
+        .home-card-desc {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: #555;
+        }
+
+        .home-card-desc::after {
+            content: " →";
+            color: var(--color-accent-text);
+        }
+
+        @media (max-width: 992px) {
+            .home-rooms-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-badge-rating {
+                grid-column: 1 / -1;
+            }
+
+            .home-rooms,
+            .home-reviews,
+            .home-location {
+                padding: var(--spacing-lg) 6%;
+            }
+
+            .home-rooms-grid {
+                gap: 1.8rem 1rem;
+            }
+
+            .home-room-name {
+                margin-top: 0.7rem;
+                font-size: 1.15rem;
+            }
+
+            .home-room-name small {
+                display: block;
+                margin: 0.1rem 0 0;
+            }
+
+            .home-room-meta {
+                font-size: 0.8rem;
+            }
+
+            .home-room-price {
+                font-size: 0.85rem;
+            }
+
+            .home-quotes,
+            .home-cards {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 1.2rem;
+            }
+
+            .home-quote {
+                padding: 1.8rem 1.5rem 1.5rem;
+            }
+
+            .home-times {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                row-gap: 1.8rem;
+            }
+
+            .home-times li:nth-child(3) {
+                border-left: 0;
+            }
+
+            .home-card {
+                padding: 1.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .home-stars {
+                display: block;
+                margin: 0 0 0.3rem;
+            }
+        }
+
+        /* 桌機 hero 右欄多了一排徽章：上下內距 8rem → 6rem，內容一樣垂直置中、不會撐破一個畫面高（1440×900 原本會多出 16px） */
+        @media (min-width: 993px) and (min-height: 881px) {
+            .hero-content {
+                padding-top: 6rem;
+                padding-bottom: 6rem;
+            }
+        }
+
+        /* 小字改用加深的古銅金（米白底對比 5.2:1）：hero 小標、文字連結 */
+        .hero-subtitle,
+        .link-btn {
+            color: var(--color-accent-text);
+        }
+
+        .link-btn::after {
+            background: var(--color-accent-text);
+        }
+
+        /* 頁尾的民宿登記證（民宿刊登廣告要載明登記證編號） */
+        .footer-license {
+            margin-top: 0.9rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            opacity: 0.75;
+        }
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}</style></noscript>
     <!-- Google Analytics 4-->
@@ -1109,6 +1697,7 @@
                 : a.closest('.fullscreen-menu') ? 'menu'
                 : a.closest('nav') ? 'nav'
                 : a.closest('footer') ? 'footer'
+                : a.closest('.avail') ? 'avail'
                 : a.closest('.room-showcase') ? 'room_card'
                 : a.closest('#whole-villa') ? 'whole_villa'
                 : sec ? (sec.id || (sec.className || '').split(' ')[0] || 'section')
@@ -1116,6 +1705,15 @@
             var params = { link_location: where, link_text: (a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40) };
             var card = a.closest('.room-showcase');
             if (card && card.id) params.room = card.id.replace('room-', '');
+            // 訂房連結帶的入住日、退房日、人數（查空房、摩西分海查詢結果）
+            if (name === 'booking_click') {
+                (href.split('?')[1] || '').split('#')[0].split('&').forEach(function (kv) {
+                    var p = kv.split('=');
+                    if (p[0] === 'start') params.checkin = p[1];
+                    else if (p[0] === 'end') params.checkout = p[1];
+                    else if (p[0] === 'adult' && Number(p[1])) params.adult = Number(p[1]);
+                });
+            }
             gtag('event', name, params);
         }, true);
     </script>
@@ -1131,8 +1729,8 @@
         </a>
         <div class="nav-actions">
             <a href="/rooms" class="nav-direct-link">房型設施</a>
-            <a href="https://booking.owlting.com/kiwi-villa" target="_blank" rel="noopener" class="nav-book-btn">線上訂房</a>
-            <button class="menu-btn" id="menu-toggle" aria-label="展開或關閉選單">Menu</button>
+            <a href="https://booking.owlting.com/kiwi-villa?adult=2" target="_blank" rel="noopener" class="nav-book-btn">線上訂房</a>
+            <button class="menu-btn" id="menu-toggle" aria-label="Menu 選單" aria-expanded="false" aria-controls="fullscreen-menu">Menu</button>
         </div>
     </nav>
 
@@ -1158,7 +1756,7 @@
             <a href="/faq" class="menu-link">常見問題 FAQ</a>
             <a href="/policy" class="menu-link">訂房須知 Policy</a>
             <a href="/moses" class="menu-link">摩西分海 Moses</a>
-            <a href="https://booking.owlting.com/kiwi-villa" class="menu-link"
+            <a href="https://booking.owlting.com/kiwi-villa?adult=2" class="menu-link"
                 target="_blank">立即訂房 Book Now</a>
         </div>
     </div>
@@ -1173,10 +1771,12 @@
                     alt="澎湖期遇度假會館 歐風巴洛克建築外觀，一樓是連續拱廊" class="hero-image" fetchpriority="high">
             </div>
             <div class="hero-content">
-                <div class="hero-subtitle">澎湖精品住宿<span class="hero-sep" aria-hidden="true"> | </span><span class="nowrap">Penghu Boutique Hotel</span></div>
-                <h1 class="hero-title">
-                    期遇<br>
-                    <span class="italic">Villa</span>
+                <h1 class="hero-heading">
+                    <span class="hero-subtitle">澎湖精品住宿<span class="hero-sep" aria-hidden="true"> | </span><span class="nowrap">Penghu Boutique Hotel</span></span>
+                    <span class="hero-title">
+                        期遇<br>
+                        <span class="italic">Villa</span>
+                    </span>
                 </h1>
                 <div class="hero-poem">
                     <p>旅行，是與驚喜不期而遇。</p>
@@ -1186,10 +1786,44 @@
                     <p>沉浸在陽光、海洋、微風與星光交織的<span class="nowrap">海島生活裡。</span></p>
                 </div>
                 <div class="hero-badges">
-                    <span class="hero-badge"><i class="fas fa-landmark"></i> 歐風巴洛克</span>
-                    <span class="hero-badge"><i class="fas fa-elevator"></i> 全棟豪華電梯</span>
-                    <span class="hero-badge"><i class="fas fa-bed"></i> 100支天絲名床</span>
-                    <span class="hero-badge"><i class="fas fa-utensils"></i> 澎湖手作早餐</span>
+                    <span class="hero-badge"><svg class="icon" width="1em" height="1em" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M240.1 4.2c9.8-5.6 21.9-5.6 31.8 0l171.8 98.1L448 104l0 .9 47.9 27.4c12.6 7.2 18.8 22 15.1 36s-16.4 23.8-30.9 23.8H32c-14.5 0-27.2-9.8-30.9-23.8s2.5-28.8 15.1-36L64 104.9V104l4.4-1.6L240.1 4.2zM64 224h64V416h40V224h64V416h48V224h64V416h40V224h64V420.3c.6 .3 1.2 .7 1.8 1.1l48 32c11.7 7.8 17 22.4 12.9 35.9S494.1 512 480 512H32c-14.1 0-26.5-9.2-30.6-22.7s1.1-28.1 12.9-35.9l48-32c.6-.4 1.2-.7 1.8-1.1V224z"/></svg> 歐風巴洛克</span>
+                    <span class="hero-badge"><svg class="icon" width="1em" height="1em" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M132.7 4.7l-64 64c-4.6 4.6-5.9 11.5-3.5 17.4s8.3 9.9 14.8 9.9H208c6.5 0 12.3-3.9 14.8-9.9s1.1-12.9-3.5-17.4l-64-64c-6.2-6.2-16.4-6.2-22.6 0zM64 128c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V192c0-35.3-28.7-64-64-64H64zm96 96a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM80 400c0-26.5 21.5-48 48-48h64c26.5 0 48 21.5 48 48v16c0 17.7-14.3 32-32 32H112c-17.7 0-32-14.3-32-32V400zm192 0c0-26.5 21.5-48 48-48h64c26.5 0 48 21.5 48 48v16c0 17.7-14.3 32-32 32H304c-17.7 0-32-14.3-32-32V400zm32-128a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zM356.7 91.3c6.2 6.2 16.4 6.2 22.6 0l64-64c4.6-4.6 5.9-11.5 3.5-17.4S438.5 0 432 0H304c-6.5 0-12.3 3.9-14.8 9.9s-1.1 12.9 3.5 17.4l64 64z"/></svg> 全棟豪華電梯</span>
+                    <span class="hero-badge"><svg class="icon" width="1.25em" height="1em" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/></svg> 100支天絲名床</span>
+                    <span class="hero-badge"><svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M416 0C400 0 288 32 288 176V288c0 35.3 28.7 64 64 64h32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V352 240 32c0-17.7-14.3-32-32-32zM64 16C64 7.8 57.9 1 49.7 .1S34.2 4.6 32.4 12.5L2.1 148.8C.7 155.1 0 161.5 0 167.9c0 45.9 35.1 83.6 80 87.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V255.6c44.9-4.1 80-41.8 80-87.7c0-6.4-.7-12.8-2.1-19.1L191.6 12.5c-1.8-8-9.3-13.3-17.4-12.4S160 7.8 160 16V150.2c0 5.4-4.4 9.8-9.8 9.8c-5.1 0-9.3-3.9-9.8-9L127.9 14.6C127.2 6.3 120.3 0 112 0s-15.2 6.3-15.9 14.6L83.7 151c-.5 5.1-4.7 9-9.8 9c-5.4 0-9.8-4.4-9.8-9.8V16zm48.3 152l-.3 0-.3 0 .3-.7 .3 .7z"/></svg> <span>特色早餐<span class="nowrap">（含早方案）</span></span></span>
+                    <span class="hero-badge hero-badge-rating"><svg class="icon" width="1.125em" height="1em" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg> Google 5.0・200 則以上評價</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 查空房（2026-11）：日期與人數直接帶進訂房系統 -->
+        <section class="avail-band" id="avail-home" aria-labelledby="avail-home-title">
+            <div class="avail-band-inner">
+                <div class="avail-band-head">
+                    <p class="avail-kicker">Availability</p>
+                    <h2 class="avail-band-title" id="avail-home-title">哪天來澎湖？</h2>
+                </div>
+                <div class="avail-band-body">
+                    <div class="avail">
+                        <div class="avail-field">
+                            <label for="avail-start-home">入住</label>
+                            <input type="date" id="avail-start-home" name="start">
+                        </div>
+                        <div class="avail-field">
+                            <label for="avail-end-home">退房</label>
+                            <input type="date" id="avail-end-home" name="end">
+                        </div>
+                        <div class="avail-field">
+                            <label for="avail-adult-home">人數</label>
+                            <select id="avail-adult-home" name="adult">
+                                <option value="1">1 位</option>
+                                <option value="2" selected>2 位</option>
+                                <option value="3">3 位</option>
+                                <option value="4">4 位</option>
+                            </select>
+                        </div>
+                        <a class="avail-go" href="https://booking.owlting.com/kiwi-villa?adult=2" target="_blank" rel="noopener">查空房</a>
+                    </div>
+                    <p class="avail-note">在新分頁打開訂房系統，日期與人數已幫你帶入。人數較多或想包棟，歡迎 <a href="https://page.line.me/ucz4004x" target="_blank" rel="noopener">LINE 詢問</a>。</p>
                 </div>
             </div>
         </section>
@@ -1205,7 +1839,7 @@
                     <br>
                     <p>捨棄繁複的裝飾，回歸建築與空間的本質。從踏入門的那一刻起，我們將用最極致的寧靜與最高品質的細節，為您洗滌城市的喧囂。</p>
                     <br>
-                    <p>座落於澎湖馬公西衛、三面環海的半島上，全館 9 間客房、6 種房型，間間附落地窗與私人陽台；鄰馬公市區約 9 分鐘車程，附免費停車，部分住宿方案含手作早餐。雙人房 NT$2,500 起，亦可整棟包下最多 25 人。</p>
+                    <p>座落於澎湖馬公西衛、三面環海的半島上，全館 9 間客房、6 種房型，間間附落地窗與私人陽台；鄰馬公市區約 9 分鐘車程，附免費停車，部分住宿方案含早餐（老闆娘手作和在地有名的排隊早餐每天穿插）。雙人房平日 NT$3,000 起，亦可整棟包下最多 25 人。</p>
                 </div>
             </div>
         </section>
@@ -1222,10 +1856,10 @@
                         <img width="1400" height="933" src="images/home/penghu-kiwi-villa-rooftop-pool-water.webp" alt="期遇度假會館頂樓戲水池，藍天白雲下的海島午後" class="feature-img" loading="lazy">
                     </div>
                     <div class="feature-text">
-                        <div class="feature-number">01</div>
+                        <div class="feature-number" aria-hidden="true">01</div>
                         <h3 class="feature-title">半島微風</h3>
-                        <p class="feature-desc">獨特的地理位置，座落於三面環海半島。步行即可擁抱蔚藍大海，感受海島無盡的魅力與平靜。</p>
-                        <a href="/location" class="link-btn">探索位置 <i class="fas fa-arrow-right"></i></a>
+                        <p class="feature-desc">獨特的地理位置，座落於三面環海半島。步行約 8 分鐘即可擁抱蔚藍大海，感受海島無盡的魅力與平靜。</p>
+                        <a href="/location" class="link-btn">探索位置 <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></a>
                     </div>
                 </div>
 
@@ -1235,10 +1869,10 @@
                         <img width="1200" height="1800" src="images/home/penghu-kiwi-villa-arcade.webp" alt="期遇度假會館一樓歐式連續拱廊與古典壁燈" class="feature-img" loading="lazy">
                     </div>
                     <div class="feature-text">
-                        <div class="feature-number">02</div>
+                        <div class="feature-number" aria-hidden="true">02</div>
                         <h3 class="feature-title">立體美學</h3>
                         <p class="feature-desc">歐洲巴洛克風格建築，細膩立體美學。潮流與經典融合，復古與現代相互碰撞，成就獨特的建築藝術。</p>
-                        <a href="/intro" class="link-btn">建築之美 <i class="fas fa-arrow-right"></i></a>
+                        <a href="/intro" class="link-btn">建築之美 <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></a>
                     </div>
                 </div>
 
@@ -1248,12 +1882,118 @@
                         <img width="1600" height="1067" src="images/home/penghu-kiwi-villa-family-room.webp" alt="201 豪華家庭房：雲朵壁畫與 King Size 大床" class="feature-img" loading="lazy">
                     </div>
                     <div class="feature-text">
-                        <div class="feature-number">03</div>
+                        <div class="feature-number" aria-hidden="true">03</div>
                         <h3 class="feature-title">專屬寧靜</h3>
                         <p class="feature-desc">全館配備專屬私人陽台、豪華電梯、雙層靜音氣密窗與100支天絲棉床品。當夜幕低垂，享受極致寧靜的渡假好眠。</p>
-                        <a href="/rooms" class="link-btn">房型體驗 <i class="fas fa-arrow-right"></i></a>
+                        <a href="/rooms" class="link-btn">房型體驗 <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- 房型與價格（2026-11）：首頁就看得到有哪些房、幾個人住、多少錢 -->
+        <section class="home-rooms" id="home-rooms">
+            <div class="home-head reveal-up">
+                <h2 class="home-h2">The Rooms</h2>
+                <p class="home-sub">6 種房型、9 間客房，間間附私人陽台</p>
+            </div>
+            <div class="home-rooms-grid">
+                <a class="home-room reveal-up" href="/rooms#room-201">
+                    <span class="home-room-img"><img width="1008" height="672" src="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp"
+                        srcset="images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1.webp 1008w, images/rooms/luxuryFamily/penghu-kiwi-villa-luxury-family-room1-1600.webp 1600w"
+                        sizes="(max-width: 768px) 46vw, (max-width: 992px) 45vw, 380px" alt="澎湖期遇豪華家庭房 - 雲朵壁畫、兩張大床與兒童帳篷全景" loading="lazy"></span>
+                    <h3 class="home-room-name">豪華家庭房<small>附浴缸</small></h3>
+                    <span class="home-room-meta">4 人・18 坪（60㎡）</span>
+                    <span class="home-room-price">平日 <span class="nowrap">NT$5,600 起／晚</span></span>
+                </a>
+                <a class="home-room reveal-up" href="/rooms#room-203">
+                    <span class="home-room-img"><img width="1008" height="672" src="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp"
+                        srcset="images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1.webp 1008w, images/rooms/premiumQuad/penghu-kiwi-villa-premium-quad-room1-1600.webp 1600w"
+                        sizes="(max-width: 768px) 46vw, (max-width: 992px) 45vw, 380px" alt="澎湖期遇高級四人房 - 金色幾何吊燈與床頭" loading="lazy"></span>
+                    <h3 class="home-room-name">高級四人房<small>附陽台</small></h3>
+                    <span class="home-room-meta">4 人・13 坪（44㎡）</span>
+                    <span class="home-room-price">平日 <span class="nowrap">NT$5,200 起／晚</span></span>
+                </a>
+                <a class="home-room reveal-up" href="/rooms#room-205">
+                    <span class="home-room-img"><img width="1008" height="672" src="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp"
+                        srcset="images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1.webp 1008w, images/rooms/deluxeQuad/penghu-kiwi-villa-deluxe-quad-room1-1600.webp 1600w"
+                        sizes="(max-width: 768px) 46vw, (max-width: 992px) 45vw, 380px" alt="澎湖期遇奢華四人房 - 仙人掌掛畫與大床" loading="lazy"></span>
+                    <h3 class="home-room-name">奢華四人房<small>附陽台</small></h3>
+                    <span class="home-room-meta">4 人・16 坪（54㎡）</span>
+                    <span class="home-room-price">平日 <span class="nowrap">NT$5,600 起／晚</span></span>
+                </a>
+                <a class="home-room reveal-up" href="/rooms#room-301">
+                    <span class="home-room-img"><img width="1008" height="672" src="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp"
+                        srcset="images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1.webp 1008w, images/rooms/premiumTwin/penghu-kiwi-villa-premium-twin-room1-1600.webp 1600w"
+                        sizes="(max-width: 768px) 46vw, (max-width: 992px) 45vw, 380px" alt="澎湖期遇高級雙床房 - 魚群壁畫與兩張單人床" loading="lazy"></span>
+                    <h3 class="home-room-name">高級雙床房<small>附陽台</small></h3>
+                    <span class="home-room-meta">2 人・10 坪（33㎡）</span>
+                    <span class="home-room-price">平日 <span class="nowrap">NT$3,000 起／晚</span></span>
+                </a>
+                <a class="home-room reveal-up" href="/rooms#room-303">
+                    <span class="home-room-img"><img width="1008" height="672" src="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp"
+                        srcset="images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1.webp 1008w, images/rooms/premiumTriple/penghu-kiwi-villa-premium-triple-room1-1600.webp 1600w"
+                        sizes="(max-width: 768px) 46vw, (max-width: 992px) 45vw, 380px" alt="澎湖期遇高級三人房 - 船型單人床、雙人床與兒童帳篷" loading="lazy"></span>
+                    <h3 class="home-room-name">高級三人房<small>附陽台</small></h3>
+                    <span class="home-room-meta">3 人・11 坪（36㎡）</span>
+                    <span class="home-room-price">平日 <span class="nowrap">NT$4,200 起／晚</span></span>
+                </a>
+                <a class="home-room reveal-up" href="/rooms#room-305">
+                    <span class="home-room-img"><img width="1008" height="672" src="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp"
+                        srcset="images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1.webp 1008w, images/rooms/premiumDouble/penghu-kiwi-villa-premium-double-room1-1600.webp 1600w"
+                        sizes="(max-width: 768px) 46vw, (max-width: 992px) 45vw, 380px" alt="澎湖期遇高級雙人房 - 床頭抱枕特寫" loading="lazy"></span>
+                    <h3 class="home-room-name">高級雙人房<small>附陽台</small></h3>
+                    <span class="home-room-meta">2 人・9 坪（29㎡）</span>
+                    <span class="home-room-price">平日 <span class="nowrap">NT$3,000 起／晚</span></span>
+                </a>
+            </div>
+            <p class="home-note"><span class="nowrap">以上為平日每晚起價，</span><span class="nowrap">實際房價依日期調整；</span><span class="nowrap">選好日期按「<a href="#avail-home">查空房</a>」</span><span class="nowrap">就看得到當天房價</span></p>
+            <div class="home-more reveal-up"><a href="/rooms" class="link-btn">看房型照片與設備 <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></a></div>
+        </section>
+
+        <!-- 住客評價（2026-11）：摘自 Google 評價，與評價頁「住客怎麼說」相同 -->
+        <section class="home-reviews" id="home-reviews">
+            <div class="home-head reveal-up">
+                <h2 class="home-h2">The Reviews</h2>
+                <p class="home-sub"><span class="home-stars" aria-hidden="true">★★★★★</span><span class="nowrap">Google 5.0・200 則以上評價</span></p>
+            </div>
+            <div class="home-quotes">
+                <figure class="home-quote reveal-up">
+                    <blockquote><p>老闆娘精心為旅客準備早餐，海鮮麵線無敵好吃；房間、舒適度與對旅客的親切關懷都無可挑剔——如果有 6 顆星我一定給 6 顆星。</p></blockquote>
+                    <figcaption>陳佩君・家庭旅遊・2025.08</figcaption>
+                </figure>
+                <figure class="home-quote reveal-up">
+                    <blockquote><p>房間跟大廳都很乾淨，裝潢與燈具很有質感，衛浴有 TOTO 免治馬桶。位在住宅區很安靜、隔音也好、有停車位，老闆娘還熱心推薦在地景點。</p></blockquote>
+                    <figcaption>方湯姆・家庭旅遊・2024.09</figcaption>
+                </figure>
+            </div>
+            <div class="home-more reveal-up"><a href="/reviews" class="link-btn">看更多住客評價 <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></a></div>
+        </section>
+
+        <!-- 位置與摩西分海（2026-11） -->
+        <section class="home-location" id="home-location">
+            <div class="home-head reveal-up">
+                <h2 class="home-h2">The Location</h2>
+                <p class="home-sub">馬公西衛，三面環海的半島住宅區<span class="nowrap">・附免費停車</span></p>
+            </div>
+            <ul class="home-times reveal-up" aria-label="從期遇出發的車程">
+                <li><strong>9</strong><span class="home-time-unit">分鐘</span><span class="home-time-label">馬公市區</span></li>
+                <li><strong>9</strong><span class="home-time-unit">分鐘</span><span class="home-time-label">馬公港碼頭</span></li>
+                <li><strong>12</strong><span class="home-time-unit">分鐘</span><span class="home-time-label">澎湖機場</span></li>
+                <li><strong>18</strong><span class="home-time-unit">分鐘</span><span class="home-time-label">奎壁山摩西分海</span></li>
+            </ul>
+            <p class="home-times-note">開車或騎車的約略時間；走路到海邊約 8 分鐘</p>
+            <div class="home-cards">
+                <a class="home-card reveal-up" href="/location">
+                    <span class="home-card-k">Getting Here</span>
+                    <strong>交通與周邊</strong>
+                    <span class="home-card-desc">機場、碼頭怎麼來，附近的便利商店與外送</span>
+                </a>
+                <a class="home-card reveal-up" href="/moses">
+                    <span class="home-card-k">Tide Finder</span>
+                    <strong>摩西分海時間查詢</strong>
+                    <span class="home-card-desc">選日期，直接看幾點到、最晚幾點走</span>
+                </a>
             </div>
         </section>
 
@@ -1261,7 +2001,7 @@
         <section class="quote-section">
             <div class="quote-content reveal-up">
                 <h2 class="quote-text">當夜幕低垂、繁星點點<br>靜靜地走進期遇——<br>那是一場與美好<span class="nowrap">不期而遇的開始</span></h2>
-                <a href="https://booking.owlting.com/kiwi-villa" class="cta-button" target="_blank">預約您的期遇之旅</a>
+                <a href="https://booking.owlting.com/kiwi-villa?adult=2" class="cta-button" target="_blank">預約您的期遇之旅</a>
                 <a href="https://page.line.me/ucz4004x" class="line-deal" target="_blank" rel="noopener">LINE 直接訂房，享專屬優惠 →</a>
             </div>
         </section>
@@ -1272,9 +2012,10 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+                <p class="footer-license">民宿登記證　澎湖縣第734號民宿</p>
             </div>
             <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
-                <h4>Explore</h4>
+                <h2>Explore</h2>
                 <a href="/">首頁</a>
                 <a href="/intro">細說期遇</a>
                 <a href="/rooms">房型設施</a>
@@ -1285,13 +2026,13 @@
                 <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
-                <h4>Social</h4>
+                <h2>Social</h2>
                 <a href="https://www.instagram.com/kiwi_villa/" target="_blank">Instagram</a>
                 <a href="https://www.facebook.com/kiwivilla.home/" target="_blank">Facebook</a>
                 <a href="https://page.line.me/ucz4004x" target="_blank">LINE 官方帳號</a>
             </div>
             <div class="footer-links">
-                <h4>Contact</h4>
+                <h2>Contact</h2>
                 <a href="https://www.google.com/maps/place/?q=place_id:ChIJp82ruCFbbDQRm-ZmRMmpVyE" target="_blank">澎湖縣馬公市西衛里347號</a>
                 <a href="tel:0933636373">0933-636-373</a>
             </div>
@@ -1364,6 +2105,8 @@
                 document.documentElement.classList.toggle('menu-open', open);
                 if (open) setMenuTop();
                 menuToggle.textContent = open ? 'Close' : 'Menu';
+                menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                menuToggle.setAttribute('aria-label', open ? 'Close 關閉選單' : 'Menu 選單');
                 if (open || window.scrollY <= 50) {
                     nav.style.mixBlendMode = 'normal';
                 }
@@ -1404,11 +2147,18 @@
             "latitude": 23.5868758,
             "longitude": 119.5818157
         },
+        "logo": "https://www.kiwi-villa.com/images/logo/kiwi-villa-logo.png",
+        "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJp82ruCFbbDQRm-ZmRMmpVyE",
+        "identifier": {
+            "@type": "PropertyValue",
+            "propertyID": "民宿登記證",
+            "value": "澎湖縣第734號民宿"
+        },
         "image": [
             "https://www.kiwi-villa.com/images/home/penghu-kiwi-villa-exterior-1920.webp",
             "https://www.kiwi-villa.com/assets/og-home.jpg"
         ],
-        "priceRange": "NT$2,500-4,800",
+        "priceRange": "NT$3,000-5,600",
         "checkinTime": "15:00",
         "checkoutTime": "11:00",
         "numberOfRooms": 9,
@@ -1420,7 +2170,12 @@
             {"@type": "LocationFeatureSpecification", "name": "戲水池", "value": true},
             {"@type": "LocationFeatureSpecification", "name": "免費WiFi", "value": true},
             {"@type": "LocationFeatureSpecification", "name": "免費停車", "value": true},
-            {"@type": "LocationFeatureSpecification", "name": "冷氣空調", "value": true}
+            {"@type": "LocationFeatureSpecification", "name": "冷氣空調", "value": true},
+            {"@type": "LocationFeatureSpecification", "name": "房內冰箱", "value": true},
+            {"@type": "LocationFeatureSpecification", "name": "熱水壺", "value": true},
+            {"@type": "LocationFeatureSpecification", "name": "吹風機", "value": true},
+            {"@type": "LocationFeatureSpecification", "name": "洗衣服務", "value": false},
+            {"@type": "LocationFeatureSpecification", "name": "嬰兒床", "value": false}
         ],
         "sameAs": [
             "https://www.instagram.com/kiwi_villa/",
@@ -1447,10 +2202,35 @@
         "url": "https://www.kiwi-villa.com"
     }
     </script>
+    <script>
+        // 查空房：把入住日、退房日、人數帶進訂房頁（OwlNest 早於今天的日期會被改回今天，所以最早只能選台灣的今天）
+        document.querySelectorAll('.avail').forEach(function (box) {
+            var s = box.querySelector('[name=start]'), e = box.querySelector('[name=end]'),
+                n = box.querySelector('[name=adult]'), go = box.querySelector('.avail-go');
+            var iso = function (d) { return d.toISOString().slice(0, 10); };
+            var addDay = function (v, k) { var d = new Date(v + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + k); return iso(d); };
+            var today = iso(new Date(Date.now() + 8 * 36e5));
+            s.min = today;
+            if (!s.value) s.value = today;
+            var sync = function () {
+                if (s.value && s.value < today) s.value = today;
+                if (s.value) {
+                    e.min = addDay(s.value, 1);
+                    if (!e.value || e.value <= s.value) e.value = addDay(s.value, 1);
+                }
+                var q = [];
+                if (s.value && e.value) q.push('start=' + s.value, 'end=' + e.value);
+                q.push('adult=' + n.value);
+                go.href = 'https://booking.owlting.com/kiwi-villa?' + q.join('&');
+            };
+            [s, e, n].forEach(function (el) { el.addEventListener('change', sync); });
+            sync();
+        });
+    </script>
     <!-- 手機浮動 CTA：訂房 + LINE（僅 ≤768px 顯示） -->
-    <div class="mobile-cta-bar">
-        <a href="https://booking.owlting.com/kiwi-villa" class="mobile-cta-book" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> 線上訂房</a>
-        <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><i class="fab fa-line"></i> LINE 直訂優惠</a>
+    <div class="mobile-cta-bar" role="navigation" aria-label="快速訂房">
+        <a href="https://booking.owlting.com/kiwi-villa?adult=2" class="mobile-cta-book" target="_blank" rel="noopener"><svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zM329 305c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-95 95-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L329 305z"/></svg> 線上訂房</a>
+        <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><svg class="icon" width="1em" height="1em" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M311 196.8v81.3c0 2.1-1.6 3.7-3.7 3.7h-13c-1.3 0-2.4-.7-3-1.5l-37.3-50.3v48.2c0 2.1-1.6 3.7-3.7 3.7h-13c-2.1 0-3.7-1.6-3.7-3.7V196.9c0-2.1 1.6-3.7 3.7-3.7h12.9c1.1 0 2.4 .6 3 1.6l37.3 50.3V196.9c0-2.1 1.6-3.7 3.7-3.7h13c2.1-.1 3.8 1.6 3.8 3.5zm-93.7-3.7h-13c-2.1 0-3.7 1.6-3.7 3.7v81.3c0 2.1 1.6 3.7 3.7 3.7h13c2.1 0 3.7-1.6 3.7-3.7V196.8c0-1.9-1.6-3.7-3.7-3.7zm-31.4 68.1H150.3V196.8c0-2.1-1.6-3.7-3.7-3.7h-13c-2.1 0-3.7 1.6-3.7 3.7v81.3c0 1 .3 1.8 1 2.5c.7 .6 1.5 1 2.5 1h52.2c2.1 0 3.7-1.6 3.7-3.7v-13c0-1.9-1.6-3.7-3.5-3.7zm193.7-68.1H327.3c-1.9 0-3.7 1.6-3.7 3.7v81.3c0 1.9 1.6 3.7 3.7 3.7h52.2c2.1 0 3.7-1.6 3.7-3.7V265c0-2.1-1.6-3.7-3.7-3.7H344V247.7h35.5c2.1 0 3.7-1.6 3.7-3.7V230.9c0-2.1-1.6-3.7-3.7-3.7H344V213.5h35.5c2.1 0 3.7-1.6 3.7-3.7v-13c-.1-1.9-1.7-3.7-3.7-3.7zM512 93.4V419.4c-.1 51.2-42.1 92.7-93.4 92.6H92.6C41.4 511.9-.1 469.8 0 418.6V92.6C.1 41.4 42.2-.1 93.4 0H419.4c51.2 .1 92.7 42.1 92.6 93.4zM441.6 233.5c0-83.4-83.7-151.3-186.4-151.3s-186.4 67.9-186.4 151.3c0 74.7 66.3 137.4 155.9 149.3c21.8 4.7 19.3 12.7 14.4 42.1c-.8 4.7-3.8 18.4 16.1 10.1s107.3-63.2 146.5-108.2c27-29.7 39.9-59.8 39.9-93.1z"/></svg> LINE 直訂優惠</a>
     </div>
 </body>
 

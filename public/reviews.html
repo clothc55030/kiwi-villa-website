@@ -30,14 +30,12 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://static.elfsight.com" crossorigin>
     <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@400&display=swap"
         onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap"></noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@400&display=swap"></noscript>
+    <!-- 圖示：內嵌 SVG，取自 Font Awesome Free 6.4.0（Icons: CC BY 4.0，https://fontawesome.com/license/free） -->
 
     <!-- Elfsight Google Reviews -->
     <script src="https://static.elfsight.com/platform/platform.js" async></script>
@@ -47,16 +45,27 @@
         html {
             font-synthesis: weight;
         }
+
+        /* 圖示：內嵌 SVG（取自 Font Awesome Free 6.4.0，CC BY 4.0），大小與顏色跟著文字，跟以前的圖示字型一樣 */
+        .icon {
+            display: inline-block;
+            height: 1em;
+            vertical-align: -0.125em;
+            fill: currentColor;
+            overflow: visible;
+            flex-shrink: 0;
+        }
         :root {
             --color-bg: #F9F7F3;
             --color-surface: #EFECE4;
             --color-text: #162431;
             --color-text-light: #5A6B7C;
             --color-accent: #8E704B;
+            --color-accent-text: #806340; /* 小字用：米白底對比 5.2:1（原色 4.3:1，不到 4.5:1） */
             --color-ocean: #162431;
 
             --font-display: 'Cormorant Garamond', 'LXGW WenKai TC', serif;
-            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans CJK TC', 'Microsoft JhengHei', sans-serif;
 
             --spacing-sm: 1rem;
             --spacing-md: 2.5rem;
@@ -430,7 +439,7 @@
             color: var(--color-accent);
         }
 
-        .footer-links h4 {
+        .footer-links h2 {
             font-family: var(--font-display);
             font-size: 1.2rem;
             margin-bottom: var(--spacing-sm);
@@ -446,7 +455,7 @@
             align-content: start;
         }
 
-        .footer-pages h4 {
+        .footer-pages h2 {
             grid-column: 1 / -1;
         }
 
@@ -742,6 +751,71 @@
             opacity: 0.7;
             margin-bottom: 0.6rem;
         }
+
+        /* 系統設定「減少動態效果」的人：關掉進場淡入、動畫與平滑捲動，內容直接顯示 */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-delay: 0s !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                transition-delay: 0s !important;
+            }
+
+            .reveal-up {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* 觸控區至少約 44px 高：頁尾連結（原本 23px）、麵包屑的「首頁」、導覽列文字連結 */
+        .footer-links a {
+            padding: 0.65rem 0;
+            margin-bottom: 0;
+        }
+
+        .breadcrumb-nav a {
+            display: inline-block;
+            padding: 0.75rem 0.3rem;
+            margin: -0.75rem -0.3rem;
+        }
+
+        .nav-direct-link {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
+
+        /* 手機：hero 只佔約半個畫面（原本 90vh，第一屏只有標題），內容在第一屏就看得到；
+           用 svh：iPhone Safari 工具列還在的時候也不會超過看得到的範圍 */
+        @media (max-width: 768px) {
+            .reviews-hero {
+                height: auto;
+                min-height: 48vh;
+                min-height: 48svh;
+                padding: 6.5rem 6% 2.5rem;
+            }
+
+            /* 英文大標不換行：字型載入前用的後備字比較寬，會先折成兩行、載入後變一行，下面的內容就跟著跳（房型頁 CLS 0.13） */
+            .reviews-hero-title {
+                font-size: min(4rem, 17vw);
+                white-space: nowrap;
+            }
+        }
+
+        /* 頁尾的民宿登記證（民宿刊登廣告要載明登記證編號） */
+        .footer-license {
+            margin-top: 0.9rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            opacity: 0.75;
+        }
     </style>
     <noscript><style>.reveal-up{opacity:1!important;transform:none!important}</style></noscript>
     <!-- Google Analytics 4-->
@@ -769,6 +843,7 @@
                 : a.closest('.fullscreen-menu') ? 'menu'
                 : a.closest('nav') ? 'nav'
                 : a.closest('footer') ? 'footer'
+                : a.closest('.avail') ? 'avail'
                 : a.closest('.room-showcase') ? 'room_card'
                 : a.closest('#whole-villa') ? 'whole_villa'
                 : sec ? (sec.id || (sec.className || '').split(' ')[0] || 'section')
@@ -776,6 +851,15 @@
             var params = { link_location: where, link_text: (a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40) };
             var card = a.closest('.room-showcase');
             if (card && card.id) params.room = card.id.replace('room-', '');
+            // 訂房連結帶的入住日、退房日、人數（查空房、摩西分海查詢結果）
+            if (name === 'booking_click') {
+                (href.split('?')[1] || '').split('#')[0].split('&').forEach(function (kv) {
+                    var p = kv.split('=');
+                    if (p[0] === 'start') params.checkin = p[1];
+                    else if (p[0] === 'end') params.checkout = p[1];
+                    else if (p[0] === 'adult' && Number(p[1])) params.adult = Number(p[1]);
+                });
+            }
             gtag('event', name, params);
         }, true);
     </script>
@@ -790,8 +874,8 @@
         </a>
         <div class="nav-actions">
             <a href="/rooms" class="nav-direct-link">房型設施</a>
-            <a href="https://booking.owlting.com/kiwi-villa" target="_blank" rel="noopener" class="nav-book-btn">線上訂房</a>
-            <button class="menu-btn" id="menu-toggle" aria-label="展開或關閉選單">Menu</button>
+            <a href="https://booking.owlting.com/kiwi-villa?adult=2" target="_blank" rel="noopener" class="nav-book-btn">線上訂房</a>
+            <button class="menu-btn" id="menu-toggle" aria-label="Menu 選單" aria-expanded="false" aria-controls="fullscreen-menu">Menu</button>
         </div>
     </nav>
 
@@ -818,7 +902,7 @@
             <a href="/faq" class="menu-link">常見問題 FAQ</a>
             <a href="/policy" class="menu-link">訂房須知 Policy</a>
             <a href="/moses" class="menu-link">摩西分海 Moses</a>
-            <a href="https://booking.owlting.com/kiwi-villa" class="menu-link"
+            <a href="https://booking.owlting.com/kiwi-villa?adult=2" class="menu-link"
                 target="_blank">立即訂房 Book Now</a>
         </div>
     </div>
@@ -831,7 +915,7 @@
 
     <main>
         <div class="breadcrumb-nav" role="navigation" aria-label="breadcrumb" style="max-width:1200px;margin:0 auto;padding:1.4rem 1.5rem 0;font-size:0.85rem;letter-spacing:0.05em;text-align:left;">
-            <a href="/" style="color:var(--color-accent,#8E704B);text-decoration:none;">首頁</a>
+            <a href="/" style="color:var(--color-accent-text,#806340);text-decoration:none;">首頁</a>
             <span style="opacity:0.45;margin:0 0.5em;">›</span>
             <span style="opacity:0.65;">客戶評價</span>
         </div>
@@ -839,22 +923,22 @@
         <section class="stats-section reveal-up">
             <div class="stats-grid">
                 <div class="stat-item reveal-up" style="transition-delay: 0.1s;">
-                    <div class="stat-icon"><i class="fas fa-star"></i></div>
+                    <div class="stat-icon"><svg class="icon" width="1.125em" height="1em" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg></div>
                     <div class="stat-number">5.0</div>
                     <div class="stat-label">Google 評分</div>
                 </div>
                 <div class="stat-item reveal-up" style="transition-delay: 0.2s;">
-                    <div class="stat-icon"><i class="fas fa-comment-dots"></i></div>
-                    <div class="stat-number">189</div>
+                    <div class="stat-icon"><svg class="icon" width="1em" height="1em" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM128 208a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm96 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg></div>
+                    <div class="stat-number">200+</div>
                     <div class="stat-label">Google 評價</div>
                 </div>
                 <div class="stat-item reveal-up" style="transition-delay: 0.3s;">
-                    <div class="stat-icon"><i class="fas fa-bed"></i></div>
+                    <div class="stat-icon"><svg class="icon" width="1.25em" height="1em" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/></svg></div>
                     <div class="stat-number">9</div>
                     <div class="stat-label">精緻客房</div>
                 </div>
                 <div class="stat-item reveal-up" style="transition-delay: 0.4s;">
-                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-icon"><svg class="icon" width="1.25em" height="1em" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/></svg></div>
                     <div class="stat-number">25</div>
                     <div class="stat-label">包棟人數</div>
                 </div>
@@ -869,37 +953,37 @@
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;">
                 <blockquote style="flex:1 1 280px;max-width:340px;margin:0;background:var(--color-surface);border-radius:14px;padding:1.6rem 1.4rem;">
-                    <i class="fas fa-quote-left" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"></i>
+                    <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z"/></svg>
                     <p style="font-size:1.02rem;line-height:1.75;color:var(--color-text);font-weight:300;margin:0.6rem 0 1rem;">老闆娘精心為旅客準備早餐，海鮮麵線無敵好吃；房間、舒適度與對旅客的親切關懷都無可挑剔——如果有 6 顆星我一定給 6 顆星。</p>
                     <span style="color:var(--color-text-light);font-size:0.8rem;letter-spacing:0.05em;">★★★★★　— 陳佩君 · 家庭旅遊 · 2025.08</span>
                 </blockquote>
                 <blockquote style="flex:1 1 280px;max-width:340px;margin:0;background:var(--color-surface);border-radius:14px;padding:1.6rem 1.4rem;">
-                    <i class="fas fa-quote-left" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"></i>
+                    <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z"/></svg>
                     <p style="font-size:1.02rem;line-height:1.75;color:var(--color-text);font-weight:300;margin:0.6rem 0 1rem;">早餐好吃、房間舒適、老闆一家待人親切、停車方便，小朋友可以在樓上開心玩水，一切都很好！</p>
                     <span style="color:var(--color-text-light);font-size:0.8rem;letter-spacing:0.05em;">★★★★★　— SAM HUANG · 家庭旅遊 · 2026.06</span>
                 </blockquote>
                 <blockquote style="flex:1 1 280px;max-width:340px;margin:0;background:var(--color-surface);border-radius:14px;padding:1.6rem 1.4rem;">
-                    <i class="fas fa-quote-left" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"></i>
+                    <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z"/></svg>
                     <p style="font-size:1.02rem;line-height:1.75;color:var(--color-text);font-weight:300;margin:0.6rem 0 1rem;">房間、浴室都很大很乾淨，燈光明亮舒適，還有電動窗簾，床很好睡。老闆老闆娘親切友善、很會聊天，早餐好吃、咖啡好喝。</p>
                     <span style="color:var(--color-text-light);font-size:0.8rem;letter-spacing:0.05em;">★★★★★　— angela chang · 家庭旅遊 · 2026.03</span>
                 </blockquote>
                 <blockquote style="flex:1 1 280px;max-width:340px;margin:0;background:var(--color-surface);border-radius:14px;padding:1.6rem 1.4rem;">
-                    <i class="fas fa-quote-left" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"></i>
+                    <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z"/></svg>
                     <p style="font-size:1.02rem;line-height:1.75;color:var(--color-text);font-weight:300;margin:0.6rem 0 1rem;">房間跟大廳都很乾淨，裝潢與燈具很有質感，衛浴有 TOTO 免治馬桶。位在住宅區很安靜、隔音也好、有停車位，老闆娘還熱心推薦在地景點。</p>
                     <span style="color:var(--color-text-light);font-size:0.8rem;letter-spacing:0.05em;">★★★★★　— 方湯姆 · 家庭旅遊 · 2024.09</span>
                 </blockquote>
                 <blockquote style="flex:1 1 280px;max-width:340px;margin:0;background:var(--color-surface);border-radius:14px;padding:1.6rem 1.4rem;">
-                    <i class="fas fa-quote-left" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"></i>
+                    <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z"/></svg>
                     <p style="font-size:1.02rem;line-height:1.75;color:var(--color-text);font-weight:300;margin:0.6rem 0 1rem;">預訂奢華四人房，三天兩夜體驗滿分！入住前一晚老闆就會詢問抵達時間；早上 10 點到先寄放行李，結果房間已提早準備好、行李也送到房內了。</p>
                     <span style="color:var(--color-text-light);font-size:0.8rem;letter-spacing:0.05em;">★★★★★　— Daisy · 朋友出遊 · 2025.06</span>
                 </blockquote>
                 <blockquote style="flex:1 1 280px;max-width:340px;margin:0;background:var(--color-surface);border-radius:14px;padding:1.6rem 1.4rem;">
-                    <i class="fas fa-quote-left" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"></i>
+                    <svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false" style="color:var(--color-accent);opacity:0.45;font-size:1.1rem;"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z"/></svg>
                     <p style="font-size:1.02rem;line-height:1.75;color:var(--color-text);font-weight:300;margin:0.6rem 0 1rem;">遠離擁擠喧囂的馬公市鬧區、地處幽靜的住宅區，民宿主人自建選用的建材與設備皆屬上等，房間相當寬敞舒適。</p>
                     <span style="color:var(--color-text-light);font-size:0.8rem;letter-spacing:0.05em;">★★★★★　— Mindy Lin · 連住三晚 · 2026.06</span>
                 </blockquote>
             </div>
-            <p style="text-align:center;margin-top:var(--spacing-md);color:var(--color-text-light);font-weight:300;">想看看住客口中的房間？<a href="/rooms" style="color:var(--color-accent);text-underline-offset:3px;">房型設施</a>・<a href="/faq" style="color:var(--color-accent);text-underline-offset:3px;">常見問題</a></p>
+            <p style="text-align:center;margin-top:var(--spacing-md);color:var(--color-text-light);font-weight:300;">想看看住客口中的房間？<a href="/rooms" style="color:var(--color-accent-text);text-underline-offset:3px;">房型設施</a>・<a href="/faq" style="color:var(--color-accent-text);text-underline-offset:3px;">常見問題</a></p>
         </section>
 
         <!-- Elfsight Widget Section -->
@@ -916,8 +1000,8 @@
         <!-- CTA -->
         <section class="cta-section reveal-up">
             <h2 class="cta-title">加入我們滿意的客戶行列</h2>
-            <a href="https://search.google.com/local/writereview?placeid=ChIJp82ruCFbbDQRm-ZmRMmpVyE" class="cta-button" target="_blank" rel="noopener"><i class="fas fa-star"></i> 在 Google 留下評價</a>
-            <a href="https://booking.owlting.com/kiwi-villa" class="cta-button" target="_blank">立即預訂</a>
+            <a href="https://search.google.com/local/writereview?placeid=ChIJp82ruCFbbDQRm-ZmRMmpVyE" class="cta-button" target="_blank" rel="noopener"><svg class="icon" width="1.125em" height="1em" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg> 在 Google 留下評價</a>
+            <a href="https://booking.owlting.com/kiwi-villa?adult=2" class="cta-button" target="_blank">立即預訂</a>
         </section>
     </main>
 
@@ -926,9 +1010,10 @@
             <div class="footer-info">
                 <div class="footer-logo">KIWI VILLA</div>
                 <p>澎湖馬公市區精品住宿<br>全館附陽台與豪華電梯</p>
+                <p class="footer-license">民宿登記證　澎湖縣第734號民宿</p>
             </div>
             <div class="footer-links footer-pages" role="navigation" aria-label="網站導覽">
-                <h4>Explore</h4>
+                <h2>Explore</h2>
                 <a href="/">首頁</a>
                 <a href="/intro">細說期遇</a>
                 <a href="/rooms">房型設施</a>
@@ -939,13 +1024,13 @@
                 <a href="/moses">摩西分海</a>
             </div>
             <div class="footer-links">
-                <h4>Social</h4>
+                <h2>Social</h2>
                 <a href="https://www.instagram.com/kiwi_villa/" target="_blank">Instagram</a>
                 <a href="https://www.facebook.com/kiwivilla.home/" target="_blank">Facebook</a>
                 <a href="https://page.line.me/ucz4004x" target="_blank">LINE 官方帳號</a>
             </div>
             <div class="footer-links">
-                <h4>Contact</h4>
+                <h2>Contact</h2>
                 <a href="https://www.google.com/maps/place/?q=place_id:ChIJp82ruCFbbDQRm-ZmRMmpVyE" target="_blank">澎湖縣馬公市西衛里347號</a>
                 <a href="tel:0933636373">0933-636-373</a>
             </div>
@@ -1015,6 +1100,8 @@
                 document.documentElement.classList.toggle('menu-open', open);
                 if (open) setMenuTop();
                 menuToggle.textContent = open ? 'Close' : 'Menu';
+                menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                menuToggle.setAttribute('aria-label', open ? 'Close 關閉選單' : 'Menu 選單');
                 if (open || window.scrollY <= 50) {
                     nav.style.mixBlendMode = 'normal';
                 }
@@ -1052,9 +1139,9 @@
     }
     </script>
     <!-- 手機浮動 CTA：訂房 + LINE（僅 ≤768px 顯示） -->
-    <div class="mobile-cta-bar">
-        <a href="https://booking.owlting.com/kiwi-villa" class="mobile-cta-book" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> 線上訂房</a>
-        <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><i class="fab fa-line"></i> LINE 直訂優惠</a>
+    <div class="mobile-cta-bar" role="navigation" aria-label="快速訂房">
+        <a href="https://booking.owlting.com/kiwi-villa?adult=2" class="mobile-cta-book" target="_blank" rel="noopener"><svg class="icon" width="0.875em" height="1em" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zM329 305c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-95 95-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L329 305z"/></svg> 線上訂房</a>
+        <a href="https://page.line.me/ucz4004x" class="mobile-cta-line" target="_blank" rel="noopener"><svg class="icon" width="1em" height="1em" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M311 196.8v81.3c0 2.1-1.6 3.7-3.7 3.7h-13c-1.3 0-2.4-.7-3-1.5l-37.3-50.3v48.2c0 2.1-1.6 3.7-3.7 3.7h-13c-2.1 0-3.7-1.6-3.7-3.7V196.9c0-2.1 1.6-3.7 3.7-3.7h12.9c1.1 0 2.4 .6 3 1.6l37.3 50.3V196.9c0-2.1 1.6-3.7 3.7-3.7h13c2.1-.1 3.8 1.6 3.8 3.5zm-93.7-3.7h-13c-2.1 0-3.7 1.6-3.7 3.7v81.3c0 2.1 1.6 3.7 3.7 3.7h13c2.1 0 3.7-1.6 3.7-3.7V196.8c0-1.9-1.6-3.7-3.7-3.7zm-31.4 68.1H150.3V196.8c0-2.1-1.6-3.7-3.7-3.7h-13c-2.1 0-3.7 1.6-3.7 3.7v81.3c0 1 .3 1.8 1 2.5c.7 .6 1.5 1 2.5 1h52.2c2.1 0 3.7-1.6 3.7-3.7v-13c0-1.9-1.6-3.7-3.5-3.7zm193.7-68.1H327.3c-1.9 0-3.7 1.6-3.7 3.7v81.3c0 1.9 1.6 3.7 3.7 3.7h52.2c2.1 0 3.7-1.6 3.7-3.7V265c0-2.1-1.6-3.7-3.7-3.7H344V247.7h35.5c2.1 0 3.7-1.6 3.7-3.7V230.9c0-2.1-1.6-3.7-3.7-3.7H344V213.5h35.5c2.1 0 3.7-1.6 3.7-3.7v-13c-.1-1.9-1.7-3.7-3.7-3.7zM512 93.4V419.4c-.1 51.2-42.1 92.7-93.4 92.6H92.6C41.4 511.9-.1 469.8 0 418.6V92.6C.1 41.4 42.2-.1 93.4 0H419.4c51.2 .1 92.7 42.1 92.6 93.4zM441.6 233.5c0-83.4-83.7-151.3-186.4-151.3s-186.4 67.9-186.4 151.3c0 74.7 66.3 137.4 155.9 149.3c21.8 4.7 19.3 12.7 14.4 42.1c-.8 4.7-3.8 18.4 16.1 10.1s107.3-63.2 146.5-108.2c27-29.7 39.9-59.8 39.9-93.1z"/></svg> LINE 直訂優惠</a>
     </div>
 </body>
 

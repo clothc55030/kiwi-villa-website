@@ -241,8 +241,8 @@ def build(data=None):
 
 
 PREVIEW = """<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@300;400&family=Noto+Sans+TC:wght@300;400;500&display=swap">
-<style>body{margin:0;background:#162431;font-family:Inter,'Noto Sans TC',sans-serif}.wrap{padding:40px 0}%s</style></head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=LXGW+WenKai+TC:wght@400&display=swap">
+<style>body{margin:0;background:#162431;font-family:Inter,-apple-system,BlinkMacSystemFont,'PingFang TC','Noto Sans CJK TC','Microsoft JhengHei',sans-serif}.wrap{padding:40px 0}%s</style></head>
 <body><div class="wrap"><figure class="map-figure">%s</figure></div></body></html>"""
 
 
