@@ -13,7 +13,7 @@
 7. 每個網頁路徑在 _headers 都有 Cache-Control
 8. 站內連結都對得到檔案、_redirects 或頁內的 id
 9. sitemap.xml 的 lastmod 不早於該頁最後一次 commit（需要完整 git 歷史；淺層 clone 會略過）
-10. 房型價格一致（淡季平日起價；房型卡有標旺季起價的，llms.txt 也要一樣）：房型頁 ↔ 房型一覽、首頁房型卡、llms.txt
+10. 房型價格一致（平日起價；房型卡若另標旺季起價，llms.txt 也要一樣）：房型頁 ↔ 房型一覽、首頁房型卡、llms.txt
 """
 
 import sys
@@ -146,12 +146,13 @@ def _shared_blocks(content):
 
 
 def _room_prices_from_rooms_page(rooms):
-    """房號 → (房名, 淡季平日起價, 旺季起價或 None)。價格一律標「淡季平日 NT$… 起」（Ricky 2026-11-07）。"""
+    """房號 → (房名, 平日起價, 旺季起價或 None)。價格標「平日 NT$… 起」（Ricky 2026-11-07 定的標準）。"""
     prices = {}
     for m in re.finditer(r'<article class="room-showcase[^"]*" id="room-(\d+)">(.*?)</article>', rooms, re.S):
         name = re.search(r'<h2 class="room-name">(.*?)</h2>', m.group(2), re.S)
-        price = re.search(r'淡季平日 NT\$([\d,]+) 起', m.group(2))
-        peak = re.search(r'旺季 NT\$([\d,]+) 起', m.group(2))
+        text = re.sub(r'<[^>]+>', '', m.group(2))
+        price = re.search(r'平日 NT\$([\d,]+) 起', text)
+        peak = re.search(r'旺季 NT\$([\d,]+) 起', text)
         if name and price:
             prices[m.group(1)] = (re.sub(r'<[^>]+>', '', name.group(1)).strip(), price.group(1),
                                   peak.group(1) if peak else None)
@@ -256,21 +257,22 @@ def verify_sitewide(workspace_dir):
                 if last and last > lastmod[:10]:
                     errors.append(f'sitemap.xml 的 {loc} lastmod 是 {lastmod}，但這頁 {last} 有改過（改頁面時一起更新日期）')
 
-    # 10. 房型價格：房型頁的每間房（淡季平日起價，有的另標旺季起價）↔ 房型一覽、首頁房型卡、llms.txt
+    # 10. 房型價格：房型頁的每間房（平日起價；若另標旺季起價也比對）↔ 房型一覽、首頁房型卡、llms.txt
     if 'rooms' in pages:
         prices = _room_prices_from_rooms_page(pages['rooms'])
         if len(prices) < 6:
-            errors.append('房型頁找不到 6 種房型的「淡季平日 NT$… 起」價格')
+            errors.append('房型頁找不到 6 種房型的「平日 NT$… 起」價格')
         for room, price in re.findall(r'<a href="#room-(\d+)">.*?</a></th>(?:<td>[^<]*</td>){2}<td>NT\$([\d,]+)</td>', pages['rooms']):
             if room in prices and prices[room][1] != price:
                 errors.append(f'房型一覽的 {room} 寫 NT${price}，房型卡寫 NT${prices[room][1]}')
         for room, card in re.findall(r'<a class="home-room[^"]*" href="/rooms#room-(\d+)">(.*?)</a>', pages.get('index', ''), re.S):
             if room not in prices:
                 continue
-            price = re.search(r'淡季平日 NT\$([\d,]+) 起', card)
+            card = re.sub(r'<[^>]+>', '', card)
+            price = re.search(r'平日 NT\$([\d,]+) 起', card)
             peak = re.search(r'旺季 NT\$([\d,]+) 起', card)
             if not price:
-                errors.append(f'首頁房型卡 {room} 找不到「淡季平日 NT$… 起」')
+                errors.append(f'首頁房型卡 {room} 找不到「平日 NT$… 起」')
             elif price.group(1) != prices[room][1]:
                 errors.append(f'首頁房型卡 {room} 寫 NT${price.group(1)}，房型頁寫 NT${prices[room][1]}')
             if peak and peak.group(1) != prices[room][2]:
@@ -283,8 +285,8 @@ def verify_sitewide(workspace_dir):
                 if line is None:
                     errors.append(f'llms.txt 找不到「{name}」這一行')
                     continue
-                if f'淡季平日 NT${price} 起' not in line:
-                    errors.append(f'llms.txt 的「{name}」淡季平日價格與房型頁（NT${price}）不同')
+                if f'平日 NT${price} 起' not in line:
+                    errors.append(f'llms.txt 的「{name}」平日價格與房型頁（NT${price}）不同')
                 llms_peak = re.search(r'旺季 NT\$([\d,]+) 起', line)
                 if (llms_peak.group(1) if llms_peak else None) != peak:
                     errors.append(f'llms.txt 的「{name}」旺季價格與房型頁不同（房型頁：{peak and "NT$" + peak or "沒寫"}）')
